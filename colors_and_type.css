@@ -1,0 +1,235 @@
+/* =========================================================
+   BOAT TIME YACHT CHARTERS — Core Design Tokens
+   Typography, colors, spacing, motion.
+   Import this file anywhere you need the brand system.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+:root {
+  /* ---------- COLORS ---------- */
+  --gold: #C9A84C;                /* Primary accent — CTAs, highlights, eyebrows */
+  --gold-light: #E8C97A;          /* Italic headings, hover states */
+  --navy: #0A1628;                /* Primary background */
+  --navy-mid: #0F2040;             /* Section backgrounds, cards */
+  --ocean: #1A3A5C;                /* Avatar backgrounds, subtle fills */
+  --cream: #F5F0E8;                /* Primary text */
+  --white: #FDFCF9;                /* High-contrast text */
+  --text-muted: rgba(245, 240, 232, 0.6);
+  --border-subtle: rgba(201, 168, 76, 0.1);
+  --border-hover: rgba(201, 168, 76, 0.3);
+  --card-hover-bg: rgba(201, 168, 76, 0.04);
+  --glass-bg: rgba(10, 22, 40, 0.97);
+
+  /* ---------- SEMANTIC COLOR ROLES ---------- */
+  --bg: var(--navy);
+  --bg-elevated: var(--navy-mid);
+  --bg-subtle: var(--ocean);
+  --fg: var(--cream);
+  --fg-strong: var(--white);
+  --fg-muted: var(--text-muted);
+  --accent: var(--gold);
+  --accent-hover: var(--gold-light);
+  --on-accent: var(--navy);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body: 'Montserrat', -apple-system, sans-serif;
+
+  /* Display sizes */
+  --fs-hero: clamp(56px, 8vw, 112px);
+  --fs-h1: clamp(44px, 5.5vw, 72px);
+  --fs-h2: clamp(32px, 4vw, 52px);
+  --fs-h3: clamp(24px, 2.5vw, 32px);
+  --fs-body: 15px;
+  --fs-body-lg: 17px;
+  --fs-small: 13px;
+  --fs-eyebrow: 10px;
+  --fs-button: 11px;
+
+  /* Line heights */
+  --lh-display: 0.98;
+  --lh-heading: 1.1;
+  --lh-body: 1.7;
+
+  /* Letter spacing */
+  --ls-display: -0.015em;
+  --ls-heading: -0.01em;
+  --ls-body: 0;
+  --ls-eyebrow: 0.3em;
+  --ls-button: 0.2em;
+  --ls-nav: 0.18em;
+
+  /* ---------- SPACING ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 100px;
+
+  /* Section rhythm */
+  --section-y: 100px;
+  --section-x: 48px;
+  --section-y-mobile: 64px;
+  --section-x-mobile: 24px;
+  --content-max: 1200px;
+  --grid-gap: 2px;
+
+  /* ---------- BORDERS & RADII ---------- */
+  --radius: 0;          /* ALL CORNERS SHARP. ALWAYS. */
+  --border-hair: 1px solid var(--border-subtle);
+  --border-ghost: 1px solid rgba(245, 240, 232, 0.35);
+  --border-gold: 1px solid var(--gold);
+
+  /* ---------- MOTION ---------- */
+  --ease: cubic-bezier(.2, .6, .2, 1);
+  --dur-fast: 0.2s;
+  --dur-med: 0.4s;
+  --dur-slow: 0.7s;
+
+  /* ---------- OVERLAYS ---------- */
+  --overlay-image: linear-gradient(to top, rgba(10,22,40,0.9) 0%, rgba(10,22,40,0.1) 60%);
+  --overlay-hero: linear-gradient(to right, rgba(10,22,40,0.85), rgba(10,22,40,0.35));
+}
+
+/* =========================================================
+   SEMANTIC ELEMENT STYLES
+   ========================================================= */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--fg);
+  margin: 0;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-heading);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+}
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+em, .italic-accent {
+  font-style: italic;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+p { color: var(--fg); margin: 0 0 var(--space-4); }
+
+/* Eyebrow label */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 500;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 16px 40px;
+  font-family: var(--font-body);
+  font-size: var(--fs-button);
+  letter-spacing: var(--ls-button);
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--dur-med) var(--ease);
+  line-height: 1;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(245, 240, 232, 0.35);
+  color: var(--cream);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.btn-outline-gold {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+.btn-outline-gold:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+/* Cards */
+.card {
+  border: var(--border-hair);
+  border-radius: 0;
+  background: transparent;
+  transition: border-color var(--dur-med) var(--ease), background var(--dur-med) var(--ease);
+}
+.card:hover {
+  border-color: var(--border-hover);
+  background: var(--card-hover-bg);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Image hover zoom wrapper */
+.img-zoom { overflow: hidden; }
+.img-zoom img { transition: transform 0.7s ease; display: block; width: 100%; height: 100%; object-fit: cover; }
+.img-zoom:hover img { transform: scale(1.06); }
+
+/* Overlay utility */
+.image-overlay { background: var(--overlay-image); }

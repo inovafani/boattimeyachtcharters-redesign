@@ -1,0 +1,307 @@
+'use client';
+
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Button, Icon } from './Shared';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const eyebrowRef = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<HTMLSpanElement>(null);
+  const line2Ref = useRef<HTMLSpanElement>(null);
+  const line3Ref = useRef<HTMLSpanElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const btnsRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const scrollCueRef = useRef<HTMLDivElement>(null);
+  const scrollLineRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      // 1. Ken Burns on background
+      gsap.fromTo(
+        bgRef.current,
+        { scale: 1.08 },
+        { scale: 1, duration: 14, ease: 'none' },
+      );
+
+      // 2. Orchestrated load sequence
+      const tl = gsap.timeline({ delay: 0.15 });
+
+      tl.from(eyebrowRef.current, {
+        y: 18,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+      })
+        .from(
+          [line1Ref.current, line2Ref.current, line3Ref.current],
+          {
+            y: '105%',
+            opacity: 0,
+            duration: 1,
+            stagger: 0.12,
+            ease: 'power3.out',
+          },
+          '-=0.35',
+        )
+        .from(
+          subtitleRef.current,
+          { y: 20, opacity: 0, duration: 0.8, ease: 'power2.out' },
+          '-=0.5',
+        )
+        .from(
+          btnsRef.current,
+          { y: 18, opacity: 0, duration: 0.7, ease: 'power2.out' },
+          '-=0.45',
+        )
+        .from(
+          badgeRef.current,
+          { x: 30, opacity: 0, duration: 0.7, ease: 'power2.out' },
+          '-=0.6',
+        )
+        .from(
+          scrollCueRef.current,
+          { opacity: 0, duration: 0.6, ease: 'power2.out' },
+          '-=0.3',
+        );
+
+      // 3. Scroll cue line pulse loop
+      gsap.to(scrollLineRef.current, {
+        scaleY: 0.4,
+        opacity: 1,
+        duration: 1,
+        ease: 'power1.inOut',
+        yoyo: true,
+        repeat: -1,
+        delay: 2,
+      });
+
+      // 4. Parallax on scroll
+      gsap.to(bgRef.current, {
+        yPercent: 28,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+
+      // 5. Subtle content lift on scroll
+      gsap.to([eyebrowRef.current, line1Ref.current, line2Ref.current, line3Ref.current, subtitleRef.current, btnsRef.current], {
+        yPercent: -18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden flex items-center"
+      style={{ height: '100vh', minHeight: 720, background: 'var(--navy)' }}
+    >
+      {/* Background image */}
+      <div
+        ref={bgRef}
+        className="absolute inset-0 will-change-transform"
+        style={{
+          backgroundImage:
+            'url(https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=2000&q=85)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 40%',
+        }}
+      />
+
+      {/* Gradient overlay — left to right + bottom fade */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(to right, rgba(10,22,40,0.82) 0%, rgba(10,22,40,0.45) 55%, rgba(10,22,40,0.25) 100%), linear-gradient(to top, rgba(10,22,40,0.9) 0%, rgba(10,22,40,0.1) 45%)',
+        }}
+      />
+
+      {/* Bottom horizon gradient */}
+      <div
+        className="absolute left-0 right-0 bottom-0"
+        style={{ height: 100, background: 'linear-gradient(to top, var(--navy), transparent)' }}
+      />
+
+      {/* Rating badge — top right */}
+      <div
+        ref={badgeRef}
+        className="absolute z-10"
+        style={{
+          top: 120,
+          right: 48,
+          padding: '14px 22px',
+          border: '1px solid rgba(201,168,76,0.4)',
+          background: 'rgba(10,22,40,0.55)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+          fontFamily: 'var(--font-body)',
+          fontSize: 10,
+          letterSpacing: '0.3em',
+          textTransform: 'uppercase',
+          color: 'var(--gold)',
+          fontWeight: 500,
+        }}
+      >
+        <Icon name="star" size={11} color="var(--gold)" />
+        4.9 · 3,900+ guest reviews
+      </div>
+
+      {/* Main content */}
+      <div
+        className="relative z-10 w-full"
+        style={{ paddingLeft: 48, paddingRight: 48, paddingTop: 80, maxWidth: 1200 }}
+      >
+        {/* Eyebrow */}
+        <div ref={eyebrowRef} className="section-eyebrow" style={{ marginBottom: 28 }}>
+          Superyacht Charters — Gold Coast &amp; Brisbane
+        </div>
+
+        {/* Title — masked line-by-line reveal */}
+        <h1
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 300,
+            fontSize: 'clamp(56px, 8vw, 120px)',
+            lineHeight: 0.96,
+            letterSpacing: '-0.02em',
+            color: 'var(--cream)',
+            margin: '0 0 28px',
+          }}
+        >
+          <div style={{ overflow: 'hidden' }}>
+            <span ref={line1Ref} style={{ display: 'block' }}>Luxury</span>
+          </div>
+          <div style={{ overflow: 'hidden' }}>
+            <span
+              ref={line2Ref}
+              style={{ display: 'block', fontStyle: 'italic', color: 'var(--gold-light)' }}
+            >
+              on the water,
+            </span>
+          </div>
+          <div style={{ overflow: 'hidden' }}>
+            <span ref={line3Ref} style={{ display: 'block' }}>unforgettable.</span>
+          </div>
+        </h1>
+
+        {/* Subtitle */}
+        <p
+          ref={subtitleRef}
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 15,
+            fontWeight: 300,
+            color: 'rgba(245,240,232,0.82)',
+            maxWidth: 500,
+            lineHeight: 1.75,
+            margin: '0 0 44px',
+          }}
+        >
+          Two superyachts berthed at Marina Mirage. Whale watching in season,
+          sunset cruises year-round, private charters on your afternoon — tell
+          us the occasion and we&rsquo;ll write the day.
+        </p>
+
+        {/* Buttons */}
+        <div ref={btnsRef} className="flex gap-4 flex-wrap">
+          <Button variant="primary" href="#cruises">
+            Explore Cruises
+          </Button>
+          <Button variant="ghost" href="#inquiry">
+            Booking Enquiry
+          </Button>
+        </div>
+      </div>
+
+      {/* Scroll cue — bottom left */}
+      <div
+        ref={scrollCueRef}
+        className="absolute z-10 flex items-center gap-3"
+        style={{
+          bottom: 40,
+          left: 48,
+          fontFamily: 'var(--font-body)',
+          fontSize: 10,
+          letterSpacing: '0.28em',
+          textTransform: 'uppercase',
+          color: 'var(--text-muted)',
+        }}
+      >
+        <div
+          ref={scrollLineRef}
+          style={{
+            width: 1,
+            height: 56,
+            background: 'var(--gold)',
+            opacity: 0.5,
+            transformOrigin: 'top',
+          }}
+        />
+        Scroll
+      </div>
+
+      {/* Bottom-right stats badge */}
+      <div
+        className="absolute z-10"
+        style={{
+          bottom: 40,
+          right: 48,
+          border: '1px solid rgba(201,168,76,0.3)',
+          background: 'rgba(10,22,40,0.65)',
+          backdropFilter: 'blur(8px)',
+          padding: '20px 28px',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ color: 'var(--gold)', fontSize: 15, letterSpacing: 3, marginBottom: 4 }}>
+          ★★★★★
+        </div>
+        <div
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 24,
+            fontWeight: 600,
+            color: 'var(--cream)',
+          }}
+        >
+          3,900+
+        </div>
+        <div
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 9,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'var(--text-muted)',
+            marginTop: 2,
+          }}
+        >
+          5-Star Reviews
+        </div>
+      </div>
+    </section>
+  );
+}

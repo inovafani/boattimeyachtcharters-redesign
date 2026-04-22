@@ -1,0 +1,328 @@
+'use client';
+
+import { useRef, useState } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Eyebrow, ItalicEm, Button, Icon } from './Shared';
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+interface FormState {
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  guests: string;
+  vessel: string;
+  charter: string;
+  note: string;
+}
+
+const initialForm: FormState = {
+  name: '',
+  email: '',
+  phone: '',
+  date: '',
+  guests: '',
+  vessel: 'Either — concierge to recommend',
+  charter: 'Private Charter',
+  note: '',
+};
+
+function Field({
+  label,
+  name,
+  value,
+  onChange,
+  type = 'text',
+  placeholder,
+  multi,
+  select,
+  options,
+}: {
+  label: string;
+  name: keyof FormState;
+  value: string;
+  onChange: (name: keyof FormState, val: string) => void;
+  type?: string;
+  placeholder?: string;
+  multi?: boolean;
+  select?: boolean;
+  options?: string[];
+}) {
+  const inputStyle: React.CSSProperties = {
+    background: 'transparent',
+    border: 0,
+    borderBottom: '1px solid rgba(245,240,232,0.22)',
+    padding: '10px 0',
+    fontFamily: 'var(--font-body)',
+    fontSize: 15,
+    color: 'var(--cream)',
+    borderRadius: 0,
+    outline: 'none',
+    width: '100%',
+    transition: 'border-color 0.3s',
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+      <label
+        style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: 9,
+          letterSpacing: '0.3em',
+          textTransform: 'uppercase',
+          color: 'var(--gold)',
+          fontWeight: 500,
+        }}
+      >
+        {label}
+      </label>
+      {multi ? (
+        <textarea
+          value={value}
+          onChange={(e) => onChange(name, e.target.value)}
+          placeholder={placeholder}
+          rows={4}
+          style={{ ...inputStyle, resize: 'none' }}
+          onFocus={(e) => (e.target.style.borderBottomColor = 'var(--gold)')}
+          onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(245,240,232,0.22)')}
+        />
+      ) : select ? (
+        <select
+          value={value}
+          onChange={(e) => onChange(name, e.target.value)}
+          style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
+          onFocus={(e) => (e.target.style.borderBottomColor = 'var(--gold)')}
+          onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(245,240,232,0.22)')}
+        >
+          {options?.map((o) => (
+            <option key={o} value={o} style={{ background: 'var(--navy)' }}>
+              {o}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          type={type}
+          value={value}
+          onChange={(e) => onChange(name, e.target.value)}
+          placeholder={placeholder}
+          style={inputStyle}
+          onFocus={(e) => (e.target.style.borderBottomColor = 'var(--gold)')}
+          onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(245,240,232,0.22)')}
+        />
+      )}
+    </div>
+  );
+}
+
+export default function Inquiry() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+  const [form, setForm] = useState<FormState>(initialForm);
+  const [sent, setSent] = useState(false);
+
+  const update = (name: keyof FormState, val: string) =>
+    setForm((prev) => ({ ...prev, [name]: val }));
+
+  useGSAP(
+    () => {
+      gsap.from(leftRef.current, {
+        y: 40,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 82%',
+          once: true,
+        },
+      });
+
+      gsap.from(formRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: formRef.current,
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
+
+  return (
+    <div
+      ref={sectionRef}
+      id="inquiry"
+      className="relative overflow-hidden"
+      style={{
+        padding: '110px 48px',
+        background: 'linear-gradient(to bottom, var(--navy-mid) 0%, var(--navy) 100%)',
+      }}
+    >
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse at 85% 100%, rgba(201,168,76,0.12), transparent 50%), radial-gradient(ellipse at 10% 20%, rgba(26,58,92,0.5), transparent 50%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      <div
+        className="relative grid"
+        style={{ maxWidth: 1200, margin: '0 auto', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'start' }}
+      >
+        {/* Left */}
+        <div ref={leftRef}>
+          <Eyebrow>Booking Enquiry</Eyebrow>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: 'clamp(40px, 5vw, 70px)',
+              lineHeight: 0.98,
+              letterSpacing: '-0.02em',
+              marginBottom: 28,
+            }}
+          >
+            Tell us the{' '}
+            <ItalicEm>occasion</ItalicEm>.
+          </h2>
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 15,
+              color: 'var(--text-muted)',
+              lineHeight: 1.75,
+              marginBottom: 44,
+              maxWidth: 420,
+            }}
+          >
+            Every charter begins with a conversation. Share the afternoon you have in mind —
+            the date, the guests, the reason — and our concierge replies within the hour.
+          </p>
+
+          <div
+            style={{
+              borderTop: '1px solid rgba(201,168,76,0.2)',
+              paddingTop: 32,
+              display: 'grid',
+              gap: 18,
+            }}
+          >
+            {[
+              { key: 'Dock', icon: 'pin' as const, val: 'Muriel Henchman Pontoon, Marina Mirage' },
+              { key: 'Hours', icon: 'clock' as const, val: '08:00 — 20:00 daily' },
+              { key: 'Direct', icon: 'phone' as const, val: '+61 7 5528 0400' },
+              { key: 'Email', icon: 'mail' as const, val: 'info@boattimeyachtcharters.com.au' },
+            ].map((d) => (
+              <div
+                key={d.key}
+                className="flex items-center gap-4"
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 13,
+                  color: 'var(--cream)',
+                }}
+              >
+                <span
+                  style={{
+                    color: 'var(--gold)',
+                    fontSize: 9,
+                    letterSpacing: '0.3em',
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                    minWidth: 72,
+                  }}
+                >
+                  {d.key}
+                </span>
+                <Icon name={d.icon} size={14} color="var(--gold)" />
+                <span style={{ color: 'var(--text-muted)' }}>{d.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Form */}
+        <div
+          ref={formRef}
+          style={{
+            background: 'rgba(10,22,40,0.5)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(201,168,76,0.18)',
+            padding: 48,
+          }}
+        >
+          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+            <Field label="Full Name" name="name" value={form.name} onChange={update} placeholder="Eleanor Vance" />
+            <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="eleanor@vance.co" />
+          </div>
+          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+            <Field label="Phone" name="phone" value={form.phone} onChange={update} placeholder="+61" />
+            <Field label="Preferred Date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" />
+          </div>
+          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+            <Field
+              label="Charter Type"
+              name="charter"
+              value={form.charter}
+              onChange={update}
+              select
+              options={['Private Charter', 'Corporate Charter', 'Wedding Charter', 'Sunset Cruise', 'Whale Watching', 'Custom']}
+            />
+            <Field label="Guests" name="guests" value={form.guests} onChange={update} placeholder="12" />
+          </div>
+          <Field
+            label="Preferred Vessel"
+            name="vessel"
+            value={form.vessel}
+            onChange={update}
+            select
+            options={['Either — concierge to recommend', 'Sun Goddess', 'Mermaid Spirit']}
+          />
+          <Field
+            label="Anything else"
+            name="note"
+            value={form.note}
+            onChange={update}
+            multi
+            placeholder="A quiet afternoon, champagne on the foredeck."
+          />
+          <div style={{ marginTop: 8 }}>
+            <Button variant="primary" onClick={() => setSent(true)}>
+              Send Enquiry
+            </Button>
+          </div>
+          {sent && (
+            <div
+              style={{
+                marginTop: 24,
+                padding: '16px 20px',
+                border: '1px solid var(--gold)',
+                background: 'rgba(201,168,76,0.08)',
+                color: 'var(--gold)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 10,
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                fontWeight: 500,
+              }}
+            >
+              Received — our concierge replies within the hour.
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
