@@ -85,12 +85,12 @@ export default function StatsBar() {
             <div
               style={{
                 fontFamily: 'var(--font-body)',
-                fontSize: 9,
-                letterSpacing: '0.3em',
+                fontSize: 13,
+                letterSpacing: '0.22em',
                 textTransform: 'uppercase',
                 color: 'var(--navy)',
-                opacity: 0.55,
-                fontWeight: 500,
+                opacity: 0.75,
+                fontWeight: 600,
               }}
             >
               {s.eyebrow}

@@ -400,44 +400,577 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx_
 __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].registerPlugin(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$gsap$2f$react$2f$src$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGSAP"]);
 const NAV_LINKS = [
     {
-        label: 'Home'
+        label: 'Home',
+        href: 'https://boattimeyachtcharters.com/'
     },
     {
-        label: 'About'
+        label: 'About BoatTime',
+        href: 'https://boattimeyachtcharters.com/about-boat-time/'
     },
     {
         label: 'Cruise Tickets',
+        href: 'https://boattimeyachtcharters.com/cruise-tickets/',
+        menu: 'cruises',
         sub: [
-            'Luxury Whale Watching',
-            'Broadwater Sunset Cruise',
-            'New Year’s Eve 2026',
-            'Valentine’s Cruise',
-            'Riverfire 2026',
-            'Relaxed Lunch Cruise',
-            'Sunset Twilight Buffet'
+            {
+                label: 'Luxury Whale Watching',
+                href: 'https://boattimeyachtcharters.com/cruise-tickets-luxury-whale-watching/'
+            },
+            {
+                label: 'Broadwater Sunset Cruise',
+                href: 'https://boattimeyachtcharters.com/luxury-broadwater-cruise/'
+            },
+            {
+                label: 'NYE 2026',
+                href: 'https://boattimeyachtcharters.com/nye-2026/'
+            },
+            {
+                label: 'Luxury Valentines Cruise',
+                href: 'https://boattimeyachtcharters.com/valentines-day/'
+            },
+            {
+                label: 'Riverfire 2026',
+                href: 'https://boattimeyachtcharters.com/riverfire-2026/'
+            },
+            {
+                label: 'Relaxed Lunch Cruise',
+                href: 'https://boattimeyachtcharters.com/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/'
+            },
+            {
+                label: 'Sunset Twilight Buffet',
+                href: 'https://boattimeyachtcharters.com/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/'
+            }
         ]
     },
     {
         label: 'Yacht Charters',
+        href: 'https://boattimeyachtcharters.com/yacht-charters/',
+        menu: 'charters',
         sub: [
-            'Private Charter',
-            'Corporate Charter',
-            'Wedding Charter',
-            'Catering'
+            {
+                label: 'Private Charter',
+                href: 'https://boattimeyachtcharters.com/private-yacht-charter/'
+            },
+            {
+                label: 'Corporate Yacht Charter',
+                href: 'https://boattimeyachtcharters.com/corporate-yacht-charter/'
+            },
+            {
+                label: 'Wedding Yacht Charter',
+                href: 'https://boattimeyachtcharters.com/wedding-yacht-charter/'
+            },
+            {
+                label: 'Catering',
+                href: 'https://boattimeyachtcharters.com/yacht-charter-menus/'
+            }
         ]
     },
     {
         label: 'Our Yachts',
+        href: 'https://boattimeyachtcharters.com/our-yachts/',
+        menu: 'yachts',
+        alignRight: true,
         sub: [
-            'Sun Goddess',
-            'Mermaid Spirit'
+            {
+                label: 'Sun Goddess',
+                href: 'https://boattimeyachtcharters.com/sun-goddess-gold-coast/'
+            },
+            {
+                label: 'Mermaid Spirit',
+                href: 'https://boattimeyachtcharters.com/mermaid-spirit-gold-coast/'
+            }
         ]
     },
     {
-        label: 'Journal'
+        label: 'Boattime News',
+        href: 'https://boattimeyachtcharters.com/boattime-news/'
     }
 ];
-function NavItem({ label, sub }) {
+const CRUISE_META = [
+    {
+        desc: 'June – October · 4 hrs',
+        img: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=60&q=80'
+    },
+    {
+        desc: 'Year-round · 2.5 hrs',
+        img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=60&q=80'
+    },
+    {
+        desc: 'Special event · 4 hrs',
+        img: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=60&q=80'
+    },
+    {
+        desc: 'February · 3 hrs',
+        img: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=60&q=80'
+    },
+    {
+        desc: 'Special event · 4 hrs',
+        img: 'https://images.unsplash.com/photo-1498354178607-a79df2916198?w=60&q=80'
+    },
+    {
+        desc: 'Year-round · 3 hrs',
+        img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=60&q=80'
+    },
+    {
+        desc: 'Year-round · 3.5 hrs',
+        img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=60&q=80'
+    }
+];
+const CHARTER_META = [
+    {
+        desc: 'Up to 135 guests on the Broadwater. Your afternoon, your brief.'
+    },
+    {
+        desc: 'Client events, launches, team offsites. Dual bars throughout.'
+    },
+    {
+        desc: 'Ceremony on the foredeck at golden hour. Three decks of celebration.'
+    },
+    {
+        desc: 'Private Chefs of Brisbane. From grazing boards to fine dining.'
+    }
+];
+// ── Mega menu: Cruise Tickets ─────────────────────────────────────────────────
+function CruisesMenu({ sub }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            display: 'flex',
+            minWidth: 640
+        },
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    width: 210,
+                    flexShrink: 0,
+                    position: 'relative',
+                    backgroundImage: 'url(https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=420&q=80)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            position: 'absolute',
+                            inset: 0,
+                            background: 'linear-gradient(to top, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.3) 60%)'
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 94,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            position: 'absolute',
+                            bottom: 28,
+                            left: 24,
+                            right: 24
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'var(--font-body)',
+                                    fontSize: 8,
+                                    letterSpacing: '0.38em',
+                                    textTransform: 'uppercase',
+                                    color: 'var(--gold)',
+                                    marginBottom: 12
+                                },
+                                children: "Cruise Tickets"
+                            }, void 0, false, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 103,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'var(--font-display)',
+                                    fontStyle: 'italic',
+                                    fontSize: 22,
+                                    color: 'var(--cream)',
+                                    lineHeight: 1.15,
+                                    marginBottom: 14
+                                },
+                                children: [
+                                    "Seven routes.",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                        fileName: "[project]/components/Nav.tsx",
+                                        lineNumber: 125,
+                                        columnNumber: 26
+                                    }, this),
+                                    "One coastline."
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 115,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                href: "https://boattimeyachtcharters.com/cruise-tickets/",
+                                style: {
+                                    fontFamily: 'var(--font-body)',
+                                    fontSize: 9,
+                                    letterSpacing: '0.25em',
+                                    textTransform: 'uppercase',
+                                    color: 'var(--gold)',
+                                    fontWeight: 600,
+                                    textDecoration: 'none',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 6
+                                },
+                                children: [
+                                    "View all ",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
+                                        name: "arrow",
+                                        size: 10,
+                                        color: "var(--gold)"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Nav.tsx",
+                                        lineNumber: 142,
+                                        columnNumber: 22
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 127,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 102,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/Nav.tsx",
+                lineNumber: 83,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                style: {
+                    flex: 1,
+                    padding: '6px 0'
+                },
+                children: sub.map((s, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                        href: s.href,
+                        style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 14,
+                            padding: '9px 20px',
+                            textDecoration: 'none'
+                        },
+                        onMouseEnter: (e)=>{
+                            e.currentTarget.style.background = 'rgba(201,168,76,0.06)';
+                        },
+                        onMouseLeave: (e)=>{
+                            e.currentTarget.style.background = 'transparent';
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    width: 40,
+                                    height: 40,
+                                    flexShrink: 0,
+                                    backgroundImage: `url(${CRUISE_META[i]?.img})`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                    border: '1px solid rgba(201,168,76,0.2)'
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 161,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            fontFamily: 'var(--font-body)',
+                                            fontSize: 10.5,
+                                            letterSpacing: '0.12em',
+                                            textTransform: 'uppercase',
+                                            color: 'var(--cream)',
+                                            fontWeight: 500,
+                                            lineHeight: 1,
+                                            marginBottom: 4
+                                        },
+                                        children: s.label
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Nav.tsx",
+                                        lineNumber: 173,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        style: {
+                                            fontFamily: 'var(--font-body)',
+                                            fontSize: 10,
+                                            color: 'var(--text-muted)',
+                                            letterSpacing: '0.06em'
+                                        },
+                                        children: CRUISE_META[i]?.desc
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Nav.tsx",
+                                        lineNumber: 187,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 172,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, s.label, true, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 150,
+                        columnNumber: 11
+                    }, this))
+            }, void 0, false, {
+                fileName: "[project]/components/Nav.tsx",
+                lineNumber: 148,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/Nav.tsx",
+        lineNumber: 81,
+        columnNumber: 5
+    }, this);
+}
+// ── Mega menu: Yacht Charters ─────────────────────────────────────────────────
+function ChartersMenu({ sub }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            minWidth: 500,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 1,
+            background: 'rgba(201,168,76,0.08)',
+            padding: 1
+        },
+        children: sub.map((s, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                href: s.href,
+                style: {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                    padding: '22px 24px',
+                    textDecoration: 'none',
+                    background: 'var(--navy)',
+                    transition: 'background 0.2s'
+                },
+                onMouseEnter: (e)=>{
+                    e.currentTarget.style.background = 'rgba(201,168,76,0.06)';
+                },
+                onMouseLeave: (e)=>{
+                    e.currentTarget.style.background = 'var(--navy)';
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            fontFamily: 'var(--font-body)',
+                            fontSize: 10,
+                            letterSpacing: '0.28em',
+                            textTransform: 'uppercase',
+                            color: 'var(--gold)',
+                            fontWeight: 600
+                        },
+                        children: s.label
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 239,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            fontFamily: 'var(--font-body)',
+                            fontSize: 12,
+                            color: 'rgba(245,240,232,0.6)',
+                            lineHeight: 1.6
+                        },
+                        children: CHARTER_META[i]?.desc
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 251,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 6,
+                            fontFamily: 'var(--font-body)',
+                            fontSize: 9,
+                            letterSpacing: '0.2em',
+                            textTransform: 'uppercase',
+                            color: 'var(--gold)',
+                            marginTop: 4
+                        },
+                        children: [
+                            "Learn more ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
+                                name: "arrow",
+                                size: 9,
+                                color: "var(--gold)"
+                            }, void 0, false, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 274,
+                                columnNumber: 24
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 261,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, s.label, true, {
+                fileName: "[project]/components/Nav.tsx",
+                lineNumber: 220,
+                columnNumber: 9
+            }, this))
+    }, void 0, false, {
+        fileName: "[project]/components/Nav.tsx",
+        lineNumber: 209,
+        columnNumber: 5
+    }, this);
+}
+// ── Mega menu: Our Yachts ─────────────────────────────────────────────────────
+const YACHT_DATA = [
+    {
+        img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=500&q=80',
+        spec: '34m · 135 guests',
+        detail: 'Two decks · Dual bars · Sound throughout'
+    },
+    {
+        img: 'https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=500&q=80',
+        spec: '30m · 100 guests',
+        detail: "Tri-deck · Chef's kitchen · Sun lounge"
+    }
+];
+function YachtsMenu({ sub }) {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        style: {
+            minWidth: 540,
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 2
+        },
+        children: sub.map((s, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                href: s.href,
+                style: {
+                    position: 'relative',
+                    height: 230,
+                    display: 'block',
+                    textDecoration: 'none',
+                    overflow: 'hidden'
+                },
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "will-change-transform",
+                        style: {
+                            position: 'absolute',
+                            inset: 0,
+                            backgroundImage: `url(${YACHT_DATA[i].img})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            transition: 'transform 0.55s ease'
+                        },
+                        onMouseEnter: (e)=>{
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                        },
+                        onMouseLeave: (e)=>{
+                            e.currentTarget.style.transform = 'scale(1)';
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 312,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            position: 'absolute',
+                            inset: 0,
+                            background: 'linear-gradient(to top, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.2) 55%)'
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 329,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            position: 'absolute',
+                            bottom: 22,
+                            left: 22,
+                            right: 22
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'var(--font-display)',
+                                    fontSize: 24,
+                                    fontStyle: 'italic',
+                                    color: 'var(--cream)',
+                                    marginBottom: 6
+                                },
+                                children: s.label
+                            }, void 0, false, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 338,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'var(--font-body)',
+                                    fontSize: 9,
+                                    letterSpacing: '0.22em',
+                                    textTransform: 'uppercase',
+                                    color: 'var(--gold)',
+                                    marginBottom: 4
+                                },
+                                children: YACHT_DATA[i].spec
+                            }, void 0, false, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 349,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                style: {
+                                    fontFamily: 'var(--font-body)',
+                                    fontSize: 10,
+                                    color: 'rgba(245,240,232,0.5)',
+                                    letterSpacing: '0.05em'
+                                },
+                                children: YACHT_DATA[i].detail
+                            }, void 0, false, {
+                                fileName: "[project]/components/Nav.tsx",
+                                lineNumber: 361,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 337,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, s.label, true, {
+                fileName: "[project]/components/Nav.tsx",
+                lineNumber: 301,
+                columnNumber: 9
+            }, this))
+    }, void 0, false, {
+        fileName: "[project]/components/Nav.tsx",
+        lineNumber: 299,
+        columnNumber: 5
+    }, this);
+}
+// ── NavItem ───────────────────────────────────────────────────────────────────
+function NavItem({ label, href, sub, menu, alignRight }) {
     const [open, setOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const dropRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const hasSub = !!sub;
@@ -445,9 +978,9 @@ function NavItem({ label, sub }) {
         if (!dropRef.current) return;
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(dropRef.current, {
             opacity: open ? 1 : 0,
-            y: open ? 0 : 6,
+            y: open ? 0 : 8,
             pointerEvents: open ? 'auto' : 'none',
-            duration: 0.22,
+            duration: 0.25,
             ease: 'power2.out'
         });
     }, [
@@ -459,7 +992,8 @@ function NavItem({ label, sub }) {
         onMouseLeave: ()=>setOpen(false),
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                className: "relative flex items-center gap-1.5 cursor-pointer select-none transition-colors duration-200",
+                href: href ?? '#',
+                className: "relative flex items-center gap-1.5 select-none",
                 style: {
                     fontFamily: 'var(--font-body)',
                     fontSize: 10.5,
@@ -468,7 +1002,8 @@ function NavItem({ label, sub }) {
                     color: 'var(--cream)',
                     fontWeight: 500,
                     padding: '8px 0',
-                    textDecoration: 'none'
+                    textDecoration: 'none',
+                    transition: 'color 0.2s'
                 },
                 onMouseEnter: (e)=>e.currentTarget.style.color = 'var(--gold)',
                 onMouseLeave: (e)=>e.currentTarget.style.color = 'var(--cream)',
@@ -476,77 +1011,106 @@ function NavItem({ label, sub }) {
                     label,
                     hasSub && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         style: {
-                            opacity: 0.6
+                            opacity: 0.55
                         },
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
                             name: "chevronDown",
                             size: 10
                         }, void 0, false, {
                             fileName: "[project]/components/Nav.tsx",
-                            lineNumber: 73,
+                            lineNumber: 434,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 72,
+                        lineNumber: 433,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Nav.tsx",
-                lineNumber: 55,
+                lineNumber: 414,
                 columnNumber: 7
             }, this),
             hasSub && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 ref: dropRef,
-                className: "absolute top-full left-0",
+                className: "absolute top-full",
                 style: {
-                    minWidth: 240,
+                    ...alignRight ? {
+                        right: 0
+                    } : {
+                        left: 0
+                    },
                     background: 'rgba(10,22,40,0.97)',
-                    backdropFilter: 'blur(14px)',
-                    WebkitBackdropFilter: 'blur(14px)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
                     border: '1px solid rgba(201,168,76,0.18)',
-                    padding: '16px 0',
+                    marginTop: 0,
                     opacity: 0,
                     pointerEvents: 'none',
                     zIndex: 100,
-                    marginTop: 6
+                    overflow: 'hidden'
                 },
-                children: sub.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                        className: "block cursor-pointer transition-colors duration-200",
-                        style: {
-                            padding: '10px 24px',
-                            fontFamily: 'var(--font-body)',
-                            fontSize: 11,
-                            letterSpacing: '0.14em',
-                            textTransform: 'uppercase',
-                            color: 'var(--cream)',
-                            textDecoration: 'none',
-                            fontWeight: 400
-                        },
-                        onMouseEnter: (e)=>{
-                            e.currentTarget.style.color = 'var(--gold)';
-                            e.currentTarget.style.background = 'rgba(201,168,76,0.05)';
-                        },
-                        onMouseLeave: (e)=>{
-                            e.currentTarget.style.color = 'var(--cream)';
-                            e.currentTarget.style.background = 'transparent';
-                        },
-                        children: s
-                    }, s, false, {
+                children: [
+                    menu === 'cruises' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(CruisesMenu, {
+                        sub: sub
+                    }, void 0, false, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 96,
-                        columnNumber: 13
-                    }, this))
-            }, void 0, false, {
+                        lineNumber: 456,
+                        columnNumber: 34
+                    }, this),
+                    menu === 'charters' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ChartersMenu, {
+                        sub: sub
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 457,
+                        columnNumber: 35
+                    }, this),
+                    menu === 'yachts' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(YachtsMenu, {
+                        sub: sub
+                    }, void 0, false, {
+                        fileName: "[project]/components/Nav.tsx",
+                        lineNumber: 458,
+                        columnNumber: 33
+                    }, this),
+                    !menu && sub.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                            href: s.href,
+                            className: "block",
+                            style: {
+                                padding: '10px 24px',
+                                fontFamily: 'var(--font-body)',
+                                fontSize: 11,
+                                letterSpacing: '0.14em',
+                                textTransform: 'uppercase',
+                                color: 'var(--cream)',
+                                textDecoration: 'none',
+                                fontWeight: 400,
+                                minWidth: 240
+                            },
+                            onMouseEnter: (e)=>{
+                                e.currentTarget.style.color = 'var(--gold)';
+                                e.currentTarget.style.background = 'rgba(201,168,76,0.05)';
+                            },
+                            onMouseLeave: (e)=>{
+                                e.currentTarget.style.color = 'var(--cream)';
+                                e.currentTarget.style.background = 'transparent';
+                            },
+                            children: s.label
+                        }, s.label, false, {
+                            fileName: "[project]/components/Nav.tsx",
+                            lineNumber: 461,
+                            columnNumber: 15
+                        }, this))
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/Nav.tsx",
-                lineNumber: 79,
+                lineNumber: 440,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/Nav.tsx",
-        lineNumber: 50,
+        lineNumber: 409,
         columnNumber: 5
     }, this);
 }
@@ -593,8 +1157,8 @@ function Nav() {
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                className: "flex items-center gap-3.5 cursor-pointer no-underline",
-                href: "#",
+                className: "flex items-center gap-3.5 no-underline",
+                href: "https://boattimeyachtcharters.com/",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex items-center justify-center",
@@ -610,7 +1174,7 @@ function Nav() {
                         children: "B"
                     }, void 0, false, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 173,
+                        lineNumber: 542,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -631,7 +1195,7 @@ function Nav() {
                                         children: "Boat"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Nav.tsx",
-                                        lineNumber: 197,
+                                        lineNumber: 566,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -641,13 +1205,13 @@ function Nav() {
                                         children: "Time"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Nav.tsx",
-                                        lineNumber: 198,
+                                        lineNumber: 567,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Nav.tsx",
-                                lineNumber: 188,
+                                lineNumber: 557,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -663,34 +1227,37 @@ function Nav() {
                                 children: "Yacht Charters"
                             }, void 0, false, {
                                 fileName: "[project]/components/Nav.tsx",
-                                lineNumber: 200,
+                                lineNumber: 569,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 187,
+                        lineNumber: 556,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Nav.tsx",
-                lineNumber: 169,
+                lineNumber: 538,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "hidden md:flex items-center gap-8",
                 children: NAV_LINKS.map((n)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(NavItem, {
                         label: n.label,
-                        sub: n.sub
+                        href: n.href,
+                        sub: n.sub,
+                        menu: n.menu,
+                        alignRight: n.alignRight
                     }, n.label, false, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 219,
+                        lineNumber: 588,
                         columnNumber: 11
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/components/Nav.tsx",
-                lineNumber: 217,
+                lineNumber: 586,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -699,16 +1266,16 @@ function Nav() {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                         variant: "outline",
                         small: true,
-                        href: "#inquiry",
+                        href: "https://boattimeyachtcharters.com/contact/",
                         className: "hidden md:inline-flex",
                         children: "Booking Enquiry"
                     }, void 0, false, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 225,
+                        lineNumber: 601,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        className: "md:hidden flex flex-col gap-1.5 p-2 cursor-pointer bg-transparent border-none",
+                        className: "md:hidden flex flex-col gap-1.5 p-2 bg-transparent border-none cursor-pointer",
                         onClick: ()=>setMobileOpen(!mobileOpen),
                         "aria-label": "Toggle menu",
                         children: [
@@ -720,7 +1287,7 @@ function Nav() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/Nav.tsx",
-                                lineNumber: 235,
+                                lineNumber: 615,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -731,7 +1298,7 @@ function Nav() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/Nav.tsx",
-                                lineNumber: 242,
+                                lineNumber: 622,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -742,19 +1309,19 @@ function Nav() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/components/Nav.tsx",
-                                lineNumber: 249,
+                                lineNumber: 626,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 230,
+                        lineNumber: 610,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Nav.tsx",
-                lineNumber: 224,
+                lineNumber: 600,
                 columnNumber: 7
             }, this),
             mobileOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -763,54 +1330,91 @@ function Nav() {
                     background: 'rgba(10,22,40,0.98)',
                     backdropFilter: 'blur(14px)',
                     borderBottom: '1px solid rgba(201,168,76,0.14)',
-                    padding: '24px'
+                    padding: '24px',
+                    maxHeight: '80vh',
+                    overflowY: 'auto'
                 },
                 children: [
-                    NAV_LINKS.map((n)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                            href: "#",
-                            className: "block py-3 border-b",
-                            style: {
-                                fontFamily: 'var(--font-body)',
-                                fontSize: 12,
-                                letterSpacing: '0.2em',
-                                textTransform: 'uppercase',
-                                color: 'var(--cream)',
-                                textDecoration: 'none',
-                                borderBottomColor: 'rgba(201,168,76,0.1)'
-                            },
-                            children: n.label
-                        }, n.label, false, {
+                    NAV_LINKS.map((n)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                    href: n.href ?? '#',
+                                    className: "block py-3 border-b",
+                                    style: {
+                                        fontFamily: 'var(--font-body)',
+                                        fontSize: 12,
+                                        letterSpacing: '0.2em',
+                                        textTransform: 'uppercase',
+                                        color: 'var(--cream)',
+                                        textDecoration: 'none',
+                                        borderBottomColor: 'rgba(201,168,76,0.1)'
+                                    },
+                                    children: n.label
+                                }, void 0, false, {
+                                    fileName: "[project]/components/Nav.tsx",
+                                    lineNumber: 651,
+                                    columnNumber: 15
+                                }, this),
+                                n.sub && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    style: {
+                                        paddingLeft: 16,
+                                        paddingBottom: 8
+                                    },
+                                    children: n.sub.map((s)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                            href: s.href,
+                                            className: "block py-2",
+                                            style: {
+                                                fontFamily: 'var(--font-body)',
+                                                fontSize: 11,
+                                                letterSpacing: '0.15em',
+                                                textTransform: 'uppercase',
+                                                color: 'var(--text-muted)',
+                                                textDecoration: 'none'
+                                            },
+                                            children: s.label
+                                        }, s.label, false, {
+                                            fileName: "[project]/components/Nav.tsx",
+                                            lineNumber: 669,
+                                            columnNumber: 21
+                                        }, this))
+                                }, void 0, false, {
+                                    fileName: "[project]/components/Nav.tsx",
+                                    lineNumber: 667,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, n.label, true, {
                             fileName: "[project]/components/Nav.tsx",
-                            lineNumber: 271,
+                            lineNumber: 650,
                             columnNumber: 13
                         }, this)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "mt-6",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                             variant: "primary",
-                            href: "#inquiry",
+                            href: "https://boattimeyachtcharters.com/contact/",
                             small: true,
                             children: "Booking Enquiry"
                         }, void 0, false, {
                             fileName: "[project]/components/Nav.tsx",
-                            lineNumber: 289,
+                            lineNumber: 690,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/Nav.tsx",
-                        lineNumber: 288,
+                        lineNumber: 689,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Nav.tsx",
-                lineNumber: 261,
+                lineNumber: 638,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/Nav.tsx",
-        lineNumber: 158,
+        lineNumber: 527,
         columnNumber: 5
     }, this);
 }
@@ -957,7 +1561,7 @@ function Hero() {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 119,
+                lineNumber: 129,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -967,7 +1571,7 @@ function Hero() {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 131,
+                lineNumber: 141,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -978,7 +1582,7 @@ function Hero() {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 140,
+                lineNumber: 150,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1009,14 +1613,14 @@ function Hero() {
                         color: "var(--gold)"
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 168,
+                        lineNumber: 181,
                         columnNumber: 9
                     }, this),
                     "4.9 · 3,900+ guest reviews"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 146,
+                lineNumber: 159,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1037,7 +1641,7 @@ function Hero() {
                         children: "Superyacht Charters — Gold Coast & Brisbane"
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 178,
+                        lineNumber: 196,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -1063,12 +1667,12 @@ function Hero() {
                                     children: "Luxury"
                                 }, void 0, false, {
                                     fileName: "[project]/components/Hero.tsx",
-                                    lineNumber: 195,
+                                    lineNumber: 217,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 194,
+                                lineNumber: 216,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1085,12 +1689,12 @@ function Hero() {
                                     children: "on the water,"
                                 }, void 0, false, {
                                     fileName: "[project]/components/Hero.tsx",
-                                    lineNumber: 198,
+                                    lineNumber: 222,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 197,
+                                lineNumber: 221,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1105,18 +1709,18 @@ function Hero() {
                                     children: "unforgettable."
                                 }, void 0, false, {
                                     fileName: "[project]/components/Hero.tsx",
-                                    lineNumber: 206,
+                                    lineNumber: 234,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 205,
+                                lineNumber: 233,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 183,
+                        lineNumber: 205,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1130,10 +1734,10 @@ function Hero() {
                             lineHeight: 1.75,
                             margin: '0 0 44px'
                         },
-                        children: "Two superyachts berthed at Marina Mirage. Whale watching in season, sunset cruises year-round, private charters on your afternoon — tell us the occasion and we’ll write the day."
+                        children: "Yacht Hire, Luxury Sunset and Whale Watching Cruises Gold Coast"
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 211,
+                        lineNumber: 241,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1143,65 +1747,31 @@ function Hero() {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                 variant: "primary",
                                 href: "#cruises",
-                                children: "Explore Cruises"
+                                children: "Sunset Cruises"
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 230,
+                                lineNumber: 258,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                 variant: "ghost",
                                 href: "#inquiry",
-                                children: "Booking Enquiry"
+                                children: "Whale Watching"
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 233,
+                                lineNumber: 261,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 229,
+                        lineNumber: 257,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 173,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                ref: scrollCueRef,
-                className: "absolute z-10 flex items-center gap-3 hero-scroll-cue",
-                style: {
-                    bottom: 40,
-                    left: 48,
-                    fontFamily: 'var(--font-body)',
-                    fontSize: 10,
-                    letterSpacing: '0.28em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-muted)'
-                },
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        ref: scrollLineRef,
-                        style: {
-                            width: 1,
-                            height: 56,
-                            background: 'var(--gold)',
-                            opacity: 0.5,
-                            transformOrigin: 'top'
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 253,
-                        columnNumber: 9
-                    }, this),
-                    "Scroll"
-                ]
-            }, void 0, true, {
-                fileName: "[project]/components/Hero.tsx",
-                lineNumber: 240,
+                lineNumber: 186,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1226,7 +1796,7 @@ function Hero() {
                         children: "★★★★★"
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 279,
+                        lineNumber: 280,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1239,7 +1809,7 @@ function Hero() {
                         children: "3,900+"
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 282,
+                        lineNumber: 290,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1254,19 +1824,19 @@ function Hero() {
                         children: "5-Star Reviews"
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 292,
+                        lineNumber: 300,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 267,
+                lineNumber: 268,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/Hero.tsx",
-        lineNumber: 113,
+        lineNumber: 123,
         columnNumber: 5
     }, this);
 }
@@ -1385,12 +1955,12 @@ function StatsBar() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             style: {
                                 fontFamily: 'var(--font-body)',
-                                fontSize: 9,
-                                letterSpacing: '0.3em',
+                                fontSize: 13,
+                                letterSpacing: '0.22em',
                                 textTransform: 'uppercase',
                                 color: 'var(--navy)',
-                                opacity: 0.55,
-                                fontWeight: 500
+                                opacity: 0.75,
+                                fontWeight: 600
                             },
                             children: s.eyebrow
                         }, void 0, false, {
@@ -2811,20 +3381,20 @@ const REVIEWS = [
     {
         quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
             children: [
-                "Hands down the best whale watching in south east Queensland. Informative without overwhelming — we watched them",
-                ' ',
+                "Hands down the best whale watching in south east Queensland. Informative without overwhelming — we watched them ",
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
                     children: "breach"
                 }, void 0, false, {
                     fileName: "[project]/components/Reviews.tsx",
-                    lineNumber: 17,
-                    columnNumber: 9
+                    lineNumber: 16,
+                    columnNumber: 40
                 }, ("TURBOPACK compile-time value", void 0)),
                 " several times. Unforgettable."
             ]
         }, void 0, true),
         name: 'Gleyn Hernandez',
-        source: 'Google · Whale Watching'
+        source: 'Google · Whale Watching',
+        photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&q=80'
     },
     {
         quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -2834,14 +3404,15 @@ const REVIEWS = [
                     children: "dolphins"
                 }, void 0, false, {
                     fileName: "[project]/components/Reviews.tsx",
-                    lineNumber: 27,
+                    lineNumber: 28,
                     columnNumber: 29
                 }, ("TURBOPACK compile-time value", void 0)),
                 ". The crew made us feel genuinely welcome."
             ]
         }, void 0, true),
         name: 'Alex',
-        source: 'Google · Whale Watching'
+        source: 'Google · Whale Watching',
+        photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&q=80'
     },
     {
         quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -2851,14 +3422,128 @@ const REVIEWS = [
                     children: "perfect day"
                 }, void 0, false, {
                     fileName: "[project]/components/Reviews.tsx",
-                    lineNumber: 38,
+                    lineNumber: 40,
                     columnNumber: 23
                 }, ("TURBOPACK compile-time value", void 0)),
                 " out for the whole family."
             ]
         }, void 0, true),
         name: 'Linda Bernhardt',
-        source: 'Google · Family Charter'
+        source: 'Google · Family Charter',
+        photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&q=80'
+    },
+    {
+        quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                "Booked for my wife’s birthday and it exceeded every expectation. The",
+                ' ',
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
+                    children: "sunset over the Broadwater"
+                }, void 0, false, {
+                    fileName: "[project]/components/Reviews.tsx",
+                    lineNumber: 51,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                " was otherworldly. Worth every cent."
+            ]
+        }, void 0, true),
+        name: 'James Nguyen',
+        source: 'Google · Sunset Cruise',
+        photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80'
+    },
+    {
+        quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                "We used Sun Goddess for our company Christmas party — 80 guests, three decks,",
+                ' ',
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
+                    children: "completely seamless"
+                }, void 0, false, {
+                    fileName: "[project]/components/Reviews.tsx",
+                    lineNumber: 62,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                ". The catering team were exceptional."
+            ]
+        }, void 0, true),
+        name: 'Sarah Mitchell',
+        source: 'Google · Corporate Charter',
+        photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&q=80'
+    },
+    {
+        quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                "Got married on the foredeck at golden hour. The crew made the whole day feel",
+                ' ',
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
+                    children: "completely effortless"
+                }, void 0, false, {
+                    fileName: "[project]/components/Reviews.tsx",
+                    lineNumber: 73,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                ". Every single guest still talks about it."
+            ]
+        }, void 0, true),
+        name: 'Emily & Tom Barker',
+        source: 'Google · Wedding Charter',
+        photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&q=80'
+    },
+    {
+        quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                "We saw over 20 humpbacks including a full breach ten metres from the bow.",
+                ' ',
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
+                    children: "Absolutely breathtaking."
+                }, void 0, false, {
+                    fileName: "[project]/components/Reviews.tsx",
+                    lineNumber: 84,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                "Best day on the water I’ve had."
+            ]
+        }, void 0, true),
+        name: 'Robert Svensson',
+        source: 'Google · Whale Watching',
+        photo: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=120&q=80'
+    },
+    {
+        quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                "Hired for grandfather’s 80th — three generations on deck. The crew treated everyone like ",
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
+                    children: "absolute royalty"
+                }, void 0, false, {
+                    fileName: "[project]/components/Reviews.tsx",
+                    lineNumber: 95,
+                    columnNumber: 23
+                }, ("TURBOPACK compile-time value", void 0)),
+                ". A perfect afternoon."
+            ]
+        }, void 0, true),
+        name: 'Diane Kowalski',
+        source: 'Google · Private Charter',
+        photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&q=80'
+    },
+    {
+        quote: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+            children: [
+                "Visiting from the UK and chose this on a whim — best decision of the trip. The",
+                ' ',
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
+                    children: "Broadwater at sunset"
+                }, void 0, false, {
+                    fileName: "[project]/components/Reviews.tsx",
+                    lineNumber: 106,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                " is something I will never forget."
+            ]
+        }, void 0, true),
+        name: 'Marcus Webb',
+        source: 'Google · Sunset Cruise',
+        photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=120&q=80'
     }
 ];
 const RATINGS = [
@@ -2875,6 +3560,8 @@ const RATINGS = [
         label: 'On the water'
     }
 ];
+const PER_PAGE = 3;
+const TOTAL_PAGES = Math.ceil(REVIEWS.length / PER_PAGE);
 function Stars() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex gap-1 mb-6",
@@ -2890,19 +3577,59 @@ function Stars() {
                 color: "var(--gold)"
             }, i, false, {
                 fileName: "[project]/components/Reviews.tsx",
-                lineNumber: 56,
+                lineNumber: 128,
                 columnNumber: 9
             }, this))
     }, void 0, false, {
         fileName: "[project]/components/Reviews.tsx",
-        lineNumber: 54,
+        lineNumber: 126,
         columnNumber: 5
     }, this);
 }
+const navBtnStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 10,
+    fontFamily: 'var(--font-body)',
+    fontSize: 10,
+    letterSpacing: '0.25em',
+    textTransform: 'uppercase',
+    color: 'var(--gold)',
+    fontWeight: 600,
+    background: 'transparent',
+    border: '1px solid rgba(201,168,76,0.3)',
+    padding: '12px 22px',
+    cursor: 'pointer',
+    transition: 'border-color 0.2s'
+};
 function Reviews() {
     const sectionRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const headerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const ratingsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const cardsRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const isFirstRender = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(true);
+    const [page, setPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [locked, setLocked] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const goToPage = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useCallback"])((target)=>{
+        if (locked || target === page) return;
+        setLocked(true);
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].to(cardsRef.current, {
+            opacity: 0,
+            y: 16,
+            duration: 0.2,
+            ease: 'power2.in',
+            onComplete: ()=>{
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].set(cardsRef.current, {
+                    opacity: 0,
+                    y: -20
+                });
+                setPage(target);
+            }
+        });
+    }, [
+        locked,
+        page
+    ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$gsap$2f$react$2f$src$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGSAP"])(()=>{
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].from(headerRef.current, {
             y: 40,
@@ -2915,7 +3642,6 @@ function Reviews() {
                 once: true
             }
         });
-        // Ratings count-up
         const ratingEls = ratingsRef.current.querySelectorAll('.rating-number');
         ratingEls.forEach((el)=>{
             const text = el.dataset.value ?? '';
@@ -2951,11 +3677,10 @@ function Reviews() {
                 once: true
             }
         });
-        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].from(sectionRef.current.querySelectorAll('.review-card'), {
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].from(cardsRef.current, {
             y: 60,
             opacity: 0,
             duration: 0.85,
-            stagger: 0.1,
             ease: 'power2.out',
             scrollTrigger: {
                 trigger: sectionRef.current,
@@ -2966,6 +3691,27 @@ function Reviews() {
     }, {
         scope: sectionRef
     });
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$gsap$2f$react$2f$src$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useGSAP"])(()=>{
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$gsap$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["default"].fromTo(cardsRef.current, {
+            opacity: 0,
+            y: -20
+        }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: 'power2.out',
+            onComplete: ()=>setLocked(false)
+        });
+    }, {
+        dependencies: [
+            page
+        ]
+    });
+    const visible = REVIEWS.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: sectionRef,
         className: "relative overflow-hidden reviews-section",
@@ -2982,7 +3728,7 @@ function Reviews() {
                 }
             }, void 0, false, {
                 fileName: "[project]/components/Reviews.tsx",
-                lineNumber: 142,
+                lineNumber: 256,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3004,7 +3750,7 @@ function Reviews() {
                                 children: "Guest Book"
                             }, void 0, false, {
                                 fileName: "[project]/components/Reviews.tsx",
-                                lineNumber: 154,
+                                lineNumber: 268,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -3016,26 +3762,25 @@ function Reviews() {
                                     letterSpacing: '-0.015em'
                                 },
                                 children: [
-                                    "What our guests",
-                                    ' ',
+                                    "What our guests ",
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ItalicEm"], {
                                         children: "say about us"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Reviews.tsx",
-                                        lineNumber: 165,
-                                        columnNumber: 13
+                                        lineNumber: 278,
+                                        columnNumber: 29
                                     }, this),
                                     "."
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Reviews.tsx",
-                                lineNumber: 155,
+                                lineNumber: 269,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Reviews.tsx",
-                        lineNumber: 153,
+                        lineNumber: 267,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3064,7 +3809,7 @@ function Reviews() {
                                         children: r.score
                                     }, void 0, false, {
                                         fileName: "[project]/components/Reviews.tsx",
-                                        lineNumber: 183,
+                                        lineNumber: 296,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3080,21 +3825,22 @@ function Reviews() {
                                         children: r.label
                                     }, void 0, false, {
                                         fileName: "[project]/components/Reviews.tsx",
-                                        lineNumber: 196,
+                                        lineNumber: 309,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, r.label, true, {
                                 fileName: "[project]/components/Reviews.tsx",
-                                lineNumber: 182,
+                                lineNumber: 295,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/Reviews.tsx",
-                        lineNumber: 170,
+                        lineNumber: 283,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        ref: cardsRef,
                         className: "grid reviews-grid",
                         style: {
                             gridTemplateColumns: 'repeat(3, 1fr)',
@@ -3102,8 +3848,8 @@ function Reviews() {
                             background: 'rgba(201,168,76,0.1)',
                             border: '1px solid rgba(201,168,76,0.1)'
                         },
-                        children: REVIEWS.map((r, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "review-card flex flex-col",
+                        children: visible.map((r, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-col",
                                 style: {
                                     padding: '48px 36px',
                                     background: 'var(--navy-mid)',
@@ -3112,7 +3858,7 @@ function Reviews() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Stars, {}, void 0, false, {
                                         fileName: "[project]/components/Reviews.tsx",
-                                        lineNumber: 233,
+                                        lineNumber: 347,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3133,7 +3879,7 @@ function Reviews() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/Reviews.tsx",
-                                        lineNumber: 234,
+                                        lineNumber: 348,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3144,21 +3890,18 @@ function Reviews() {
                                         },
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "flex items-center justify-center flex-shrink-0",
+                                                className: "flex-shrink-0",
                                                 style: {
-                                                    width: 38,
-                                                    height: 38,
-                                                    background: 'var(--ocean)',
-                                                    color: 'var(--gold)',
-                                                    fontFamily: 'var(--font-display)',
-                                                    fontStyle: 'italic',
-                                                    fontSize: 16,
-                                                    border: '1px solid rgba(201,168,76,0.3)'
-                                                },
-                                                children: r.name[0]
+                                                    width: 44,
+                                                    height: 44,
+                                                    border: '1px solid rgba(201,168,76,0.3)',
+                                                    backgroundImage: `url(${r.photo})`,
+                                                    backgroundSize: 'cover',
+                                                    backgroundPosition: 'center'
+                                                }
                                             }, void 0, false, {
                                                 fileName: "[project]/components/Reviews.tsx",
-                                                lineNumber: 255,
+                                                lineNumber: 369,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3174,7 +3917,7 @@ function Reviews() {
                                                         children: r.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Reviews.tsx",
-                                                        lineNumber: 271,
+                                                        lineNumber: 381,
                                                         columnNumber: 19
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3190,42 +3933,133 @@ function Reviews() {
                                                         children: r.source
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Reviews.tsx",
-                                                        lineNumber: 282,
+                                                        lineNumber: 392,
                                                         columnNumber: 19
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/Reviews.tsx",
-                                                lineNumber: 270,
+                                                lineNumber: 380,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/Reviews.tsx",
-                                        lineNumber: 248,
+                                        lineNumber: 362,
                                         columnNumber: 15
                                     }, this)
                                 ]
-                            }, i, true, {
+                            }, `${page}-${i}`, true, {
                                 fileName: "[project]/components/Reviews.tsx",
-                                lineNumber: 224,
+                                lineNumber: 338,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/components/Reviews.tsx",
-                        lineNumber: 214,
+                        lineNumber: 327,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex items-center justify-between",
+                        style: {
+                            marginTop: 40
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                style: navBtnStyle,
+                                onClick: ()=>goToPage((page - 1 + TOTAL_PAGES) % TOTAL_PAGES),
+                                onMouseEnter: (e)=>e.currentTarget.style.borderColor = 'var(--gold)',
+                                onMouseLeave: (e)=>e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)',
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        style: {
+                                            transform: 'rotate(180deg)',
+                                            display: 'inline-flex'
+                                        },
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
+                                            name: "arrow",
+                                            size: 11,
+                                            color: "var(--gold)"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/Reviews.tsx",
+                                            lineNumber: 423,
+                                            columnNumber: 15
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Reviews.tsx",
+                                        lineNumber: 422,
+                                        columnNumber: 13
+                                    }, this),
+                                    "Previous"
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/Reviews.tsx",
+                                lineNumber: 416,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center gap-3",
+                                children: Array.from({
+                                    length: TOTAL_PAGES
+                                }).map((_, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>goToPage(i),
+                                        style: {
+                                            width: i === page ? 32 : 8,
+                                            height: 2,
+                                            background: i === page ? 'var(--gold)' : 'rgba(201,168,76,0.3)',
+                                            border: 'none',
+                                            cursor: 'pointer',
+                                            padding: 0,
+                                            transition: 'all 0.35s ease'
+                                        }
+                                    }, i, false, {
+                                        fileName: "[project]/components/Reviews.tsx",
+                                        lineNumber: 430,
+                                        columnNumber: 15
+                                    }, this))
+                            }, void 0, false, {
+                                fileName: "[project]/components/Reviews.tsx",
+                                lineNumber: 428,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                style: navBtnStyle,
+                                onClick: ()=>goToPage((page + 1) % TOTAL_PAGES),
+                                onMouseEnter: (e)=>e.currentTarget.style.borderColor = 'var(--gold)',
+                                onMouseLeave: (e)=>e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)',
+                                children: [
+                                    "Next",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Shared$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Icon"], {
+                                        name: "arrow",
+                                        size: 11,
+                                        color: "var(--gold)"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Reviews.tsx",
+                                        lineNumber: 453,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/Reviews.tsx",
+                                lineNumber: 446,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/Reviews.tsx",
+                        lineNumber: 412,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Reviews.tsx",
-                lineNumber: 151,
+                lineNumber: 265,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/Reviews.tsx",
-        lineNumber: 136,
+        lineNumber: 251,
         columnNumber: 5
     }, this);
 }

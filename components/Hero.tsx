@@ -95,16 +95,26 @@ export default function Hero() {
       });
 
       // 5. Subtle content lift on scroll
-      gsap.to([eyebrowRef.current, line1Ref.current, line2Ref.current, line3Ref.current, subtitleRef.current, btnsRef.current], {
-        yPercent: -18,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
+      gsap.to(
+        [
+          eyebrowRef.current,
+          line1Ref.current,
+          line2Ref.current,
+          line3Ref.current,
+          subtitleRef.current,
+          btnsRef.current,
+        ],
+        {
+          yPercent: -18,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
         },
-      });
+      );
     },
     { scope: sectionRef },
   );
@@ -139,7 +149,10 @@ export default function Hero() {
       {/* Bottom horizon gradient */}
       <div
         className="absolute left-0 right-0 bottom-0"
-        style={{ height: 100, background: 'linear-gradient(to top, var(--navy), transparent)' }}
+        style={{
+          height: 100,
+          background: 'linear-gradient(to top, var(--navy), transparent)',
+        }}
       />
 
       {/* Rating badge — top right */}
@@ -172,10 +185,19 @@ export default function Hero() {
       {/* Main content */}
       <div
         className="relative z-10 w-full hero-content"
-        style={{ paddingLeft: 48, paddingRight: 48, paddingTop: 80, maxWidth: 1200 }}
+        style={{
+          paddingLeft: 48,
+          paddingRight: 48,
+          paddingTop: 80,
+          maxWidth: 1200,
+        }}
       >
         {/* Eyebrow */}
-        <div ref={eyebrowRef} className="section-eyebrow" style={{ marginBottom: 28 }}>
+        <div
+          ref={eyebrowRef}
+          className="section-eyebrow"
+          style={{ marginBottom: 28 }}
+        >
           Superyacht Charters — Gold Coast &amp; Brisbane
         </div>
 
@@ -192,18 +214,26 @@ export default function Hero() {
           }}
         >
           <div style={{ overflow: 'hidden' }}>
-            <span ref={line1Ref} style={{ display: 'block' }}>Luxury</span>
+            <span ref={line1Ref} style={{ display: 'block' }}>
+              Luxury
+            </span>
           </div>
           <div style={{ overflow: 'hidden' }}>
             <span
               ref={line2Ref}
-              style={{ display: 'block', fontStyle: 'italic', color: 'var(--gold-light)' }}
+              style={{
+                display: 'block',
+                fontStyle: 'italic',
+                color: 'var(--gold-light)',
+              }}
             >
               on the water,
             </span>
           </div>
           <div style={{ overflow: 'hidden' }}>
-            <span ref={line3Ref} style={{ display: 'block' }}>unforgettable.</span>
+            <span ref={line3Ref} style={{ display: 'block' }}>
+              unforgettable.
+            </span>
           </div>
         </h1>
 
@@ -220,47 +250,18 @@ export default function Hero() {
             margin: '0 0 44px',
           }}
         >
-          Two superyachts berthed at Marina Mirage. Whale watching in season,
-          sunset cruises year-round, private charters on your afternoon — tell
-          us the occasion and we&rsquo;ll write the day.
+          Yacht Hire, Luxury Sunset and Whale Watching Cruises Gold Coast
         </p>
 
         {/* Buttons */}
         <div ref={btnsRef} className="flex gap-4 flex-wrap">
           <Button variant="primary" href="#cruises">
-            Explore Cruises
+            Sunset Cruises
           </Button>
           <Button variant="ghost" href="#inquiry">
-            Booking Enquiry
+            Whale Watching
           </Button>
         </div>
-      </div>
-
-      {/* Scroll cue — bottom left */}
-      <div
-        ref={scrollCueRef}
-        className="absolute z-10 flex items-center gap-3 hero-scroll-cue"
-        style={{
-          bottom: 40,
-          left: 48,
-          fontFamily: 'var(--font-body)',
-          fontSize: 10,
-          letterSpacing: '0.28em',
-          textTransform: 'uppercase',
-          color: 'var(--text-muted)',
-        }}
-      >
-        <div
-          ref={scrollLineRef}
-          style={{
-            width: 1,
-            height: 56,
-            background: 'var(--gold)',
-            opacity: 0.5,
-            transformOrigin: 'top',
-          }}
-        />
-        Scroll
       </div>
 
       {/* Bottom-right stats badge */}
@@ -276,7 +277,14 @@ export default function Hero() {
           textAlign: 'center',
         }}
       >
-        <div style={{ color: 'var(--gold)', fontSize: 15, letterSpacing: 3, marginBottom: 4 }}>
+        <div
+          style={{
+            color: 'var(--gold)',
+            fontSize: 15,
+            letterSpacing: 3,
+            marginBottom: 4,
+          }}
+        >
           ★★★★★
         </div>
         <div
