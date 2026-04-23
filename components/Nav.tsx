@@ -79,11 +79,11 @@ const NAV_LINKS: NavLinkData[] = [
     sub: [
       {
         label: 'Sun Goddess',
-        href: 'https://boattimeyachtcharters.com/sun-goddess-gold-coast/',
+        href: '/sun-goddess-gold-coast',
       },
       {
         label: 'Mermaid Spirit',
-        href: 'https://boattimeyachtcharters.com/mermaid-spirit-gold-coast/',
+        href: '/mermaid-spirit-gold-coast',
       },
     ],
   },
