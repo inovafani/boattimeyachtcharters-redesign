@@ -279,4 +279,36 @@
     gap: 12px !important;
     align-items: flex-start !important;
   }
+
+  /* Cruise subpages */
+  .cruise-hero-content {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 100px !important;
+    max-width: 100% !important;
+  }
+  .cruise-stats-row {
+    gap: 8px !important;
+  }
+  .cruise-section {
+    padding: 60px 20px !important;
+  }
+  .cruise-overview-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .cruise-inclusions-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .cruise-details-grid {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+  .cruise-pricing-grid {
+    flex-direction: column !important;
+  }
+  .cruise-menu-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
 }

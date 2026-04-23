@@ -429,31 +429,31 @@ const NAV_LINKS = [
         sub: [
             {
                 label: 'Luxury Whale Watching',
-                href: 'https://boattimeyachtcharters.com/cruise-tickets-luxury-whale-watching/'
+                href: '/cruise-tickets-luxury-whale-watching'
             },
             {
                 label: 'Broadwater Sunset Cruise',
-                href: 'https://boattimeyachtcharters.com/luxury-broadwater-cruise/'
+                href: '/luxury-broadwater-cruise'
             },
             {
                 label: 'NYE 2026',
-                href: 'https://boattimeyachtcharters.com/nye-2026/'
+                href: '/nye-2026'
             },
             {
                 label: 'Luxury Valentines Cruise',
-                href: 'https://boattimeyachtcharters.com/valentines-day/'
+                href: '/valentines-day'
             },
             {
                 label: 'Riverfire 2026',
-                href: 'https://boattimeyachtcharters.com/riverfire-2026/'
+                href: '/riverfire-2026'
             },
             {
                 label: 'Relaxed Lunch Cruise',
-                href: 'https://boattimeyachtcharters.com/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/'
+                href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit'
             },
             {
                 label: 'Sunset Twilight Buffet',
-                href: 'https://boattimeyachtcharters.com/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/'
+                href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit'
             }
         ]
     },

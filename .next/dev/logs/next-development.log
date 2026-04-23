@@ -75,3 +75,24 @@
 {"timestamp":"18:16:50.793","source":"Browser","level":"WARN","message":"GSAP target null not found. https://gsap.com"}
 {"timestamp":"18:16:50.793","source":"Browser","level":"WARN","message":"GSAP target  not found. https://gsap.com"}
 {"timestamp":"18:16:50.793","source":"Browser","level":"WARN","message":"GSAP target null not found. https://gsap.com"}
+{"timestamp":"18:18:34.733","source":"Server","level":"ERROR","message":"[browser] \"Uncaught Error: Internal Next.js error: Router action dispatched before initialization.\""}
+{"timestamp":"18:18:34.734","source":"Browser","level":"ERROR","message":"Uncaught Error: Internal Next.js error: Router action dispatched before initialization."}
+{"timestamp":"18:18:34.734","source":"Server","level":"ERROR","message":"[browser] \"Uncaught Error: Internal Next.js error: Router action dispatched before initialization.\""}
+{"timestamp":"18:18:34.734","source":"Browser","level":"ERROR","message":"Uncaught Error: Internal Next.js error: Router action dispatched before initialization."}
+{"timestamp":"18:18:34.734","source":"Server","level":"ERROR","message":"[browser] \"Uncaught Error: Internal Next.js error: Router action dispatched before initialization.\""}
+{"timestamp":"18:18:34.734","source":"Browser","level":"ERROR","message":"Uncaught Error: Internal Next.js error: Router action dispatched before initialization."}
+{"timestamp":"18:18:34.734","source":"Server","level":"ERROR","message":"[browser] \"Uncaught Error: Internal Next.js error: Router action dispatched before initialization.\""}
+{"timestamp":"18:18:34.734","source":"Browser","level":"ERROR","message":"Uncaught Error: Internal Next.js error: Router action dispatched before initialization."}
+{"timestamp":"18:32:38.825","source":"Server","level":"LOG","message":"✓ Compiled in 217ms"}
+{"timestamp":"18:32:47.270","source":"Server","level":"LOG","message":"✓ Compiled in 107ms"}
+{"timestamp":"18:37:22.232","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"18:37:22.408","source":"Server","level":"WARN","message":"[browser] \"GSAP target null not found. https://gsap.com\" \"(components/Hero.tsx:68:10)\""}
+{"timestamp":"18:37:22.408","source":"Browser","level":"WARN","message":"GSAP target null not found. https://gsap.com"}
+{"timestamp":"18:37:22.409","source":"Server","level":"WARN","message":"[browser] \"GSAP target  not found. https://gsap.com\" \"(components/Hero.tsx:68:10)\""}
+{"timestamp":"18:37:22.409","source":"Browser","level":"WARN","message":"GSAP target  not found. https://gsap.com"}
+{"timestamp":"18:37:22.409","source":"Server","level":"WARN","message":"[browser] \"GSAP target null not found. https://gsap.com\" \"(components/Hero.tsx:75:12)\""}
+{"timestamp":"18:37:22.409","source":"Browser","level":"WARN","message":"GSAP target null not found. https://gsap.com"}
+{"timestamp":"18:37:22.409","source":"Browser","level":"WARN","message":"GSAP target null not found. https://gsap.com"}
+{"timestamp":"18:37:22.409","source":"Browser","level":"WARN","message":"GSAP target  not found. https://gsap.com"}
+{"timestamp":"18:37:22.409","source":"Browser","level":"WARN","message":"GSAP target null not found. https://gsap.com"}
+{"timestamp":"18:37:26.545","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}

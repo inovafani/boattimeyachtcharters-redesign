@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/layout,_N_T_/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/page,_N_T_/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/__PAGE__",
+    "/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit",
+    "/_index",
+    "/_head"
+  ]
+}

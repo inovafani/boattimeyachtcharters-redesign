@@ -40,6 +40,48 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/cruise-tickets-luxury-whale-watching",
+      "regex": "^/cruise\\-tickets\\-luxury\\-whale\\-watching(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cruise\\-tickets\\-luxury\\-whale\\-watching(?:/)?$"
+    },
+    {
+      "page": "/luxury-broadwater-cruise",
+      "regex": "^/luxury\\-broadwater\\-cruise(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/luxury\\-broadwater\\-cruise(?:/)?$"
+    },
+    {
+      "page": "/nye-2026",
+      "regex": "^/nye\\-2026(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/nye\\-2026(?:/)?$"
+    },
+    {
+      "page": "/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit",
+      "regex": "^/relaxed\\-lunch\\-cruise\\-flavours\\-of\\-australia\\-aboard\\-the\\-mermaid\\-spirit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/relaxed\\-lunch\\-cruise\\-flavours\\-of\\-australia\\-aboard\\-the\\-mermaid\\-spirit(?:/)?$"
+    },
+    {
+      "page": "/riverfire-2026",
+      "regex": "^/riverfire\\-2026(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/riverfire\\-2026(?:/)?$"
+    },
+    {
+      "page": "/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit",
+      "regex": "^/sunset\\-twilight\\-buffet\\-flavours\\-of\\-australia\\-aboard\\-the\\-mermaid\\-spirit(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sunset\\-twilight\\-buffet\\-flavours\\-of\\-australia\\-aboard\\-the\\-mermaid\\-spirit(?:/)?$"
+    },
+    {
+      "page": "/valentines-day",
+      "regex": "^/valentines\\-day(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/valentines\\-day(?:/)?$"
     }
   ],
   "dataRoutes": [],

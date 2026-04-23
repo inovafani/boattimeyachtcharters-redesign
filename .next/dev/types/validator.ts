@@ -36,10 +36,73 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 }
 
 
+// Validate ../../../app/cruise-tickets-luxury-whale-watching/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/cruise-tickets-luxury-whale-watching">> = Specific
+  const handler = {} as typeof import("../../../app/cruise-tickets-luxury-whale-watching/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/luxury-broadwater-cruise/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/luxury-broadwater-cruise">> = Specific
+  const handler = {} as typeof import("../../../app/luxury-broadwater-cruise/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/nye-2026/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/nye-2026">> = Specific
+  const handler = {} as typeof import("../../../app/nye-2026/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/">> = Specific
   const handler = {} as typeof import("../../../app/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit">> = Specific
+  const handler = {} as typeof import("../../../app/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/riverfire-2026/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/riverfire-2026">> = Specific
+  const handler = {} as typeof import("../../../app/riverfire-2026/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit">> = Specific
+  const handler = {} as typeof import("../../../app/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/valentines-day/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/valentines-day">> = Specific
+  const handler = {} as typeof import("../../../app/valentines-day/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

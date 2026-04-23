@@ -1,5 +1,12 @@
 {
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js"
+  "/cruise-tickets-luxury-whale-watching/page": "app/cruise-tickets-luxury-whale-watching/page.js",
+  "/luxury-broadwater-cruise/page": "app/luxury-broadwater-cruise/page.js",
+  "/nye-2026/page": "app/nye-2026/page.js",
+  "/page": "app/page.js",
+  "/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/page": "app/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit/page.js",
+  "/riverfire-2026/page": "app/riverfire-2026/page.js",
+  "/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/page": "app/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit/page.js",
+  "/valentines-day/page": "app/valentines-day/page.js"
 }
