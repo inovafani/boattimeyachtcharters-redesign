@@ -108,34 +108,37 @@ function CruiseCard({ c }: { c: CruiseData }) {
   const descRef = useRef<HTMLDivElement>(null);
   const linkRef = useRef<HTMLAnchorElement>(null);
 
-  useGSAP(() => {
-    gsap.to(imgRef.current, {
-      scale: hovered ? 1.06 : 1,
-      duration: 0.75,
-      ease: 'power2.out',
-    });
-    if (descRef.current) {
-      gsap.to(descRef.current, {
-        opacity: hovered ? 1 : 0,
-        y: hovered ? 0 : 8,
-        duration: 0.35,
+  useGSAP(
+    () => {
+      gsap.to(imgRef.current, {
+        scale: hovered ? 1.06 : 1,
+        duration: 0.75,
         ease: 'power2.out',
       });
-    }
-    if (linkRef.current) {
-      gsap.to(linkRef.current, {
-        opacity: hovered ? 1 : 0,
-        y: hovered ? 0 : 6,
-        duration: 0.35,
-        delay: hovered ? 0.05 : 0,
-        ease: 'power2.out',
-      });
-    }
-  }, { dependencies: [hovered] });
+      if (descRef.current) {
+        gsap.to(descRef.current, {
+          opacity: hovered ? 1 : 0,
+          y: hovered ? 0 : 8,
+          duration: 0.35,
+          ease: 'power2.out',
+        });
+      }
+      if (linkRef.current) {
+        gsap.to(linkRef.current, {
+          opacity: hovered ? 1 : 0,
+          y: hovered ? 0 : 6,
+          duration: 0.35,
+          delay: hovered ? 0.05 : 0,
+          ease: 'power2.out',
+        });
+      }
+    },
+    { dependencies: [hovered] },
+  );
 
   return (
     <div
-      className="relative overflow-hidden cursor-pointer"
+      className="relative overflow-hidden cursor-pointer cruise-card-inner"
       style={{
         gridColumn: c.col,
         gridRow: c.row,
@@ -194,7 +197,9 @@ function CruiseCard({ c }: { c: CruiseData }) {
           }}
         >
           {c.title}{' '}
-          <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>{c.em}</span>
+          <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+            {c.em}
+          </span>
         </div>
         {c.body && (
           <div
@@ -290,8 +295,21 @@ export default function Cruises() {
   );
 
   return (
-    <div ref={sectionRef} id="cruises" style={{ padding: '110px 0', background: 'var(--navy)' }}>
-      <div ref={headerRef} style={{ textAlign: 'center', maxWidth: 780, margin: '0 auto 72px', padding: '0 48px' }}>
+    <div
+      ref={sectionRef}
+      id="cruises"
+      className="cruises-section"
+      style={{ padding: '110px 0', background: 'var(--navy)' }}
+    >
+      <div
+        ref={headerRef}
+        style={{
+          textAlign: 'center',
+          maxWidth: 780,
+          margin: '0 auto 72px',
+          padding: '0 48px',
+        }}
+      >
         <Eyebrow>Cruise Tickets</Eyebrow>
         <h2
           style={{
@@ -313,8 +331,8 @@ export default function Cruises() {
             lineHeight: 1.75,
           }}
         >
-          Seven scheduled cruises running year-round from Marina Mirage — from whale season
-          mornings to New Year&rsquo;s Eve across three decks.
+          Seven scheduled cruises running year-round from Marina Mirage — from
+          whale season mornings to New Year&rsquo;s Eve across three decks.
         </p>
       </div>
 

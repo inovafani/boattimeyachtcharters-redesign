@@ -59,7 +59,7 @@ export default function CtaBand() {
   return (
     <div
       ref={sectionRef}
-      className="relative overflow-hidden flex items-center justify-center"
+      className="relative overflow-hidden flex items-center justify-center cta-band"
       style={{ minHeight: 560, padding: '120px 48px' }}
     >
       {/* Background image with parallax */}

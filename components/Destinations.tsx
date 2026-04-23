@@ -70,7 +70,7 @@ export default function Destinations() {
   return (
     <div
       ref={sectionRef}
-      className="relative overflow-hidden"
+      className="relative overflow-hidden destinations-section"
       style={{ padding: '110px 48px', background: 'var(--navy)' }}
     >
       {/* Subtle gold radial */}
@@ -84,7 +84,7 @@ export default function Destinations() {
       />
 
       <div
-        className="relative grid"
+        className="relative grid dest-outer-grid"
         style={{ maxWidth: 1200, margin: '0 auto', gridTemplateColumns: '1fr 1.2fr', gap: 80, alignItems: 'start' }}
       >
         {/* Left */}
@@ -123,7 +123,7 @@ export default function Destinations() {
         </div>
 
         {/* Right — two column destination lists */}
-        <div ref={rightRef} className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+        <div ref={rightRef} className="grid dest-inner-cols" style={{ gridTemplateColumns: '1fr 1fr', gap: 48 }}>
           {/* Gold Coast */}
           <div className="dest-col">
             <div

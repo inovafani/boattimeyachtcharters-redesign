@@ -172,10 +172,11 @@ export default function Faq() {
   return (
     <div
       ref={sectionRef}
+      className="faq-section"
       style={{ padding: '110px 48px', background: 'var(--navy)' }}
     >
       <div
-        className="grid"
+        className="grid faq-layout"
         style={{ maxWidth: 1100, margin: '0 auto', gridTemplateColumns: '0.9fr 1.3fr', gap: 80, alignItems: 'start' }}
       >
         {/* Left column */}

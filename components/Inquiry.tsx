@@ -161,7 +161,7 @@ export default function Inquiry() {
     <div
       ref={sectionRef}
       id="inquiry"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden inquiry-section"
       style={{
         padding: '110px 48px',
         background: 'linear-gradient(to bottom, var(--navy-mid) 0%, var(--navy) 100%)',
@@ -178,7 +178,7 @@ export default function Inquiry() {
       />
 
       <div
-        className="relative grid"
+        className="relative grid inquiry-layout"
         style={{ maxWidth: 1200, margin: '0 auto', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'start' }}
       >
         {/* Left */}
@@ -256,6 +256,7 @@ export default function Inquiry() {
         {/* Form */}
         <div
           ref={formRef}
+          className="inquiry-form"
           style={{
             background: 'rgba(10,22,40,0.5)',
             backdropFilter: 'blur(8px)',
@@ -263,15 +264,15 @@ export default function Inquiry() {
             padding: 48,
           }}
         >
-          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+          <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
             <Field label="Full Name" name="name" value={form.name} onChange={update} placeholder="Eleanor Vance" />
             <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="eleanor@vance.co" />
           </div>
-          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+          <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
             <Field label="Phone" name="phone" value={form.phone} onChange={update} placeholder="+61" />
             <Field label="Preferred Date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" />
           </div>
-          <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+          <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
             <Field
               label="Charter Type"
               name="charter"

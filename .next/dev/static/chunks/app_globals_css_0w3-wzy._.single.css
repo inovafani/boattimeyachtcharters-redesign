@@ -637,7 +637,134 @@ em {
   will-change: transform;
 }
 
+@media (max-width: 768px) {
+  .nav-bar {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .hero-content {
+    max-width: 100% !important;
+    padding-top: 100px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .hero-rating-badge {
+    display: none !important;
+  }
+
+  .hero-scroll-cue {
+    left: 24px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .cruises-section {
+    padding: 60px 0 !important;
+  }
+
+  .cruise-mosaic {
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 16px !important;
+    display: flex !important;
+  }
+
+  .cruise-card-inner {
+    height: 320px !important;
+    min-height: 320px !important;
+  }
+
+  .fleet-section {
+    padding: 60px 20px !important;
+  }
+
+  .fleet-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .charters-section, .reviews-section {
+    padding: 60px 20px !important;
+  }
+
+  .ratings-row {
+    flex-wrap: wrap !important;
+    gap: 28px !important;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .cta-band {
+    padding: 80px 24px !important;
+  }
+
+  .destinations-section {
+    padding: 60px 20px !important;
+  }
+
+  .dest-outer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .dest-inner-cols {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .faq-section {
+    padding: 60px 20px !important;
+  }
+
+  .faq-layout {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+
+  .inquiry-section {
+    padding: 60px 20px !important;
+  }
+
+  .inquiry-layout {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  .form-row-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .inquiry-form {
+    padding: 28px 20px !important;
+  }
+
+  .footer-section {
+    padding: 60px 20px 32px !important;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+}
+
 @media (min-width: 768px) {
+  .md\:block {
+    display: block;
+  }
+
   .md\:flex {
     display: flex;
   }

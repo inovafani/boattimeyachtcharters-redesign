@@ -135,7 +135,7 @@ export default function Reviews() {
   return (
     <div
       ref={sectionRef}
-      className="relative overflow-hidden"
+      className="relative overflow-hidden reviews-section"
       style={{ padding: '110px 48px', background: 'var(--navy-mid)' }}
     >
       {/* Subtle radial accent */}
@@ -169,7 +169,7 @@ export default function Reviews() {
         {/* Platform ratings */}
         <div
           ref={ratingsRef}
-          className="flex justify-center"
+          className="flex justify-center ratings-row"
           style={{
             gap: 64,
             marginTop: 36,
@@ -212,7 +212,7 @@ export default function Reviews() {
 
         {/* Cards */}
         <div
-          className="grid"
+          className="grid reviews-grid"
           style={{
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: 2,

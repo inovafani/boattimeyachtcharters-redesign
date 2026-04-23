@@ -145,7 +145,7 @@ export default function Hero() {
       {/* Rating badge — top right */}
       <div
         ref={badgeRef}
-        className="absolute z-10"
+        className="absolute z-10 hero-rating-badge"
         style={{
           top: 120,
           right: 48,
@@ -171,7 +171,7 @@ export default function Hero() {
 
       {/* Main content */}
       <div
-        className="relative z-10 w-full"
+        className="relative z-10 w-full hero-content"
         style={{ paddingLeft: 48, paddingRight: 48, paddingTop: 80, maxWidth: 1200 }}
       >
         {/* Eyebrow */}
@@ -239,7 +239,7 @@ export default function Hero() {
       {/* Scroll cue — bottom left */}
       <div
         ref={scrollCueRef}
-        className="absolute z-10 flex items-center gap-3"
+        className="absolute z-10 flex items-center gap-3 hero-scroll-cue"
         style={{
           bottom: 40,
           left: 48,
@@ -265,7 +265,7 @@ export default function Hero() {
 
       {/* Bottom-right stats badge */}
       <div
-        className="absolute z-10"
+        className="absolute z-10 hidden md:block"
         style={{
           bottom: 40,
           right: 48,

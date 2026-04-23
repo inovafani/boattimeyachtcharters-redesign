@@ -63,7 +63,7 @@ export default function StatsBar() {
   return (
     <div ref={sectionRef} style={{ background: 'var(--gold)' }}>
       <div
-        className="grid"
+        className="grid stats-grid"
         style={{
           gridTemplateColumns: 'repeat(4, 1fr)',
           maxWidth: 1200,

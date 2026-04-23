@@ -157,7 +157,7 @@ export default function Nav() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between border-b border-transparent"
+      className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between border-b border-transparent nav-bar"
       style={{
         paddingTop: 22,
         paddingBottom: 22,

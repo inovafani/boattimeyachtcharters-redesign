@@ -247,6 +247,7 @@ export default function Fleet() {
     <div
       ref={sectionRef}
       id="fleet"
+      className="fleet-section"
       style={{ padding: '110px 48px', background: 'var(--navy-mid)' }}
     >
       <div style={{ maxWidth: 1440, margin: '0 auto' }}>
@@ -277,7 +278,7 @@ export default function Fleet() {
           </p>
         </div>
 
-        <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+        <div className="grid fleet-grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 2 }}>
           <div ref={card1Ref}>
             <YachtCard y={YACHTS[0]} index={0} />
           </div>

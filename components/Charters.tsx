@@ -205,6 +205,7 @@ export default function Charters() {
   return (
     <div
       ref={sectionRef}
+      className="charters-section"
       style={{ padding: '110px 48px', maxWidth: 1440, margin: '0 auto' }}
     >
       <div ref={headerRef} style={{ textAlign: 'center', maxWidth: 780, margin: '0 auto 64px' }}>

@@ -70,6 +70,7 @@ export default function Footer() {
   return (
     <footer
       ref={footRef}
+      className="footer-section"
       style={{
         padding: '80px 48px 36px',
         background: '#060f1a',
@@ -79,7 +80,7 @@ export default function Footer() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Top grid */}
         <div
-          className="grid"
+          className="grid footer-top-grid"
           style={{
             gridTemplateColumns: '1.4fr 1fr 1fr 1fr',
             gap: 56,
@@ -221,7 +222,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="flex justify-between items-center"
+          className="flex justify-between items-center footer-bottom-bar"
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: 10,
