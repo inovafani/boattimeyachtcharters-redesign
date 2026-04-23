@@ -1,1 +1,38 @@
-node_modules
+# dependencies
+node_modules/
+
+# next.js build output
+.next/
+out/
+
+# misc build output
+dist/
+build/
+
+# env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# local tooling
+.claude/
+
+# temporary/debug files
+*.log

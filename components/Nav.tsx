@@ -7,7 +7,10 @@ import { Button, Icon } from './Shared';
 
 gsap.registerPlugin(useGSAP);
 
-interface SubLink { label: string; href: string }
+interface SubLink {
+  label: string;
+  href: string;
+}
 interface NavLinkData {
   label: string;
   href?: string;
@@ -17,20 +20,32 @@ interface NavLinkData {
 }
 
 const NAV_LINKS: NavLinkData[] = [
-  { label: 'Home', href: 'https://boattimeyachtcharters.com/' },
-  { label: 'About BoatTime', href: 'https://boattimeyachtcharters.com/about-boat-time/' },
+  { label: 'Home', href: '/' },
+  {
+    label: 'About BoatTime',
+    href: 'https://boattimeyachtcharters.com/about-boat-time/',
+  },
   {
     label: 'Cruise Tickets',
     href: 'https://boattimeyachtcharters.com/cruise-tickets/',
     menu: 'cruises',
     sub: [
-      { label: 'Luxury Whale Watching', href: '/cruise-tickets-luxury-whale-watching' },
+      {
+        label: 'Luxury Whale Watching',
+        href: '/cruise-tickets-luxury-whale-watching',
+      },
       { label: 'Broadwater Sunset Cruise', href: '/luxury-broadwater-cruise' },
       { label: 'NYE 2026', href: '/nye-2026' },
       { label: 'Luxury Valentines Cruise', href: '/valentines-day' },
       { label: 'Riverfire 2026', href: '/riverfire-2026' },
-      { label: 'Relaxed Lunch Cruise', href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit' },
-      { label: 'Sunset Twilight Buffet', href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit' },
+      {
+        label: 'Relaxed Lunch Cruise',
+        href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit',
+      },
+      {
+        label: 'Sunset Twilight Buffet',
+        href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit',
+      },
     ],
   },
   {
@@ -38,10 +53,22 @@ const NAV_LINKS: NavLinkData[] = [
     href: 'https://boattimeyachtcharters.com/yacht-charters/',
     menu: 'charters',
     sub: [
-      { label: 'Private Charter', href: 'https://boattimeyachtcharters.com/private-yacht-charter/' },
-      { label: 'Corporate Yacht Charter', href: 'https://boattimeyachtcharters.com/corporate-yacht-charter/' },
-      { label: 'Wedding Yacht Charter', href: 'https://boattimeyachtcharters.com/wedding-yacht-charter/' },
-      { label: 'Catering', href: 'https://boattimeyachtcharters.com/yacht-charter-menus/' },
+      {
+        label: 'Private Charter',
+        href: 'https://boattimeyachtcharters.com/private-yacht-charter/',
+      },
+      {
+        label: 'Corporate Yacht Charter',
+        href: 'https://boattimeyachtcharters.com/corporate-yacht-charter/',
+      },
+      {
+        label: 'Wedding Yacht Charter',
+        href: 'https://boattimeyachtcharters.com/wedding-yacht-charter/',
+      },
+      {
+        label: 'Catering',
+        href: 'https://boattimeyachtcharters.com/yacht-charter-menus/',
+      },
     ],
   },
   {
@@ -50,27 +77,59 @@ const NAV_LINKS: NavLinkData[] = [
     menu: 'yachts',
     alignRight: true,
     sub: [
-      { label: 'Sun Goddess', href: 'https://boattimeyachtcharters.com/sun-goddess-gold-coast/' },
-      { label: 'Mermaid Spirit', href: 'https://boattimeyachtcharters.com/mermaid-spirit-gold-coast/' },
+      {
+        label: 'Sun Goddess',
+        href: 'https://boattimeyachtcharters.com/sun-goddess-gold-coast/',
+      },
+      {
+        label: 'Mermaid Spirit',
+        href: 'https://boattimeyachtcharters.com/mermaid-spirit-gold-coast/',
+      },
     ],
   },
-  { label: 'Boattime News', href: 'https://boattimeyachtcharters.com/boattime-news/' },
+  {
+    label: 'Boattime News',
+    href: 'https://boattimeyachtcharters.com/boattime-news/',
+  },
 ];
 
 const CRUISE_META = [
-  { desc: 'June – October · 4 hrs', img: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=60&q=80' },
-  { desc: 'Year-round · 2.5 hrs', img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=60&q=80' },
-  { desc: 'Special event · 4 hrs', img: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=60&q=80' },
-  { desc: 'February · 3 hrs', img: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=60&q=80' },
-  { desc: 'Special event · 4 hrs', img: 'https://images.unsplash.com/photo-1498354178607-a79df2916198?w=60&q=80' },
-  { desc: 'Year-round · 3 hrs', img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=60&q=80' },
-  { desc: 'Year-round · 3.5 hrs', img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=60&q=80' },
+  {
+    desc: 'June – October · 4 hrs',
+    img: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=60&q=80',
+  },
+  {
+    desc: 'Year-round · 2.5 hrs',
+    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=60&q=80',
+  },
+  {
+    desc: 'Special event · 4 hrs',
+    img: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=60&q=80',
+  },
+  {
+    desc: 'February · 3 hrs',
+    img: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=60&q=80',
+  },
+  {
+    desc: 'Special event · 4 hrs',
+    img: 'https://images.unsplash.com/photo-1498354178607-a79df2916198?w=60&q=80',
+  },
+  {
+    desc: 'Year-round · 3 hrs',
+    img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=60&q=80',
+  },
+  {
+    desc: 'Year-round · 3.5 hrs',
+    img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=60&q=80',
+  },
 ];
 
 const CHARTER_META = [
   { desc: 'Up to 135 guests on the Broadwater. Your afternoon, your brief.' },
   { desc: 'Client events, launches, team offsites. Dual bars throughout.' },
-  { desc: 'Ceremony on the foredeck at golden hour. Three decks of celebration.' },
+  {
+    desc: 'Ceremony on the foredeck at golden hour. Three decks of celebration.',
+  },
   { desc: 'Private Chefs of Brisbane. From grazing boards to fine dining.' },
 ];
 
@@ -122,7 +181,9 @@ function CruisesMenu({ sub }: { sub: SubLink[] }) {
               marginBottom: 14,
             }}
           >
-            Seven routes.<br />One coastline.
+            Seven routes.
+            <br />
+            One coastline.
           </div>
           <a
             href="https://boattimeyachtcharters.com/cruise-tickets/"
@@ -150,9 +211,16 @@ function CruisesMenu({ sub }: { sub: SubLink[] }) {
           <a
             key={s.label}
             href={s.href}
-            style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '9px 20px', textDecoration: 'none' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 14,
+              padding: '9px 20px',
+              textDecoration: 'none',
+            }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.06)';
+              (e.currentTarget as HTMLElement).style.background =
+                'rgba(201,168,76,0.06)';
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.background = 'transparent';
@@ -230,7 +298,8 @@ function ChartersMenu({ sub }: { sub: SubLink[] }) {
             transition: 'background 0.2s',
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = 'rgba(201,168,76,0.06)';
+            (e.currentTarget as HTMLElement).style.background =
+              'rgba(201,168,76,0.06)';
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLElement).style.background = 'var(--navy)';
@@ -296,7 +365,14 @@ const YACHT_DATA = [
 
 function YachtsMenu({ sub }: { sub: SubLink[] }) {
   return (
-    <div style={{ minWidth: 540, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+    <div
+      style={{
+        minWidth: 540,
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 2,
+      }}
+    >
       {sub.map((s, i) => (
         <a
           key={s.label}
@@ -334,7 +410,9 @@ function YachtsMenu({ sub }: { sub: SubLink[] }) {
                 'linear-gradient(to top, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.2) 55%)',
             }}
           />
-          <div style={{ position: 'absolute', bottom: 22, left: 22, right: 22 }}>
+          <div
+            style={{ position: 'absolute', bottom: 22, left: 22, right: 22 }}
+          >
             <div
               style={{
                 fontFamily: 'var(--font-display)',
@@ -535,10 +613,7 @@ export default function Nav() {
       }}
     >
       {/* Logo */}
-      <a
-        className="flex items-center gap-3.5 no-underline"
-        href="https://boattimeyachtcharters.com/"
-      >
+      <a className="flex items-center gap-3.5 no-underline" href="/">
         <div
           className="flex items-center justify-center"
           style={{
@@ -616,7 +691,9 @@ export default function Nav() {
             className="block w-6 h-px transition-all duration-300"
             style={{
               background: 'var(--cream)',
-              transform: mobileOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none',
+              transform: mobileOpen
+                ? 'rotate(45deg) translate(3px, 3px)'
+                : 'none',
             }}
           />
           <span
@@ -627,7 +704,9 @@ export default function Nav() {
             className="block w-6 h-px transition-all duration-300"
             style={{
               background: 'var(--cream)',
-              transform: mobileOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none',
+              transform: mobileOpen
+                ? 'rotate(-45deg) translate(3px, -3px)'
+                : 'none',
             }}
           />
         </button>
@@ -687,7 +766,11 @@ export default function Nav() {
             </div>
           ))}
           <div className="mt-6">
-            <Button variant="primary" href="https://boattimeyachtcharters.com/contact/" small>
+            <Button
+              variant="primary"
+              href="https://boattimeyachtcharters.com/contact/"
+              small
+            >
               Booking Enquiry
             </Button>
           </div>
