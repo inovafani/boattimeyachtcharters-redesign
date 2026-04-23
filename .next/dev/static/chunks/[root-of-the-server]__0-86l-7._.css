@@ -1124,6 +1124,10 @@ em {
   will-change: transform;
 }
 
+.cruise-card-inner {
+  height: 100%;
+}
+
 @media (max-width: 768px) {
   .nav-bar {
     padding-left: 20px !important;

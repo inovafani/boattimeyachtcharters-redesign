@@ -144,6 +144,11 @@
   .will-change-transform {
     will-change: transform;
   }
+
+  /* Cards must fill their grid-cell wrapper — content is all absolutely-positioned */
+  .cruise-card-inner {
+    height: 100%;
+  }
 }
 
 /* ============================================================
