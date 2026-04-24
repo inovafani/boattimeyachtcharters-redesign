@@ -23,7 +23,7 @@ const NAV_LINKS: NavLinkData[] = [
   { label: 'Home', href: '/' },
   {
     label: 'About BoatTime',
-    href: 'https://boattimeyachtcharters.com/about-boat-time/',
+    href: '/about-boattime',
   },
   {
     label: 'Cruise Tickets',
@@ -55,19 +55,19 @@ const NAV_LINKS: NavLinkData[] = [
     sub: [
       {
         label: 'Private Charter',
-        href: 'https://boattimeyachtcharters.com/private-yacht-charter/',
+        href: '/private-yacht-charter',
       },
       {
         label: 'Corporate Yacht Charter',
-        href: 'https://boattimeyachtcharters.com/corporate-yacht-charter/',
+        href: '/corporate-yacht-charter',
       },
       {
         label: 'Wedding Yacht Charter',
-        href: 'https://boattimeyachtcharters.com/wedding-yacht-charter/',
+        href: '/wedding-yacht-charter',
       },
       {
         label: 'Catering',
-        href: 'https://boattimeyachtcharters.com/yacht-charter-menus/',
+        href: '/yacht-charter-menus',
       },
     ],
   },
