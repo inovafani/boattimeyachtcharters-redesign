@@ -81,7 +81,7 @@ export default function CtaBand() {
         }}
       />
 
-      <div ref={contentRef} className="relative z-10 text-center" style={{ maxWidth: 760 }}>
+      <div ref={contentRef} className="cta-band-content relative z-10 text-center" style={{ maxWidth: 760 }}>
         <Eyebrow>Ready when you are</Eyebrow>
 
         <h2

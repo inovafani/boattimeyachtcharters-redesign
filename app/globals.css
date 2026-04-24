@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  /* ── Dark theme (default) ──────────────────────────────────────────────── */
+  :root,
+  [data-theme='dark'] {
     --gold: #C9A84C;
     --gold-light: #E8C97A;
     --navy: #0A1628;
@@ -15,11 +17,32 @@
     --border-subtle: rgba(201, 168, 76, 0.1);
     --border-hover: rgba(201, 168, 76, 0.3);
     --glass-bg: rgba(10, 22, 40, 0.97);
+    --nav-bg-scrolled: rgba(10, 22, 40, 0.97);
+    --nav-border: rgba(201, 168, 76, 0.14);
+    --nav-drawer-bg: rgba(10, 22, 40, 0.98);
 
     --font-display: var(--font-cormorant), 'Times New Roman', serif;
     --font-body: var(--font-montserrat), -apple-system, sans-serif;
 
     --ease-brand: cubic-bezier(0.2, 0.6, 0.2, 1);
+  }
+
+  /* ── Light theme ───────────────────────────────────────────────────────── */
+  [data-theme='light'] {
+    --gold: #B8943E;
+    --gold-light: #C9A84C;
+    --navy: #F7F3EC;
+    --navy-mid: #EDE8DC;
+    --ocean: #D8D0C4;
+    --cream: #0A1628;
+    --white: #FDFCF9;
+    --text-muted: rgba(10, 22, 40, 0.55);
+    --border-subtle: rgba(10, 22, 40, 0.1);
+    --border-hover: rgba(10, 22, 40, 0.25);
+    --glass-bg: rgba(247, 243, 236, 0.97);
+    --nav-bg-scrolled: rgba(247, 243, 236, 0.97);
+    --nav-border: rgba(10, 22, 40, 0.1);
+    --nav-drawer-bg: rgba(247, 243, 236, 0.98);
   }
 
   *,
@@ -311,4 +334,202 @@
     grid-template-columns: 1fr !important;
     gap: 32px !important;
   }
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+   White in dark mode (visible on transparent/dark nav).
+   Switches to dark in light mode via the data-theme override.
+   ============================================================ */
+
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  transition: border-color 0.2s, opacity 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  opacity: 0.85;
+}
+
+[data-theme='light'] .theme-toggle-btn {
+  border-color: rgba(10, 22, 40, 0.3);
+  color: #0A1628;
+}
+
+[data-theme='light'] .theme-toggle-btn:hover {
+  border-color: rgba(10, 22, 40, 0.65);
+}
+
+/* ============================================================
+   LIGHT MODE — text & colour overrides
+   CSS variables handle backgrounds and CSS-var-referenced
+   colours automatically. The !important rules below fix the
+   remaining inline styles that use hardcoded rgba(245,…) cream
+   values which cannot be overridden any other way.
+
+   Order matters: broad rule first, then more-specific restores.
+   ============================================================ */
+
+[data-theme='light'] body {
+  color: #0A1628;
+}
+
+/* ── Broad fix: make ALL section descendant text dark ──────── */
+[data-theme='light'] main section * {
+  color: rgba(10, 22, 40, 0.75) !important;
+}
+
+/* ── Hero sections keep white text (dark overlay stays behind) */
+[data-theme='light'] .cruise-hero-content,
+[data-theme='light'] .cruise-hero-content * {
+  color: #F5F0E8 !important;
+}
+
+/* ── Homepage hero — photo overlay, text always stays cream ─── */
+[data-theme='light'] .hero-content,
+[data-theme='light'] .hero-content * {
+  color: #F5F0E8 !important;
+}
+[data-theme='light'] .hero-content .section-eyebrow {
+  color: var(--gold) !important;
+}
+[data-theme='light'] .hero-content .section-eyebrow::before {
+  background: var(--gold) !important;
+}
+/* Ghost button inside hero — .btn-ghost override is (0,2,0); this is (0,3,0) so wins */
+[data-theme='light'] .hero-content .btn-ghost {
+  color: #F5F0E8 !important;
+  border-color: rgba(245, 240, 232, 0.4) !important;
+}
+
+/* Hero dark-glass badges sit outside .hero-content but on dark backgrounds */
+[data-theme='light'] .hero-stats-badge,
+[data-theme='light'] .hero-stats-badge * {
+  color: #F5F0E8 !important;
+}
+[data-theme='light'] .hero-stats-badge [style*="var(--gold)"] {
+  color: var(--gold) !important;
+}
+
+/* ── CTA band — dark photo overlay, text always cream ───────── */
+[data-theme='light'] .cta-band-content,
+[data-theme='light'] .cta-band-content * {
+  color: #F5F0E8 !important;
+}
+[data-theme='light'] .cta-band-content [style*="var(--gold)"],
+[data-theme='light'] .cta-band-content [style*="var(--gold-light)"] {
+  color: var(--gold) !important;
+}
+[data-theme='light'] .cta-band-content .btn-ghost {
+  color: #F5F0E8 !important;
+  border-color: rgba(245, 240, 232, 0.4) !important;
+}
+
+/* ── All photo-overlay cards — cream text on dark photo regardless of theme */
+[data-theme='light'] .cruise-card-inner *,
+[data-theme='light'] .photo-overlay-card * {
+  color: #F5F0E8 !important;
+}
+[data-theme='light'] .cruise-card-inner [style*="var(--gold)"],
+[data-theme='light'] .cruise-card-inner [style*="var(--gold-light)"],
+[data-theme='light'] .photo-overlay-card [style*="var(--gold)"],
+[data-theme='light'] .photo-overlay-card [style*="var(--gold-light)"] {
+  color: var(--gold) !important;
+}
+
+/* ── Restore gold eyebrows ─────────────────────────────────── */
+[data-theme='light'] .section-eyebrow {
+  color: var(--gold) !important;
+}
+[data-theme='light'] .section-eyebrow::before {
+  background: var(--gold) !important;
+}
+
+/* ── Restore headings (var(--cream) = #0A1628 in light) ────── */
+[data-theme='light'] main section h1,
+[data-theme='light'] main section h2,
+[data-theme='light'] main section h3,
+[data-theme='light'] main section h4 {
+  color: #0A1628 !important;
+}
+
+/* ── Restore italic gold accent <em> ───────────────────────── */
+[data-theme='light'] em {
+  color: var(--gold) !important;
+}
+
+/* ── Restore inline-styled gold elements ───────────────────── */
+/* gold-light must come AFTER gold so it wins for gold-light elements */
+[data-theme='light'] [style*="var(--gold)"] {
+  color: var(--gold) !important;
+}
+[data-theme='light'] [style*="var(--gold-light)"] {
+  color: var(--gold) !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+[data-theme='light'] .btn-ghost {
+  border-color: rgba(10, 22, 40, 0.3) !important;
+  color: #0A1628 !important;
+}
+[data-theme='light'] .btn-ghost:hover {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+[data-theme='light'] .btn-outline {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+[data-theme='light'] .btn-outline:hover {
+  background: var(--gold) !important;
+  color: #0A1628 !important;
+}
+
+/* ── Nav in light mode ──────────────────────────────────────── */
+/* Force the light nav to always show its glass background — avoids
+   dark-hero-text-on-transparent-light-nav readability issues.
+   GSAP padding animation still works (only background is pinned). */
+[data-theme='light'] .nav-bar {
+  background: var(--nav-bg-scrolled) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom-color: var(--nav-border) !important;
+}
+
+/* ── Nav link text in light mode ────────────────────────────── */
+[data-theme='light'] .nav-bar a[style*="var(--cream)"] {
+  color: #0A1628 !important;
+}
+
+/* ── Nav mobile drawer links ────────────────────────────────── */
+[data-theme='light'] .nav-bar [style*="var(--cream)"] {
+  color: #0A1628 !important;
+}
+
+/* ── Footer light mode ──────────────────────────────────────── */
+[data-theme='light'] footer {
+  border-top-color: rgba(10, 22, 40, 0.1) !important;
+}
+[data-theme='light'] .footer-top-grid {
+  border-bottom-color: rgba(10, 22, 40, 0.1) !important;
+}
+[data-theme='light'] footer [style*="var(--cream)"] {
+  color: #0A1628 !important;
+}
+[data-theme='light'] footer [style*="var(--gold)"] {
+  color: var(--gold) !important;
+}
+[data-theme='light'] footer [style*="var(--text-muted)"] {
+  color: var(--text-muted) !important;
 }

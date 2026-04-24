@@ -69,7 +69,7 @@ function CharterCard({ c }: { c: CharterData }) {
 
   return (
     <div
-      className="relative overflow-hidden cursor-pointer"
+      className="photo-overlay-card relative overflow-hidden cursor-pointer"
       style={{ minHeight: 440, aspectRatio: '3/4', background: 'var(--ocean)' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

@@ -55,7 +55,7 @@ function YachtCard({ y, index }: { y: YachtData; index: number }) {
   return (
     <div
       ref={cardRef}
-      className="relative overflow-hidden cursor-pointer"
+      className="photo-overlay-card relative overflow-hidden cursor-pointer"
       style={{ aspectRatio: '4/5', background: 'var(--ocean)' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

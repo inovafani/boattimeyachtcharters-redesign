@@ -73,8 +73,8 @@ export default function Footer() {
       className="footer-section"
       style={{
         padding: '80px 48px 36px',
-        background: '#060f1a',
-        borderTop: '1px solid rgba(201,168,76,0.12)',
+        background: 'var(--navy)',
+        borderTop: '1px solid var(--border-subtle)',
       }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -86,7 +86,7 @@ export default function Footer() {
             gap: 56,
             marginBottom: 64,
             paddingBottom: 52,
-            borderBottom: '1px solid rgba(201,168,76,0.12)',
+            borderBottom: '1px solid var(--border-subtle)',
           }}
         >
           {/* Brand */}
@@ -226,7 +226,7 @@ export default function Footer() {
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: 10,
-            color: 'rgba(245,240,232,0.3)',
+            color: 'var(--text-muted)',
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
           }}

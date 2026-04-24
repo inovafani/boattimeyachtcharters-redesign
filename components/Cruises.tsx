@@ -143,7 +143,6 @@ function CruiseCard({ c }: { c: CruiseData }) {
         gridColumn: c.col,
         gridRow: c.row,
         background: 'var(--ocean)',
-        minHeight: c.lg ? 480 : 'auto',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -341,7 +340,7 @@ export default function Cruises() {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(12, 1fr)',
-          gridAutoRows: '200px',
+          gridAutoRows: '240px',
           gap: 2,
           maxWidth: 1440,
           margin: '0 auto',

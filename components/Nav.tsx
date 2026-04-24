@@ -4,6 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Button, Icon } from './Shared';
+import { useTheme } from './ThemeProvider';
+import ThemeToggle from './ThemeToggle';
 
 gsap.registerPlugin(useGSAP);
 
@@ -176,7 +178,7 @@ function CruisesMenu({ sub }: { sub: SubLink[] }) {
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
               fontSize: 22,
-              color: 'var(--cream)',
+              color: '#F5F0E8',
               lineHeight: 1.15,
               marginBottom: 14,
             }}
@@ -321,7 +323,7 @@ function ChartersMenu({ sub }: { sub: SubLink[] }) {
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: 12,
-              color: 'rgba(245,240,232,0.6)',
+              color: 'var(--text-muted)',
               lineHeight: 1.6,
             }}
           >
@@ -418,7 +420,7 @@ function YachtsMenu({ sub }: { sub: SubLink[] }) {
                 fontFamily: 'var(--font-display)',
                 fontSize: 24,
                 fontStyle: 'italic',
-                color: 'var(--cream)',
+                color: '#F5F0E8',
                 marginBottom: 6,
               }}
             >
@@ -520,10 +522,10 @@ function NavItem({
           className="absolute top-full"
           style={{
             ...(alignRight ? { right: 0 } : { left: 0 }),
-            background: 'rgba(10,22,40,0.97)',
+            background: 'var(--glass-bg)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(201,168,76,0.18)',
+            border: '1px solid var(--nav-border)',
             marginTop: 0,
             opacity: 0,
             pointerEvents: 'none',
@@ -575,6 +577,7 @@ export default function Nav() {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => {
@@ -588,17 +591,22 @@ export default function Nav() {
   useGSAP(
     () => {
       if (!navRef.current) return;
+      const isLight = theme === 'light';
       gsap.to(navRef.current, {
-        background: scrolled ? 'rgba(10,22,40,0.97)' : 'transparent',
+        background: scrolled
+          ? (isLight ? 'rgba(247,243,236,0.97)' : 'rgba(10,22,40,0.97)')
+          : 'transparent',
         backdropFilter: scrolled ? 'blur(14px)' : 'blur(0px)',
-        borderBottomColor: scrolled ? 'rgba(201,168,76,0.14)' : 'transparent',
+        borderBottomColor: scrolled
+          ? (isLight ? 'rgba(10,22,40,0.1)' : 'rgba(201,168,76,0.14)')
+          : 'transparent',
         paddingTop: scrolled ? 14 : 22,
         paddingBottom: scrolled ? 14 : 22,
         duration: 0.4,
         ease: 'power2.out',
       });
     },
-    { dependencies: [scrolled] },
+    { dependencies: [scrolled, theme] },
   );
 
   return (
@@ -671,8 +679,9 @@ export default function Nav() {
         ))}
       </div>
 
-      {/* CTA + hamburger */}
-      <div className="flex items-center gap-4">
+      {/* CTA + toggle + hamburger */}
+      <div className="flex items-center gap-3">
+        <ThemeToggle />
         <Button
           variant="outline"
           small
@@ -717,9 +726,9 @@ export default function Nav() {
         <div
           className="absolute top-full left-0 right-0 md:hidden"
           style={{
-            background: 'rgba(10,22,40,0.98)',
+            background: 'var(--nav-drawer-bg)',
             backdropFilter: 'blur(14px)',
-            borderBottom: '1px solid rgba(201,168,76,0.14)',
+            borderBottom: '1px solid var(--nav-border)',
             padding: '24px',
             maxHeight: '80vh',
             overflowY: 'auto',

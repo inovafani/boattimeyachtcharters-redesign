@@ -5,10 +5,13 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button, Icon } from './Shared';
+import { useTheme } from './ThemeProvider';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Hero() {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
@@ -146,14 +149,16 @@ export default function Hero() {
         }}
       />
 
-      {/* Bottom horizon gradient */}
-      <div
-        className="absolute left-0 right-0 bottom-0"
-        style={{
-          height: 100,
-          background: 'linear-gradient(to top, var(--navy), transparent)',
-        }}
-      />
+      {/* Bottom horizon gradient — hidden in light mode (var(--navy) is cream there) */}
+      {!isLight && (
+        <div
+          className="absolute left-0 right-0 bottom-0"
+          style={{
+            height: 100,
+            background: 'linear-gradient(to top, var(--navy), transparent)',
+          }}
+        />
+      )}
 
       {/* Rating badge — top right */}
       <div
@@ -266,7 +271,7 @@ export default function Hero() {
 
       {/* Bottom-right stats badge */}
       <div
-        className="absolute z-10 hidden md:block"
+        className="hero-stats-badge absolute z-10 hidden md:block"
         style={{
           bottom: 40,
           right: 48,
@@ -292,7 +297,7 @@ export default function Hero() {
             fontFamily: 'var(--font-display)',
             fontSize: 24,
             fontWeight: 600,
-            color: 'var(--cream)',
+            color: '#F5F0E8',
           }}
         >
           3,900+
@@ -303,7 +308,7 @@ export default function Hero() {
             fontSize: 9,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: 'var(--text-muted)',
+            color: 'rgba(245,240,232,0.55)',
             marginTop: 2,
           }}
         >

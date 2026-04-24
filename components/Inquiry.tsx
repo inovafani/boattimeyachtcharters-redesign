@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm, Button, Icon } from './Shared';
+import { useTheme } from './ThemeProvider';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -40,6 +41,7 @@ function Field({
   multi,
   select,
   options,
+  isLight,
 }: {
   label: string;
   name: keyof FormState;
@@ -50,15 +52,17 @@ function Field({
   multi?: boolean;
   select?: boolean;
   options?: string[];
+  isLight?: boolean;
 }) {
+  const borderColor = isLight ? 'rgba(10,22,40,0.18)' : 'rgba(245,240,232,0.22)';
   const inputStyle: React.CSSProperties = {
     background: 'transparent',
     border: 0,
-    borderBottom: '1px solid rgba(245,240,232,0.22)',
+    borderBottom: `1px solid ${borderColor}`,
     padding: '10px 0',
     fontFamily: 'var(--font-body)',
     fontSize: 15,
-    color: 'var(--cream)',
+    color: isLight ? '#0A1628' : 'var(--cream)',
     borderRadius: 0,
     outline: 'none',
     width: '100%',
@@ -87,7 +91,7 @@ function Field({
           rows={4}
           style={{ ...inputStyle, resize: 'none' }}
           onFocus={(e) => (e.target.style.borderBottomColor = 'var(--gold)')}
-          onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(245,240,232,0.22)')}
+          onBlur={(e) => (e.target.style.borderBottomColor = borderColor)}
         />
       ) : select ? (
         <select
@@ -95,10 +99,10 @@ function Field({
           onChange={(e) => onChange(name, e.target.value)}
           style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
           onFocus={(e) => (e.target.style.borderBottomColor = 'var(--gold)')}
-          onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(245,240,232,0.22)')}
+          onBlur={(e) => (e.target.style.borderBottomColor = borderColor)}
         >
           {options?.map((o) => (
-            <option key={o} value={o} style={{ background: 'var(--navy)' }}>
+            <option key={o} value={o} style={{ background: 'var(--navy)', color: 'var(--cream)' }}>
               {o}
             </option>
           ))}
@@ -111,7 +115,7 @@ function Field({
           placeholder={placeholder}
           style={inputStyle}
           onFocus={(e) => (e.target.style.borderBottomColor = 'var(--gold)')}
-          onBlur={(e) => (e.target.style.borderBottomColor = 'rgba(245,240,232,0.22)')}
+          onBlur={(e) => (e.target.style.borderBottomColor = borderColor)}
         />
       )}
     </div>
@@ -119,6 +123,8 @@ function Field({
 }
 
 export default function Inquiry() {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const sectionRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -171,8 +177,9 @@ export default function Inquiry() {
       <div
         className="absolute inset-0"
         style={{
-          background:
-            'radial-gradient(ellipse at 85% 100%, rgba(201,168,76,0.12), transparent 50%), radial-gradient(ellipse at 10% 20%, rgba(26,58,92,0.5), transparent 50%)',
+          background: isLight
+            ? 'radial-gradient(ellipse at 85% 100%, rgba(201,168,76,0.08), transparent 50%)'
+            : 'radial-gradient(ellipse at 85% 100%, rgba(201,168,76,0.12), transparent 50%), radial-gradient(ellipse at 10% 20%, rgba(26,58,92,0.5), transparent 50%)',
           pointerEvents: 'none',
         }}
       />
@@ -258,19 +265,19 @@ export default function Inquiry() {
           ref={formRef}
           className="inquiry-form"
           style={{
-            background: 'rgba(10,22,40,0.5)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(201,168,76,0.18)',
+            background: isLight ? 'rgba(255,255,255,0.75)' : 'rgba(10,22,40,0.5)',
+            backdropFilter: 'blur(10px)',
+            border: isLight ? '1px solid rgba(10,22,40,0.1)' : '1px solid rgba(201,168,76,0.18)',
             padding: 48,
           }}
         >
           <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
-            <Field label="Full Name" name="name" value={form.name} onChange={update} placeholder="Eleanor Vance" />
-            <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="eleanor@vance.co" />
+            <Field label="Full Name" name="name" value={form.name} onChange={update} placeholder="Eleanor Vance" isLight={isLight} />
+            <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="eleanor@vance.co" isLight={isLight} />
           </div>
           <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
-            <Field label="Phone" name="phone" value={form.phone} onChange={update} placeholder="+61" />
-            <Field label="Preferred Date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" />
+            <Field label="Phone" name="phone" value={form.phone} onChange={update} placeholder="+61" isLight={isLight} />
+            <Field label="Preferred Date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" isLight={isLight} />
           </div>
           <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
             <Field
@@ -280,8 +287,9 @@ export default function Inquiry() {
               onChange={update}
               select
               options={['Private Charter', 'Corporate Charter', 'Wedding Charter', 'Sunset Cruise', 'Whale Watching', 'Custom']}
+              isLight={isLight}
             />
-            <Field label="Guests" name="guests" value={form.guests} onChange={update} placeholder="12" />
+            <Field label="Guests" name="guests" value={form.guests} onChange={update} placeholder="12" isLight={isLight} />
           </div>
           <Field
             label="Preferred Vessel"
@@ -290,6 +298,7 @@ export default function Inquiry() {
             onChange={update}
             select
             options={['Either — concierge to recommend', 'Sun Goddess', 'Mermaid Spirit']}
+            isLight={isLight}
           />
           <Field
             label="Anything else"
@@ -298,6 +307,7 @@ export default function Inquiry() {
             onChange={update}
             multi
             placeholder="A quiet afternoon, champagne on the foredeck."
+            isLight={isLight}
           />
           <div style={{ marginTop: 8 }}>
             <Button variant="primary" onClick={() => setSent(true)}>
