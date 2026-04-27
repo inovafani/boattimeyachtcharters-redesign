@@ -58,6 +58,7 @@ export default function AdminPostForm({
   const [form, setForm] = useState<PostForm>(empty);
   const [loading, setLoading] = useState(isEdit);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -103,6 +104,33 @@ export default function AdminPostForm({
         ? f.categories.filter((c) => c !== cat)
         : [...f.categories, cat],
     }));
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    setError('');
+    console.log('[AdminPostForm] uploading image', file.name);
+
+    const supabase = createClient();
+    const ext = file.name.split('.').pop();
+    const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+
+    const { error: upErr } = await supabase.storage
+      .from('news-images')
+      .upload(filename, file, { upsert: true });
+
+    if (upErr) {
+      setError(`Image upload failed: ${upErr.message}`);
+      setUploading(false);
+      return;
+    }
+
+    const { data } = supabase.storage.from('news-images').getPublicUrl(filename);
+    setForm((f) => ({ ...f, image_url: data.publicUrl }));
+    setUploading(false);
+    console.log('[AdminPostForm] image uploaded', data.publicUrl);
   }
 
   async function handleSave(e: React.FormEvent) {
@@ -282,21 +310,64 @@ export default function AdminPostForm({
             />
           </div>
 
-          {/* Image URL */}
+          {/* Image */}
           <div>
-            <label style={labelStyle}>Image URL</label>
+            <label style={labelStyle}>Article Image</label>
+
+            {/* Upload from computer */}
+            <label
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '11px 22px',
+                border: '1px solid var(--border-subtle)',
+                color: uploading ? 'var(--text-muted)' : 'var(--cream)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 10,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                cursor: uploading ? 'not-allowed' : 'pointer',
+                marginBottom: 12,
+                background: 'rgba(255,255,255,0.03)',
+              }}
+            >
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={uploading}
+                style={{ display: 'none' }}
+              />
+              {uploading ? 'Uploading…' : 'Upload from computer'}
+            </label>
+
+            {/* Or paste URL */}
+            <div
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 10,
+                color: 'var(--text-muted)',
+                letterSpacing: '0.14em',
+                marginBottom: 8,
+              }}
+            >
+              Or paste an image URL
+            </div>
             <input
-              type="url"
+              type="text"
               value={form.image_url}
               onChange={(e) => setForm((f) => ({ ...f, image_url: e.target.value }))}
-              placeholder="https://images.unsplash.com/photo-…"
+              placeholder="https://…"
               style={inputStyle}
             />
+
+            {/* Preview */}
             {form.image_url && (
               <div
                 style={{
                   marginTop: 12,
-                  height: 160,
+                  height: 180,
                   backgroundImage: `url(${form.image_url})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
