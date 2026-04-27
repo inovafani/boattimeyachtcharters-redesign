@@ -556,7 +556,8 @@ function PostGrid({
 
   useGSAP(
     () => {
-      gsap.from(ref.current!.querySelectorAll('.post-card'), {
+      if (!ref.current) return;
+      gsap.from(ref.current.querySelectorAll('.post-card'), {
         x: -16,
         opacity: 0,
         duration: 0.6,
