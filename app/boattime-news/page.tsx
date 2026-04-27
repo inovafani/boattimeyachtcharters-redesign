@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Guides, inspiration, and local knowledge from Gold Coast's premier yacht charter company.",
 };
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   console.log('[boattime-news] fetching published posts');
