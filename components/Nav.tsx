@@ -91,7 +91,7 @@ const NAV_LINKS: NavLinkData[] = [
   },
   {
     label: 'Boattime News',
-    href: 'https://boattimeyachtcharters.com/boattime-news/',
+    href: '/boattime-news',
   },
 ];
 

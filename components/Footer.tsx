@@ -215,7 +215,7 @@ export default function Footer() {
               <ColHead>Company</ColHead>
             </div>
             <FootLink>About BoatTime</FootLink>
-            <FootLink>Boattime News</FootLink>
+            <FootLink href="/boattime-news">Boattime News</FootLink>
             <FootLink href="#inquiry">Booking Enquiry</FootLink>
           </div>
         </div>
