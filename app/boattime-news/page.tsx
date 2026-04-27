@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { createClient } from '@/lib/supabase/server';
+import { createPublicClient } from '@/lib/supabase/public';
 import NewsPage, { type Post } from '@/components/NewsPage';
 
 export const metadata: Metadata = {
@@ -12,19 +12,27 @@ export const revalidate = 60;
 
 export default async function Page() {
   console.log('[boattime-news] fetching published posts');
-  const supabase = await createClient();
 
-  const { data, error } = await supabase
-    .from('posts')
-    .select('id, slug, title, excerpt, image_url, categories, published_at, created_at')
-    .eq('published', true)
-    .order('published_at', { ascending: false });
+  let posts: Post[] = [];
 
-  if (error) {
-    console.log('[boattime-news] fetch error', error.message);
+  try {
+    const supabase = createPublicClient();
+
+    const { data, error } = await supabase
+      .from('posts')
+      .select('id, slug, title, excerpt, image_url, categories, published_at, created_at')
+      .eq('published', true)
+      .order('published_at', { ascending: false });
+
+    if (error) {
+      console.log('[boattime-news] fetch error', error.message);
+    } else {
+      posts = (data as Post[]) ?? [];
+      console.log('[boattime-news] loaded', posts.length, 'posts');
+    }
+  } catch (err) {
+    console.log('[boattime-news] client error', err);
   }
 
-  console.log('[boattime-news] loaded', data?.length ?? 0, 'posts');
-
-  return <NewsPage posts={(data as Post[]) ?? []} />;
+  return <NewsPage posts={posts} />;
 }
