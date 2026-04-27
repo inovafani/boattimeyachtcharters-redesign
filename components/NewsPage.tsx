@@ -25,128 +25,27 @@ const CATEGORIES = [
   'Yacht Charter Wedding',
 ];
 
-interface Post {
+export interface Post {
+  id: string;
   slug: string;
   title: string;
-  date: string;
-  categories: string[];
   excerpt: string;
-  img: string;
+  image_url: string | null;
+  categories: string[];
+  published_at: string | null;
+  created_at: string;
 }
 
-const FEATURED: Post[] = [
-  {
-    slug: 'celebrate-new-years-eve-luxury-yacht-charter',
-    title: "Celebrate New Year's Eve in Style with a Luxury Yacht Charter Experience",
-    date: 'Dec 20, 2024',
-    categories: ['Holiday Cruises'],
-    excerpt:
-      "New Year's Eve is a time for celebration, reflection, and anticipation. Why not make it truly unforgettable by welcoming the New Year in style aboard a luxury yacht charter on the Gold Coast Broadwater?",
-    img: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=800&q=80',
-  },
-  {
-    slug: 'top-5-team-building-activities-luxury-yacht-charter',
-    title: 'Top 5 Team-Building Activities to Enjoy During Your Luxury Yacht Charter',
-    date: 'Oct 15, 2024',
-    categories: ['Business'],
-    excerpt:
-      'Transform your next corporate outing into an unforgettable experience. Discover how a luxury yacht charter elevates team-building beyond the boardroom and onto the open water.',
-    img: 'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=800&q=80',
-  },
-  {
-    slug: 'elevate-bachelor-hen-party-gold-coast-yacht-charter',
-    title: 'Elevate Your Bachelor or Hen Party on a Gold Coast Yacht Charter',
-    date: 'Sep 8, 2024',
-    categories: ['Celebration'],
-    excerpt:
-      "Bachelor and hen parties mark the end of singlehood and the beginning of exciting new chapters. Celebrate in style on the Broadwater aboard Gold Coast's finest superyachts.",
-    img: 'https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=800&q=80',
-  },
-];
+const FALLBACK_IMG = 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80';
 
-const POSTS: Post[] = [
-  {
-    slug: 'sunset-cruises-gold-coast-complete-guide',
-    title: 'Sunset Cruises Gold Coast: Your Complete Guide to Boattime Yacht Charters',
-    date: 'Apr 26, 2025',
-    categories: ['Sunset Cruises'],
-    excerpt:
-      'Everything you need to know about experiencing a world-class sunset cruise on the Gold Coast Broadwater — from timing and what to wear to what you can expect on board.',
-    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
-  },
-  {
-    slug: 'luxury-yacht-charter-gold-coast-experience-guide',
-    title: 'Luxury Yacht Charter Gold Coast: Your Complete Boattime Experience Guide',
-    date: 'Mar 23, 2025',
-    categories: ['Luxury Yacht Hire'],
-    excerpt:
-      'From half-day escapes to full private charters — your complete guide to chartering a superyacht on the Gold Coast with Boattime Yacht Charters.',
-    img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=600&q=80',
-  },
-  {
-    slug: 'whale-migration-australia-gold-coast-viewing',
-    title: 'Whale Migration Australia: Why the Gold Coast Offers the Best Viewing Experience',
-    date: 'Feb 21, 2025',
-    categories: ['Luxury Whale Watching'],
-    excerpt:
-      "Each year, over 35,000 humpback whales migrate along Australia's east coast. Here's why the Gold Coast is the ultimate vantage point — and how to see them in unrivalled style.",
-    img: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=600&q=80',
-  },
-  {
-    slug: 'planning-surprise-proposal-yacht-gold-coast',
-    title: 'Planning a Surprise Proposal on a Yacht (Gold Coast)',
-    date: 'Jan 28, 2025',
-    categories: ['Celebration', 'Lifestyle'],
-    excerpt:
-      'The golden hour light, the open sea, and the one you love — plan a flawless proposal aboard a private yacht charter on the Gold Coast Broadwater.',
-    img: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=600&q=80',
-  },
-  {
-    slug: 'whale-watching-queensland-sun-goddess-gold-coast',
-    title: "Whale Watching Queensland on the Sun Goddess: Gold Coast's Most Luxurious Way to Meet the Humpbacks",
-    date: 'Jan 20, 2025',
-    categories: ['Company', 'Lifestyle'],
-    excerpt:
-      "There's whale watching, and then there's whale watching from the sun deck of a 34m superyacht. Here's what that experience looks like aboard the Sun Goddess.",
-    img: 'https://images.unsplash.com/photo-1498354178607-a79df2916198?w=600&q=80',
-  },
-  {
-    slug: 'best-season-gold-coast-yacht-charters-guide-2025',
-    title: "Best Season for Gold Coast Yacht Charters: A Local Expert's Guide (2025)",
-    date: 'Dec 12, 2024',
-    categories: ['Company', 'Lifestyle'],
-    excerpt:
-      'Sun-soaked summers or the dramatic whale season of winter — every month on the Gold Coast brings something extraordinary on the water. Here is when to go.',
-    img: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&q=80',
-  },
-  {
-    slug: 'boattime-yacht-charters-hidden-gem-luxury-sailing',
-    title: 'Why Boattime Yacht Charters Is the Hidden Gem of Luxury Sailing (2025 Guide)',
-    date: 'Nov 17, 2024',
-    categories: ['Company', 'Lifestyle'],
-    excerpt:
-      'What sets a Boattime charter apart from the rest? We break down exactly what you get on board — and why guests keep coming back year after year.',
-    img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80',
-  },
-  {
-    slug: 'sunset-cruise-gold-coast-hidden-spots-locals-guide',
-    title: 'Sunset Cruise Gold Coast: Hidden Spots Only Locals Know (2025 Guide)',
-    date: 'Oct 27, 2024',
-    categories: ['Sunset Cruises'],
-    excerpt:
-      "Beyond the Broadwater's famous skyline, there are golden coves and quiet anchorages only reachable by water. Here's where we take you during golden hour.",
-    img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
-  },
-  {
-    slug: 'boattime-luxury-whale-watching-gold-coast-2025',
-    title: 'Why Boattime Luxury Whale Watching Gold Coast Will Take Your Breath Away in 2025',
-    date: 'Apr 17, 2024',
-    categories: ['Luxury Whale Watching'],
-    excerpt:
-      'We share what makes our luxury whale watching season unlike anything else on the Gold Coast — and why you should book early for 2025.',
-    img: 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=600&q=80',
-  },
-];
+function fmtDate(dateStr: string | null | undefined) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-AU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
 
 const POSTS_PER_PAGE = 9;
 
@@ -280,7 +179,7 @@ function FeaturedCard({ post }: { post: Post }) {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `url(${post.img})`,
+            backgroundImage: `url(${post.image_url || FALLBACK_IMG})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             transform: hovered ? 'scale(1.05)' : 'scale(1)',
@@ -334,7 +233,7 @@ function FeaturedCard({ post }: { post: Post }) {
             marginBottom: 10,
           }}
         >
-          {post.date}
+          {fmtDate(post.published_at ?? post.created_at)}
         </div>
         <h3
           style={{
@@ -419,7 +318,7 @@ function FeaturedPosts({ posts }: { posts: Post[] }) {
           style={{ gap: 24 }}
         >
           {posts.map((post) => (
-            <FeaturedCard key={post.slug} post={post} />
+            <FeaturedCard key={post.id} post={post} />
           ))}
         </div>
       </div>
@@ -540,7 +439,7 @@ function PostCard({ post }: { post: Post }) {
           style={{
             position: 'absolute',
             inset: 0,
-            backgroundImage: `url(${post.img})`,
+            backgroundImage: `url(${post.image_url || FALLBACK_IMG})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             transform: hovered ? 'scale(1.06)' : 'scale(1)',
@@ -572,7 +471,7 @@ function PostCard({ post }: { post: Post }) {
                 color: 'var(--text-muted)',
               }}
             >
-              {post.date}
+              {fmtDate(post.published_at ?? post.created_at)}
             </div>
             <div style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.2)' }} />
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -700,7 +599,7 @@ function PostGrid({
         ) : (
           <div ref={ref} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {posts.map((post) => (
-              <PostCard key={post.slug} post={post} />
+              <PostCard key={post.id} post={post} />
             ))}
           </div>
         )}
@@ -784,14 +683,16 @@ function PaginationBtn({
 
 // ── Main export ───────────────────────────────────────────────────────────────
 
-export default function NewsPage() {
+export default function NewsPage({ posts }: { posts: Post[] }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [page, setPage] = useState(1);
 
+  const featured = posts.slice(0, 3);
+
   const filteredPosts =
     activeCategory === 'All'
-      ? POSTS
-      : POSTS.filter((p) => p.categories.includes(activeCategory));
+      ? posts
+      : posts.filter((p) => p.categories.includes(activeCategory));
 
   const paginatedPosts = filteredPosts.slice(
     (page - 1) * POSTS_PER_PAGE,
@@ -808,7 +709,7 @@ export default function NewsPage() {
       <Nav />
       <main>
         <NewsHero />
-        <FeaturedPosts posts={FEATURED} />
+        {featured.length > 0 && <FeaturedPosts posts={featured} />}
         <CategoryFilter active={activeCategory} onSelect={handleCategorySelect} />
         <PostGrid
           posts={paginatedPosts}

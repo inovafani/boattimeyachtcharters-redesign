@@ -2,7 +2,7 @@
 
 ## What the app does and who uses it
 
-A luxury marketing website for Boattime Yacht Charters (Gold Coast & Brisbane, AU). Visitors browse cruise experiences, learn about the fleet, and submit booking enquiries. No auth, no database — pure frontend with a static enquiry form.
+A luxury marketing website for Boattime Yacht Charters (Gold Coast & Brisbane, AU). Visitors browse cruise experiences, learn about the fleet, and submit booking enquiries. An admin dashboard lets the Boattime team publish and manage news articles without touching code.
 
 ## Tech Stack
 
@@ -12,57 +12,50 @@ A luxury marketing website for Boattime Yacht Charters (Gold Coast & Brisbane, A
 - **Animations:** GSAP 3 + ScrollTrigger + @gsap/react
 - **Fonts:** next/font/google — Cormorant Garamond, Montserrat
 - **Deployment:** Vercel
-- **Backend:** None (static site)
+- **Backend:** Supabase (Postgres + Auth + RLS)
+- **Supabase packages:** `@supabase/supabase-js`, `@supabase/ssr`
 
 ## Pages & User Flows
 
-Single page (`/`) composed of sections in order:
-1. Nav — fixed, scrolled state, dropdown menus
-2. Hero — full-screen with parallax + load sequence
-3. StatsBar — gold bar with animated counters
-4. Cruises — mosaic grid of 7 cruise experiences
-5. Fleet — two yacht showcase cards
-6. Charters — 4 charter type cards (Private, Corporate, Wedding, Catering)
-7. Reviews — 3 testimonial cards + platform ratings
-8. CtaBand — full-bleed CTA with parallax background
-9. Destinations — two-column list of charter destinations
-10. FAQ — accordion with GSAP height animation
-11. Inquiry — static booking enquiry form (shows success message on submit)
-12. Footer — links, contact, socials
+### Public
+1. `/` — Home page (all existing sections)
+2. `/boattime-news` — News listing (fetches published posts from Supabase)
 
-## Data
+### Admin (requires login)
+1. `/admin` — Login page (email + password via Supabase Auth)
+2. `/admin/news` — Article list: see all posts, toggle published, delete
+3. `/admin/news/new` — Create a new article
+4. `/admin/news/[id]` — Edit an existing article
 
-All content is hardcoded (cruise names, yacht specs, reviews, FAQs). No external API calls.
+Admin routes are protected via middleware — unauthenticated users are redirected to `/admin`.
 
-## GSAP Animations
+## Data Model
 
-### On page load (Hero):
-- Background image: Ken Burns slow zoom
-- Text lines: masked slide-up reveal, line by line
-- Badge: slide in from right
-- Scroll indicator: fade in + pulse loop
+### `posts` table (Supabase Postgres)
 
-### On scroll (ScrollTrigger):
-- All section headings: word/line reveal
-- All grid cards: staggered fade+slide from bottom (stagger: 0.08s)
-- Stats: count-up from zero
-- Hero background: parallax (yPercent 30)
-- CTA band background: parallax
-- Destinations list: stagger slide from left
-- FAQ items: stagger slide from right
+| Column       | Type        | Notes                          |
+|--------------|-------------|--------------------------------|
+| id           | uuid        | Primary key, auto-generated    |
+| title        | text        | Article title                  |
+| slug         | text        | URL-friendly, unique           |
+| excerpt      | text        | Short description              |
+| content      | text        | Full article body (plain text) |
+| image_url    | text        | Image URL                      |
+| categories   | text[]      | Array of category tags         |
+| published    | boolean     | Default false (draft)          |
+| published_at | timestamptz | Set when published = true      |
+| created_at   | timestamptz | Auto                           |
 
-### On hover:
-- All image cards: smooth GSAP scale (1.06)
-- Nav links: color transition
-- Buttons: lift (translateY -2px)
-
-### Nav:
-- On scroll > 40px: background + blur + border animate in (GSAP)
+### RLS rules
+- Public: SELECT where published = true only
+- Admin (authenticated): full SELECT, INSERT, UPDATE, DELETE
 
 ## What "done" looks like
 
 - `npm run build` succeeds with no TypeScript errors
-- All 12 sections render correctly at localhost:3000
-- GSAP animations work on scroll, hover, and page load
-- Responsive at mobile (768px breakpoint)
+- Admin can log in at `/admin` and is redirected to `/admin/news`
+- Admin can create, edit, delete, and publish/unpublish articles
+- `/boattime-news` shows only published articles, fetched from Supabase
+- Category filter and pagination work with live data
+- Unauthenticated users hitting `/admin/*` are redirected to `/admin`
 - No console errors
