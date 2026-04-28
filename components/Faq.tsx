@@ -172,6 +172,7 @@ export default function Faq() {
   return (
     <div
       ref={sectionRef}
+      id="faq"
       className="faq-section"
       style={{ padding: '110px 48px', background: 'var(--navy)' }}
     >

@@ -296,7 +296,7 @@ export default function Cruises() {
   return (
     <div
       ref={sectionRef}
-      id="cruises"
+      id="experiences"
       className="cruises-section"
       style={{ padding: '110px 0', background: 'var(--navy)' }}
     >

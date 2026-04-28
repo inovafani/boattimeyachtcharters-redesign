@@ -1,195 +1,277 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Eyebrow, ItalicEm, Icon } from './Shared';
+import { Eyebrow, ItalicEm } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 interface YachtData {
-  eyebrow: string;
+  badge: string;
+  meta: string;
   name: string;
   emWord: string;
+  tagline: string;
   body: string;
-  specs: [string, string][];
+  specs: { label: string; value: string; unit: string }[];
+  feats: string[];
+  ctaLabel: string;
+  ctaHref: string;
   img: string;
+  reverse: boolean;
 }
 
 const YACHTS: YachtData[] = [
   {
-    eyebrow: '34m · 110ft Superyacht',
-    name: 'Sun Goddess',
+    badge: '01 / FLAGSHIP',
+    meta: 'SG-34M · OCEAN FAST YACHT · 2019 REFIT',
+    name: 'Sun',
     emWord: 'Goddess',
-    body: 'Sleek, stylish, unmistakable on the Broadwater. Dual bars, two decks, a dual-level galley, and sound throughout — room to breathe without giving up a thing.',
-    specs: [['Guests', '135'], ['Length', '34m'], ['Decks', 'Two']],
-    img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1400&q=80',
+    tagline: 'She turns every head in the marina — and earns it.',
+    body: 'At 110 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
+    specs: [
+      { label: 'Guests', value: '135', unit: 'pax' },
+      { label: 'Length', value: '34m', unit: '/ 110ft' },
+      { label: 'Decks', value: '2', unit: '' },
+      { label: 'Bars', value: '2', unit: '' },
+    ],
+    feats: ['Bose Audio', 'Dual Galley', 'Upper Sun Deck', 'Flat-Screens', 'BBQ Facilities', 'Weddings Licensed'],
+    ctaLabel: 'Tour Sun Goddess',
+    ctaHref: '/#inquiry',
+    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_2899-scaled.jpg',
+    reverse: false,
   },
   {
-    eyebrow: '30m · 100ft Tri-Deck',
-    name: 'Mermaid Spirit',
+    badge: '02 / ENTERTAINER',
+    meta: 'MS-30M · TRI-DECK CATAMARAN · NEW REFIT',
+    name: 'Mermaid',
     emWord: 'Spirit',
-    body: 'A tri-deck catamaran built for functions and celebrations. Three decks, a chef\'s kitchen, sun lounge, dual bars — the ultimate entertaining venue on the coast.',
-    specs: [['Guests', '100'], ['Length', '30m'], ['Decks', 'Three']],
-    img: 'https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=1400&q=80',
+    tagline: 'Three decks built for the best night of your life.',
+    body: 'A tri-deck catamaran engineered for celebrations. Three full decks, a chef\'s kitchen, stinger pool, sun lounge, jet skis, and room for 100 by day or 22 overnight. The Gold Coast\'s ultimate floating venue.',
+    specs: [
+      { label: 'Day Guests', value: '100', unit: 'pax' },
+      { label: 'Length', value: '30m', unit: '/ 100ft' },
+      { label: 'Decks', value: '3', unit: '' },
+      { label: 'Sleeps', value: '22', unit: '' },
+    ],
+    feats: ["Chef's Kitchen", 'Jet Skis', 'Stinger Pool', 'Paddle Boards', 'Sun Lounge', 'Scuba Gear'],
+    ctaLabel: 'Tour Mermaid Spirit',
+    ctaHref: '/#inquiry',
+    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_2760-scaled.jpg',
+    reverse: true,
   },
 ];
 
-function YachtCard({ y, index }: { y: YachtData; index: number }) {
-  const [hovered, setHovered] = useState(false);
+function YachtShowcase({ y }: { y: YachtData }) {
+  const showcaseRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      gsap.to(imgRef.current, {
-        scale: hovered ? 1.05 : 1,
-        duration: 0.8,
+      gsap.from(imgRef.current, {
+        x: y.reverse ? 80 : -80,
+        opacity: 0,
+        duration: 1.1,
         ease: 'power2.out',
+        scrollTrigger: { trigger: showcaseRef.current, start: 'top 80%', once: true },
+      });
+      gsap.from(infoRef.current, {
+        x: y.reverse ? -60 : 60,
+        opacity: 0,
+        duration: 1.1,
+        delay: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: showcaseRef.current, start: 'top 80%', once: true },
       });
     },
-    { dependencies: [hovered] },
+    { scope: showcaseRef },
   );
 
   return (
     <div
-      ref={cardRef}
-      className="photo-overlay-card relative overflow-hidden cursor-pointer"
-      style={{ aspectRatio: '4/5', background: 'var(--ocean)' }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      ref={showcaseRef}
+      className={`yacht-showcase${y.reverse ? ' yacht-showcase--reverse' : ''}`}
     >
-      <div
-        ref={imgRef}
-        className="absolute inset-0 will-change-transform"
-        style={{
-          backgroundImage: `url(${y.img})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(10,22,40,0.97) 0%, rgba(10,22,40,0.5) 45%, rgba(10,22,40,0.15) 100%)',
-        }}
-      />
-
-      {/* Large ghost number */}
-      <div
-        className="absolute"
-        style={{
-          top: 40,
-          right: 44,
-          fontFamily: 'var(--font-display)',
-          fontStyle: 'italic',
-          fontSize: 100,
-          fontWeight: 300,
-          color: 'rgba(201,168,76,0.12)',
-          lineHeight: 1,
-          userSelect: 'none',
-        }}
-      >
-        0{index + 1}
+      {/* Image panel */}
+      <div ref={imgRef} className="yacht-visual">
+        <img src={y.img} alt={`${y.name} ${y.emWord}`} />
+        <div
+          className="yacht-visual__badge"
+          style={{
+            position: 'absolute',
+            top: 40,
+            left: y.reverse ? 'auto' : 40,
+            right: y.reverse ? 40 : 'auto',
+            zIndex: 2,
+            fontFamily: 'var(--font-body)',
+            fontSize: 9,
+            letterSpacing: '0.32em',
+            textTransform: 'uppercase',
+            color: 'var(--gold)',
+            fontWeight: 600,
+            border: '1px solid rgba(201,168,76,0.4)',
+            padding: '7px 14px',
+            background: 'rgba(10,22,40,0.6)',
+          }}
+        >
+          {y.badge}
+        </div>
       </div>
 
-      {/* Info */}
-      <div className="absolute" style={{ left: 44, right: 44, bottom: 44 }}>
+      {/* Info panel */}
+      <div ref={infoRef} className="yacht-info">
         <div
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 10,
-            letterSpacing: '0.3em',
+            fontSize: 9,
+            letterSpacing: '0.32em',
             textTransform: 'uppercase',
             color: 'var(--gold)',
             fontWeight: 500,
-            marginBottom: 14,
+            marginBottom: 24,
           }}
         >
-          {y.eyebrow}
+          {y.meta}
         </div>
-        <div
+
+        <h2
           style={{
             fontFamily: 'var(--font-display)',
-            fontWeight: 400,
-            fontSize: 'clamp(38px, 4vw, 54px)',
+            fontWeight: 300,
+            fontSize: 'clamp(52px, 6vw, 80px)',
+            lineHeight: 0.95,
+            letterSpacing: '-0.02em',
             color: 'var(--cream)',
-            lineHeight: 1,
-            marginBottom: 18,
-            letterSpacing: '-0.015em',
+            marginBottom: 20,
           }}
         >
-          {y.name.replace(y.emWord, '').trim()}{' '}
+          {y.name}{' '}
           <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>{y.emWord}</span>
-        </div>
+        </h2>
+
+        <p
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontSize: 'clamp(16px, 1.6vw, 20px)',
+            color: 'rgba(245,240,232,0.65)',
+            lineHeight: 1.4,
+            marginBottom: 28,
+            letterSpacing: '-0.005em',
+          }}
+        >
+          {y.tagline}
+        </p>
+
         <p
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 13.5,
-            color: 'rgba(245,240,232,0.78)',
-            lineHeight: 1.7,
-            marginBottom: 24,
-            maxWidth: 400,
+            fontSize: 14,
+            color: 'var(--text-muted)',
+            lineHeight: 1.8,
+            marginBottom: 40,
+            maxWidth: 420,
           }}
         >
           {y.body}
         </p>
 
-        {/* Specs */}
+        {/* 4-column spec row */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, auto)',
-            gap: 32,
-            paddingTop: 20,
-            borderTop: '1px solid rgba(201,168,76,0.28)',
-            marginBottom: 28,
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 0,
+            borderTop: '1px solid rgba(201,168,76,0.18)',
+            borderLeft: '1px solid rgba(201,168,76,0.18)',
+            marginBottom: 36,
           }}
         >
-          {y.specs.map(([k, v]) => (
-            <div key={k} className="flex flex-col gap-1.5">
+          {y.specs.map((s) => (
+            <div
+              key={s.label}
+              style={{
+                padding: '20px 0 20px 20px',
+                borderRight: '1px solid rgba(201,168,76,0.18)',
+                borderBottom: '1px solid rgba(201,168,76,0.18)',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(24px, 2.5vw, 36px)',
+                  fontWeight: 300,
+                  color: 'var(--cream)',
+                  lineHeight: 1,
+                  marginBottom: 4,
+                }}
+              >
+                {s.value}
+              </div>
+              {s.unit && (
+                <div
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 10,
+                    color: 'rgba(245,240,232,0.45)',
+                    marginBottom: 6,
+                  }}
+                >
+                  {s.unit}
+                </div>
+              )}
               <div
                 style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 9,
-                  letterSpacing: '0.28em',
+                  letterSpacing: '0.24em',
                   textTransform: 'uppercase',
                   color: 'var(--gold)',
                   fontWeight: 500,
                 }}
               >
-                {k}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 24,
-                  color: 'var(--cream)',
-                  fontWeight: 400,
-                }}
-              >
-                {v}
+                {s.label}
               </div>
             </div>
           ))}
         </div>
 
-        <a
-          href="#"
-          className="inline-flex items-center gap-3"
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 10,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'var(--gold)',
-            fontWeight: 600,
-            textDecoration: 'none',
-          }}
-        >
-          Step aboard <Icon name="arrow" size={12} color="var(--gold)" />
+        {/* Feature pills */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 44 }}>
+          {y.feats.map((f) => (
+            <span
+              key={f}
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 9,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: 'var(--gold-light)',
+                border: '1px solid rgba(201,168,76,0.28)',
+                borderRadius: '100px',
+                padding: '6px 14px',
+              }}
+            >
+              {f}
+            </span>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <a href={y.ctaHref} className="yacht-cta-link">
+          {y.ctaLabel}
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path
+              d="M2 6h8M6 2l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </a>
       </div>
     </div>
@@ -199,8 +281,6 @@ function YachtCard({ y, index }: { y: YachtData; index: number }) {
 export default function Fleet() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const card1Ref = useRef<HTMLDivElement>(null);
-  const card2Ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -209,84 +289,62 @@ export default function Fleet() {
         opacity: 0,
         duration: 0.9,
         ease: 'power2.out',
-        scrollTrigger: {
-          trigger: headerRef.current,
-          start: 'top 85%',
-          once: true,
-        },
-      });
-
-      gsap.from(card1Ref.current, {
-        x: -60,
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: card1Ref.current,
-          start: 'top 85%',
-          once: true,
-        },
-      });
-
-      gsap.from(card2Ref.current, {
-        x: 60,
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: card2Ref.current,
-          start: 'top 85%',
-          once: true,
-        },
+        scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
       });
     },
     { scope: sectionRef },
   );
 
   return (
-    <div
-      ref={sectionRef}
-      id="fleet"
-      className="fleet-section"
-      style={{ padding: '110px 48px', background: 'var(--navy-mid)' }}
-    >
-      <div style={{ maxWidth: 1440, margin: '0 auto' }}>
-        <div ref={headerRef} style={{ textAlign: 'center', maxWidth: 780, margin: '0 auto 64px' }}>
-          <Eyebrow>Our Yachts</Eyebrow>
+    <div ref={sectionRef} id="fleet" style={{ background: 'var(--navy)' }}>
+      {/* Section header — 2-column grid */}
+      <div
+        ref={headerRef}
+        className="fleet-header-grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 64,
+          padding: '110px 80px 80px',
+          maxWidth: 1440,
+          margin: '0 auto',
+          alignItems: 'end',
+        }}
+      >
+        <div>
+          <Eyebrow>The Fleet</Eyebrow>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 300,
-              fontSize: 'clamp(40px, 5vw, 64px)',
-              lineHeight: 1.05,
-              letterSpacing: '-0.015em',
+              fontSize: 'clamp(44px, 5.5vw, 72px)',
+              lineHeight: 1.0,
+              letterSpacing: '-0.02em',
+              color: 'var(--cream)',
             }}
           >
-            Two superyachts. <ItalicEm>One</ItalicEm> unhurried coastline.
+            Two vessels.{' '}
+            <ItalicEm>One horizon.</ItalicEm>
           </h2>
-          <p
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 15,
-              color: 'var(--text-muted)',
-              marginTop: 22,
-              lineHeight: 1.75,
-            }}
-          >
-            Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks of
-            celebration. Both berthed at Marina Mirage, ready for your afternoon.
-          </p>
         </div>
-
-        <div className="grid fleet-grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-          <div ref={card1Ref}>
-            <YachtCard y={YACHTS[0]} index={0} />
-          </div>
-          <div ref={card2Ref}>
-            <YachtCard y={YACHTS[1]} index={1} />
-          </div>
-        </div>
+        <p
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 15,
+            color: 'var(--text-muted)',
+            lineHeight: 1.8,
+            maxWidth: 480,
+          }}
+        >
+          Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks of
+          celebration. Both berthed at Marina Mirage — ready when you are.
+        </p>
       </div>
+
+      {/* Yacht showcases */}
+      {YACHTS.map((y) => (
+        <YachtShowcase key={y.name} y={y} />
+      ))}
     </div>
   );
 }

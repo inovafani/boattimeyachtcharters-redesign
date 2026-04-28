@@ -4,54 +4,52 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Eyebrow, ItalicEm, Button } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function CtaBand() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // Parallax on the background image
-      gsap.to(bgRef.current, {
-        yPercent: 22,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
+      const lines = sectionRef.current!.querySelectorAll<HTMLElement>('.kinetic-line');
+
+      lines.forEach((line, i) => {
+        gsap.fromTo(
+          line,
+          { scale: 0.88, opacity: 0, y: 40 },
+          {
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            delay: i * 0.14,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 72%',
+              once: true,
+            },
+          },
+        );
       });
 
-      // Content reveal
-      gsap.from(contentRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          once: true,
+      gsap.fromTo(
+        sectionRef.current!.querySelector('.kinetic-caption'),
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          delay: 0.5,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 72%',
+            once: true,
+          },
         },
-      });
-
-      gsap.from(sectionRef.current!.querySelectorAll('.cta-line'), {
-        y: '110%',
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: 'top 82%',
-          once: true,
-        },
-      });
+      );
     },
     { scope: sectionRef },
   );
@@ -59,78 +57,129 @@ export default function CtaBand() {
   return (
     <div
       ref={sectionRef}
-      className="relative overflow-hidden flex items-center justify-center cta-band"
-      style={{ minHeight: 560, padding: '120px 48px' }}
+      style={{
+        background: 'var(--navy)',
+        padding: '140px 64px 160px',
+        overflow: 'hidden',
+        position: 'relative',
+      }}
     >
-      {/* Background image with parallax */}
+      {/* Subtle radial glow */}
       <div
-        ref={bgRef}
-        className="absolute inset-0 will-change-transform"
         style={{
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=2000&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <div
-        className="absolute inset-0"
-        style={{
+          position: 'absolute',
+          inset: 0,
           background:
-            'linear-gradient(to bottom, rgba(10,22,40,0.72) 0%, rgba(10,22,40,0.58) 50%, rgba(10,22,40,0.88) 100%)',
+            'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 65%)',
+          pointerEvents: 'none',
         }}
       />
 
-      <div ref={contentRef} className="cta-band-content relative z-10 text-center" style={{ maxWidth: 760 }}>
-        <Eyebrow>Ready when you are</Eyebrow>
+      <div style={{ maxWidth: 1440, margin: '0 auto', position: 'relative' }}>
 
-        <h2
+        {/* Line 1 — left */}
+        <div
+          className="kinetic-line"
+          style={{ transformOrigin: 'left center' }}
+        >
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: 'clamp(64px, 11vw, 200px)',
+              lineHeight: 0.92,
+              letterSpacing: '-0.025em',
+              color: 'var(--cream)',
+              margin: 0,
+              textAlign: 'left',
+            }}
+          >
+            This is not
+          </h2>
+        </div>
+
+        {/* Line 2 — right, italic gold */}
+        <div
+          className="kinetic-line"
+          style={{ transformOrigin: 'right center', marginTop: '0.08em' }}
+        >
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontStyle: 'italic',
+              fontSize: 'clamp(52px, 8.5vw, 160px)',
+              lineHeight: 0.94,
+              letterSpacing: '-0.02em',
+              color: 'var(--gold-light)',
+              margin: 0,
+              textAlign: 'right',
+            }}
+          >
+            a tourist cruise.
+          </h2>
+        </div>
+
+        {/* Line 3 — centered */}
+        <div
+          className="kinetic-line"
+          style={{ transformOrigin: 'center center', marginTop: '0.1em' }}
+        >
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 300,
+              fontSize: 'clamp(58px, 10vw, 190px)',
+              lineHeight: 0.92,
+              letterSpacing: '-0.025em',
+              color: 'var(--cream)',
+              margin: 0,
+              textAlign: 'center',
+            }}
+          >
+            It&apos;s{' '}
+            <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>your</em>
+            {' '}day.
+          </h2>
+        </div>
+
+        {/* Caption */}
+        <div
+          className="kinetic-caption"
           style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 300,
-            fontSize: 'clamp(44px, 6vw, 88px)',
-            lineHeight: 0.98,
-            letterSpacing: '-0.02em',
-            color: 'var(--cream)',
-            margin: '20px 0 28px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 20,
+            marginTop: 72,
           }}
         >
-          <div style={{ overflow: 'hidden' }}>
-            <span className="cta-line block">Ready to</span>
-          </div>
-          <div style={{ overflow: 'hidden' }}>
-            <span
-              className="cta-line block"
-              style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}
-            >
-              set sail?
-            </span>
-          </div>
-        </h2>
-
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 16,
-            color: 'rgba(245,240,232,0.82)',
-            lineHeight: 1.75,
-            marginBottom: 44,
-            maxWidth: 520,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          Every charter begins with a conversation. Share the afternoon you have in mind —
-          our concierge replies within the hour.
-        </p>
-
-        <div className="flex gap-4 justify-center flex-wrap">
-          <Button variant="primary" href="#inquiry">
-            Booking Enquiry
-          </Button>
-          <Button variant="ghost" href="#cruises">
-            Browse Cruise Tickets
-          </Button>
+          <div
+            style={{
+              height: 1,
+              width: 56,
+              background: 'rgba(201,168,76,0.28)',
+            }}
+          />
+          <span
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 9,
+              letterSpacing: '0.32em',
+              textTransform: 'uppercase',
+              color: 'rgba(201,168,76,0.45)',
+              fontWeight: 500,
+            }}
+          >
+            Boattime · Designed, never generic
+          </span>
+          <div
+            style={{
+              height: 1,
+              width: 56,
+              background: 'rgba(201,168,76,0.28)',
+            }}
+          />
         </div>
       </div>
     </div>

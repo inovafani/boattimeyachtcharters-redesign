@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,9 +9,37 @@ import { useTheme } from './ThemeProvider';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+function getGoldCoastSunset(): string {
+  const now = new Date();
+  const yr = now.getFullYear();
+  const dayOfYear = Math.floor(
+    (now.getTime() - new Date(yr, 0, 0).getTime()) / 86400000,
+  );
+  const lat = -27.9 * (Math.PI / 180);
+  const lon = 153.4;
+  const B = (2 * Math.PI * (dayOfYear - 81)) / 364;
+  const decl = 23.45 * Math.sin(B) * (Math.PI / 180);
+  const cosH =
+    (Math.cos(90.833 * (Math.PI / 180)) - Math.sin(decl) * Math.sin(lat)) /
+    (Math.cos(decl) * Math.cos(lat));
+  if (Math.abs(cosH) > 1) return '—';
+  const H = Math.acos(cosH) * (180 / Math.PI);
+  const noon = 12 - (lon - 150) / 15;
+  const sunset = noon + H / 15;
+  const h = Math.floor(sunset);
+  const m = Math.floor((sunset - h) * 60);
+  return `${h}:${String(m).padStart(2, '0')}`;
+}
+
 export default function Hero() {
   const { theme } = useTheme();
+  const [sunsetTime, setSunsetTime] = useState('—');
   const isLight = theme === 'light';
+
+  useEffect(() => {
+    setSunsetTime(getGoldCoastSunset());
+  }, []);
+
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
@@ -125,7 +153,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden flex items-center"
+      className="relative overflow-hidden flex"
       style={{ height: '100vh', minHeight: 720, background: 'var(--navy)' }}
     >
       {/* Background image */}
@@ -193,8 +221,10 @@ export default function Hero() {
         style={{
           paddingLeft: 48,
           paddingRight: 48,
-          paddingTop: 80,
+          paddingBottom: 80,
           maxWidth: 1200,
+          alignSelf: 'flex-start',
+          marginTop: 'max(100px, calc(50vh - 300px))',
         }}
       >
         {/* Eyebrow */}
@@ -269,11 +299,37 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Info bar — pinned to bottom */}
+      <div className="hero-infobar">
+        <div className="hero-infobar-cell">
+          <div className="hero-infobar-label">Today&apos;s Sunset</div>
+          <div className="hero-infobar-value">
+            {sunsetTime} <em>· gold</em>
+          </div>
+        </div>
+        <div className="hero-infobar-cell">
+          <div className="hero-infobar-label">Sea State</div>
+          <div className="hero-infobar-value">
+            Calm <em>· &lt;0.5m swell</em>
+          </div>
+        </div>
+        <div className="hero-infobar-cell">
+          <div className="hero-infobar-label">Next Whale</div>
+          <div className="hero-infobar-value">
+            Sat 08:30 <em>· Sun Goddess</em>
+          </div>
+        </div>
+        <div className="hero-infobar-cell status">
+          <div className="hero-infobar-label">Availability</div>
+          <div className="hero-infobar-value">3 dates this week</div>
+        </div>
+      </div>
+
       {/* Bottom-right stats badge */}
       <div
         className="hero-stats-badge absolute z-10 hidden md:block"
         style={{
-          bottom: 40,
+          bottom: 96,
           right: 48,
           border: '1px solid rgba(201,168,76,0.3)',
           background: 'rgba(10,22,40,0.65)',
