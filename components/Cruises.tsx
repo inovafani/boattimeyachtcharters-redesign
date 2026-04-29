@@ -32,7 +32,7 @@ const CRUISES: CruiseData[] = [
     lg: true,
     col: 'span 7',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=1400&q=80',
+    img: '/luxury-whale.jpg',
   },
   {
     cat: 'Sunset',
@@ -43,7 +43,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Sun Goddess',
     col: 'span 5',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80',
+    img: '/broadwater.jpeg',
   },
   {
     cat: 'Galley',
@@ -65,7 +65,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 5',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1498354178607-a79df2916198?w=1200&q=80',
+    img: 'https://images.unsplash.com/photo-1610343744628-c8e13a666dc0?w=1200&q=80',
   },
   {
     cat: 'Celebration',
@@ -76,7 +76,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 3',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=1000&q=80',
+    img: 'https://images.unsplash.com/photo-1661858660542-51240df72dad?w=1200&q=80',
   },
   {
     cat: 'Romance',
