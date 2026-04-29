@@ -2043,6 +2043,344 @@
 .contact-value:hover { color: var(--gold); }
 
 /* ============================================================
+   LIVE STREAM SECTION
+   ============================================================ */
+
+.ls-section {
+  background: var(--navy);
+  padding: 120px 80px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ls-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Header */
+.ls-header {
+  margin-bottom: 48px;
+}
+
+.ls-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.ls-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin: 0;
+}
+
+.ls-subtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 680px;
+}
+
+/* Live / offline pills */
+.ls-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  padding: 9px 16px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ef4444;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ls-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+  animation: lsDotPulse 1.4s ease infinite;
+}
+
+@keyframes lsDotPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45); }
+  60% { opacity: 0.85; box-shadow: 0 0 0 7px rgba(239, 68, 68, 0); }
+}
+
+.ls-offline-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 9px 16px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ── Player 16:9 container ────────────────────────────────────── */
+.ls-player-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  overflow: hidden;
+}
+
+/* Live iframe */
+.ls-iframe-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.ls-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.ls-player-live-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(220, 38, 38, 0.88);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Offline / poster state ───────────────────────────────────── */
+.ls-offline-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ls-offline-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.4;
+  filter: grayscale(0.2);
+  transition: opacity 0.6s ease;
+}
+
+.ls-offline-wrap:hover .ls-offline-bg {
+  opacity: 0.5;
+}
+
+.ls-offline-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 22, 40, 0.88) 0%,
+    rgba(10, 22, 40, 0.65) 50%,
+    rgba(10, 22, 40, 0.92) 100%
+  );
+}
+
+.ls-scanlines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.05) 3px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ls-offline-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 48px 40px;
+  max-width: 600px;
+}
+
+.ls-offline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45) !important;
+  font-weight: 600;
+  border: 1px solid rgba(245, 240, 232, 0.14);
+  padding: 7px 14px;
+  margin-bottom: 28px;
+}
+
+.ls-offline-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(245, 240, 232, 0.3);
+  flex-shrink: 0;
+}
+
+.ls-offline-heading {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(28px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #F5F0E8 !important;
+  margin-bottom: 18px;
+}
+
+.ls-offline-body {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(245, 240, 232, 0.58) !important;
+  line-height: 1.85;
+  margin-bottom: 36px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ls-next-stream {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.ls-next-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.7) !important;
+  font-weight: 600;
+}
+
+.ls-next-date {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #F5F0E8 !important;
+}
+
+/* Gold corner brackets on offline poster */
+.ls-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  z-index: 3;
+  pointer-events: none;
+}
+.ls-corner--tl { top: 14px; left: 14px; border-top: 1px solid rgba(201, 168, 76, 0.5); border-left: 1px solid rgba(201, 168, 76, 0.5); }
+.ls-corner--tr { top: 14px; right: 14px; border-top: 1px solid rgba(201, 168, 76, 0.5); border-right: 1px solid rgba(201, 168, 76, 0.5); }
+.ls-corner--bl { bottom: 14px; left: 14px; border-bottom: 1px solid rgba(201, 168, 76, 0.5); border-left: 1px solid rgba(201, 168, 76, 0.5); }
+.ls-corner--br { bottom: 14px; right: 14px; border-bottom: 1px solid rgba(201, 168, 76, 0.5); border-right: 1px solid rgba(201, 168, 76, 0.5); }
+
+/* ── Info strip below player ──────────────────────────────────── */
+.ls-info-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  border: 1px solid rgba(201, 168, 76, 0.14);
+  border-top: none;
+}
+
+.ls-info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 28px;
+  border-right: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.ls-info-cell:last-child { border-right: none; }
+
+.ls-info-cell--cta {
+  justify-content: center;
+  padding: 14px 28px;
+}
+
+.ls-info-label {
+  font-family: var(--font-body);
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(201, 168, 76, 0.65);
+  font-weight: 600;
+}
+
+.ls-info-value {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ls-section { padding: 80px 24px; }
+  .ls-info-strip { grid-template-columns: 1fr 1fr; }
+  .ls-info-cell:nth-child(2) { border-right: none; }
+  .ls-info-cell:nth-child(3) { border-top: 1px solid rgba(201,168,76,0.1); }
+  .ls-info-cell--cta { grid-column: 1 / -1; border-right: none; border-top: 1px solid rgba(201,168,76,0.1); }
+}
+
+@media (max-width: 640px) {
+  .ls-info-strip { grid-template-columns: 1fr; }
+  .ls-info-cell { border-right: none !important; border-top: 1px solid rgba(201,168,76,0.1); }
+  .ls-info-cell:first-child { border-top: none; }
+  .ls-title-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .ls-offline-content { padding: 32px 24px; }
+}
+
+/* ── Light mode overrides — offline poster sits on dark overlay ─ */
+[data-theme='light'] .ls-offline-badge { color: rgba(245,240,232,0.45) !important; }
+[data-theme='light'] .ls-offline-heading { color: #F5F0E8 !important; }
+[data-theme='light'] .ls-offline-body { color: rgba(245,240,232,0.58) !important; }
+[data-theme='light'] .ls-next-date { color: #F5F0E8 !important; }
+[data-theme='light'] .ls-next-label { color: rgba(201,168,76,0.7) !important; }
+[data-theme='light'] .ls-live-pill { color: #ef4444 !important; }
+
+/* ============================================================
    RESPONSIVE — all new sections
    ============================================================ */
 @media (max-width: 1024px) {

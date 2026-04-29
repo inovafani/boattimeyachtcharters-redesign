@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import StatsBar from '@/components/StatsBar';
 import Fleet from '@/components/Fleet';
 import WhaleSection from '@/components/WhaleSection';
+import LiveStream from '@/components/LiveStream';
 import Cruises from '@/components/Cruises';
 import DayTimeline from '@/components/DayTimeline';
 import Reviews from '@/components/Reviews';
@@ -23,6 +24,7 @@ export default function HomePage() {
         <StatsBar />
         <Fleet />
         <WhaleSection />
+        <LiveStream />
         <Cruises />
         <DayTimeline />
         <Reviews />
