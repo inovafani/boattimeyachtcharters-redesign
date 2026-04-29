@@ -314,7 +314,7 @@
 
   /* Footer */
   .footer-section {
-    padding: 60px 20px 32px !important;
+    padding: 60px 20px 72px !important;
   }
   .footer-top-grid {
     grid-template-columns: 1fr 1fr !important;
@@ -978,24 +978,41 @@
 }
 
 /* ── Nav in light mode ──────────────────────────────────────── */
-/* Force the light nav to always show its glass background — avoids
-   dark-hero-text-on-transparent-light-nav readability issues.
-   GSAP padding animation still works (only background is pinned). */
-[data-theme='light'] .nav-bar {
-  background: var(--nav-bg-scrolled) !important;
+/* Always show the glass-cream background so nav text stays readable.
+   The hero photo section overrides its own content separately. */
+[data-theme='light'] .site-header {
+  background: rgba(247, 243, 236, 0.97) !important;
   backdrop-filter: blur(14px) !important;
   -webkit-backdrop-filter: blur(14px) !important;
-  border-bottom-color: var(--nav-border) !important;
+  border-bottom-color: rgba(10, 22, 40, 0.1) !important;
 }
 
-/* ── Nav link text in light mode ────────────────────────────── */
-[data-theme='light'] .nav-bar a[style*="var(--cream)"] {
+/* Logo image — invert(1) makes it white; brightness(0) makes it black */
+[data-theme='light'] .site-header .site-header__logo-img {
+  filter: brightness(0) !important;
+}
+
+/* Logo text */
+[data-theme='light'] .site-header .site-header__logo-text strong {
   color: #0A1628 !important;
 }
 
-/* ── Nav mobile drawer links ────────────────────────────────── */
-[data-theme='light'] .nav-bar [style*="var(--cream)"] {
-  color: #0A1628 !important;
+/* Nav links */
+[data-theme='light'] .site-header .site-header__nav-link {
+  color: rgba(10, 22, 40, 0.75) !important;
+}
+
+/* Phone */
+[data-theme='light'] .site-header .site-header__phone {
+  color: rgba(10, 22, 40, 0.75) !important;
+}
+
+/* Hamburger button border + lines */
+[data-theme='light'] .site-header .site-header__menu-btn {
+  border-color: rgba(10, 22, 40, 0.28) !important;
+}
+[data-theme='light'] .site-header .site-header__menu-line {
+  background: #0A1628 !important;
 }
 
 /* ── Footer light mode ──────────────────────────────────────── */
@@ -1013,6 +1030,30 @@
 }
 [data-theme='light'] footer [style*="var(--text-muted)"] {
   color: var(--text-muted) !important;
+}
+
+/* ── Hero infobar — dark glass strip, always-cream text ─────── */
+[data-theme='light'] .hero-infobar * {
+  color: rgba(245, 240, 232, 0.85) !important;
+}
+[data-theme='light'] .hero-infobar .hero-infobar-label {
+  color: rgba(201, 168, 76, 0.65) !important;
+}
+[data-theme='light'] .hero-infobar-cell.status .hero-infobar-value {
+  color: #4ade80 !important;
+}
+
+/* ── Whale floating stat cards — dark glass, always-cream text ─ */
+[data-theme='light'] .whale-floating-stat .whale-floating-label {
+  color: var(--gold) !important;
+}
+[data-theme='light'] .whale-floating-stat .whale-floating-value {
+  color: rgba(245, 240, 232, 0.92) !important;
+}
+
+/* ── Testimonials hover — light bg in light mode ────────────── */
+[data-theme='light'] .t-card:hover {
+  background: rgba(10, 22, 40, 0.06) !important;
 }
 
 /* ── Yacht Showcase (Fleet) ────────────────────────────────────────────── */

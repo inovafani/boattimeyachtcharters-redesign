@@ -30,6 +30,7 @@ export default function TickerBar() {
 
   return (
     <div
+      className="ticker-bar-wrap"
       style={{
         position: 'fixed',
         bottom: 0,
@@ -70,7 +71,7 @@ export default function TickerBar() {
                 fontFamily: 'var(--font-body)',
                 fontSize: 11,
                 letterSpacing: '0.1em',
-                color: item.accent ? 'var(--gold)' : 'var(--cream)',
+                color: item.accent ? 'var(--gold)' : 'rgba(245,240,232,0.9)',
                 fontWeight: item.accent ? 600 : 400,
               }}
             >

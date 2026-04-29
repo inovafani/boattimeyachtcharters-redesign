@@ -72,7 +72,7 @@ export default function Footer() {
       ref={footRef}
       className="footer-section"
       style={{
-        padding: '80px 48px 36px',
+        padding: '80px 48px 80px',
         background: 'var(--navy)',
         borderTop: '1px solid var(--border-subtle)',
       }}
