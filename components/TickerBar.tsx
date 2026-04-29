@@ -52,9 +52,9 @@ export default function TickerBar() {
       }}
     >
       {/* Status items */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 32, flexShrink: 0 }}>
+      <div className="ticker-items" style={{ display: 'flex', alignItems: 'center', gap: 32, flexShrink: 0 }}>
         {ITEMS.map((item) => (
-          <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div key={item.label} className="ticker-item" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
             <span
               style={{
                 fontFamily: 'var(--font-body)',

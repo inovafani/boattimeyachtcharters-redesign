@@ -2433,21 +2433,46 @@
 /* ── Nav drawer sits above the sticky header ────────────────── */
 /* z-index already set to 200 on .mobile-drawer */
 
-/* ── TickerBar — compact on mobile ─────────────────────────── */
+/* ── TickerBar — 2×2 grid on mobile, all 4 stats visible ────── */
 @media (max-width: 768px) {
+  /* Outer bar: auto height, vertical centre alignment */
   .ticker-bar-wrap {
-    padding: 0 16px !important;
-    height: 48px !important;
+    height: auto !important;
+    padding: 10px 16px !important;
+    gap: 14px !important;
+    align-items: center !important;
   }
-  /* Hide middle stat items on small screens, keep sunset + reserve */
-  .ticker-bar-wrap > div:first-child > div:nth-child(n+3) {
-    display: none !important;
+  /* Items: 2-column grid so all 4 stats show in 2 rows */
+  .ticker-items {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px 16px !important;
+    flex: 1 1 0 !important;
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    align-items: start !important;
   }
-}
-@media (max-width: 480px) {
-  /* On very small screens only show the Reserve button */
-  .ticker-bar-wrap > div:first-child {
-    display: none !important;
+  /* Each stat: stack label above value */
+  .ticker-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+  }
+  /* Truncate long values (e.g. "Sat 08:30 · Sun Goddess") */
+  .ticker-item span {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    display: block !important;
+  }
+  /* Reserve button — keep it centred beside the 2×2 grid */
+  .ticker-bar-wrap > a {
+    align-self: center !important;
+    padding: 14px 18px !important;
+    font-size: 8px !important;
   }
 }
 
