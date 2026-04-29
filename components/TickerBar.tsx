@@ -91,15 +91,15 @@ export default function TickerBar() {
           letterSpacing: '0.26em',
           textTransform: 'uppercase',
           fontWeight: 600,
-          color: 'var(--navy)',
-          background: 'var(--gold)',
+          color: '#0A1628',
+          background: '#C9A84C',
           padding: '10px 24px',
           textDecoration: 'none',
           transition: 'background 0.2s',
           whiteSpace: 'nowrap',
         }}
-        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--gold-light)')}
-        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--gold)')}
+        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = '#E8C97A')}
+        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = '#C9A84C')}
       >
         Reserve
       </a>

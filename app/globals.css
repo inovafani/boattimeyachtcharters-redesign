@@ -359,6 +359,11 @@
   }
 }
 
+/* TickerBar reserve button — always dark navy text on gold, both modes */
+.ticker-bar-wrap a {
+  color: #0A1628 !important;
+}
+
 /* ============================================================
    THEME TOGGLE BUTTON
    White in dark mode (visible on transparent/dark nav).
