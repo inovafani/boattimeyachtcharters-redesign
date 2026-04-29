@@ -107,8 +107,8 @@ export default function Nav() {
 
           <button
             className={`site-header__menu-btn${mobileOpen ? ' site-header__menu-btn--active' : ''}`}
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
             <span className="site-header__menu-line" />
             <span className="site-header__menu-line" />

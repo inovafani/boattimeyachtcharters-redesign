@@ -302,6 +302,7 @@ export default function Cruises() {
     >
       <div
         ref={headerRef}
+        className="cruise-header-wrap"
         style={{
           textAlign: 'center',
           maxWidth: 780,

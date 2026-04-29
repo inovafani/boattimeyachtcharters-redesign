@@ -55,6 +55,8 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
@@ -62,6 +64,8 @@
     background: var(--navy);
     color: var(--cream);
     overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -764,7 +768,7 @@
 .mobile-drawer {
   position: fixed;
   inset: 0;
-  z-index: 99;
+  z-index: 200;
   background: var(--navy);
   padding: 100px 40px 48px;
   display: flex;
@@ -2419,4 +2423,182 @@
   .hero-infobar { display: none; }
   .timeline { grid-template-columns: 1fr; }
   .whale-facts { gap: 24px; }
+}
+
+/* ============================================================
+   MOBILE — comprehensive fixes
+   Covers everything the earlier media blocks missed.
+   ============================================================ */
+
+/* ── Nav drawer sits above the sticky header ────────────────── */
+/* z-index already set to 200 on .mobile-drawer */
+
+/* ── TickerBar — compact on mobile ─────────────────────────── */
+@media (max-width: 768px) {
+  .ticker-bar-wrap {
+    padding: 0 16px !important;
+    height: 48px !important;
+  }
+  /* Hide middle stat items on small screens, keep sunset + reserve */
+  .ticker-bar-wrap > div:first-child > div:nth-child(n+3) {
+    display: none !important;
+  }
+}
+@media (max-width: 480px) {
+  /* On very small screens only show the Reserve button */
+  .ticker-bar-wrap > div:first-child {
+    display: none !important;
+  }
+}
+
+/* ── Destinations — disable sticky on mobile ────────────────── */
+@media (max-width: 1024px) {
+  .horizons-left {
+    position: relative !important;
+    top: auto !important;
+  }
+  /* Stop compass spin on mobile to avoid visual glitch */
+  .compass-needle {
+    animation: none !important;
+    transform: translateX(-50%) translateY(-100%) rotate(15deg) !important;
+  }
+}
+
+/* ── StatsBar philosophy header — single column on mobile ───── */
+@media (max-width: 768px) {
+  .philosophy-header {
+    padding: 60px 24px 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .stats-grid {
+    padding: 40px 24px 60px !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px 0 !important;
+  }
+  /* Remove right border from 2nd stat (now last in its row) */
+  .stat-item:nth-child(2) { border-right: none !important; }
+  .stat-item:nth-child(3) { border-top: 1px solid var(--border-subtle); padding-left: 0 !important; }
+  .stat-item:nth-child(4) { border-top: 1px solid var(--border-subtle); }
+}
+
+/* ── Fleet — header and spec grid ──────────────────────────── */
+@media (max-width: 768px) {
+  .fleet-header-grid {
+    grid-template-columns: 1fr !important;
+    padding: 60px 24px 40px !important;
+    gap: 24px !important;
+  }
+  .yacht-info {
+    padding: 40px 24px !important;
+  }
+  /* Spec grid: 2 cols instead of 4 on mobile */
+  .yacht-specs-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ── Final CTA — contact row wraps and centres ──────────────── */
+@media (max-width: 640px) {
+  .final-contact-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 28px !important;
+  }
+  .final-actions {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .final-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── Live stream — section padding ─────────────────────────── */
+@media (max-width: 768px) {
+  .ls-section {
+    padding: 60px 20px !important;
+  }
+  .ls-title-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .ls-offline-content {
+    padding: 28px 20px !important;
+  }
+  .ls-offline-heading {
+    font-size: clamp(22px, 6vw, 36px) !important;
+  }
+}
+
+/* ── Reviews — larger touch targets for pagination dots ─────── */
+@media (max-width: 768px) {
+  .t-prog-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+  }
+  .t-prog-dot.active {
+    width: 28px !important;
+    border-radius: 5px !important;
+  }
+  .nav-btn {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+/* ── Day timeline — reduce image height on mobile ───────────── */
+@media (max-width: 640px) {
+  .timeline-img {
+    height: 220px !important;
+  }
+}
+
+/* ── Mobile drawer — ensure theme toggle visible inside drawer ─ */
+@media (max-width: 1024px) {
+  /* The close button must not be cut off by padding */
+  .mobile-drawer__close-btn {
+    top: 20px !important;
+    right: 20px !important;
+    /* Larger touch target */
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+/* ── Hero — tighten padding and hide overlapping elements ───── */
+@media (max-width: 768px) {
+  .hero-content {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-bottom: 60px !important;
+  }
+  /* Hide right-side rating badge — overlaps title on small screens */
+  .hero-rating-badge {
+    display: none !important;
+  }
+}
+
+/* ── Cruises mosaic — stack to single column on mobile ──────── */
+@media (max-width: 768px) {
+  .cruises-section {
+    padding: 72px 0 !important;
+  }
+  .cruise-header-wrap {
+    padding: 0 24px !important;
+    margin-bottom: 40px !important;
+  }
+  .cruise-mosaic {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 260px !important;
+    padding: 0 24px !important;
+    gap: 8px !important;
+  }
+  .cruise-card-wrap {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -27,6 +27,15 @@ export default function Destinations() {
   const sectionRef = useRef<HTMLElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1024px)');
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   useGSAP(
     () => {
@@ -158,21 +167,23 @@ export default function Destinations() {
                 <text x="170" y="373" className="rm-pin-label">Muriel Henchman</text>
                 <text x="170" y="384" className="rm-pin-label-sub">Home Port · 27°56&apos;S</text>
 
-                {/* Animated yacht */}
-                <g>
-                  <circle r="8" className="rm-yacht" opacity="0.35">
-                    <animate attributeName="r" from="5" to="22" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" from="0.35" to="0" dur="2s" repeatCount="indefinite" />
-                    <animateMotion dur="28s" repeatCount="indefinite" rotate="auto">
-                      <mpath href="#rmRoute" />
-                    </animateMotion>
-                  </circle>
-                  <circle r="5" className="rm-yacht">
-                    <animateMotion dur="28s" repeatCount="indefinite" rotate="auto">
-                      <mpath href="#rmRoute" />
-                    </animateMotion>
-                  </circle>
-                </g>
+                {/* Animated yacht — desktop only (SMIL animations are janky on mobile) */}
+                {!isMobile && (
+                  <g>
+                    <circle r="8" className="rm-yacht" opacity="0.35">
+                      <animate attributeName="r" from="5" to="22" dur="2s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" from="0.35" to="0" dur="2s" repeatCount="indefinite" />
+                      <animateMotion dur="28s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#rmRoute" />
+                      </animateMotion>
+                    </circle>
+                    <circle r="5" className="rm-yacht">
+                      <animateMotion dur="28s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#rmRoute" />
+                      </animateMotion>
+                    </circle>
+                  </g>
+                )}
 
                 {/* Wave Break */}
                 <g className="rm-pin-group">
