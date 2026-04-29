@@ -10,6 +10,7 @@ import Reviews from '@/components/Reviews';
 import CtaBand from '@/components/CtaBand';
 import FinalCta from '@/components/FinalCta';
 import Destinations from '@/components/Destinations';
+import AboutOwners from '@/components/AboutOwners';
 import Faq from '@/components/Faq';
 import Inquiry from '@/components/Inquiry';
 import Footer from '@/components/Footer';
@@ -31,6 +32,7 @@ export default function HomePage() {
         <CtaBand />
         <Destinations />
         <FinalCta />
+        <AboutOwners />
         <Faq />
         <Inquiry />
       </main>

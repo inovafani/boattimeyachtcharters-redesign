@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+
 const GC = [
   { name: 'Wave Break', em: 'Island', time: '35 MIN' },
   { name: 'Sovereign', em: 'Islands', time: '45 MIN' },
@@ -37,6 +38,12 @@ export default function Destinations() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
+  // Recalculate ScrollTrigger positions after CSS applies (sticky→relative on mobile)
+  useEffect(() => {
+    const id = setTimeout(() => ScrollTrigger.refresh(), 300);
+    return () => clearTimeout(id);
+  }, []);
+
   useGSAP(
     () => {
       gsap.from(leftRef.current!.children, {
@@ -45,7 +52,7 @@ export default function Destinations() {
         duration: 0.85,
         stagger: 0.1,
         ease: 'power2.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 82%', once: true },
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 92%', once: true, invalidateOnRefresh: true },
       });
 
       gsap.from(rightRef.current!.children, {
@@ -54,7 +61,7 @@ export default function Destinations() {
         duration: 0.85,
         stagger: 0.12,
         ease: 'power2.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', once: true },
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 92%', once: true, invalidateOnRefresh: true },
       });
 
       gsap.from(sectionRef.current!.querySelectorAll('.dest-item'), {
@@ -63,7 +70,7 @@ export default function Destinations() {
         duration: 0.55,
         stagger: 0.06,
         ease: 'power2.out',
-        scrollTrigger: { trigger: rightRef.current, start: 'top 75%', once: true },
+        scrollTrigger: { trigger: rightRef.current, start: 'top 92%', once: true, invalidateOnRefresh: true },
       });
     },
     { scope: sectionRef },

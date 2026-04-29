@@ -1953,6 +1953,161 @@
 }
 
 /* ============================================================
+   ABOUT OWNERS
+   ============================================================ */
+
+.ao-section {
+  background: var(--navy);
+  padding: 120px 80px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ao-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 100px;
+  align-items: center;
+}
+
+/* ── Photo ── */
+.ao-img-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.ao-img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(0.08);
+}
+
+/* Gold corner brackets */
+.ao-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+}
+.ao-corner--tl { top: -10px;    left: -10px;  border-top:    1px solid var(--gold); border-left:   1px solid var(--gold); }
+.ao-corner--tr { top: -10px;    right: -10px; border-top:    1px solid var(--gold); border-right:  1px solid var(--gold); }
+.ao-corner--bl { bottom: -10px; left: -10px;  border-bottom: 1px solid var(--gold); border-left:   1px solid var(--gold); }
+.ao-corner--br { bottom: -10px; right: -10px; border-bottom: 1px solid var(--gold); border-right:  1px solid var(--gold); }
+
+.ao-img-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48px 22px 18px;
+  background: linear-gradient(to top, rgba(10,22,40,0.88) 0%, transparent 100%);
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.75);
+  font-weight: 500;
+}
+
+/* ── Copy ── */
+.ao-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ao-headline {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(36px, 4vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+  margin-bottom: 36px;
+}
+
+.ao-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 22px;
+  max-width: 560px;
+}
+
+/* Stat strip */
+.ao-stats {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 0;
+  margin: 12px 0 36px;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ao-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ao-stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ao-stat-num em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.ao-stat-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.ao-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.ao-cta {
+  margin-top: 4px;
+}
+
+/* ── Light mode ── */
+[data-theme='light'] .ao-img-caption {
+  background: linear-gradient(to top, rgba(247,243,236,0.92) 0%, transparent 100%);
+  color: rgba(10,22,40,0.5);
+}
+
+/* ── Mobile ── */
+@media (max-width: 1024px) {
+  .ao-section { padding: 80px 32px; }
+  .ao-inner   { grid-template-columns: 1fr; gap: 56px; }
+  .ao-img     { aspect-ratio: 4 / 3; object-position: center 20%; }
+}
+
+@media (max-width: 640px) {
+  .ao-section { padding: 72px 24px; }
+  .ao-stats   { gap: 20px; flex-wrap: wrap; }
+}
+
+/* ============================================================
    FINAL CTA
    ============================================================ */
 .final-cta {
@@ -2498,10 +2653,18 @@
     grid-template-columns: 1fr 1fr !important;
     gap: 32px 0 !important;
   }
-  /* Remove right border from 2nd stat (now last in its row) */
-  .stat-item:nth-child(2) { border-right: none !important; }
-  .stat-item:nth-child(3) { border-top: 1px solid var(--border-subtle); padding-left: 0 !important; }
-  .stat-item:nth-child(4) { border-top: 1px solid var(--border-subtle); }
+  /* Reset ALL inline paddingLeft/paddingRight set by React — they crush cells on mobile */
+  .stat-item {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 24px !important;
+  }
+  /* Col 1 items get a subtle right divider, col 2 items don't */
+  .stat-item:nth-child(odd)  { padding-right: 16px !important; border-right: 1px solid var(--border-subtle) !important; }
+  .stat-item:nth-child(even) { padding-left: 16px !important;  border-right: none !important; }
+  /* Row 2 gets a top border */
+  .stat-item:nth-child(3),
+  .stat-item:nth-child(4) { border-top: 1px solid var(--border-subtle) !important; }
 }
 
 /* ── Fleet — header and spec grid ──────────────────────────── */
@@ -2622,5 +2785,23 @@
   .cruise-card-wrap {
     grid-column: 1 !important;
     grid-row: auto !important;
+  }
+}
+
+/* ── Inquiry form — single column, reduced padding on mobile ── */
+@media (max-width: 768px) {
+  .inquiry-section {
+    padding: 72px 24px !important;
+  }
+  .inquiry-layout {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .inquiry-form {
+    padding: 28px 20px !important;
+  }
+  .form-row-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
 }
