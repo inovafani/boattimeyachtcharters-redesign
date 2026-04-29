@@ -2805,3 +2805,30 @@
     gap: 0 !important;
   }
 }
+
+/* ── Footer — mobile layout + clear TickerBar ───────────────── */
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 60px 24px 120px !important; /* 120px = content gap + TickerBar height */
+  }
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px 24px !important;
+    margin-bottom: 40px !important;
+    padding-bottom: 36px !important;
+  }
+  /* Brand column spans both cols */
+  .footer-top-grid > div:first-child {
+    grid-column: 1 / -1 !important;
+  }
+  .footer-bottom-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+  /* Prevent long email from overflowing */
+  .footer-section a {
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+  }
+}

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, Montserrat } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
@@ -22,6 +22,12 @@ export const metadata: Metadata = {
   title: 'Boattime Yacht Charters — Gold Coast & Brisbane',
   description:
     "Private yacht charters, sunset cruises, and whale watching aboard Gold Coast's finest superyachts — Sun Goddess & Mermaid Spirit.",
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 // Runs before React hydrates — prevents flash of wrong theme

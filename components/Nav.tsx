@@ -12,12 +12,11 @@ const NAV_LINKS = [
 ];
 
 const MOBILE_LINKS = [
-  { pre: 'The', em: 'Fleet', href: '/#fleet', num: '01' },
-  { pre: 'Whale', em: 'Season', href: '/#whale', num: '02' },
-  { pre: 'The', em: 'Showreel', href: '/#showreel', num: '03' },
-  { pre: 'Signature', em: 'Experiences', href: '/#experiences', num: '04' },
-  { pre: 'Where we', em: 'sail', href: '/#horizons', num: '05' },
-  { pre: 'Good to', em: 'know', href: '/#faq', num: '06' },
+  { pre: '',   em: 'Fleet',       href: '/#fleet',       num: '01' },
+  { pre: '',   em: 'Whale',       href: '/#whale',       num: '02' },
+  { pre: '',   em: 'Experiences', href: '/#experiences', num: '03' },
+  { pre: '',   em: 'Horizons',    href: '/#horizons',    num: '04' },
+  { pre: '',   em: 'FAQ',         href: '/#faq',         num: '05' },
 ];
 
 export default function Nav() {
