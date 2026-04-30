@@ -105,7 +105,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 8',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80',
+    img: '/sunset-twilight.png',
     href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit',
   },
 ];
