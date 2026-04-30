@@ -31,10 +31,10 @@ export default function HomePage() {
         <Reviews />
         <CtaBand />
         <Destinations />
-        <FinalCta />
-        <AboutOwners />
-        <Faq />
         <Inquiry />
+        <AboutOwners />
+        <FinalCta />
+        <Faq />
       </main>
       <Footer />
       <TickerBar />

@@ -21,7 +21,11 @@ export default function WhaleSection() {
         duration: 0.85,
         stagger: 0.1,
         ease: 'power2.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 78%', once: true },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 78%',
+          once: true,
+        },
       });
 
       gsap.from(rightRef.current, {
@@ -29,7 +33,11 @@ export default function WhaleSection() {
         opacity: 0,
         duration: 1.1,
         ease: 'power2.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', once: true },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          once: true,
+        },
       });
 
       gsap.from(sectionRef.current!.querySelectorAll('.whale-floating-stat'), {
@@ -39,7 +47,11 @@ export default function WhaleSection() {
         stagger: 0.15,
         delay: 0.5,
         ease: 'power2.out',
-        scrollTrigger: { trigger: sectionRef.current, start: 'top 65%', once: true },
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 65%',
+          once: true,
+        },
       });
     },
     { scope: sectionRef },
@@ -58,36 +70,58 @@ export default function WhaleSection() {
           </div>
 
           <h2 className="whale-headline">
-            Humpbacks,<br />
+            Humpbacks,
+            <br />
             <em>at close range.</em>
           </h2>
 
           <p className="whale-desc">
-            Every year from June to November, fifty thousand humpback whales migrate up
-            the Australian East Coast — straight past the Gold Coast. Sun Goddess takes
-            you out to meet them. Warm galley, hot coffee, marine biologist commentary,
-            and the{' '}
-            <em>stability of a 34-metre superyacht</em> that makes everyone&apos;s
-            photos come out sharp.
+            Every year from June to November, fifty thousand humpback whales
+            migrate up the Australian East Coast — straight past the Gold Coast.
+            Sun Goddess takes you out to meet them. Warm galley, hot coffee,
+            marine biologist commentary, and the{' '}
+            <em>stability of a 34-metre superyacht</em> that makes
+            everyone&apos;s photos come out sharp.
           </p>
 
           <div className="whale-facts">
             <div className="whale-fact">
-              <div className="whale-fact-num">100<em>%</em></div>
-              <div className="whale-fact-label">Sighting Guarantee<br />or you return free</div>
+              <div className="whale-fact-num">
+                100<em>%</em>
+              </div>
+              <div className="whale-fact-label">
+                Sighting Guarantee
+                <br />
+                or you return free
+              </div>
             </div>
             <div className="whale-fact">
-              <div className="whale-fact-num">2.5<em>h</em></div>
-              <div className="whale-fact-label">Tour Duration<br />rotating viewing decks</div>
+              <div className="whale-fact-num">
+                2.5<em>h</em>
+              </div>
+              <div className="whale-fact-label">
+                Tour Duration
+                <br />
+                rotating viewing decks
+              </div>
             </div>
             <div className="whale-fact">
-              <div className="whale-fact-num">Jun<em>—Nov</em></div>
-              <div className="whale-fact-label">Migration Season<br />peak July to September</div>
+              <div className="whale-fact-num">
+                Jun<em>—Nov</em>
+              </div>
+              <div className="whale-fact-label">
+                Migration Season
+                <br />
+                peak July to September
+              </div>
             </div>
           </div>
 
           <div className="whale-cta-row">
-            <Button variant="primary" href="https://boattimeyachtcharters.com/cruise-tickets-luxury-whale-watching/">
+            <Button
+              variant="primary"
+              href="https://boattimeyachtcharters.com/cruise-tickets-luxury-whale-watching/"
+            >
               Book Whale Watching
             </Button>
             <span className="whale-price">from $129 / adult</span>
@@ -100,7 +134,7 @@ export default function WhaleSection() {
           <div className="whale-circle-ring" />
           <div className="whale-circle">
             <img
-              src="https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_3071-scaled.jpg"
+              src="/humpback-circle.jpg"
               alt="Humpback whale breach from Sun Goddess"
               loading="lazy"
             />
@@ -108,7 +142,9 @@ export default function WhaleSection() {
 
           <div className="whale-floating-stat whale-floating-stat-1">
             <div className="whale-floating-label">Species Spotted</div>
-            <div className="whale-floating-value">Humpback · Dolphin · Turtle · Dugong</div>
+            <div className="whale-floating-value">
+              Humpback · Dolphin · Turtle · Dugong
+            </div>
           </div>
 
           <div className="whale-floating-stat whale-floating-stat-2">
