@@ -1,19 +1,23 @@
 'use client';
 
+import Script from 'next/script';
 import Nav from './Nav';
 import Footer from './Footer';
 import {
   CruiseHero, CruiseEventBanner, CruiseOverview,
   CruisePhotographyFeature, CruiseInclusions,
   CruiseScheduleDetails, CruisePricingCards,
-  CruiseGiftVoucherCallout, CruiseBookingCTA,
+  CruiseGiftVoucherCallout,
 } from './CruiseSections';
-
-const BOOKING = 'https://boattimeyachtcharters.rezdy.com/';
 
 export default function ValentinesPage() {
   return (
     <>
+      <Script
+        src="https://boattimeyachtcharters.rezdy.com/pluginJs"
+        strategy="lazyOnload"
+      />
+
       <Nav />
       <main>
         <CruiseHero
@@ -27,10 +31,9 @@ export default function ValentinesPage() {
             { label: 'Departs',   value: '6:00 PM' },
             { label: 'Duration',  value: '2.5 hours' },
           ]}
-          bookingUrl={BOOKING}
+          bookingUrl="#book"
         />
 
-        {/* Date confirmed callout */}
         <CruiseEventBanner
           date="14 February 2026"
           vessel="Sun Goddess — 34m Superyacht"
@@ -48,7 +51,6 @@ export default function ValentinesPage() {
           image="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80"
         />
 
-        {/* Photography is a signature feature of this cruise */}
         <CruisePhotographyFeature />
 
         <CruiseInclusions
@@ -77,13 +79,71 @@ export default function ValentinesPage() {
           pricing={[
             { label: '2 Tickets', price: '$269', note: '$134.50 per person · all inclusive' },
           ]}
-          bookingUrl={BOOKING}
+          bookingUrl="#book"
         />
 
-        {/* Valentine's-specific gift voucher callout */}
-        <CruiseGiftVoucherCallout bookingUrl={BOOKING} />
+        <CruiseGiftVoucherCallout bookingUrl="#book" />
 
-        <CruiseBookingCTA bookingUrl={BOOKING} />
+        {/* ── Inline booking widget ── */}
+        <section
+          id="book"
+          style={{
+            background: 'var(--navy-mid)',
+            borderTop: '1px solid var(--border-subtle)',
+            padding: '80px 48px 100px',
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ marginBottom: 48, textAlign: 'center' }}>
+              <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
+                Book Your Tickets
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(36px, 5vw, 60px)',
+                  lineHeight: 1.0,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--cream)',
+                  marginBottom: 16,
+                }}
+              >
+                Reserve your <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>spot</em>.
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 15,
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.75,
+                  maxWidth: 520,
+                  margin: '0 auto',
+                }}
+              >
+                Saturday, 14 February 2026. Limited tickets available for Valentine's evening.
+                Instant confirmation on booking.
+              </p>
+            </div>
+
+            <div
+              style={{
+                border: '1px solid var(--border-subtle)',
+                background: 'rgba(255,255,255,0.02)',
+              }}
+            >
+              <iframe
+                seamless
+                width="100%"
+                height="1000px"
+                frameBorder="0"
+                className="rezdy"
+                src="https://boattimeyachtcharters.rezdy.com/542529/zzz-luxury-valentines-sunset-cruise?iframe=true"
+                style={{ display: 'block' }}
+              />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

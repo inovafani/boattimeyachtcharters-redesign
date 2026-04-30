@@ -19,6 +19,7 @@ interface CruiseData {
   col: string;
   row: string;
   img: string;
+  href: string;
 }
 
 const CRUISES: CruiseData[] = [
@@ -33,6 +34,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 7',
     row: 'span 2',
     img: '/luxury-whale.jpg',
+    href: '/cruise-tickets-luxury-whale-watching',
   },
   {
     cat: 'Sunset',
@@ -44,6 +46,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 5',
     row: 'span 2',
     img: '/broadwater.jpeg',
+    href: '/luxury-broadwater-cruise',
   },
   {
     cat: 'Galley',
@@ -55,6 +58,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 4',
     row: 'span 2',
     img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80',
+    href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit',
   },
   {
     cat: 'Event',
@@ -66,6 +70,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 5',
     row: 'span 2',
     img: 'https://images.unsplash.com/photo-1610343744628-c8e13a666dc0?w=1200&q=80',
+    href: '/riverfire-2026',
   },
   {
     cat: 'Celebration',
@@ -77,6 +82,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 3',
     row: 'span 2',
     img: 'https://images.unsplash.com/photo-1661858660542-51240df72dad?w=1200&q=80',
+    href: '/nye-2026',
   },
   {
     cat: 'Romance',
@@ -88,6 +94,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 4',
     row: 'span 2',
     img: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=1200&q=80',
+    href: '/valentines-day',
   },
   {
     cat: 'Dining',
@@ -99,6 +106,7 @@ const CRUISES: CruiseData[] = [
     col: 'span 8',
     row: 'span 2',
     img: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80',
+    href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit',
   },
 ];
 
@@ -137,12 +145,15 @@ function CruiseCard({ c }: { c: CruiseData }) {
   );
 
   return (
-    <div
+    <a
+      href={c.href}
       className="relative overflow-hidden cursor-pointer cruise-card-inner"
       style={{
         gridColumn: c.col,
         gridRow: c.row,
         background: 'var(--ocean)',
+        display: 'block',
+        textDecoration: 'none',
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -237,9 +248,8 @@ function CruiseCard({ c }: { c: CruiseData }) {
             <Icon name="anchor" size={10} color="var(--gold)" /> {c.vessel}
           </span>
         </div>
-        <a
+        <span
           ref={linkRef}
-          href="#"
           className="flex items-center gap-2"
           style={{
             fontFamily: 'var(--font-body)',
@@ -248,14 +258,14 @@ function CruiseCard({ c }: { c: CruiseData }) {
             textTransform: 'uppercase',
             color: 'var(--gold)',
             fontWeight: 600,
-            textDecoration: 'none',
             opacity: 0,
+            display: 'inline-flex',
           }}
         >
           View Experience <Icon name="arrow" size={11} color="var(--gold)" />
-        </a>
+        </span>
       </div>
-    </div>
+    </a>
   );
 }
 

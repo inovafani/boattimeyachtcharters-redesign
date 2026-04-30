@@ -1,18 +1,22 @@
 'use client';
 
+import Script from 'next/script';
 import Nav from './Nav';
 import Footer from './Footer';
 import {
   CruiseHero, CruiseEventBanner, CruiseOverview,
   CruiseFoodMenu, CruiseInclusions,
-  CruiseScheduleDetails, CruisePricingCards, CruiseBookingCTA,
+  CruiseScheduleDetails, CruisePricingCards,
 } from './CruiseSections';
-
-const BOOKING = 'https://boattimeyachtcharters.rezdy.com/668818/new-years-eve-2025';
 
 export default function NyePage() {
   return (
     <>
+      <Script
+        src="https://boattimeyachtcharters.rezdy.com/pluginJs"
+        strategy="lazyOnload"
+      />
+
       <Nav />
       <main>
         <CruiseHero
@@ -26,10 +30,9 @@ export default function NyePage() {
             { label: 'Departs',   value: '9:30 PM' },
             { label: 'Event',     value: '18+ Only' },
           ]}
-          bookingUrl={BOOKING}
+          bookingUrl="#book"
         />
 
-        {/* Date + vessel confirmation banner */}
         <CruiseEventBanner
           date="31 December 2025"
           vessel="Mermaid Spirit — Tri-deck Catamaran"
@@ -48,7 +51,6 @@ export default function NyePage() {
           image="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80"
         />
 
-        {/* Canapé menu — the 8 items are a key feature of this page */}
         <CruiseFoodMenu
           title="8 Gourmet Canapés"
           titleAccent="Included"
@@ -102,10 +104,69 @@ export default function NyePage() {
           pricing={[
             { label: 'Per Person', price: '$169', note: 'Includes champagne & 8 gourmet canapés' },
           ]}
-          bookingUrl={BOOKING}
+          bookingUrl="#book"
         />
 
-        <CruiseBookingCTA bookingUrl={BOOKING} />
+        {/* ── Inline booking widget ── */}
+        <section
+          id="book"
+          style={{
+            background: 'var(--navy-mid)',
+            borderTop: '1px solid var(--border-subtle)',
+            padding: '80px 48px 100px',
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ marginBottom: 48, textAlign: 'center' }}>
+              <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
+                Book Your Tickets
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(36px, 5vw, 60px)',
+                  lineHeight: 1.0,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--cream)',
+                  marginBottom: 16,
+                }}
+              >
+                Reserve your <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>spot</em>.
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 15,
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.75,
+                  maxWidth: 520,
+                  margin: '0 auto',
+                }}
+              >
+                Tuesday, 31 December 2025. Limited tickets — this event sells out every year.
+                Instant confirmation on booking.
+              </p>
+            </div>
+
+            <div
+              style={{
+                border: '1px solid var(--border-subtle)',
+                background: 'rgba(255,255,255,0.02)',
+              }}
+            >
+              <iframe
+                seamless
+                width="100%"
+                height="1000px"
+                frameBorder="0"
+                className="rezdy"
+                src="https://boattimeyachtcharters.rezdy.com/668818/zzz-new-years-eve-2026?iframe=true"
+                style={{ display: 'block' }}
+              />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

@@ -1,18 +1,22 @@
 'use client';
 
+import Script from 'next/script';
 import Nav from './Nav';
 import Footer from './Footer';
 import {
   CruiseHero, CruiseOverview, CruiseChefSection,
   CruiseFoodMenu, CruiseInclusions, CruiseFamilyCallout,
-  CruiseScheduleDetails, CruisePricingCards, CruiseBookingCTA,
+  CruiseScheduleDetails, CruisePricingCards,
 } from './CruiseSections';
-
-const BOOKING = 'https://boattimeyachtcharters.rezdy.com/';
 
 export default function LunchPage() {
   return (
     <>
+      <Script
+        src="https://boattimeyachtcharters.rezdy.com/pluginJs"
+        strategy="lazyOnload"
+      />
+
       <Nav />
       <main>
         <CruiseHero
@@ -26,7 +30,7 @@ export default function LunchPage() {
             { label: 'Departs',     value: '12:00 PM' },
             { label: 'Days',        value: 'Fri Sat Sun' },
           ]}
-          bookingUrl={BOOKING}
+          bookingUrl="#book"
         />
 
         <CruiseOverview
@@ -39,7 +43,6 @@ export default function LunchPage() {
           image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
         />
 
-        {/* Chef is a signature feature of the Flavours of Australia cruises */}
         <CruiseChefSection
           name="Executive Chef Brendan Ward"
           role="Head of Culinary · Boattime Yacht Charters"
@@ -47,7 +50,6 @@ export default function LunchPage() {
           image="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80"
         />
 
-        {/* Full menu is the centrepiece of this experience */}
         <CruiseFoodMenu
           title="Today's Menu"
           titleAccent="Flavours of Australia"
@@ -91,8 +93,7 @@ export default function LunchPage() {
           ]}
         />
 
-        {/* Family pricing is a key differentiator for the lunch cruise */}
-        <CruiseFamilyCallout bookingUrl={BOOKING} />
+        <CruiseFamilyCallout bookingUrl="#book" />
 
         <CruiseScheduleDetails
           schedule={[
@@ -111,10 +112,69 @@ export default function LunchPage() {
             { label: 'Child (3–12)', price: '$79',  note: 'Per child' },
             { label: 'Family',       price: '$349', note: '2 adults + 2 children' },
           ]}
-          bookingUrl={BOOKING}
+          bookingUrl="#book"
         />
 
-        <CruiseBookingCTA bookingUrl={BOOKING} />
+        {/* ── Inline booking widget ── */}
+        <section
+          id="book"
+          style={{
+            background: 'var(--navy-mid)',
+            borderTop: '1px solid var(--border-subtle)',
+            padding: '80px 48px 100px',
+          }}
+        >
+          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+            <div style={{ marginBottom: 48, textAlign: 'center' }}>
+              <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
+                Book Your Session
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(36px, 5vw, 60px)',
+                  lineHeight: 1.0,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--cream)',
+                  marginBottom: 16,
+                }}
+              >
+                Reserve your <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>spot</em>.
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 15,
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.75,
+                  maxWidth: 520,
+                  margin: '0 auto',
+                }}
+              >
+                Fridays, Saturdays, and Sundays at noon year-round.
+                Instant confirmation — cancel up to 24 hours before for a full refund.
+              </p>
+            </div>
+
+            <div
+              style={{
+                border: '1px solid var(--border-subtle)',
+                background: 'rgba(255,255,255,0.02)',
+              }}
+            >
+              <iframe
+                seamless
+                width="100%"
+                height="1000px"
+                frameBorder="0"
+                className="rezdy"
+                src="https://boattimeyachtcharters.rezdy.com/730190/relaxed-lunch-cruise-flavors-of-australia-aboard-the-mermaid-spirit?iframe=true"
+                style={{ display: 'block' }}
+              />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -711,6 +711,335 @@ export function CruisePhotographyFeature() {
             minHeight: 320,
           }}
         />
+      </div>
+    </section>
+  );
+}
+
+// ── PHOTO GALLERY ─────────────────────────────────────────────────────────────
+
+export function CruiseGallery({ main, thumbs, wide }: { main: string; thumbs: string[]; wide: string }) {
+  const ref = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    gsap.from(ref.current!.querySelectorAll('.gl'), {
+      y: 30, opacity: 0, duration: 0.75, stagger: 0.06, ease: 'power2.out',
+      scrollTrigger: { trigger: ref.current, start: 'top 82%', once: true },
+    });
+  }, { scope: ref });
+
+  return (
+    <section ref={ref} style={{ background: 'var(--navy)', padding: '0 48px 80px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {/* Top row: large left image + 2×2 thumbnail grid right */}
+        <div className="gl" style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 2, height: 400 }}>
+          <div
+            style={{
+              backgroundImage: `url(${main})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 2 }}>
+            {thumbs.slice(0, 4).map((src, i) => (
+              <div
+                key={i}
+                style={{
+                  backgroundImage: `url(${src})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+            ))}
+          </div>
+        </div>
+        {/* Full-width panoramic below */}
+        <div
+          className="gl"
+          style={{
+            height: 320,
+            backgroundImage: `url(${wide})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 40%',
+          }}
+        />
+      </div>
+    </section>
+  );
+}
+
+// ── DETAILS & ITINERARY ACCORDION ────────────────────────────────────────────
+
+export function CruiseItinerary({
+  items, intro,
+}: {
+  items: { title: string; content: ReactNode }[];
+  intro?: ReactNode;
+}) {
+  const [open, setOpen] = useState<number | null>(null);
+  const ref = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    gsap.from(ref.current!.querySelectorAll('.ia'), {
+      y: 20, opacity: 0, duration: 0.6, stagger: 0.07, ease: 'power2.out',
+      scrollTrigger: { trigger: ref.current, start: 'top 82%', once: true },
+    });
+  }, { scope: ref });
+
+  return (
+    <section ref={ref} style={{ padding: '100px 48px', background: 'var(--navy)' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div className="ia" style={{ textAlign: 'center', marginBottom: 64 }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}><Eyebrow>Plan Your Visit</Eyebrow></div>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1.05 }}>
+            Details &amp; <ItalicEm>Itinerary</ItalicEm>.
+          </h2>
+        </div>
+        <div
+          className="ia"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: intro ? '5fr 7fr' : '1fr',
+            gap: intro ? 80 : 0,
+            alignItems: 'start',
+          }}
+        >
+          {/* Left: intro descriptive text */}
+          {intro && <div>{intro}</div>}
+          {/* Right: accordion */}
+          <div style={{ borderTop: '1px solid rgba(201,168,76,0.18)' }}>
+            {items.map((item, i) => (
+              <div key={i} style={{ borderBottom: '1px solid rgba(201,168,76,0.18)' }}>
+                <button
+                  onClick={() => setOpen(open === i ? null : i)}
+                  style={{
+                    width: '100%', display: 'flex', justifyContent: 'space-between',
+                    alignItems: 'center', padding: '22px 0', background: 'none', border: 'none',
+                    cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: 11,
+                    letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600,
+                    color: open === i ? 'var(--gold)' : 'var(--cream)', transition: 'color 0.2s',
+                    textAlign: 'left',
+                  }}
+                >
+                  {item.title}
+                  <span
+                    style={{
+                      fontSize: 22, lineHeight: 1, color: 'var(--gold)', fontWeight: 300,
+                      flexShrink: 0, marginLeft: 24, display: 'inline-block',
+                      transition: 'transform 0.25s',
+                      transform: open === i ? 'rotate(45deg)' : 'none',
+                    }}
+                  >
+                    +
+                  </span>
+                </button>
+                <div style={{ overflow: 'hidden', maxHeight: open === i ? 800 : 0, transition: 'max-height 0.4s ease' }}>
+                  <div style={{ paddingBottom: 28 }}>{item.content}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── OUR YACHTS (full-bleed carousel) ────────────────────────────────────────
+
+interface VesselData {
+  image: string;
+  name: string;
+  description: string;
+  pax: string;
+  size: string;
+  features: string[];
+  href: string;
+}
+
+export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
+  const [current, setCurrent] = useState(0);
+  const vessel = vessels[current];
+  const prev = () => setCurrent((c) => (c - 1 + vessels.length) % vessels.length);
+  const next = () => setCurrent((c) => (c + 1) % vessels.length);
+
+  return (
+    <section style={{ background: 'var(--navy)' }}>
+      {/* Section header */}
+      <div style={{ textAlign: 'center', padding: '80px 48px 48px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}><Eyebrow>The Fleet</Eyebrow></div>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1.05 }}>
+          Our <ItalicEm>Yachts</ItalicEm>.
+        </h2>
+      </div>
+
+      {/* Full-bleed carousel */}
+      <div style={{ position: 'relative', minHeight: 580 }}>
+        {/* Background image */}
+        <div
+          style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: `url(${vessel.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,22,40,0.68)' }} />
+
+        {/* Centred content overlay */}
+        <div
+          style={{
+            position: 'relative', zIndex: 1,
+            textAlign: 'center',
+            padding: '72px 140px 100px',
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: 'var(--font-display)', fontWeight: 400,
+              fontSize: 'clamp(32px, 4vw, 52px)', fontStyle: 'italic',
+              color: 'var(--cream)', marginBottom: 20, lineHeight: 1,
+            }}
+          >
+            {vessel.name}
+          </h3>
+          <p
+            style={{
+              fontFamily: 'var(--font-body)', fontSize: 14,
+              color: 'rgba(245,240,232,0.78)', lineHeight: 1.85,
+              marginBottom: 36, maxWidth: 600, marginLeft: 'auto', marginRight: 'auto',
+            }}
+          >
+            {vessel.description}
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+            <div style={{ padding: '0 36px', borderRight: '1px solid rgba(201,168,76,0.3)' }}>
+              <div style={{ ...GL, textAlign: 'center' }}>PAX</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--cream)', lineHeight: 1, marginTop: 4 }}>{vessel.pax}</div>
+            </div>
+            <div style={{ padding: '0 36px' }}>
+              <div style={{ ...GL, textAlign: 'center' }}>SIZE</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--cream)', lineHeight: 1, marginTop: 4 }}>{vessel.size}</div>
+            </div>
+          </div>
+          <div
+            style={{
+              fontFamily: 'var(--font-body)', fontSize: 12,
+              color: 'rgba(245,240,232,0.72)', letterSpacing: '0.1em',
+              textTransform: 'uppercase', marginBottom: 32,
+            }}
+          >
+            <span style={{ color: 'var(--gold)', fontWeight: 600, marginRight: 8 }}>Features:</span>
+            {vessel.features.join(' · ')}
+          </div>
+          <a
+            href={vessel.href}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.22em',
+              textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 600, textDecoration: 'none',
+            }}
+          >
+            View More
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        {/* Navigation arrows */}
+        {vessels.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              aria-label="Previous yacht"
+              style={{
+                position: 'absolute', left: 32, top: '50%', transform: 'translateY(-50%)', zIndex: 2,
+                background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.4)',
+                color: 'var(--gold)', width: 52, height: 52,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', fontSize: 20,
+              }}
+            >
+              ←
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next yacht"
+              style={{
+                position: 'absolute', right: 32, top: '50%', transform: 'translateY(-50%)', zIndex: 2,
+                background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.4)',
+                color: 'var(--gold)', width: 52, height: 52,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', fontSize: 20,
+              }}
+            >
+              →
+            </button>
+          </>
+        )}
+
+        {/* Dot indicators */}
+        {vessels.length > 1 && (
+          <div
+            style={{
+              position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
+              display: 'flex', gap: 8, zIndex: 2,
+            }}
+          >
+            {vessels.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Go to yacht ${i + 1}`}
+                style={{
+                  width: i === current ? 28 : 8, height: 8,
+                  background: i === current ? 'var(--gold)' : 'rgba(201,168,76,0.35)',
+                  border: 'none', cursor: 'pointer', padding: 0,
+                  transition: 'all 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ── THE BOATTIME EXPERIENCE (YouTube) ────────────────────────────────────────
+
+export function CruiseExperience({ videoId }: { videoId: string }) {
+  const ref = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    gsap.from(ref.current!.querySelectorAll('.ex'), {
+      y: 30, opacity: 0, duration: 0.9, stagger: 0.1, ease: 'power2.out',
+      scrollTrigger: { trigger: ref.current, start: 'top 82%', once: true },
+    });
+  }, { scope: ref });
+
+  return (
+    <section ref={ref} style={{ padding: '100px 48px', background: 'var(--navy-mid)' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div className="ex" style={{ textAlign: 'center', marginBottom: 56 }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}><Eyebrow>See It For Yourself</Eyebrow></div>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 'clamp(32px, 4vw, 52px)', lineHeight: 1.05 }}>
+            The Boattime <ItalicEm>Experience</ItalicEm>.
+          </h2>
+        </div>
+        <div
+          className="ex"
+          style={{ position: 'relative', aspectRatio: '16/9', border: '1px solid rgba(201,168,76,0.15)' }}
+        >
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+            title="The Boattime Experience"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              position: 'absolute', inset: 0, width: '100%', height: '100%',
+              display: 'block', border: 'none',
+            }}
+          />
+        </div>
       </div>
     </section>
   );
