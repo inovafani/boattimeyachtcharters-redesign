@@ -41,7 +41,7 @@ export default function Nav() {
         {/* Logo */}
         <a href="/" className="site-header__logo">
           <img
-            src="https://boattimeyachtcharters.com/wp-content/uploads/2021/08/Boattime-Logo-PMS.png"
+            src="/boattime-logo.png"
             alt="Boattime Yacht Charters"
             className="site-header__logo-img"
           />

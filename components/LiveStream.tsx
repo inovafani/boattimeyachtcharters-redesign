@@ -17,7 +17,7 @@ const IS_LIVE = false;
 const YOUTUBE_VIDEO_ID = 'YOUR_VIDEO_ID_HERE';
 const NEXT_STREAM_DATE = 'Sat 28 Jun · 08:00 AEST';
 const POSTER_URL =
-  'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_3071-scaled.jpg';
+  '/EDI_3071.jpg';
 
 export default function LiveStream() {
   const sectionRef = useRef<HTMLElement>(null);

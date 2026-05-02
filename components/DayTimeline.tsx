@@ -13,7 +13,7 @@ const ACTS = [
     title: 'Champagne ',
     em: 'welcome',
     desc: 'Relaxed boarding at Muriel Henchman pontoon. Welcome glass in hand before we slip the lines.',
-    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_2932-scaled.jpg',
+    img: '/EDI_2932.jpg',
     alt: 'Champagne welcome aboard',
   },
   {
@@ -21,7 +21,7 @@ const ACTS = [
     title: 'Into the ',
     em: 'Broadwater',
     desc: 'Gentle cruise out past Surfers Paradise, the skyline shifting to gold as we head north.',
-    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_2954-scaled.jpg',
+    img: '/EDI_2954.jpg',
     alt: 'Sailing the Broadwater',
   },
   {
@@ -29,7 +29,7 @@ const ACTS = [
     title: 'Sunset ',
     em: 'spectacle',
     desc: 'Anchored at the ideal vantage. Platters, cocktails, and the moment everyone stops talking.',
-    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_3057-scaled.jpg',
+    img: '/EDI_3057.jpg',
     alt: 'Golden hour sunset over water',
   },
   {
@@ -37,7 +37,7 @@ const ACTS = [
     title: 'Homeward, ',
     em: 'aglow',
     desc: 'Cruise back under the Gold Coast skyline. Somehow always the best part of the night.',
-    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_3026-scaled.jpg',
+    img: '/EDI_3026.jpg',
     alt: 'Gold Coast city lights',
   },
 ];

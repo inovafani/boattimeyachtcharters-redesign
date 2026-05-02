@@ -40,7 +40,7 @@ const YACHTS: YachtData[] = [
     feats: ['Bose Audio', 'Dual Galley', 'Upper Sun Deck', 'Flat-Screens', 'BBQ Facilities', 'Weddings Licensed'],
     ctaLabel: 'Tour Sun Goddess',
     ctaHref: '/#inquiry',
-    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_2899-scaled.jpg',
+    img: '/EDI_2899.jpg',
     reverse: false,
   },
   {
@@ -59,7 +59,7 @@ const YACHTS: YachtData[] = [
     feats: ["Chef's Kitchen", 'Jet Skis', 'Stinger Pool', 'Paddle Boards', 'Sun Lounge', 'Scuba Gear'],
     ctaLabel: 'Tour Mermaid Spirit',
     ctaHref: '/#inquiry',
-    img: 'https://boattimeyachtcharters.com/wp-content/uploads/2026/03/EDI_2760-scaled.jpg',
+    img: '/EDI_2760.jpg',
     reverse: true,
   },
 ];
