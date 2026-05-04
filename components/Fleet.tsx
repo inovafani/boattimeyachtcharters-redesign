@@ -33,7 +33,7 @@ const YACHTS: YachtData[] = [
     body: 'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
     specs: [
       { label: 'Guests', value: '135', unit: 'pax' },
-      { label: 'Length', value: '34m', unit: '/ 110ft' },
+      { label: 'Length', value: '34m', unit: '/ 114ft' },
       { label: 'Decks', value: '2', unit: '' },
       { label: 'Bars', value: '2', unit: '' },
     ],
