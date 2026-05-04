@@ -30,6 +30,127 @@ const GALLERY_THUMBS = [
   '/broadwater.jpeg',
 ];
 
+const FEATURES = [
+  {
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="3" />
+        <path d="M20.188 10.934c.2.519.312 1.077.312 1.662C20.5 15.53 16.642 18 12 18c-4.642 0-8.5-2.47-8.5-5.404 0-.585.112-1.143.312-1.662M3.5 12C3.5 8.47 7.358 6 12 6c4.642 0 8.5 2.47 8.5 6" />
+        <path d="M8 10V6M16 10V6" />
+      </svg>
+    ),
+    title: 'Professional Photographer',
+    desc: 'An onboard photographer captures every breach and tail slap. Your best shots are available to purchase after the tour — no camera skills required.',
+  },
+  {
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
+        <path d="M12 8v4l3 3" />
+      </svg>
+    ),
+    title: 'Marine Biologist Commentary',
+    desc: 'A qualified marine biologist provides live commentary throughout the tour — whale behaviour, migration patterns, and the Gold Coast&apos;s unique marine ecosystem.',
+  },
+  {
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+        <line x1="6" y1="1" x2="6" y2="4" />
+        <line x1="10" y1="1" x2="10" y2="4" />
+        <line x1="14" y1="1" x2="14" y2="4" />
+      </svg>
+    ),
+    title: 'Complimentary Refreshments',
+    desc: 'Hot chocolate and espresso coffee are complimentary throughout the tour. The fully licensed bar and galley are also open for additional food and drinks.',
+  },
+  {
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    title: 'Two Sessions Daily',
+    desc: 'Morning (9:00 AM) and afternoon (1:30 PM) sessions run every day of the week from June through November — choose what suits your schedule.',
+  },
+  {
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+    ),
+    title: '100% Sighting Guarantee',
+    desc: "If we don't spot a whale, you come back free. In over a decade of tours, we've maintained one of the best sighting records on the Gold Coast.",
+  },
+  {
+    icon: (
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg>
+    ),
+    title: 'Online Gift Store',
+    desc: 'Browse our online store for whale watching guidebooks, keepsake gifts, and souvenirs — available before your tour or as the perfect post-trip memento.',
+  },
+];
+
 const ITINERARY_INTRO: ReactNode = (
   <div
     style={{
@@ -54,16 +175,47 @@ const ITINERARY_INTRO: ReactNode = (
         S
       </span>
       ensational two and a half hour Luxury Gold Coast Whale Watching tours on
-      board Sun Goddess, a stylish 34 metre super yacht with a fully licensed
-      bar and rotating viewing decks so everyone gets an amazing view!
+      board Sun Goddess — one of the fastest whale watching vessels on the Gold
+      Coast. A stylish 34 metre superyacht with a fully licensed bar and
+      rotating viewing decks so everyone gets an amazing view.
     </p>
-    <p style={{ fontSize: 14, clear: 'both' }}>
-      Jump aboard a clean, well appointed vessel and a truly international
-      operation for a unique tour away from the crowded big players. Sensational
-      commentary with lots of fun and games along the way, our world-class and
-      informative crew will guide you on an epic adventure learning about the
-      unique marine life and Whale Migration off the Gold Coast.
+    <p style={{ fontSize: 14, clear: 'both', marginBottom: 20 }}>
+      Jump aboard a clean, well appointed vessel for a truly international
+      operation, away from the crowded big players. Live commentary from an
+      onboard marine biologist guides you through an epic adventure learning
+      about the unique marine life and whale migration off the Gold Coast.
     </p>
+    <div style={{ marginBottom: 28 }}>
+      <div style={{ ...GL, marginBottom: 14 }}>What&apos;s Included</div>
+      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+        {[
+          'Onboard professional photographer',
+          'Marine biologist live commentary',
+          'Complimentary hot chocolate & espresso coffee',
+          'Two sessions daily — morning & afternoon',
+          '100% whale sighting guarantee',
+          'Fully licensed bar & galley',
+          'Online store for gifts & souvenirs',
+        ].map((item) => (
+          <li
+            key={item}
+            style={{
+              display: 'flex',
+              gap: 10,
+              alignItems: 'flex-start',
+              fontSize: 13,
+              color: 'rgba(245,240,232,0.7)',
+              marginBottom: 10,
+            }}
+          >
+            <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 1 }}>
+              ✓
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 );
 
@@ -197,19 +349,23 @@ const ITINERARY = [
         {[
           {
             q: 'Will I get seasick?',
-            a: 'We recommend a non-drowsy seasickness remedy taken 30 minutes before boarding. The Sun Goddess is a large, stable vessel and the Broadwater is relatively protected. Covered seating is available throughout.',
+            a: 'If you are prone to seasickness, we recommend taking a motion sickness tablet at least 30 minutes prior to departure. Sun Goddess is a large, stable superyacht — one of the fastest and most stable whale watching vessels on the Gold Coast.',
           },
           {
             q: 'Are children welcome?',
-            a: 'Absolutely — all ages are welcome aboard. Life jackets and full safety briefings are provided for all passengers.',
+            a: 'Absolutely — all ages are welcome aboard. Life jackets and full safety briefings are provided. Our marine biologist makes the commentary fun and engaging for kids too.',
           },
           {
             q: 'What if it rains?',
-            a: 'All cruises operate in all weather unless conditions are unsafe. The Sun Goddess has covered viewing areas on every deck.',
+            a: 'All cruises operate in all weather unless conditions are unsafe. Sun Goddess has covered viewing areas on every deck, plus a warm galley with complimentary hot chocolate and coffee.',
           },
           {
             q: 'How close do we get to the whales?',
-            a: 'We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel.',
+            a: 'We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel. Our marine biologist will explain their behaviour in real time.',
+          },
+          {
+            q: 'Can I buy photos after the tour?',
+            a: "Yes — our onboard professional photographer's shots are available to purchase after the cruise through our online store, along with gifts and souvenirs.",
           },
         ].map((faq, i, arr) => (
           <div
@@ -264,7 +420,7 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Optional Extras',
+    title: 'Optional Extras & Online Store',
     content: (
       <ul
         style={{
@@ -279,8 +435,9 @@ const ITINERARY = [
       >
         {[
           'Premium drinks packages available from $35 pp — ask the crew on boarding',
-          'Souvenir whale watching guidebooks available for purchase on board',
-          'Professional photography prints available post-cruise via our online gallery',
+          'Professional photography prints available after the tour via our online store',
+          'Whale watching guidebooks and keepsake gifts in the online store',
+          'Souvenir merchandise available online and on board',
           'Gift vouchers from $74.50 — never expire, redeemable online',
         ].map((item, i) => (
           <li
@@ -290,7 +447,7 @@ const ITINERARY = [
               gap: 14,
               paddingBottom: 10,
               marginBottom: 10,
-              borderBottom: i < 3 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+              borderBottom: i < 4 ? '1px solid rgba(201,168,76,0.08)' : 'none',
             }}
           >
             <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 2 }}>
@@ -304,13 +461,30 @@ const ITINERARY = [
   },
 ];
 
+// Sun Goddess listed first as primary vessel
 const VESSELS = [
+  {
+    image: '/broadwater.jpeg',
+    name: 'Sun Goddess',
+    description:
+      'Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
+    pax: '135 Guests',
+    size: '34m (110ft)',
+    features: [
+      'Primary Whale Vessel',
+      'Rotating Viewing Decks',
+      'Dual Bars',
+      'Dual-level Galley',
+      'Bose Audio',
+    ],
+    href: '/sun-goddess-gold-coast',
+  },
   {
     image:
       'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1600&q=80',
     name: 'Mermaid Spirit',
     description:
-      'This hugely spacious and beautifully appointed vessel is the perfect venue for functions and celebrations. A Tri-Deck catamaran, Mermaid Spirit is the ultimate entertaining venue.',
+      "Our tri-deck catamaran for larger group charters and private events. Spacious sun lounge, chef's kitchen, stinger pool, and room for 100 guests. Available for private whale watching charters on request.",
     pax: '100 Guests',
     size: '30m (100ft)',
     features: [
@@ -321,22 +495,6 @@ const VESSELS = [
       'Dual Bars',
     ],
     href: '/mermaid-spirit-gold-coast',
-  },
-  {
-    image: '/broadwater.jpeg',
-    name: 'Sun Goddess',
-    description:
-      "Sleek, stylish, and luxury are the first words that come to mind when you view Sun Goddess. A real 'Head Turner,' SG will get people excited — lots of room without giving up the luxury.",
-    pax: '135 Guests',
-    size: '34m (110ft)',
-    features: [
-      'Dual Bars',
-      '2 Decks',
-      'Dual-level Galley',
-      'Speakers Throughout',
-      "A Real 'Head Turner'",
-    ],
-    href: '/sun-goddess-gold-coast',
   },
 ];
 
@@ -361,12 +519,12 @@ export default function WhalePage() {
             { label: 'Duration', value: '2.5 hours' },
             { label: 'From', value: '$74.50 pp' },
             { label: 'Season', value: 'Jun – Nov' },
-            { label: 'Daily', value: 'AM & PM' },
+            { label: 'Sessions', value: '2 Daily' },
           ]}
           bookingUrl="#book"
         />
 
-        {/* 3 ── SOCIAL PROOF */}
+        {/* 2 ── SOCIAL PROOF */}
         <div
           style={{
             background: 'var(--navy-mid)',
@@ -405,17 +563,7 @@ export default function WhalePage() {
                 style={{ display: 'flex', alignItems: 'center', gap: 14 }}
               >
                 <div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-body)',
-                      fontSize: 9,
-                      letterSpacing: '0.28em',
-                      textTransform: 'uppercase',
-                      color: 'var(--gold)',
-                      fontWeight: 600,
-                      marginBottom: 4,
-                    }}
-                  >
+                  <div style={{ ...GL, marginBottom: 4 }}>
                     Boattime Yacht Charters
                   </div>
                   <div
@@ -463,7 +611,7 @@ export default function WhalePage() {
           </div>
         </div>
 
-        {/* 4 ── SESSION INFO BAR */}
+        {/* 3 ── SESSION INFO BAR */}
         <div
           style={{
             background: 'var(--navy)',
@@ -499,9 +647,10 @@ export default function WhalePage() {
               <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
             </svg>
             {[
-              'SeaWorld Drive Muriel Henchman Public Pontoon Gold Coast',
-              'Morning Sessions 9:00 AM · 7 Days',
-              'Afternoon Sessions 1:30 PM · 7 Days',
+              'Muriel Henchman Public Pontoon · SeaWorld Drive, Gold Coast',
+              'Morning Session · Departs 9:00 AM',
+              'Afternoon Session · Departs 1:30 PM',
+              '7 Days a Week · June – November',
             ].map((text, i, arr) => (
               <span
                 key={i}
@@ -525,14 +674,272 @@ export default function WhalePage() {
           </div>
         </div>
 
-        {/* 5 ── GALLERY */}
+        {/* 4 ── WHY SUN GODDESS (new) */}
+        <section style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: '0 auto',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 80,
+              alignItems: 'center',
+            }}
+          >
+            {/* Left — image */}
+            <div
+              style={{
+                position: 'relative',
+                aspectRatio: '4/3',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src="/sungoddess-page-boat.jpeg"
+                alt="Sun Goddess whale watching"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+              {/* Fastest vessel badge */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 24,
+                  left: 24,
+                  background: 'rgba(10,22,40,0.92)',
+                  border: '1px solid rgba(201,168,76,0.3)',
+                  padding: '16px 24px',
+                  backdropFilter: 'blur(8px)',
+                }}
+              >
+                <div style={{ ...GL, marginBottom: 6 }}>Primary Vessel</div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 22,
+                    fontWeight: 300,
+                    color: 'var(--cream)',
+                    lineHeight: 1,
+                  }}
+                >
+                  Sun Goddess
+                </div>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 11,
+                    color: 'rgba(245,240,232,0.5)',
+                    marginTop: 4,
+                    letterSpacing: '0.05em',
+                  }}
+                >
+                  34m · One of the fastest on the Gold Coast
+                </div>
+              </div>
+            </div>
+
+            {/* Right — text */}
+            <div>
+              <div style={{ ...GL, marginBottom: 20 }}>The Vessel</div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(28px, 3.5vw, 48px)',
+                  lineHeight: 1.05,
+                  letterSpacing: '-0.01em',
+                  color: 'var(--cream)',
+                  marginBottom: 24,
+                }}
+              >
+                Sun Goddess —{' '}
+                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                  the fastest way to the whales
+                </em>
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 15,
+                  color: 'rgba(245,240,232,0.72)',
+                  lineHeight: 1.85,
+                  marginBottom: 32,
+                }}
+              >
+                Sun Goddess is our primary whale watching vessel and one of the
+                fastest on the Gold Coast. Her 34-metre hull means she reaches
+                the migration corridor quickly — giving you more time with the
+                whales and less time in transit.
+              </p>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 14,
+                  color: 'rgba(245,240,232,0.58)',
+                  lineHeight: 1.85,
+                  marginBottom: 36,
+                }}
+              >
+                Rotating viewing decks ensure every passenger gets an
+                unobstructed sightline. The warm galley, licensed bar, and
+                onboard crew mean you&apos;re comfortable from the moment you
+                step aboard to the moment you step off.
+              </p>
+              {/* Specs strip */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: 16,
+                  paddingTop: 28,
+                  borderTop: '1px solid rgba(201,168,76,0.12)',
+                }}
+              >
+                {[
+                  { label: 'Vessel', value: 'Sun Goddess' },
+                  { label: 'Length', value: '34m (110ft)' },
+                  { label: 'Capacity', value: 'Up to 135 guests' },
+                  { label: 'Speed', value: "Among Gold Coast's fastest" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <div style={{ ...GL, marginBottom: 4 }}>{s.label}</div>
+                    <div
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 13,
+                        color: 'rgba(245,240,232,0.75)',
+                      }}
+                    >
+                      {s.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 5 ── WHAT'S INCLUDED FEATURE GRID (new) */}
+        <section
+          style={{
+            background: 'var(--navy-mid)',
+            padding: '100px 48px',
+            borderTop: '1px solid rgba(201,168,76,0.08)',
+          }}
+        >
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+            {/* Header */}
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: 20,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 10,
+                    letterSpacing: '0.3em',
+                    textTransform: 'uppercase',
+                    color: 'var(--gold)',
+                    fontWeight: 500,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 14,
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'block',
+                      width: 32,
+                      height: 1,
+                      background: 'var(--gold)',
+                    }}
+                  />
+                  Every Ticket Includes
+                  <span
+                    style={{
+                      display: 'block',
+                      width: 32,
+                      height: 1,
+                      background: 'var(--gold)',
+                    }}
+                  />
+                </div>
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  lineHeight: 1.05,
+                  color: 'var(--cream)',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                What&apos;s{' '}
+                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                  Included
+                </em>
+              </h2>
+            </div>
+
+            {/* 3-column feature grid */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: 2,
+                background: 'rgba(201,168,76,0.06)',
+                border: '1px solid rgba(201,168,76,0.1)',
+              }}
+            >
+              {FEATURES.map((f, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: '40px 32px',
+                    borderRight:
+                      (i + 1) % 3 !== 0
+                        ? '1px solid rgba(201,168,76,0.08)'
+                        : 'none',
+                    borderBottom:
+                      i < 3 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+                  }}
+                >
+                  <div style={{ color: 'var(--gold)', marginBottom: 20 }}>
+                    {f.icon}
+                  </div>
+                  <div style={{ ...GL, marginBottom: 12 }}>{f.title}</div>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 13,
+                      color: 'rgba(245,240,232,0.65)',
+                      lineHeight: 1.75,
+                    }}
+                    dangerouslySetInnerHTML={{ __html: f.desc }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 6 ── GALLERY */}
         <CruiseGallery
           main="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=1200&q=80"
           thumbs={GALLERY_THUMBS}
           wide="/luxury-whale.jpg"
         />
 
-        {/* 6 ── QUICK INFO GRID */}
+        {/* 7 ── QUICK INFO GRID */}
         <div
           style={{
             background: 'var(--navy-mid)',
@@ -555,10 +962,13 @@ export default function WhalePage() {
                   label: 'Departure Point',
                   value: 'Muriel Henchman Public Pontoon, Gold Coast',
                 },
-                { label: 'Sessions Per Day', value: '2 (AM & PM)' },
+                { label: 'Sessions Per Day', value: '2 — Morning & Afternoon' },
                 { label: 'Days Per Week', value: '7 Days — June to November' },
-                { label: 'Duration', value: '2.5 Hours' },
-                { label: 'Vessel', value: 'Superyacht Experience' },
+                { label: 'Duration', value: '2.5 Hours Per Session' },
+                {
+                  label: 'Primary Vessel',
+                  value: 'Sun Goddess · 34m Superyacht',
+                },
                 { label: 'Guarantee', value: 'Whale Sighting Guaranteed' },
               ].map((item, i, arr) => (
                 <div
@@ -592,13 +1002,13 @@ export default function WhalePage() {
           </div>
         </div>
 
-        {/* 7 ── DETAILS & ITINERARY */}
+        {/* 8 ── DETAILS & ITINERARY */}
         <CruiseItinerary items={ITINERARY} intro={ITINERARY_INTRO} />
 
-        {/* 8 ── OUR YACHTS */}
+        {/* 9 ── OUR YACHTS */}
         <CruiseYachts vessels={VESSELS} />
 
-        {/* 9 ── THE BOATTIME EXPERIENCE */}
+        {/* 10 ── THE BOATTIME EXPERIENCE */}
         <CruiseExperience videoId="4te3yFiKLmM" />
 
         {/* 11 ── INLINE BOOKING WIDGET */}

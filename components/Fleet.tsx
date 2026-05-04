@@ -30,14 +30,21 @@ const YACHTS: YachtData[] = [
     name: 'Sun',
     emWord: 'Goddess',
     tagline: 'She turns every head in the marina — and earns it.',
-    body: 'At 110 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
+    body: 'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
     specs: [
       { label: 'Guests', value: '135', unit: 'pax' },
       { label: 'Length', value: '34m', unit: '/ 110ft' },
       { label: 'Decks', value: '2', unit: '' },
       { label: 'Bars', value: '2', unit: '' },
     ],
-    feats: ['Bose Audio', 'Dual Galley', 'Upper Sun Deck', 'Flat-Screens', 'BBQ Facilities', 'Weddings Licensed'],
+    feats: [
+      'Bose Audio',
+      'Dual Galley',
+      'Upper Sun Deck',
+      'Flat-Screens',
+      'BBQ Facilities',
+      'Weddings Licensed',
+    ],
     ctaLabel: 'Tour Sun Goddess',
     ctaHref: '/#inquiry',
     img: '/EDI_2899.jpg',
@@ -49,14 +56,21 @@ const YACHTS: YachtData[] = [
     name: 'Mermaid',
     emWord: 'Spirit',
     tagline: 'Three decks built for the best night of your life.',
-    body: 'A tri-deck catamaran engineered for celebrations. Three full decks, a chef\'s kitchen, stinger pool, sun lounge, jet skis, and room for 100 by day or 22 overnight. The Gold Coast\'s ultimate floating venue.',
+    body: "A tri-deck catamaran engineered for celebrations. Three full decks, a chef's kitchen, stinger pool, sun lounge, jet skis, and room for 150 by day or 22 overnight. The Gold Coast's ultimate floating venue.",
     specs: [
-      { label: 'Day Guests', value: '100', unit: 'pax' },
+      { label: 'Day Guests', value: '150', unit: 'pax' },
       { label: 'Length', value: '30m', unit: '/ 100ft' },
       { label: 'Decks', value: '3', unit: '' },
       { label: 'Sleeps', value: '22', unit: '' },
     ],
-    feats: ["Chef's Kitchen", 'Jet Skis', 'Stinger Pool', 'Paddle Boards', 'Sun Lounge', 'Scuba Gear'],
+    feats: [
+      "Chef's Kitchen",
+      'Jet Skis',
+      'Stinger Pool',
+      'Paddle Boards',
+      'Sun Lounge',
+      'Scuba Gear',
+    ],
     ctaLabel: 'Tour Mermaid Spirit',
     ctaHref: '/#inquiry',
     img: '/EDI_2760.jpg',
@@ -76,7 +90,11 @@ function YachtShowcase({ y }: { y: YachtData }) {
         opacity: 0,
         duration: 1.1,
         ease: 'power2.out',
-        scrollTrigger: { trigger: showcaseRef.current, start: 'top 80%', once: true },
+        scrollTrigger: {
+          trigger: showcaseRef.current,
+          start: 'top 80%',
+          once: true,
+        },
       });
       gsap.from(infoRef.current, {
         x: y.reverse ? -60 : 60,
@@ -84,7 +102,11 @@ function YachtShowcase({ y }: { y: YachtData }) {
         duration: 1.1,
         delay: 0.15,
         ease: 'power2.out',
-        scrollTrigger: { trigger: showcaseRef.current, start: 'top 80%', once: true },
+        scrollTrigger: {
+          trigger: showcaseRef.current,
+          start: 'top 80%',
+          once: true,
+        },
       });
     },
     { scope: showcaseRef },
@@ -149,7 +171,9 @@ function YachtShowcase({ y }: { y: YachtData }) {
           }}
         >
           {y.name}{' '}
-          <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>{y.emWord}</span>
+          <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+            {y.emWord}
+          </span>
         </h2>
 
         <p
@@ -240,7 +264,14 @@ function YachtShowcase({ y }: { y: YachtData }) {
         </div>
 
         {/* Feature pills */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 44 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 8,
+            marginBottom: 44,
+          }}
+        >
           {y.feats.map((f) => (
             <span
               key={f}
@@ -263,7 +294,13 @@ function YachtShowcase({ y }: { y: YachtData }) {
         {/* CTA */}
         <a href={y.ctaHref} className="yacht-cta-link">
           {y.ctaLabel}
-          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+          >
             <path
               d="M2 6h8M6 2l4 4-4 4"
               stroke="currentColor"
@@ -289,7 +326,11 @@ export default function Fleet() {
         opacity: 0,
         duration: 0.9,
         ease: 'power2.out',
-        scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: 'top 85%',
+          once: true,
+        },
       });
     },
     { scope: sectionRef },
@@ -323,8 +364,7 @@ export default function Fleet() {
               color: 'var(--cream)',
             }}
           >
-            Two vessels.{' '}
-            <ItalicEm>One horizon.</ItalicEm>
+            Two vessels. <ItalicEm>One horizon.</ItalicEm>
           </h2>
         </div>
         <p
@@ -336,8 +376,8 @@ export default function Fleet() {
             maxWidth: 480,
           }}
         >
-          Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks of
-          celebration. Both berthed at Marina Mirage — ready when you are.
+          Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks
+          of celebration. Both berthed at Marina Mirage — ready when you are.
         </p>
       </div>
 

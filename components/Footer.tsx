@@ -8,7 +8,13 @@ import { Icon } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-function FootLink({ children, href = '#' }: { children: React.ReactNode; href?: string }) {
+function FootLink({
+  children,
+  href = '#',
+}: {
+  children: React.ReactNode;
+  href?: string;
+}) {
   return (
     <a
       href={href}
@@ -91,7 +97,10 @@ export default function Footer() {
         >
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3.5" style={{ marginBottom: 20 }}>
+            <div
+              className="flex items-center gap-3.5"
+              style={{ marginBottom: 20 }}
+            >
               <div
                 className="flex items-center justify-center"
                 style={{
@@ -143,8 +152,8 @@ export default function Footer() {
                 marginBottom: 28,
               }}
             >
-              Superyacht charters on the Gold Coast and Brisbane. Two vessels, one unhurried
-              coastline — since 2014.
+              Superyacht charters on the Gold Coast and Brisbane. Two vessels,
+              one unhurried coastline — since 2014.
             </p>
             {/* Socials */}
             <div className="flex gap-2.5">
@@ -179,13 +188,21 @@ export default function Footer() {
           {/* Cruise Tickets */}
           <div>
             <ColHead>Cruise Tickets</ColHead>
-            <FootLink href="/cruise-tickets-luxury-whale-watching">Luxury Whale Watching</FootLink>
-            <FootLink href="/luxury-broadwater-cruise">Broadwater Sunset</FootLink>
+            <FootLink href="/cruise-tickets-luxury-whale-watching">
+              Luxury Whale Watching
+            </FootLink>
+            <FootLink href="/luxury-broadwater-cruise">
+              Broadwater Sunset
+            </FootLink>
             <FootLink href="/nye-2026">New Year&rsquo;s Eve 2026</FootLink>
             <FootLink href="/valentines-day">Valentine&rsquo;s Cruise</FootLink>
             <FootLink href="/riverfire-2026">Riverfire 2026</FootLink>
-            <FootLink href="/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit">Relaxed Lunch</FootLink>
-            <FootLink href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit">Twilight Buffet</FootLink>
+            <FootLink href="/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit">
+              Relaxed Lunch
+            </FootLink>
+            <FootLink href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit">
+              Twilight Buffet
+            </FootLink>
           </div>
 
           {/* Charters + Yachts */}
@@ -205,9 +222,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <ColHead>Contact</ColHead>
-            <FootLink>Muriel Henchman Pontoon</FootLink>
-            <FootLink>Marina Mirage, Southport QLD</FootLink>
-            <FootLink href="tel:+61755280400">+61 7 5528 0400</FootLink>
+            <FootLink href="tel:+61477667644">+61 477 667 644</FootLink>
             <FootLink href="mailto:info@boattimeyachtcharters.com.au">
               info@boattimeyachtcharters.com.au
             </FootLink>

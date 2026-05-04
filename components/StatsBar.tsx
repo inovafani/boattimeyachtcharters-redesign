@@ -9,22 +9,38 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const STATS = [
   {
-    end: 3910, suffix: '+', unit: false, decimals: 0, comma: true,
+    end: 3910,
+    suffix: '+',
+    unit: false,
+    decimals: 0,
+    comma: true,
     label: 'Verified reviews',
     note: 'Across Google, Facebook & Tripadvisor — more than any other GC operator.',
   },
   {
-    end: 4.9, suffix: '★', unit: false, decimals: 1, comma: false,
+    end: 4.9,
+    suffix: '★',
+    unit: false,
+    decimals: 1,
+    comma: false,
     label: 'Average rating',
     note: 'Near-flawless, weighted across a four-year rolling window.',
   },
   {
-    end: 110, suffix: 'ft', unit: true, decimals: 0, comma: false,
+    end: 114,
+    suffix: 'ft',
+    unit: true,
+    decimals: 0,
+    comma: false,
     label: 'Largest vessel',
     note: 'Sun Goddess — the most spacious superyacht in the category.',
   },
   {
-    end: 8, suffix: '+', unit: false, decimals: 0, comma: false,
+    end: 8,
+    suffix: '+',
+    unit: false,
+    decimals: 0,
+    comma: false,
     label: 'Seasons operating',
     note: 'Family-run, locally crewed, obsessive about the Broadwater.',
   },
@@ -71,8 +87,8 @@ export default function StatsBar() {
               s.decimals > 0
                 ? v.toFixed(s.decimals)
                 : s.comma
-                ? Math.round(v).toLocaleString()
-                : String(Math.round(v));
+                  ? Math.round(v).toLocaleString()
+                  : String(Math.round(v));
           },
         });
       });
@@ -81,7 +97,13 @@ export default function StatsBar() {
   );
 
   return (
-    <section ref={sectionRef} style={{ background: 'var(--navy)', borderBottom: '1px solid var(--border-subtle)' }}>
+    <section
+      ref={sectionRef}
+      style={{
+        background: 'var(--navy)',
+        borderBottom: '1px solid var(--border-subtle)',
+      }}
+    >
       {/* Top row: headline + body */}
       <div
         style={{
@@ -107,11 +129,19 @@ export default function StatsBar() {
             }}
           >
             Luxury,{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>uncomplicated.</em>
+            <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+              uncomplicated.
+            </em>
           </h2>
 
           {/* Key facts below heading */}
-          <div style={{ marginTop: 36, paddingTop: 28, borderTop: '1px solid var(--border-subtle)' }}>
+          <div
+            style={{
+              marginTop: 36,
+              paddingTop: 28,
+              borderTop: '1px solid var(--border-subtle)',
+            }}
+          >
             {[
               "Gold Coast's most-reviewed superyacht operator",
               'Two vessels — up to 135 guests',
@@ -126,7 +156,14 @@ export default function StatsBar() {
                   marginBottom: 16,
                 }}
               >
-                <div style={{ width: 20, height: 1, background: 'var(--gold)', flexShrink: 0 }} />
+                <div
+                  style={{
+                    width: 20,
+                    height: 1,
+                    background: 'var(--gold)',
+                    flexShrink: 0,
+                  }}
+                />
                 <span
                   style={{
                     fontFamily: 'var(--font-body)',
@@ -152,9 +189,10 @@ export default function StatsBar() {
               maxWidth: 480,
             }}
           >
-            Boattime is the Gold Coast&apos;s most-reviewed superyacht charter company —
-            not by marketing, but by math. Yachts larger than competitors, warmest
-            crew on the water, guests who return year after year.
+            Boattime is the Gold Coast&apos;s most-reviewed superyacht charter
+            company — not by marketing, but by math. Yachts larger than
+            competitors, warmest crew on the water, guests who return year after
+            year.
           </p>
           <p
             style={{
@@ -166,8 +204,9 @@ export default function StatsBar() {
               marginTop: 20,
             }}
           >
-            We don&apos;t chase numbers. We chase moments — the kind that make your guests
-            call us first next time they have something worth celebrating.
+            We don&apos;t chase numbers. We chase moments — the kind that make
+            your guests call us first next time they have something worth
+            celebrating.
           </p>
           <p
             style={{
@@ -246,7 +285,9 @@ export default function StatsBar() {
               }}
             >
               <span
-                ref={(el) => { numRefs.current[i] = el; }}
+                ref={(el) => {
+                  numRefs.current[i] = el;
+                }}
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(80px, 9vw, 140px)',
@@ -261,7 +302,10 @@ export default function StatsBar() {
               <span
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: s.suffix === '★' ? 'clamp(44px, 5vw, 78px)' : 'clamp(36px, 3.8vw, 60px)',
+                  fontSize:
+                    s.suffix === '★'
+                      ? 'clamp(44px, 5vw, 78px)'
+                      : 'clamp(36px, 3.8vw, 60px)',
                   fontStyle: s.unit ? 'italic' : 'normal',
                   fontWeight: 300,
                   color: 'var(--gold)',

@@ -2,31 +2,48 @@
 
 import { useEffect, useState } from 'react';
 
-function getSunsetTime() {
-  // Approximate Gold Coast sunset — varies ~17:20–18:45 through the year
-  const month = new Date().getMonth(); // 0–11
-  const sunsets = [18, 18, 18, 17, 17, 17, 17, 17, 17, 18, 18, 18];
-  const mins = [45, 30, 5, 45, 30, 20, 25, 40, 55, 10, 25, 40];
-  const h = sunsets[month];
-  const m = mins[month];
+function sunsetFallback(): string {
+  const month = new Date().getMonth();
+  const h = [18, 18, 18, 17, 17, 17, 17, 17, 17, 18, 18, 18][month];
+  const m = [45, 30, 5, 45, 30, 20, 25, 40, 55, 10, 25, 40][month];
   return `${h}:${String(m).padStart(2, '0')}`;
 }
 
-const ITEMS = [
-  { label: "Today's Sunset", value: getSunsetTime(), accent: true },
-  { label: 'Sea State', value: 'Calm · 0.4m' },
-  { label: 'Next Whale', value: 'Sat 08:30 · Sun Goddess' },
-  { label: 'Availability', value: '3 dates this week' },
-];
+interface Conditions {
+  sunset: string;
+  seaState: string;
+  nextWhale: string;
+}
 
 export default function TickerBar() {
   const [visible, setVisible] = useState(false);
+  const [conditions, setConditions] = useState<Conditions>({
+    sunset: sunsetFallback(),
+    seaState: 'Calm · 0.4m',
+    nextWhale: 'Loading…',
+  });
 
+  // Show/hide on scroll
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 300);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Fetch live conditions once on mount
+  useEffect(() => {
+    fetch('/api/conditions')
+      .then((r) => r.json())
+      .then((data: Conditions) => setConditions(data))
+      .catch(() => {}); // keep fallback values on error
+  }, []);
+
+  const ITEMS = [
+    { label: "Today's Sunset", value: conditions.sunset, accent: true },
+    { label: 'Sea State',      value: conditions.seaState },
+    { label: 'Next Whale',     value: conditions.nextWhale },
+    { label: 'Availability',   value: '3 dates this week' },
+  ];
 
   return (
     <div

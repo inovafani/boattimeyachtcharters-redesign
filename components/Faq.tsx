@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: 'What about food and drinks?',
-    a: "Each vessel has two bars with bar-tab or consumption options. Our culinary partners — Private Chefs of Brisbane — handle everything from grazing boards and canapés to gourmet BBQ, buffet, and fine dining.",
+    a: 'Each vessel has two bars with bar-tab or consumption options. Our culinary partners — Private Chefs of Brisbane — handle everything from grazing boards and canapés to gourmet BBQ, buffet, and fine dining. No external food or beverages are permitted onboard.',
   },
   {
     q: 'What destinations can we visit?',
@@ -31,11 +31,19 @@ const FAQS = [
   },
   {
     q: 'Are your charters accessible for guests with limited mobility?',
-    a: 'We have welcomed many guests with limited mobility. Boarding requires a step up from the marina pontoon, and each guest is different — our team will walk you through the layout and accommodations before booking to make sure it is the right fit.',
+    a: 'Our charters are currently not wheelchair accessible. Boarding requires a step up from the marina pontoon, and space onboard can be limited depending on the vessel and guest needs. \nIn some cases, exceptions may be possible if we are notified at least 1 week before departure. This allows our team to review the requirements, arrange adequate crew support, and confirm whether the charter can be accommodated safely. \nFor safety reasons, electric wheelchairs are not permitted onboard.',
   },
 ];
 
-function FaqItem({ f, open, onToggle }: { f: typeof FAQS[0]; open: boolean; onToggle: () => void }) {
+function FaqItem({
+  f,
+  open,
+  onToggle,
+}: {
+  f: (typeof FAQS)[0];
+  open: boolean;
+  onToggle: () => void;
+}) {
   const bodyRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLDivElement>(null);
@@ -178,7 +186,13 @@ export default function Faq() {
     >
       <div
         className="grid faq-layout"
-        style={{ maxWidth: 1100, margin: '0 auto', gridTemplateColumns: '0.9fr 1.3fr', gap: 80, alignItems: 'start' }}
+        style={{
+          maxWidth: 1100,
+          margin: '0 auto',
+          gridTemplateColumns: '0.9fr 1.3fr',
+          gap: 80,
+          alignItems: 'start',
+        }}
       >
         {/* Left column */}
         <div ref={leftRef}>
@@ -205,8 +219,9 @@ export default function Faq() {
               maxWidth: 340,
             }}
           >
-            Everything you need to know before a charter — parking, catering, destinations,
-            mobility. Anything else, our concierge is at the other end of a phone.
+            Everything you need to know before a charter — parking, catering,
+            destinations, mobility. Anything else, our concierge is at the other
+            end of a phone.
           </p>
           <Button variant="outline" href="#inquiry">
             Contact Concierge
@@ -220,7 +235,11 @@ export default function Faq() {
         >
           {FAQS.map((f, i) => (
             <div key={i} className="faq-item-wrap">
-              <FaqItem f={f} open={openIndex === i} onToggle={() => toggle(i)} />
+              <FaqItem
+                f={f}
+                open={openIndex === i}
+                onToggle={() => toggle(i)}
+              />
             </div>
           ))}
         </div>
