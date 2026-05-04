@@ -179,13 +179,13 @@ export default function Footer() {
           {/* Cruise Tickets */}
           <div>
             <ColHead>Cruise Tickets</ColHead>
-            <FootLink>Luxury Whale Watching</FootLink>
-            <FootLink>Broadwater Sunset</FootLink>
-            <FootLink>New Year&rsquo;s Eve 2026</FootLink>
-            <FootLink>Valentine&rsquo;s Cruise</FootLink>
-            <FootLink>Riverfire 2026</FootLink>
-            <FootLink>Relaxed Lunch</FootLink>
-            <FootLink>Twilight Buffet</FootLink>
+            <FootLink href="/cruise-tickets-luxury-whale-watching">Luxury Whale Watching</FootLink>
+            <FootLink href="/luxury-broadwater-cruise">Broadwater Sunset</FootLink>
+            <FootLink href="/nye-2026">New Year&rsquo;s Eve 2026</FootLink>
+            <FootLink href="/valentines-day">Valentine&rsquo;s Cruise</FootLink>
+            <FootLink href="/riverfire-2026">Riverfire 2026</FootLink>
+            <FootLink href="/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit">Relaxed Lunch</FootLink>
+            <FootLink href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit">Twilight Buffet</FootLink>
           </div>
 
           {/* Charters + Yachts */}
