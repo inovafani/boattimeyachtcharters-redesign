@@ -309,7 +309,7 @@ const LEFT_VESSELS = (
       kayaks, scuba diving gear, stinger proof pool and paddle boards for the
       more adventurous of guests.
     </p>
-    <a
+    {/* <a
       href="/mermaid-spirit-gold-coast"
       style={{
         fontFamily: 'var(--font-body)',
@@ -326,7 +326,7 @@ const LEFT_VESSELS = (
       }}
     >
       See Mermaid Spirit here →
-    </a>
+    </a> */}
 
     <h3 style={h3Style}>Sun Goddess –</h3>
     <p style={pStyle}>
@@ -336,7 +336,7 @@ const LEFT_VESSELS = (
       celebration, our varying route options allow for us to work together to
       design a sailing course perfect for your event.
     </p>
-    <a
+    {/* <a
       href="/sun-goddess-gold-coast"
       style={{
         fontFamily: 'var(--font-body)',
@@ -352,7 +352,7 @@ const LEFT_VESSELS = (
       }}
     >
       See Sun Goddess here →
-    </a>
+    </a> */}
   </div>
 );
 
