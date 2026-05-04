@@ -17,29 +17,40 @@ const VESSEL_LAYOUT = (
     <p style={{ marginBottom: 8 }}>
       <strong style={{ color: 'var(--cream)' }}>Mermaid Spirit –</strong>
     </p>
-    <p style={{ marginBottom: 20, fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}>
-      Our newly renovated Mermaid Spirit can host up to 100 guests for day charters and can sleep
-      22 guests for overnight charters. A tri-deck catamaran, Mermaid Spirit boasts multiple
-      entertainment decks and spaces and comes equipped with jet skis, kayaks, scuba diving gear,
-      stinger proof pool and paddle boards for the more adventurous of guests.
+    <p
+      style={{
+        marginBottom: 20,
+        fontSize: 13,
+        color: 'rgba(245,240,232,0.65)',
+        lineHeight: 1.8,
+      }}
+    >
+      Our newly renovated Mermaid Spirit can host up to 100 guests for day
+      charters and can sleep 22 guests for overnight charters. A tri-deck
+      catamaran, Mermaid Spirit boasts multiple entertainment decks and spaces
+      and comes equipped with jet skis, kayaks, scuba diving gear, stinger proof
+      pool and paddle boards for the more adventurous of guests.
     </p>
     <p style={{ marginBottom: 8 }}>
       <strong style={{ color: 'var(--cream)' }}>Sun Goddess –</strong>
     </p>
-    <p style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}>
-      Our slightly larger vessel, Sun Goddess, can host up to 135 guests for day charters. We have
-      a variety of route options depending on the requirements of your event. Whether your event is
-      a birthday party, a corporate event or even a wedding celebration, our huge range of options
-      will allow for us to work together to design your event.
+    <p
+      style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
+    >
+      Our slightly larger vessel, Sun Goddess, can host up to 135 guests for day
+      charters. We have a variety of route options depending on the requirements
+      of your event. Whether your event is a birthday party, a corporate event
+      or even a wedding celebration, our huge range of options will allow for us
+      to work together to design your event.
     </p>
   </div>
 );
 
 const DINING_BARS = (
   <p style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}>
-    Each Vessel boasts 2 bars, with a Bar-Tab and Consumption options available, we can cater to
-    your every dining need with our experienced staff and culinary partners &lsquo;Private Chefs of
-    Brisbane&rsquo;.
+    Each Vessel boasts 2 bars, with a Bar-Tab and Consumption options available,
+    we can cater to your every dining need with our experienced staff and
+    culinary partners &lsquo;Private Chefs of Brisbane&rsquo;.
   </p>
 );
 
@@ -58,8 +69,28 @@ const INCLUSIONS = (
       'Inflatable stinger proof pool',
       'Banana boat',
     ].map((item) => (
-      <li key={item} style={{ padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: 'rgba(245,240,232,0.65)' }}>
-        <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+      <li
+        key={item}
+        style={{
+          padding: '6px 0',
+          borderBottom: '1px solid rgba(255,255,255,0.05)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          fontSize: 13,
+          color: 'rgba(245,240,232,0.65)',
+        }}
+      >
+        <span
+          style={{
+            width: 4,
+            height: 4,
+            background: 'var(--gold)',
+            borderRadius: '50%',
+            flexShrink: 0,
+            display: 'inline-block',
+          }}
+        />
         {item}
       </li>
     ))}
@@ -83,8 +114,28 @@ const EXTRAS = (
       'Photography',
       'Videography',
     ].map((item) => (
-      <li key={item} style={{ padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: 'rgba(245,240,232,0.65)' }}>
-        <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+      <li
+        key={item}
+        style={{
+          padding: '6px 0',
+          borderBottom: '1px solid rgba(255,255,255,0.05)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          fontSize: 13,
+          color: 'rgba(245,240,232,0.65)',
+        }}
+      >
+        <span
+          style={{
+            width: 4,
+            height: 4,
+            background: 'var(--gold)',
+            borderRadius: '50%',
+            flexShrink: 0,
+            display: 'inline-block',
+          }}
+        />
         {item}
       </li>
     ))}
@@ -92,26 +143,76 @@ const EXTRAS = (
 );
 
 const DESTINATIONS = (
-  <div style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}>
+  <div
+    style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
+  >
     <p style={{ marginBottom: 14 }}>
-      Tour the northern Islands of the Coast&rsquo;s Broadwater or out into the ocean with a
-      Surfers Paradise backdrop! We can customise your destination depending on availability and
-      charter.
+      Tour the northern Islands of the Coast&rsquo;s Broadwater or out into the
+      ocean with a Surfers Paradise backdrop! We can customise your destination
+      depending on availability and charter.
     </p>
-    <p style={{ marginBottom: 8, color: 'var(--cream)', fontWeight: 600 }}>Gold Coast</p>
+    <p style={{ marginBottom: 8, color: 'var(--cream)', fontWeight: 600 }}>
+      Gold Coast
+    </p>
     <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none' }}>
-      {['Wave Break Island', 'Sanctuary Cove', 'Jumpinpin', 'Scottish Prince Wreck'].map((d) => (
-        <li key={d} style={{ padding: '5px 0', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+      {[
+        'Wave Break Island',
+        'Sanctuary Cove',
+        'Jumpinpin',
+        'Scottish Prince Wreck',
+      ].map((d) => (
+        <li
+          key={d}
+          style={{
+            padding: '5px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <span
+            style={{
+              width: 4,
+              height: 4,
+              background: 'var(--gold)',
+              borderRadius: '50%',
+              flexShrink: 0,
+              display: 'inline-block',
+            }}
+          />
           {d}
         </li>
       ))}
     </ul>
-    <p style={{ marginBottom: 8, color: 'var(--cream)', fontWeight: 600 }}>Moreton Bay</p>
+    <p style={{ marginBottom: 8, color: 'var(--cream)', fontWeight: 600 }}>
+      Moreton Bay
+    </p>
     <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-      {['Brisbane River', 'Tangalooma', 'Moreton Island', 'Stradbroke Island'].map((d) => (
-        <li key={d} style={{ padding: '5px 0', display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+      {[
+        'Brisbane River',
+        'Tangalooma',
+        'Moreton Island',
+        'Stradbroke Island',
+      ].map((d) => (
+        <li
+          key={d}
+          style={{
+            padding: '5px 0',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+          }}
+        >
+          <span
+            style={{
+              width: 4,
+              height: 4,
+              background: 'var(--gold)',
+              borderRadius: '50%',
+              flexShrink: 0,
+              display: 'inline-block',
+            }}
+          />
           {d}
         </li>
       ))}
@@ -120,34 +221,68 @@ const DESTINATIONS = (
 );
 
 const AVAILABILITY = (
-  <div style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}>
+  <div
+    style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
+  >
     <p style={{ marginBottom: 16 }}>
-      Availability depends on demand but we will always go out of our way to suit your preferred
-      date and time! Please contact us on our booking enquiry form and we will be sure to get back
-      to you as soon as possible.
+      Availability depends on demand but we will always go out of our way to
+      suit your preferred date and time! Please contact us on our booking
+      enquiry form and we will be sure to get back to you as soon as possible.
     </p>
-    <a href="/#inquiry" style={{
-      fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.2em',
-      textTransform: 'uppercase', fontWeight: 700, color: '#0A1628',
-      background: '#C9A84C', padding: '11px 22px', textDecoration: 'none', display: 'inline-block',
-    }}>
+    <a
+      href="/#inquiry"
+      style={{
+        fontFamily: 'var(--font-body)',
+        fontSize: 10,
+        letterSpacing: '0.2em',
+        textTransform: 'uppercase',
+        fontWeight: 700,
+        color: '#0A1628',
+        background: '#C9A84C',
+        padding: '11px 22px',
+        textDecoration: 'none',
+        display: 'inline-block',
+      }}
+    >
       Booking Enquiry →
     </a>
   </div>
 );
 
 const CORPORATE_FAQ = (
-  <div style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}>
+  <div
+    style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
+  >
     {[
-      { q: 'Where do your boats depart from?', a: 'Our boats are berthed at the Muriel Henchman Public Pontoon, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.' },
-      { q: 'Can we customise the catering and drinks?', a: 'Absolutely. From grazing boards and canapés to private chef fine dining — we work with our culinary partners to build a menu around your event. Bar packages are fully customisable.' },
-      { q: 'Is AV equipment available for presentations?', a: 'Yes. Both vessels have flat-screen TVs and premium audio throughout. Let us know your AV requirements at the time of enquiry.' },
-      { q: 'What transport options are there for large groups?', a: 'Maxi taxis are the most popular and cost-effective option. The pontoon also has ample free parking.' },
-      { q: 'Can we add corporate branding or custom signage?', a: 'Yes — corporate branding, custom menus, and event theming can all be arranged. Contact us with your requirements and we will accommodate where possible.' },
-      { q: 'Are accessibility requirements catered for?', a: 'We welcome guests with limited mobility. We recommend contacting us before booking so we can assess specific requirements.' },
+      {
+        q: 'Where do your boats depart from?',
+        a: 'Our boats are berthed at the Muriel Henchman Public Pontoon, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+      },
+      {
+        q: 'Can we customise the catering and drinks?',
+        a: 'Absolutely. From grazing boards and canapés to private chef fine dining — we work with our culinary partners to build a menu around your event. Bar packages are fully customisable.',
+      },
+      {
+        q: 'Is AV equipment available for presentations?',
+        a: 'Yes. Both vessels have flat-screen TVs and premium audio throughout. Let us know your AV requirements at the time of enquiry.',
+      },
+      {
+        q: 'What transport options are there for large groups?',
+        a: 'Maxi taxis are the most popular and cost-effective option. The pontoon also has ample free parking.',
+      },
+      {
+        q: 'Can we add corporate branding or custom signage?',
+        a: 'Yes — corporate branding, custom menus, and event theming can all be arranged. Contact us with your requirements and we will accommodate where possible.',
+      },
+      {
+        q: 'Are accessibility requirements catered for?',
+        a: 'We welcome guests with limited mobility. We recommend contacting us before booking so we can assess specific requirements.',
+      },
     ].map(({ q, a }) => (
       <div key={q} style={{ marginBottom: 16 }}>
-        <p style={{ color: 'var(--cream)', fontWeight: 600, marginBottom: 6 }}>{q}</p>
+        <p style={{ color: 'var(--cream)', fontWeight: 600, marginBottom: 6 }}>
+          {q}
+        </p>
         <p>{a}</p>
       </div>
     ))}
@@ -185,35 +320,42 @@ const h3Style: React.CSSProperties = {
 
 const LEFT_PACKAGES = (
   <div>
-    <h3 style={{ ...h3Style, marginTop: 0 }}>Package 1 – Corporate Island Getaway</h3>
+    <h3 style={{ ...h3Style, marginTop: 0 }}>
+      Package 1 – Corporate Island Getaway
+    </h3>
     <p style={pStyle}>
-      Departing at 12pm, our captain takes your work crew out Island Hopping for a day of
-      Watersports, BBQ buffet, Cold drinks, and fun in the sun. Think Banana boats, cold beers,
-      SUP&rsquo;s and multiple bars.
+      Departing at 12pm, our captain takes your work crew out Island Hopping for
+      a day of Watersports, BBQ buffet, Cold drinks, and fun in the sun. Think
+      Banana boats, cold beers, SUP&rsquo;s and multiple bars.
     </p>
     <p style={pStyle}>
-      This package is perfect for a day in the Sun with your work crew, with up to 130 passengers
-      and a minimum run time of 4 hours this is definitely one your employees will remember.
+      This package is perfect for a day in the Sun with your work crew, with up
+      to 130 passengers and a minimum run time of 4 hours this is definitely one
+      your employees will remember.
     </p>
 
-    <h3 style={h3Style}>Package 2 – Awards Night Cocktails &amp; Canap&eacute;s</h3>
+    <h3 style={h3Style}>
+      Package 2 – Awards Night Cocktails &amp; Canap&eacute;s
+    </h3>
     <p style={pStyle}>
-      Departing at 5pm, this Sunset Cruise sets the mood for a night of world-class luxury and
-      celebration aboard the Gold Coasts premiere Superyacht. Touring the northern Islands of the
-      Coast&rsquo;s Broadwater and cruising back to the Sun Setting over Surfers Paradise, this is
-      the ideal venue to create special memories.
+      Departing at 5pm, this Sunset Cruise sets the mood for a night of
+      world-class luxury and celebration aboard the Gold Coasts premiere
+      Superyacht. Touring the northern Islands of the Coast&rsquo;s Broadwater
+      and cruising back to the Sun Setting over Surfers Paradise, this is the
+      ideal venue to create special memories.
     </p>
     <p style={pStyle}>
-      With a selection of Canap&eacute;s, Cocktails, and Champagne on the menu &ndash; come aboard
-      with up to 130 guests and be entertained on a 3-hour Luxury Cruise sure to stand out as
-      unforgettable.
+      With a selection of Canap&eacute;s, Cocktails, and Champagne on the menu
+      &ndash; come aboard with up to 130 guests and be entertained on a 3-hour
+      Luxury Cruise sure to stand out as unforgettable.
     </p>
 
     <h3 style={h3Style}>Option 3 – Custom Charter</h3>
     <p style={pStyle}>
-      Want to create a Custom Charter event? We&rsquo;ve got it handled &ndash; Let us do the
-      planning for you. Delicious food, plentiful drinks, and great entertainment. We have a lot of
-      partners including Dining and Recreational activities available inclusive of the charter hire.
+      Want to create a Custom Charter event? We&rsquo;ve got it handled &ndash;
+      Let us do the planning for you. Delicious food, plentiful drinks, and
+      great entertainment. We have a lot of partners including Dining and
+      Recreational activities available inclusive of the charter hire.
     </p>
   </div>
 );
@@ -225,76 +367,98 @@ export default function CharterPageCorporate() {
     <>
       <Nav />
       <main>
-
         {/* 1. Hero */}
         <CharterHero
           eyebrow="Boattime YC Luxury"
           headline="Corporate Yacht Charter Gold Coast"
           subtext="Welcome to Boattime Yacht Charters, where luxury meets business. Whether you're planning a networking event, team-building retreat, or product launch, we provide a unique and impressive setting that will leave a lasting impact on your guests."
-          image="/EDI_2954.jpg"
-          ctas={[{ label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' }]}
+          image="/corporate-charter-images/06_Mermaid-Insidfe-1-1.webp"
+          ctas={[
+            { label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' },
+          ]}
         />
 
         {/* 2. Overview box */}
         <CharterInfoBox heading="Corporate Yacht Charter Gold Coast">
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'rgba(245,240,232,0.72)', lineHeight: 1.85 }}>
+          <div
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 14,
+              color: 'rgba(245,240,232,0.72)',
+              lineHeight: 1.85,
+            }}
+          >
             <p style={{ marginBottom: 20 }}>
-              Welcome to Boattime Yacht Charters, where luxury meets business. Hosting corporate
-              events can be daunting, but we offer the perfect solution with our luxurious yacht
-              charters in Gold Coast. Whether you&rsquo;re planning a networking event,
-              team-building retreat, or product launch, we provide a unique and impressive setting
-              that will leave a lasting impact on your guests.
+              Welcome to Boattime Yacht Charters, where luxury meets business.
+              Hosting corporate events can be daunting, but we offer the perfect
+              solution with our luxurious yacht charters in Gold Coast. Whether
+              you&rsquo;re planning a networking event, team-building retreat,
+              or product launch, we provide a unique and impressive setting that
+              will leave a lasting impact on your guests.
             </p>
             <p style={{ marginBottom: 6 }}>
-              <strong style={{ color: 'var(--cream)' }}>Our Corporate Event Services</strong>
+              <strong style={{ color: 'var(--cream)' }}>
+                Our Corporate Event Services
+              </strong>
             </p>
             <p style={{ marginBottom: 20 }}>
-              Boattime Yacht Charters offers a range of customizable yacht charter options for
-              various corporate events, including retreats, team building, client entertainment,
-              conferences, meetings, and more. Our yachts, the Sun Goddess and Mermaid Spirit,
-              provide a luxurious backdrop for your event, complete with top-notch amenities and
-              professional crew. We provide the premier event venue for Corporate Yacht Charters on
-              the Gold Coast.
+              Boattime Yacht Charters offers a range of customizable yacht
+              charter options for various corporate events, including retreats,
+              team building, client entertainment, conferences, meetings, and
+              more. Our yachts, the Sun Goddess and Mermaid Spirit, provide a
+              luxurious backdrop for your event, complete with top-notch
+              amenities and professional crew. We provide the premier event
+              venue for Corporate Yacht Charters on the Gold Coast.
             </p>
             <p style={{ marginBottom: 6 }}>
               <strong style={{ color: 'var(--cream)' }}>Our Offer:</strong>
             </p>
             <p style={{ marginBottom: 20 }}>
-              Boattime Yacht Charters offers a range of fully customizable yacht charter options for
-              corporate events, including corporate retreats, team building, client entertainment,
-              conference venues, meeting spaces, business events, corporate hospitality, professional
-              development, networking events, product launches, award ceremonies, charity events, and
-              corporate social responsibility events. We have a variety of yacht sizes to choose from
-              to ensure that your corporate event meets your needs. Experience a luxury event for
-              your Corporate Yacht Charters on the Gold Coast.
+              Boattime Yacht Charters offers a range of fully customizable yacht
+              charter options for corporate events, including corporate
+              retreats, team building, client entertainment, conference venues,
+              meeting spaces, business events, corporate hospitality,
+              professional development, networking events, product launches,
+              award ceremonies, charity events, and corporate social
+              responsibility events. We have a variety of yacht sizes to choose
+              from to ensure that your corporate event meets your needs.
+              Experience a luxury event for your Corporate Yacht Charters on the
+              Gold Coast.
             </p>
             <p style={{ marginBottom: 6 }}>
-              <strong style={{ color: 'var(--cream)' }}>Why Boattime YC?</strong>
+              <strong style={{ color: 'var(--cream)' }}>
+                Why Boattime YC?
+              </strong>
             </p>
             <p style={{ marginBottom: 16 }}>
-              Our yacht charters provide a unique and luxurious setting that will impress your
-              guests and leave a lasting impression. Our team of experienced event planners will
-              work with you to customize every detail of your corporate event, ensuring that it
-              meets your specific requirements and objectives.
+              Our yacht charters provide a unique and luxurious setting that
+              will impress your guests and leave a lasting impression. Our team
+              of experienced event planners will work with you to customize
+              every detail of your corporate event, ensuring that it meets your
+              specific requirements and objectives.
             </p>
             <p style={{ marginBottom: 20 }}>
-              We take care of everything from catering and entertainment to transportation and
-              logistics, allowing you to focus on your professional goals and enjoy your event with
-              your colleagues. At Boattime Yacht Charters, we pride ourselves on providing
-              exceptional service and attention to detail. We understand the importance of corporate
-              events and the impact they can have on your business, which is why we strive to make
-              your event as stress-free and memorable as possible. Book your business event with us
-              today and let us take care of everything else!
+              We take care of everything from catering and entertainment to
+              transportation and logistics, allowing you to focus on your
+              professional goals and enjoy your event with your colleagues. At
+              Boattime Yacht Charters, we pride ourselves on providing
+              exceptional service and attention to detail. We understand the
+              importance of corporate events and the impact they can have on
+              your business, which is why we strive to make your event as
+              stress-free and memorable as possible. Book your business event
+              with us today and let us take care of everything else!
             </p>
             <p style={{ marginBottom: 6 }}>
               <strong style={{ color: 'var(--cream)' }}>How to Book:</strong>
             </p>
             <p>
-              Booking a yacht charter with Boattime Yacht Charters is easy. Fill in our Booking
-              Enquiry or give us a call to speak with one of our event planning specialists. We will
-              work with you to determine your specific needs and provide a customized quote for your
-              event. Once you&rsquo;ve booked your yacht charter, our team will take care of
-              everything else, so all you have to do is show up and enjoy the luxurious experience.
+              Booking a yacht charter with Boattime Yacht Charters is easy. Fill
+              in our Booking Enquiry or give us a call to speak with one of our
+              event planning specialists. We will work with you to determine
+              your specific needs and provide a customized quote for your event.
+              Once you&rsquo;ve booked your yacht charter, our team will take
+              care of everything else, so all you have to do is show up and
+              enjoy the luxurious experience.
             </p>
           </div>
         </CharterInfoBox>
@@ -303,11 +467,13 @@ export default function CharterPageCorporate() {
         <CharterGallery folder="corporate-charter-images" />
 
         {/* 4. Packages left + Accordion right */}
-        <CharterSplitSection leftContent={LEFT_PACKAGES} accordionSections={ACCORDION} />
+        <CharterSplitSection
+          leftContent={LEFT_PACKAGES}
+          accordionSections={ACCORDION}
+        />
 
         {/* 5. Bottom CTA box */}
         <CharterInfoBox heading="Corporate Yacht Charter Gold Coast" compact />
-
       </main>
       <Footer />
     </>
