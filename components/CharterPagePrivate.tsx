@@ -4,119 +4,314 @@ import Nav from './Nav';
 import Footer from './Footer';
 import {
   CharterHero,
-  CharterOverview,
-  CharterPackages,
-  VesselCards,
-  CharterInclusionsExtras,
-  CharterDestinations,
-  CharterFAQ,
-  CharterBookingCTA,
+  CharterInfoBox,
+  CharterGallery,
+  CharterSplitSection,
+  type AccordionSection,
 } from './CharterSections';
 
-const PACKAGES = [
-  {
-    title: 'Day-trip Beaches & BBQs',
-    time: '12pm',
-    duration: 'Min. 4 hours',
-    capacity: 'Up to 130 guests',
-    description:
-      'Set sail at midday for an afternoon of island hopping, watersports and a gourmet BBQ buffet on the Broadwater. Swim at Wave Break Island, try the banana boats, and soak in the Gold Coast sunshine.',
-    highlights: [
-      'Island hopping',
-      'Watersports included',
-      'BBQ buffet',
-      'Cold beverages throughout',
-      'Banana boats & bars',
-    ],
-  },
-  {
-    title: 'Evening Cocktails & Canapés',
-    time: '5pm',
-    duration: '3 hours',
-    capacity: 'Up to 130 guests',
-    description:
-      'Cruise the northern broadwater islands as the sun sets over the Gold Coast. Platters and canapés circulated by crew, with cocktails, champagne, and a golden-hour backdrop that makes every moment memorable.',
-    highlights: [
-      'Sunset Broadwater cruise',
-      'Platters & canapés',
-      'Cocktails & champagne',
-      'Northern islands route',
-      'Professional crew throughout',
-    ],
-  },
-  {
-    title: 'Custom Charter',
-    description:
-      'A fully bespoke event designed around your vision. Choose your route, your catering style, your entertainment — we coordinate every element with our culinary and entertainment partners.',
-    highlights: [
-      'Fully customisable',
-      'Catering from chef partners',
-      'DJ, band or live entertainment',
-      'Photography & videography',
-      'Any date, any duration',
-    ],
-  },
+// ── Shared accordion content (Yacht Layout, Dining, Inclusions, etc.) ─────────
+
+const VESSEL_LAYOUT = (
+  <div>
+    <p style={{ marginBottom: 20 }}>
+      <strong style={{ color: 'var(--cream)' }}>Mermaid Spirit –</strong>
+    </p>
+    <p style={{ marginBottom: 24 }}>
+      Our newly renovated Mermaid Spirit can host up to 100 guests for day charters and can sleep
+      22 guests for overnight charters. A tri-deck catamaran, Mermaid Spirit boasts multiple
+      entertainment decks and spaces and comes equipped with jet skis, kayaks, scuba diving gear,
+      stinger proof pool and paddle boards for the more adventurous of guests.
+    </p>
+    <p style={{ marginBottom: 20 }}>
+      <strong style={{ color: 'var(--cream)' }}>Sun Goddess –</strong>
+    </p>
+    <p>
+      Our slightly larger vessel, Sun Goddess, can host up to 135 guests for day charters. We have
+      a variety of route options depending on the requirements of your event. Whether your event is
+      a birthday party, a corporate event or even a wedding celebration, our huge range of options
+      will allow for us to work together to design your event.
+    </p>
+  </div>
+);
+
+const DINING_BARS = (
+  <p>
+    Each Vessel boasts 2 bars, with a Bar-Tab and Consumption options available, we can cater to
+    your every dining need with our experienced staff and culinary partners &lsquo;Private Chefs of
+    Brisbane&rsquo;.
+  </p>
+);
+
+const INCLUSIONS = (
+  <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+    {[
+      'Bars',
+      'Entertainment areas',
+      'Captain',
+      'Crew',
+      'Audio Throughout',
+      'Flat Screen TV\'s',
+      'Watersports (ask us!)',
+      'Canoes',
+      'Stand up paddle boards',
+      'Inflatable stinger proof pool',
+      'Banana boat',
+    ].map((item) => (
+      <li key={item} style={{ padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+        {item}
+      </li>
+    ))}
+  </ul>
+);
+
+const EXTRAS = (
+  <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+    {[
+      'Catering',
+      'Canapes',
+      'Platters',
+      'Gourmet BBQ',
+      'Buffet style',
+      'Fine dining',
+      'Bar service',
+      'Drinks packages available',
+      'Bar tab (by consumption)',
+      'Entertainment – DJ/band',
+      'Extra Watersports',
+      'Photography',
+      'Videography',
+    ].map((item) => (
+      <li key={item} style={{ padding: '6px 0', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+        {item}
+      </li>
+    ))}
+  </ul>
+);
+
+const DESTINATIONS = (
+  <div>
+    <p style={{ marginBottom: 16 }}>
+      Tour the northern Islands of the Coast&rsquo;s Broadwater or out into the ocean with a
+      Surfers Paradise backdrop! We can customise your destination depending on availability and
+      charter.
+    </p>
+    <p style={{ marginBottom: 10 }}>
+      <strong style={{ color: 'var(--cream)' }}>Gold Coast</strong>
+    </p>
+    <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none' }}>
+      {['Wave Break Island', 'Sanctuary Cove', 'Jumpinpin', 'Scottish Prince Wreck'].map((d) => (
+        <li key={d} style={{ padding: '5px 0', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+          {d}
+        </li>
+      ))}
+    </ul>
+    <p style={{ marginBottom: 10 }}>
+      <strong style={{ color: 'var(--cream)' }}>Moreton Bay</strong>
+    </p>
+    <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+      {['Brisbane River', 'Tangalooma', 'Moreton Island', 'Stradbroke Island'].map((d) => (
+        <li key={d} style={{ padding: '5px 0', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ width: 4, height: 4, background: 'var(--gold)', borderRadius: '50%', flexShrink: 0, display: 'inline-block' }} />
+          {d}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const AVAILABILITY = (
+  <div>
+    <p style={{ marginBottom: 16 }}>
+      Availability depends on demand but we will always go out of our way to suit your preferred
+      date and time! Please contact us on our booking enquiry form and we will be sure to get back
+      to you as soon as possible.
+    </p>
+    <a href="/#inquiry" style={{
+      fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.2em',
+      textTransform: 'uppercase', fontWeight: 700, color: '#0A1628',
+      background: '#C9A84C', padding: '11px 22px', textDecoration: 'none',
+      display: 'inline-block',
+    }}>
+      Booking Enquiry →
+    </a>
+  </div>
+);
+
+const PRIVATE_FAQ = (
+  <div>
+    {[
+      { q: 'Where do your boats depart from?', a: 'Our boats are berthed at the Muriel Henchman Public Pontoon, Gold Coast. The Muriel Henchman Public Pontoon is about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.' },
+      { q: 'Where can I park?', a: 'There is plentiful free parking at Muriel Henchman Public Pontoon which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.' },
+      { q: 'What about other transport options?', a: 'There are lots of ways to get to the boat! The most popular (and cost effective/convenient) is often via Maxi Taxis.' },
+      { q: 'Can you help with catering/drinks?', a: 'Yes, we also offer catering and drinks service for your convenience. Please request our full catering list as advance bookings are required. We offer a range of catering options from grazing boards, to canapes and private chefs.' },
+      { q: 'Do you have Eskies on board?', a: 'Yes we have Fridges & Eskies and we also provide ice.' },
+      { q: 'Where can we go on our charter?', a: 'We mainly operate in the calm, protected waters of the Gold Coast Broadwater. In a 3 hour charter during the day our guests usually love a swim stop at Wavebreak Island. In the evening we will generally sail north to watch the sunset and return to the southern part of the Broadwater to enjoy the city lights after dark.' },
+      { q: 'Will I get seasick?', a: 'We mainly operate in the calm, protected waters of the Gold Coast Broadwater. If we go offshore (into the open ocean) there is a possibility of large waves.' },
+    ].map(({ q, a }) => (
+      <div key={q} style={{ marginBottom: 16 }}>
+        <p style={{ color: 'var(--cream)', fontWeight: 600, marginBottom: 6 }}>{q}</p>
+        <p>{a}</p>
+      </div>
+    ))}
+  </div>
+);
+
+const ACCORDION: AccordionSection[] = [
+  { title: 'Yacht Layout Features', content: VESSEL_LAYOUT },
+  { title: 'Dining and Bars', content: DINING_BARS },
+  { title: 'Inclusions', content: INCLUSIONS },
+  { title: 'Extras', content: EXTRAS },
+  { title: 'Landings & Destinations', content: DESTINATIONS },
+  { title: 'Availability & Booking Enquiry', content: AVAILABILITY },
+  { title: 'FAQ', content: PRIVATE_FAQ },
 ];
 
-const FAQ = [
-  {
-    q: 'Where do we depart?',
-    a: 'Muriel Henchman Public Pontoon, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available at the pontoon.',
-  },
-  {
-    q: 'Can we bring our own food and drinks?',
-    a: "Yes. We also offer a full catering list — from grazing boards and canapés to private chef experiences. Fridges, eskies, and ice are provided on board.",
-  },
-  {
-    q: 'What transport options are there?',
-    a: "Maxi taxis are the most popular option and are cost-effective for groups. The pontoon has ample free parking if you're driving.",
-  },
-  {
-    q: 'Where will we cruise?',
-    a: 'Day charters typically visit Wave Break Island for swimming. Evening charters sail north through the Broadwater for sunset views and city lights. Offshore and extended routes are also available on request.',
-  },
-  {
-    q: 'Will guests get seasick?',
-    a: 'We operate primarily in the calm, protected Gold Coast Broadwater — seasickness is rarely an issue. Offshore charters may encounter larger swell.',
-  },
-  {
-    q: 'Can guests with limited mobility come on board?',
-    a: 'Yes. We recommend contacting us before booking so we can assess your specific requirements and ensure the experience is comfortable for everyone.',
-  },
-];
+// ── Left column: Packages text ─────────────────────────────────────────────────
+
+const pStyle: React.CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 14,
+  color: 'rgba(245,240,232,0.72)',
+  lineHeight: 1.85,
+  marginBottom: 16,
+};
+
+const h3Style: React.CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 15,
+  fontWeight: 600,
+  color: 'var(--cream)',
+  marginBottom: 16,
+  marginTop: 40,
+};
+
+const dropCapStyle: React.CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  fontSize: 64,
+  float: 'left',
+  lineHeight: 0.78,
+  color: 'var(--gold)',
+  marginRight: 8,
+  marginTop: 8,
+  fontStyle: 'italic',
+};
+
+const LEFT_PACKAGES = (
+  <div>
+    <h3 style={h3Style}>Package 1 – Day-trip Beaches &amp; BBQ&rsquo;s</h3>
+    <p style={pStyle}>
+      <span style={dropCapStyle}>D</span>eparting at 12pm, our captain takes your crew out Island
+      Hopping for a day of Watersports, BBQ buffet, Cold drinks and fun in the sun. Think Banana
+      boats, cold beers, SUP&rsquo;s and multiple bars.
+    </p>
+    <p style={{ ...pStyle, clear: 'both' }}>
+      This package is perfect for an Aussie Summer day, with up to 130 passengers and a minimum
+      run time of 4 hours this is definitely one the crew will remember.
+    </p>
+
+    <h3 style={h3Style}>Package 2 – Evening Cocktails &amp; Canap&eacute;s</h3>
+    <p style={pStyle}>
+      Departing at 5pm, this Sunset Cruise sets the mood for a night of world class luxury and
+      celebration aboard the Gold Coasts premiere Superyacht. Touring the northern Islands of the
+      Coast&rsquo;s Broadwater and cruising back to the Sun Setting over Surfers Paradise, this is
+      the ideal venue to create special memories.
+    </p>
+    <p style={pStyle}>
+      With a selection of platters, Canap&eacute;s, Cocktails and Champagne on the menu &ndash;
+      come aboard with up to 130 guests and be entertained on a 3-hour Luxury Cruise sure to stand
+      out as unforgettable.
+    </p>
+
+    <h3 style={h3Style}>Option 3 – Custom Charter</h3>
+    <p style={pStyle}>
+      Want to create a Custom Charter event? We&rsquo;ve got it handled &ndash; Let us do the
+      planning for you. Delicious food, plentiful drinks, and great entertainment. We have a lot of
+      partners including Dining and Recreational activities available inclusive of the charter hire.
+    </p>
+  </div>
+);
+
+// ── Page ──────────────────────────────────────────────────────────────────────
 
 export default function CharterPagePrivate() {
   return (
     <>
       <Nav />
       <main>
+
+        {/* 1. Hero */}
         <CharterHero
-          eyebrow="Yacht Charters · Gold Coast"
-          headline="Private Yacht Charter"
-          subtext="Experience the best private yacht charter on the Gold Coast. Whether it's an intimate gathering or a large celebration, we tailor every element to create an unforgettable day on the water."
-          image="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=1800&q=80"
-          ctas={[
-            { label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' },
-            { label: 'View Sun Goddess', href: '/sun-goddess-gold-coast', variant: 'ghost' },
-            { label: 'View Mermaid Spirit', href: '/mermaid-spirit-gold-coast', variant: 'ghost' },
-          ]}
+          eyebrow="Boattime YC Luxury"
+          headline="Private Yacht Charter Gold Coast"
+          subtext="Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
+          image="/EDI_2899.jpg"
+          ctas={[{ label: 'Booking Enquiry', href: '/#inquiry', variant: 'primary' }]}
         />
-        <CharterOverview
-          eyebrow="The Experience"
-          title="Your boat."
-          titleAccent="Your rules."
-          description={[
-            'A private yacht charter is the ultimate way to celebrate on the Gold Coast. From birthday parties and anniversaries to family reunions and sunset escapes — we provide the platform, you provide the occasion.',
-            "With two world-class vessels, expert crew, and access to the Gold Coast's most beautiful waterways, every charter is built around your vision. No two are the same.",
-          ]}
-          image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80"
-        />
-        <CharterPackages packages={PACKAGES} />
-        <VesselCards />
-        <CharterInclusionsExtras />
-        <CharterDestinations />
-        <CharterFAQ items={FAQ} />
-        <CharterBookingCTA />
+
+        {/* 2. Overview box */}
+        <CharterInfoBox heading="Private Yacht Charters – Gold Coast">
+          <div style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'rgba(245,240,232,0.72)', lineHeight: 1.85 }}>
+            <p style={{ marginBottom: 20 }}>
+              Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters.
+              Whether it&rsquo;s an intimate gathering or a large event, we offer tailored luxury
+              experiences that promise an unforgettable time on the water.
+            </p>
+            <p style={{ marginBottom: 6 }}>
+              <strong style={{ color: 'var(--cream)' }}>Our Private Yacht Charter Services</strong>
+            </p>
+            <p style={{ marginBottom: 20 }}>
+              Boattime provides top-tier private boat charter services in Gold Coast for all
+              occasions, with luxury yacht hire and experienced crew support.
+            </p>
+            <p style={{ marginBottom: 6 }}>
+              <strong style={{ color: 'var(--cream)' }}>Why Choose Us?</strong>
+            </p>
+            <p style={{ marginBottom: 20 }}>
+              Choosing our yacht charter services in Gold Coast means opting for unparalleled luxury
+              and comfort. We pride ourselves on offering personalized services to cater to your
+              specific needs, ensuring every moment aboard our yachts is exceptional.
+            </p>
+            <p style={{ marginBottom: 6 }}>
+              <strong style={{ color: 'var(--cream)' }}>Customizable Packages</strong>
+            </p>
+            <p style={{ marginBottom: 20 }}>
+              We offer a variety of customizable packages to suit your needs, whether it&rsquo;s
+              for a private celebration, corporate event, or a relaxing day out on the water. Our
+              Gold Coast private yacht rental options are designed to provide maximum enjoyment and
+              flexibility.
+            </p>
+            <p style={{ marginBottom: 6 }}>
+              <strong style={{ color: 'var(--cream)' }}>Luxurious Amenities</strong>
+            </p>
+            <p style={{ marginBottom: 20 }}>
+              Our yachts are equipped with state-of-the-art facilities to ensure your comfort and
+              entertainment. From spacious decks to gourmet catering, we provide everything you need
+              for a luxurious experience.
+            </p>
+            <p style={{ marginBottom: 6 }}>
+              Ready to plan the ultimate in luxury on the Gold Coast waters? Contact us today to
+              book your private yacht charter. Our team is here to help you plan every detail of
+              your journey, ensuring a seamless and memorable experience.
+            </p>
+            <p style={{ fontWeight: 600, color: 'var(--cream)', marginTop: 8 }}>
+              Book Your Private Yacht Charter Today
+            </p>
+          </div>
+        </CharterInfoBox>
+
+        {/* 3. Photo gallery */}
+        <CharterGallery folder="private-charter-images" />
+
+        {/* 4. Packages left + Accordion right */}
+        <CharterSplitSection leftContent={LEFT_PACKAGES} accordionSections={ACCORDION} />
+
+        {/* 5. Bottom CTA box */}
+        <CharterInfoBox heading="Private Yacht Charters – Gold Coast" compact />
+
       </main>
       <Footer />
     </>

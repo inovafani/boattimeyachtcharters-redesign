@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -998,6 +998,432 @@ export function CateringMenuGrid() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CHARTER INFO BOX (navy overview / bottom CTA box) ────────────────────────
+
+export function CharterInfoBox({
+  heading,
+  children,
+  compact = false,
+  vesselOrder = ['sun-goddess', 'mermaid-spirit'] as ('sun-goddess' | 'mermaid-spirit')[],
+}: {
+  heading: string;
+  children?: React.ReactNode;
+  compact?: boolean;
+  vesselOrder?: ('sun-goddess' | 'mermaid-spirit')[];
+}) {
+  const ref = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    gsap.from(ref.current!.querySelectorAll('.ib'), {
+      y: 30, opacity: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out',
+      scrollTrigger: { trigger: ref.current, start: 'top 85%', once: true },
+    });
+  }, { scope: ref });
+
+  const buttons = vesselOrder.map((v) =>
+    v === 'sun-goddess'
+      ? { label: 'View The Sun Goddess →', href: '/sun-goddess-gold-coast' }
+      : { label: 'View The Mermaid Spirit →', href: '/mermaid-spirit-gold-coast' },
+  );
+
+  return (
+    <section ref={ref} style={{ padding: compact ? '40px 48px' : '64px 48px', background: 'var(--navy)' }}>
+      <div
+        style={{
+          maxWidth: 1200, margin: '0 auto',
+          border: '1px solid rgba(201,168,76,0.2)',
+          background: '#060f1c',
+          padding: compact ? '48px 64px' : '60px 72px',
+          position: 'relative',
+        }}
+      >
+        {/* Corner accents */}
+        {(['tl','tr','bl','br'] as const).map((c) => (
+          <div key={c} style={{ position: 'absolute',
+            top: c.startsWith('t') ? 0 : 'auto', bottom: c.startsWith('b') ? 0 : 'auto',
+            left: c.endsWith('l') ? 0 : 'auto', right: c.endsWith('r') ? 0 : 'auto',
+          }}>
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 28, height: 1, background: 'var(--gold)', transform: c.endsWith('r') ? 'translateX(-100%)' : undefined }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 1, height: 28, background: 'var(--gold)', transform: c.startsWith('b') ? 'translateY(-100%)' : undefined }} />
+          </div>
+        ))}
+
+        <h2 className="ib" style={{
+          fontFamily: 'var(--font-body)', fontSize: 'clamp(13px, 1.6vw, 20px)',
+          fontWeight: 700, color: 'var(--gold)', letterSpacing: '0.2em',
+          textTransform: 'uppercase', textAlign: 'center', marginBottom: 40,
+        }}>
+          {heading}
+        </h2>
+
+        {children && <div className="ib">{children}</div>}
+
+        <div className="ib" style={{ marginTop: 40, display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          {buttons.map((b) => (
+            <a key={b.href} href={b.href} style={{
+              fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.2em',
+              textTransform: 'uppercase', fontWeight: 700, color: '#0A1628',
+              background: '#C9A84C', padding: '13px 26px', textDecoration: 'none',
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+            }}>
+              {b.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="ib" style={{ textAlign: 'center', marginTop: 28 }}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="5" r="2.5" />
+            <line x1="12" y1="7.5" x2="12" y2="19" />
+            <path d="M6 12 C6 12 6 19 12 19 C18 19 18 12 18 12" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+          </svg>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CHARTER PHOTO ROW ─────────────────────────────────────────────────────────
+
+export function CharterPhotoRow({ images }: { images: string[] }) {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+      {images.map((img, i) => (
+        <div key={i} style={{
+          height: 280, backgroundImage: `url(${img})`,
+          backgroundSize: 'cover', backgroundPosition: 'center',
+        }} />
+      ))}
+    </div>
+  );
+}
+
+// ── CHARTER GALLERY (folder-based slider + lightbox) ──────────────────────────
+
+const PER_PAGE = 3;
+
+const arrowBtnBase: React.CSSProperties = {
+  position: 'absolute', top: '50%', transform: 'translateY(-50%)',
+  zIndex: 10, width: 52, height: 52,
+  display: 'flex', alignItems: 'center', justifyContent: 'center',
+  background: 'rgba(6,15,28,0.72)', border: '1px solid rgba(201,168,76,0.35)',
+  cursor: 'pointer', color: 'var(--gold)', fontSize: 20,
+  transition: 'background 0.2s, border-color 0.2s, opacity 0.2s',
+  backdropFilter: 'blur(6px)',
+};
+
+export function CharterGallery({ folder }: { folder: string }) {
+  const [images, setImages] = useState<string[]>([]);
+  const [page, setPage] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Load images from folder via API
+  useEffect(() => {
+    fetch(`/api/gallery/${folder}`)
+      .then((r) => r.json())
+      .then((data: { images?: string[] }) => setImages(data.images ?? []))
+      .catch(() => {});
+  }, [folder]);
+
+  const totalPages = Math.max(1, Math.ceil(images.length / PER_PAGE));
+  const visible = images.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+
+  // Lightbox helpers
+  const lbPrev = () => setActiveIndex((i) => (i === null ? null : (i - 1 + images.length) % images.length));
+  const lbNext = () => setActiveIndex((i) => (i === null ? null : (i + 1) % images.length));
+  const lbClose = () => setActiveIndex(null);
+
+  useEffect(() => {
+    if (activeIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') lbPrev();
+      if (e.key === 'ArrowRight') lbNext();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex, images.length]);
+
+  useEffect(() => {
+    document.body.style.overflow = activeIndex !== null ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [activeIndex]);
+
+  if (images.length === 0) {
+    // Placeholder while loading / empty
+    return <div style={{ height: 280, background: '#060f1c' }} />;
+  }
+
+  return (
+    <>
+      {/* ── Slider grid ── */}
+      <div style={{ position: 'relative', background: '#060f1c' }}>
+
+        {/* Left arrow — always visible, dimmed on first page */}
+        <button
+          onClick={() => setPage((p) => Math.max(0, p - 1))}
+          disabled={page === 0}
+          aria-label="Previous photos"
+          style={{
+            ...arrowBtnBase,
+            left: 16,
+            opacity: page === 0 ? 0.28 : 1,
+            cursor: page === 0 ? 'default' : 'pointer',
+          }}
+          onMouseEnter={(e) => {
+            if (page === 0) return;
+            const el = e.currentTarget as HTMLElement;
+            el.style.background = 'rgba(201,168,76,0.18)';
+            el.style.borderColor = 'var(--gold)';
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLElement;
+            el.style.background = 'rgba(6,15,28,0.72)';
+            el.style.borderColor = 'rgba(201,168,76,0.35)';
+          }}
+        >
+          ←
+        </button>
+
+        {/* Images */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
+          {visible.map((img, i) => {
+            const globalIndex = page * PER_PAGE + i;
+            return (
+              <button
+                key={img}
+                onClick={() => setActiveIndex(globalIndex)}
+                aria-label={`Open photo ${globalIndex + 1}`}
+                style={{
+                  height: 300,
+                  backgroundImage: `url(${img})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  border: 'none',
+                  cursor: 'zoom-in',
+                  padding: 0,
+                  display: 'block',
+                  position: 'relative',
+                  transition: 'filter 0.3s',
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1.1)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(1)'; }}
+              >
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'rgba(10,22,40,0)',
+                  transition: 'background 0.3s',
+                }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(10,22,40,0.3)'; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'rgba(10,22,40,0)'; }}
+                >
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.85)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.9 }}>
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="11" y1="8" x2="11" y2="14" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                  </svg>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right arrow — always visible, dimmed on last page */}
+        <button
+          onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+          disabled={page >= totalPages - 1}
+          aria-label="Next photos"
+          style={{
+            ...arrowBtnBase,
+            right: 16,
+            opacity: page >= totalPages - 1 ? 0.28 : 1,
+            cursor: page >= totalPages - 1 ? 'default' : 'pointer',
+          }}
+          onMouseEnter={(e) => {
+            if (page >= totalPages - 1) return;
+            const el = e.currentTarget as HTMLElement;
+            el.style.background = 'rgba(201,168,76,0.18)';
+            el.style.borderColor = 'var(--gold)';
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLElement;
+            el.style.background = 'rgba(6,15,28,0.72)';
+            el.style.borderColor = 'rgba(201,168,76,0.35)';
+          }}
+        >
+          →
+        </button>
+
+        {/* Page dots */}
+        {totalPages > 1 && (
+          <div style={{
+            display: 'flex', justifyContent: 'center', gap: 8,
+            padding: '14px 0 12px',
+            background: '#060f1c',
+          }}>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setPage(i)}
+                aria-label={`Go to page ${i + 1}`}
+                style={{
+                  width: i === page ? 24 : 8, height: 8,
+                  borderRadius: 4,
+                  background: i === page ? 'var(--gold)' : 'rgba(201,168,76,0.25)',
+                  border: 'none', cursor: 'pointer', padding: 0,
+                  transition: 'width 0.25s, background 0.25s',
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── Lightbox ── */}
+      {activeIndex !== null && (
+        <div
+          onClick={lbClose}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 9999,
+            background: 'rgba(6,15,28,0.97)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          {/* Close */}
+          <button onClick={lbClose} aria-label="Close lightbox" style={{
+            position: 'absolute', top: 20, right: 28,
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: 'rgba(245,240,232,0.7)', fontSize: 38, lineHeight: 1,
+            fontWeight: 200, padding: '4px 8px', transition: 'color 0.2s',
+          }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'rgba(245,240,232,0.7)'; }}
+          >×</button>
+
+          {/* Left */}
+          {images.length > 1 && (
+            <button onClick={(e) => { e.stopPropagation(); lbPrev(); }} aria-label="Previous" style={{
+              ...arrowBtnBase, position: 'fixed', left: 20, top: '50%', transform: 'translateY(-50%)',
+              width: 56, height: 56, fontSize: 24,
+            }}
+              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(201,168,76,0.2)'; el.style.borderColor = 'var(--gold)'; }}
+              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(6,15,28,0.72)'; el.style.borderColor = 'rgba(201,168,76,0.35)'; }}
+            >←</button>
+          )}
+
+          {/* Image */}
+          <img
+            src={images[activeIndex]}
+            alt={`Photo ${activeIndex + 1}`}
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: '88vw', maxHeight: '84vh', objectFit: 'contain', display: 'block', border: '1px solid rgba(201,168,76,0.1)' }}
+          />
+
+          {/* Right */}
+          {images.length > 1 && (
+            <button onClick={(e) => { e.stopPropagation(); lbNext(); }} aria-label="Next" style={{
+              ...arrowBtnBase, position: 'fixed', right: 20, top: '50%', transform: 'translateY(-50%)',
+              width: 56, height: 56, fontSize: 24,
+            }}
+              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(201,168,76,0.2)'; el.style.borderColor = 'var(--gold)'; }}
+              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(6,15,28,0.72)'; el.style.borderColor = 'rgba(201,168,76,0.35)'; }}
+            >→</button>
+          )}
+
+          {/* Counter */}
+          <div style={{
+            position: 'fixed', bottom: 24, left: '50%', transform: 'translateX(-50%)',
+            fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.26em',
+            textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)',
+          }}>
+            {activeIndex + 1} / {images.length}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ── CHARTER SPLIT SECTION (left text + right accordion) ───────────────────────
+
+function AccordionItem({ title, children }: { title: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: '1px solid rgba(201,168,76,0.14)' }}>
+      <button onClick={() => setOpen((o) => !o)} style={{
+        width: '100%', padding: '18px 0', display: 'flex',
+        justifyContent: 'space-between', alignItems: 'center',
+        background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', gap: 12,
+      }}>
+        <span style={{
+          fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.22em',
+          textTransform: 'uppercase', color: 'var(--cream)', fontWeight: 600,
+        }}>
+          {title}
+        </span>
+        <span style={{
+          color: 'var(--gold)', fontSize: 22, fontWeight: 300, lineHeight: 1, flexShrink: 0,
+          transition: 'transform 0.25s', transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
+          display: 'inline-block',
+        }}>+</span>
+      </button>
+      {open && (
+        <div style={{
+          paddingBottom: 20, fontFamily: 'var(--font-body)',
+          fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8,
+        }}>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export interface AccordionSection { title: string; content: React.ReactNode }
+
+export function CharterSplitSection({
+  leftContent,
+  accordionSections,
+}: {
+  leftContent: React.ReactNode;
+  accordionSections: AccordionSection[];
+}) {
+  const ref = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    gsap.from(ref.current!.querySelectorAll('.sp'), {
+      y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out',
+      scrollTrigger: { trigger: ref.current, start: 'top 82%', once: true },
+    });
+  }, { scope: ref });
+
+  return (
+    <section ref={ref} style={{ background: 'var(--navy)', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+      <div style={{
+        maxWidth: 1200, margin: '0 auto',
+        display: 'grid', gridTemplateColumns: '1.15fr 0.85fr',
+      }}>
+        <div className="sp" style={{ padding: '72px 56px 72px 48px' }}>
+          {leftContent}
+        </div>
+        <div className="sp" style={{
+          padding: '72px 48px 72px 48px',
+          borderLeft: '1px solid rgba(201,168,76,0.1)',
+          background: '#060f1c',
+        }}>
+          <div style={{ borderTop: '1px solid rgba(201,168,76,0.14)' }}>
+            {accordionSections.map((s) => (
+              <AccordionItem key={s.title} title={s.title}>{s.content}</AccordionItem>
+            ))}
+          </div>
         </div>
       </div>
     </section>

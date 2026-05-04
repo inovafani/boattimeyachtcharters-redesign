@@ -5,6 +5,7 @@ import Fleet from '@/components/Fleet';
 import WhaleSection from '@/components/WhaleSection';
 import LiveStream from '@/components/LiveStream';
 import Cruises from '@/components/Cruises';
+import YachtChartersSection from '@/components/YachtChartersSection';
 import DayTimeline from '@/components/DayTimeline';
 import Reviews from '@/components/Reviews';
 import CtaBand from '@/components/CtaBand';
@@ -27,6 +28,7 @@ export default function HomePage() {
         <WhaleSection />
         <LiveStream />
         <Cruises />
+        <YachtChartersSection />
         <DayTimeline />
         <Reviews />
         <CtaBand />

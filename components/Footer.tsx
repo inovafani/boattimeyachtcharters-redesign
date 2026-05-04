@@ -208,10 +208,10 @@ export default function Footer() {
           {/* Charters + Yachts */}
           <div>
             <ColHead>Yacht Charters</ColHead>
-            <FootLink>Private Charter</FootLink>
-            <FootLink>Corporate Charter</FootLink>
-            <FootLink>Wedding Charter</FootLink>
-            <FootLink>Catering &amp; Menus</FootLink>
+            <FootLink href="/private-yacht-charter">Private Charter</FootLink>
+            <FootLink href="/corporate-yacht-charter">Corporate Charter</FootLink>
+            <FootLink href="/wedding-yacht-charter">Wedding Charter</FootLink>
+            <FootLink href="/yacht-charter-menus">Catering &amp; Menus</FootLink>
             <div style={{ marginTop: 28 }}>
               <ColHead>Our Yachts</ColHead>
             </div>
