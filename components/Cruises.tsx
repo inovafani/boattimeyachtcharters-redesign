@@ -57,7 +57,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 4',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80',
+    img: '/relaxed-lunch/relaxed_lunch_2.webp',
     href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit',
   },
   {

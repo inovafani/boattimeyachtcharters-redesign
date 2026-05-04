@@ -54,7 +54,9 @@ function Field({
   options?: string[];
   isLight?: boolean;
 }) {
-  const borderColor = isLight ? 'rgba(10,22,40,0.18)' : 'rgba(245,240,232,0.22)';
+  const borderColor = isLight
+    ? 'rgba(10,22,40,0.18)'
+    : 'rgba(245,240,232,0.22)';
   const inputStyle: React.CSSProperties = {
     background: 'transparent',
     border: 0,
@@ -70,7 +72,14 @@ function Field({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+        marginBottom: 24,
+      }}
+    >
       <label
         style={{
           fontFamily: 'var(--font-body)',
@@ -102,7 +111,11 @@ function Field({
           onBlur={(e) => (e.target.style.borderBottomColor = borderColor)}
         >
           {options?.map((o) => (
-            <option key={o} value={o} style={{ background: 'var(--navy)', color: 'var(--cream)' }}>
+            <option
+              key={o}
+              value={o}
+              style={{ background: 'var(--navy)', color: 'var(--cream)' }}
+            >
               {o}
             </option>
           ))}
@@ -170,7 +183,8 @@ export default function Inquiry() {
       className="relative overflow-hidden inquiry-section"
       style={{
         padding: '110px 48px',
-        background: 'linear-gradient(to bottom, var(--navy-mid) 0%, var(--navy) 100%)',
+        background:
+          'linear-gradient(to bottom, var(--navy-mid) 0%, var(--navy) 100%)',
       }}
     >
       {/* Ambient glow */}
@@ -186,7 +200,13 @@ export default function Inquiry() {
 
       <div
         className="relative grid inquiry-layout"
-        style={{ maxWidth: 1200, margin: '0 auto', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'start' }}
+        style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          gridTemplateColumns: '1fr 1.1fr',
+          gap: 80,
+          alignItems: 'start',
+        }}
       >
         {/* Left */}
         <div ref={leftRef}>
@@ -201,8 +221,7 @@ export default function Inquiry() {
               marginBottom: 28,
             }}
           >
-            Tell us the{' '}
-            <ItalicEm>occasion</ItalicEm>.
+            Tell us the <ItalicEm>occasion</ItalicEm>.
           </h2>
           <p
             style={{
@@ -214,8 +233,9 @@ export default function Inquiry() {
               maxWidth: 420,
             }}
           >
-            Every charter begins with a conversation. Share the afternoon you have in mind —
-            the date, the guests, the reason — and our concierge replies within the hour.
+            Every charter begins with a conversation. Share the afternoon you
+            have in mind — the date, the guests, the reason — and our concierge
+            replies within the hour.
           </p>
 
           <div
@@ -227,10 +247,22 @@ export default function Inquiry() {
             }}
           >
             {[
-              { key: 'Dock', icon: 'pin' as const, val: 'Muriel Henchman Pontoon, Marina Mirage' },
-              { key: 'Hours', icon: 'clock' as const, val: '08:00 — 20:00 daily' },
-              { key: 'Direct', icon: 'phone' as const, val: '+61 7 5528 0400' },
-              { key: 'Email', icon: 'mail' as const, val: 'info@boattimeyachtcharters.com.au' },
+              {
+                key: 'Dock',
+                icon: 'pin' as const,
+                val: 'Muriel Henchman Pontoon, Marina Mirage',
+              },
+              {
+                key: 'Hours',
+                icon: 'clock' as const,
+                val: '08:00 — 20:00 daily',
+              },
+              { key: 'Direct', icon: 'phone' as const, val: '+61 477 667 644' },
+              {
+                key: 'Email',
+                icon: 'mail' as const,
+                val: 'info@boattimeyachtcharters.com.au',
+              },
             ].map((d) => (
               <div
                 key={d.key}
@@ -265,31 +297,87 @@ export default function Inquiry() {
           ref={formRef}
           className="inquiry-form"
           style={{
-            background: isLight ? 'rgba(255,255,255,0.75)' : 'rgba(10,22,40,0.5)',
+            background: isLight
+              ? 'rgba(255,255,255,0.75)'
+              : 'rgba(10,22,40,0.5)',
             backdropFilter: 'blur(10px)',
-            border: isLight ? '1px solid rgba(10,22,40,0.1)' : '1px solid rgba(201,168,76,0.18)',
+            border: isLight
+              ? '1px solid rgba(10,22,40,0.1)'
+              : '1px solid rgba(201,168,76,0.18)',
             padding: 48,
           }}
         >
-          <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
-            <Field label="Full Name" name="name" value={form.name} onChange={update} placeholder="Eleanor Vance" isLight={isLight} />
-            <Field label="Email" name="email" value={form.email} onChange={update} type="email" placeholder="eleanor@vance.co" isLight={isLight} />
+          <div
+            className="grid form-row-2"
+            style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}
+          >
+            <Field
+              label="Full Name"
+              name="name"
+              value={form.name}
+              onChange={update}
+              placeholder="Eleanor Vance"
+              isLight={isLight}
+            />
+            <Field
+              label="Email"
+              name="email"
+              value={form.email}
+              onChange={update}
+              type="email"
+              placeholder="eleanor@vance.co"
+              isLight={isLight}
+            />
           </div>
-          <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
-            <Field label="Phone" name="phone" value={form.phone} onChange={update} placeholder="+61" isLight={isLight} />
-            <Field label="Preferred Date" name="date" value={form.date} onChange={update} placeholder="Saturday, 3 May" isLight={isLight} />
+          <div
+            className="grid form-row-2"
+            style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}
+          >
+            <Field
+              label="Phone"
+              name="phone"
+              value={form.phone}
+              onChange={update}
+              placeholder="+61"
+              isLight={isLight}
+            />
+            <Field
+              label="Preferred Date"
+              name="date"
+              value={form.date}
+              onChange={update}
+              placeholder="Saturday, 3 May"
+              isLight={isLight}
+            />
           </div>
-          <div className="grid form-row-2" style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}>
+          <div
+            className="grid form-row-2"
+            style={{ gridTemplateColumns: '1fr 1fr', gap: 28 }}
+          >
             <Field
               label="Charter Type"
               name="charter"
               value={form.charter}
               onChange={update}
               select
-              options={['Private Charter', 'Corporate Charter', 'Wedding Charter', 'Sunset Cruise', 'Whale Watching', 'Custom']}
+              options={[
+                'Private Charter',
+                'Corporate Charter',
+                'Wedding Charter',
+                'Sunset Cruise',
+                'Whale Watching',
+                'Custom',
+              ]}
               isLight={isLight}
             />
-            <Field label="Guests" name="guests" value={form.guests} onChange={update} placeholder="12" isLight={isLight} />
+            <Field
+              label="Guests"
+              name="guests"
+              value={form.guests}
+              onChange={update}
+              placeholder="12"
+              isLight={isLight}
+            />
           </div>
           <Field
             label="Preferred Vessel"
@@ -297,7 +385,11 @@ export default function Inquiry() {
             value={form.vessel}
             onChange={update}
             select
-            options={['Either — concierge to recommend', 'Sun Goddess', 'Mermaid Spirit']}
+            options={[
+              'Either — concierge to recommend',
+              'Sun Goddess',
+              'Mermaid Spirit',
+            ]}
             isLight={isLight}
           />
           <Field

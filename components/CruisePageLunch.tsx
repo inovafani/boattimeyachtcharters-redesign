@@ -3,11 +3,7 @@
 import Script from 'next/script';
 import Nav from './Nav';
 import Footer from './Footer';
-import {
-  CruiseHero,
-  CruiseGallery,
-  CruiseItinerary,
-} from './CruiseSections';
+import { CruiseHero, CruiseGallery, CruiseItinerary } from './CruiseSections';
 import type { ReactNode } from 'react';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -21,13 +17,12 @@ const GL: React.CSSProperties = {
   fontWeight: 600,
 };
 
-const GALLERY_MAIN =
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80';
+const GALLERY_MAIN = '/relaxed-lunch/relaxed_lunch_3.webp';
 const GALLERY_THUMBS = [
-  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
-  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80',
-  'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&q=80',
-  'https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&q=80',
+  '/relaxed-lunch/relaxed_lunch_4.webp',
+  '/relaxed-lunch/relaxed_lunch_5.webp',
+  '/relaxed-lunch/relaxed_lunch_1.webp',
+  '/relaxed-lunch/relaxed_lunch_6.webp',
 ];
 const GALLERY_WIDE =
   'https://images.unsplash.com/photo-1548093237-8b67b5c8b5c1?w=2000&q=80';
@@ -166,7 +161,8 @@ const ITINERARY = [
         }}
       >
         <p style={{ marginBottom: 12 }}>
-          Boarding 11:30 AM &middot; Departure 12:00 PM &middot; Returning 2:00 PM
+          Boarding 11:30 AM &middot; Departure 12:00 PM &middot; Returning 2:00
+          PM
         </p>
         <p style={{ marginBottom: 12 }}>
           Departs from Muriel Henchman Public Pontoon, Main Beach, Gold Coast.
@@ -189,9 +185,9 @@ const ITINERARY = [
         }}
       >
         {[
-          { label: 'Adult',        price: '$99',  note: 'per person' },
-          { label: 'Child (3–12)', price: '$79',  note: 'per child' },
-          { label: 'Family',       price: '$349', note: '2 adults + 2 children' },
+          { label: 'Adult', price: '$99', note: 'per person' },
+          { label: 'Child (3–12)', price: '$79', note: 'per child' },
+          { label: 'Family', price: '$349', note: '2 adults + 2 children' },
         ].map((p, i, arr) => (
           <div
             key={i}
@@ -273,8 +269,8 @@ const ITINERARY = [
           anniversaries, or a midday treat.
         </p>
         <p style={{ marginBottom: 12 }}>
-          Vouchers can be purchased from $79. To redeem, enter your voucher
-          code during checkout at the booking portal.
+          Vouchers can be purchased from $79. To redeem, enter your voucher code
+          during checkout at the booking portal.
         </p>
         <p>Valid for Fridays, Saturdays and Sundays year-round.</p>
       </div>
@@ -293,18 +289,17 @@ export default function LunchPage() {
       />
       <Nav />
       <main>
-
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Lunch Cruise"
           title="Relaxed Lunch Cruise"
           titleAccent="Flavours of Australia"
-          image="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2000&q=85"
+          image="/relaxed-lunch/relaxed_lunch_6.webp"
           stats={[
-            { label: 'Duration',    value: '2 hours' },
+            { label: 'Duration', value: '2 hours' },
             { label: 'Adults from', value: '$99' },
-            { label: 'Departs',     value: '12:00 PM' },
-            { label: 'Days',        value: 'Fri Sat Sun' },
+            { label: 'Departs', value: '12:00 PM' },
+            { label: 'Days', value: 'Fri Sat Sun' },
           ]}
           bookingUrl="#book"
         />
@@ -424,8 +419,20 @@ export default function LunchPage() {
                 }}
               >
                 Buy Tickets
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 6h8M6 2l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </a>
               <a
@@ -447,8 +454,20 @@ export default function LunchPage() {
                 }}
               >
                 Gift Vouchers
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 6h8M6 2l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </a>
             </div>
@@ -493,7 +512,7 @@ export default function LunchPage() {
               }}
             >
               <img
-                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80"
+                src="/relaxed-lunch/relaxed_lunch_2.webp"
                 alt="Relaxed lunch cruise on the Mermaid Spirit"
                 style={{
                   width: '100%',
@@ -570,8 +589,8 @@ export default function LunchPage() {
                 }}
               >
                 This hugely spacious and beautifully appointed tri-deck
-                catamaran is the perfect venue for families and groups seeking
-                a relaxed, memorable lunch on the Gold Coast Broadwater.
+                catamaran is the perfect venue for families and groups seeking a
+                relaxed, memorable lunch on the Gold Coast Broadwater.
               </p>
 
               <div
@@ -581,7 +600,9 @@ export default function LunchPage() {
                   marginBottom: 36,
                 }}
               >
-                <div style={{ ...GL, marginBottom: 10 }}>Savour the Flavours Together</div>
+                <div style={{ ...GL, marginBottom: 10 }}>
+                  Savour the Flavours Together
+                </div>
                 <p
                   style={{
                     fontFamily: 'var(--font-body)',
@@ -607,10 +628,10 @@ export default function LunchPage() {
                 }}
               >
                 {[
-                  { label: 'Vessel',    value: 'Mermaid Spirit' },
+                  { label: 'Vessel', value: 'Mermaid Spirit' },
                   { label: 'Capacity', value: 'Up to 100 guests' },
-                  { label: 'Type',     value: 'Tri-deck catamaran' },
-                  { label: 'Length',   value: '30m (100ft)' },
+                  { label: 'Type', value: 'Tri-deck catamaran' },
+                  { label: 'Length', value: '30m (100ft)' },
                 ].map((s) => (
                   <div key={s.label}>
                     <div style={{ ...GL, marginBottom: 4 }}>{s.label}</div>
@@ -736,10 +757,11 @@ export default function LunchPage() {
                 }}
               >
                 From Broadwater prawns to Bangalow pork belly, Chef Brendan
-                Ward&apos;s menu is built around a simple belief: Queensland&apos;s
-                best ingredients, handled with care, need little else. His lunch
-                buffet has become a Gold Coast institution — the midday meal
-                that locals recommend to every visitor.
+                Ward&apos;s menu is built around a simple belief:
+                Queensland&apos;s best ingredients, handled with care, need
+                little else. His lunch buffet has become a Gold Coast
+                institution — the midday meal that locals recommend to every
+                visitor.
               </p>
 
               <div
@@ -797,8 +819,18 @@ export default function LunchPage() {
             }}
           >
             {[
-              { platform: 'Facebook', score: '5.0', reviews: '2,047 reviews', stars: 5 },
-              { platform: 'Google',   score: '4.7', reviews: '1,863 reviews', stars: 5 },
+              {
+                platform: 'Facebook',
+                score: '5.0',
+                reviews: '2,047 reviews',
+                stars: 5,
+              },
+              {
+                platform: 'Google',
+                score: '4.7',
+                reviews: '1,863 reviews',
+                stars: 5,
+              },
             ].map((r) => (
               <div
                 key={r.platform}
@@ -820,7 +852,9 @@ export default function LunchPage() {
                   >
                     {r.platform}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div
+                    style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+                  >
                     <span style={{ color: 'var(--gold)', fontSize: 13 }}>
                       {'★'.repeat(r.stars)}
                     </span>
@@ -897,7 +931,8 @@ export default function LunchPage() {
               With a return to the dock at 2:00 PM, you&apos;ll step ashore
               refreshed, well-fed, and carrying stories to share. This is the
               perfect chance to slow down and connect with the ones you love
-              while experiencing the natural beauty of the Gold Coast Broadwater.
+              while experiencing the natural beauty of the Gold Coast
+              Broadwater.
             </p>
 
             <a
@@ -918,8 +953,20 @@ export default function LunchPage() {
               }}
             >
               Buy Tickets
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 12 12"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2 6h8M6 2l4 4-4 4"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </a>
           </div>
@@ -1227,7 +1274,8 @@ export default function LunchPage() {
                 marginBottom: 32,
               }}
             >
-              Boarding 11:30 AM &middot; Muriel Henchman Public Pontoon, Main Beach
+              Boarding 11:30 AM &middot; Muriel Henchman Public Pontoon, Main
+              Beach
             </p>
             <div
               style={{
@@ -1255,8 +1303,20 @@ export default function LunchPage() {
                 }}
               >
                 Buy Tickets
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 6h8M6 2l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </a>
               <a
@@ -1278,8 +1338,20 @@ export default function LunchPage() {
                 }}
               >
                 Gift Vouchers
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 6h8M6 2l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </a>
             </div>
@@ -1353,7 +1425,6 @@ export default function LunchPage() {
             </div>
           </div>
         </section>
-
       </main>
       <Footer />
     </>
