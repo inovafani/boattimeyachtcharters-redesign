@@ -1,149 +1,745 @@
 'use client';
 
-import Script from 'next/script';
+import { useRef, useState } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Nav from './Nav';
 import Footer from './Footer';
-import {
-  CruiseHero, CruiseEventBanner, CruiseOverview,
-  CruisePhotographyFeature, CruiseInclusions,
-  CruiseScheduleDetails, CruisePricingCards,
-  CruiseGiftVoucherCallout,
-} from './CruiseSections';
+import { CharterGallery } from './CharterSections';
 
-export default function ValentinesPage() {
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+// ── Shared styles ─────────────────────────────────────────────────────────────
+
+const GL: React.CSSProperties = {
+  fontFamily: 'var(--font-body)',
+  fontSize: 9,
+  letterSpacing: '0.28em',
+  textTransform: 'uppercase' as const,
+  color: 'var(--gold)',
+  fontWeight: 600,
+};
+
+// ── Anchor SVG ────────────────────────────────────────────────────────────────
+
+function AnchorSvg() {
   return (
-    <>
-      <Script
-        src="https://boattimeyachtcharters.rezdy.com/pluginJs"
-        strategy="lazyOnload"
+    <svg
+      width="44" height="44" viewBox="0 0 24 24"
+      fill="none" stroke="var(--gold)"
+      strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"
+      style={{ display: 'block', margin: '0 auto' }}
+    >
+      <circle cx="12" cy="5" r="2.5" />
+      <line x1="12" y1="7.5" x2="12" y2="19" />
+      <path d="M6 12 C6 12 6 19 12 19 C18 19 18 12 18 12" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+    </svg>
+  );
+}
+
+// ── Navy CTA box (matching original "BOARDING…" and "DEPARTS…" boxes) ─────────
+
+function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
+  return (
+    <section
+      style={{
+        background: 'var(--navy)',
+        padding: '72px 40px 0',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Subtle wave background */}
+      <svg
+        aria-hidden="true"
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          opacity: 0.06, pointerEvents: 'none',
+        }}
+        preserveAspectRatio="none"
+        viewBox="0 0 1200 300"
+      >
+        {Array.from({ length: 20 }).map((_, i) => {
+          const y = 12 + i * 16;
+          return (
+            <path
+              key={i}
+              d={`M0 ${y} Q300 ${y - 10} 600 ${y} Q900 ${y + 10} 1200 ${y}`}
+              stroke="white" strokeWidth="1" fill="none"
+            />
+          );
+        })}
+      </svg>
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <h2
+          style={{
+            fontFamily: 'var(--font-body)',
+            color: 'var(--gold)',
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            fontSize: 17,
+            fontWeight: 700,
+            marginBottom: 36,
+            maxWidth: 700,
+            margin: '0 auto 36px',
+          }}
+        >
+          {title}
+        </h2>
+
+        {/* Location row */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 48,
+            flexWrap: 'wrap',
+            marginBottom: 44,
+          }}
+        >
+          {/* Ship icon + location 1 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 20L12 4l10 16H2z"/>
+              <line x1="12" y1="4" x2="12" y2="14"/>
+              <line x1="7" y1="14" x2="17" y2="14"/>
+            </svg>
+            <span style={{
+              fontFamily: 'var(--font-body)', fontSize: 12,
+              color: 'rgba(245,240,232,0.85)', letterSpacing: '0.04em',
+            }}>
+              Boarding at 5.30. From Muriel Henchman Public Pontoon
+            </span>
+          </div>
+
+          {/* Anchor icon + location 2 */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="var(--gold)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="5" r="2" />
+              <line x1="12" y1="7" x2="12" y2="17" />
+              <path d="M6 11 C6 11 6 17 12 17 C18 17 18 11 18 11" />
+              <line x1="3" y1="11" x2="21" y2="11" />
+            </svg>
+            <span style={{
+              fontFamily: 'var(--font-body)', fontSize: 12,
+              color: 'rgba(245,240,232,0.85)', letterSpacing: '0.04em',
+            }}>
+              Seaworld Dr, Main Beach QLD 4217
+            </span>
+          </div>
+        </div>
+
+        {/* Book Now button */}
+        <a
+          href={bookHref}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 10,
+            padding: '13px 44px',
+            border: '1px solid var(--gold)',
+            color: 'var(--gold)',
+            textDecoration: 'none',
+            fontFamily: 'var(--font-body)',
+            fontSize: 10,
+            letterSpacing: '0.22em',
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            marginBottom: 44,
+            transition: 'background 0.25s, color 0.25s',
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = 'var(--gold)';
+            el.style.color = '#0A1628';
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = 'transparent';
+            el.style.color = 'var(--gold)';
+          }}
+        >
+          Book Now &rarr;
+        </a>
+
+        <AnchorSvg />
+      </div>
+
+      {/* Gold rope border */}
+      <div
+        style={{
+          marginTop: 40,
+          height: 10,
+          background:
+            'repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 8px, transparent 8px, transparent 14px)',
+          opacity: 0.45,
+        }}
+      />
+    </section>
+  );
+}
+
+// ── Inline accordion (single itinerary item) ──────────────────────────────────
+
+function ItineraryAccordion() {
+  const [open, setOpen] = useState(false);
+
+  const ITEMS = [
+    { time: '5:30 PM', label: 'Boarding — Welcome aboard with sparkling wine or premium beer' },
+    { time: '6:00 PM', label: 'Departure from Muriel Henchman Public Pontoon' },
+    { time: '6:30 PM', label: 'Canapés served on deck as you cruise the Broadwater' },
+    { time: '7:00 PM', label: 'Gourmet dinner served in the dining room or al fresco on deck' },
+    { time: '8:00 PM', label: 'Return journey as you enjoy the Gold Coast city lights' },
+    { time: '8:30 PM', label: 'Arrival back at Muriel Henchman Public Pontoon' },
+  ];
+
+  return (
+    <section
+      style={{
+        background: 'var(--navy)',
+        borderTop: '1px solid rgba(201,168,76,0.1)',
+      }}
+    >
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
+        <button
+          onClick={() => setOpen((o) => !o)}
+          style={{
+            width: '100%',
+            padding: '28px 0',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            textAlign: 'left',
+            borderBottom: open ? '1px solid rgba(201,168,76,0.12)' : 'none',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 10,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--cream)',
+              fontWeight: 600,
+            }}
+          >
+            Itinerary
+          </span>
+          <span
+            style={{
+              color: 'var(--gold)',
+              fontSize: 26,
+              fontWeight: 300,
+              lineHeight: 1,
+              transition: 'transform 0.25s',
+              transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
+              display: 'inline-block',
+            }}
+          >
+            +
+          </span>
+        </button>
+
+        {open && (
+          <div style={{ padding: '24px 0 40px' }}>
+            {ITEMS.map((item) => (
+              <div
+                key={item.time}
+                style={{
+                  display: 'flex',
+                  gap: 32,
+                  padding: '14px 0',
+                  borderBottom: '1px solid rgba(201,168,76,0.08)',
+                  alignItems: 'flex-start',
+                }}
+              >
+                <span
+                  style={{
+                    ...GL,
+                    flexShrink: 0,
+                    minWidth: 64,
+                    fontSize: 10,
+                  }}
+                >
+                  {item.time}
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 13,
+                    color: 'rgba(245,240,232,0.72)',
+                    lineHeight: 1.7,
+                  }}
+                >
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ── Valentine's menu card ─────────────────────────────────────────────────────
+
+function DinnerMenuCard() {
+  const MENU = [
+    'Roasted Garlic, Spinach, and Three Cheese Arancini (V)',
+    'Smoked Salmon Blini with Dill Cream Cheese and Black Caviar',
+    'Baked Chicken and Pesto Spoon with Vine Ripe Tomato (GF)',
+    'Thick Vegetable Spring Rolls with Plum Sauce (VG)',
+    'Diced Chicken, Tomato, Onion, and Basil Bruschetta',
+    'Sicilian Chicken with Parsley, Seasoning, and Lemon Zest Wrapped in Puff Pastry',
+    'Beef Croquette with Pan Sauce',
+    'Tempura Battered Tiger Prawn with Black Caviar Aioli',
+  ];
+
+  return (
+    <div
+      style={{
+        background: '#060f1c',
+        border: '1px solid rgba(201,168,76,0.25)',
+        padding: '52px 40px 48px',
+        position: 'relative',
+      }}
+    >
+      {/* Top gold bar */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0,
+          height: 3,
+          background: 'var(--gold)',
+        }}
       />
 
+      {/* Corner accents */}
+      {(['tl', 'tr', 'bl', 'br'] as const).map((c) => (
+        <div
+          key={c}
+          style={{
+            position: 'absolute',
+            top: c.startsWith('t') ? 12 : 'auto',
+            bottom: c.startsWith('b') ? 12 : 'auto',
+            left: c.endsWith('l') ? 12 : 'auto',
+            right: c.endsWith('r') ? 12 : 'auto',
+          }}
+        >
+          <div style={{
+            position: 'absolute', top: 0, left: 0,
+            width: 20, height: 1,
+            background: 'rgba(201,168,76,0.4)',
+            transform: c.endsWith('r') ? 'translateX(-100%)' : undefined,
+          }} />
+          <div style={{
+            position: 'absolute', top: 0, left: 0,
+            width: 1, height: 20,
+            background: 'rgba(201,168,76,0.4)',
+            transform: c.startsWith('b') ? 'translateY(-100%)' : undefined,
+          }} />
+        </div>
+      ))}
+
+      <div style={{ textAlign: 'center', marginBottom: 36 }}>
+        <div style={{ ...GL, marginBottom: 8, fontSize: 8 }}>Valentine&rsquo;s Day</div>
+        <h3
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 300,
+            fontSize: 32,
+            color: 'var(--cream)',
+            lineHeight: 1.1,
+            marginBottom: 4,
+          }}
+        >
+          Dinner Menu
+        </h3>
+        <div
+          style={{
+            width: 48,
+            height: 1,
+            background: 'var(--gold)',
+            margin: '20px auto 0',
+            opacity: 0.6,
+          }}
+        />
+      </div>
+
+      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+        {MENU.map((item) => (
+          <li
+            key={item}
+            style={{
+              padding: '10px 0',
+              borderBottom: '1px solid rgba(201,168,76,0.08)',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 12,
+            }}
+          >
+            <span
+              style={{
+                width: 4,
+                height: 4,
+                background: 'var(--gold)',
+                borderRadius: '50%',
+                flexShrink: 0,
+                marginTop: 6,
+                display: 'inline-block',
+              }}
+            />
+            <span
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 12,
+                color: 'rgba(245,240,232,0.78)',
+                lineHeight: 1.65,
+                letterSpacing: '0.02em',
+              }}
+            >
+              {item}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Heart motif */}
+      <div style={{ textAlign: 'center', marginTop: 32, opacity: 0.5 }}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--gold)">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// ── Main page ─────────────────────────────────────────────────────────────────
+
+export default function ValentinesPage() {
+  const heroRef = useRef<HTMLElement>(null);
+  const bgRef   = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    gsap.fromTo(bgRef.current, { scale: 1.08 }, { scale: 1, duration: 14, ease: 'none' });
+    gsap.from(textRef.current!.querySelectorAll('.hr'), {
+      y: 30, opacity: 0, duration: 0.85, stagger: 0.1, ease: 'power2.out', delay: 0.15,
+    });
+    gsap.to(bgRef.current, {
+      yPercent: 25, ease: 'none',
+      scrollTrigger: {
+        trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true,
+      },
+    });
+  }, { scope: heroRef });
+
+  const SPECS = [
+    'Muriel Henchman Public Pontoon Gold Coast',
+    '2 for $269',
+    '14th of February, 2026',
+    '2.5 Hours',
+    'Sparkling or Beer on Arrival',
+    'Canapés',
+  ];
+
+  const pStyle: React.CSSProperties = {
+    fontFamily: 'var(--font-body)',
+    fontSize: 14,
+    color: 'rgba(245,240,232,0.72)',
+    lineHeight: 1.85,
+    marginBottom: 16,
+    fontWeight: 300,
+  };
+
+  const dropCap: React.CSSProperties = {
+    fontFamily: 'var(--font-display)',
+    fontSize: 64,
+    float: 'left',
+    lineHeight: 0.78,
+    color: 'var(--gold)',
+    marginRight: 8,
+    marginTop: 8,
+    fontStyle: 'italic',
+  };
+
+  return (
+    <>
       <Nav />
       <main>
-        <CruiseHero
-          eyebrow="Special Event · Valentine's Day"
-          title="Valentine's"
-          titleAccent="Cruise 2026"
-          image="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=2000&q=85"
-          stats={[
-            { label: 'Date',      value: '14 Feb 2026' },
-            { label: '2 Tickets', value: '$269' },
-            { label: 'Departs',   value: '6:00 PM' },
-            { label: 'Duration',  value: '2.5 hours' },
-          ]}
-          bookingUrl="#book"
+
+        {/* ── Hero ── */}
+        <section
+          ref={heroRef}
+          className="relative overflow-hidden"
+          style={{ minHeight: '100vh', background: 'var(--navy)', display: 'flex', alignItems: 'flex-end' }}
+        >
+          <div
+            ref={bgRef}
+            className="absolute inset-0 will-change-transform"
+            style={{
+              backgroundImage: 'url(/sungoddess-page-boat.jpeg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to right, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.55) 55%, rgba(10,22,40,0.18) 100%), linear-gradient(to top, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.08) 50%)',
+            }}
+          />
+
+          {/* Two-column hero content */}
+          <div
+            ref={textRef}
+            className="relative z-10 w-full"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 60,
+              padding: '100px 80px 88px',
+              maxWidth: 1400,
+              width: '100%',
+              alignItems: 'center',
+            }}
+          >
+            {/* Left: heading + CTA */}
+            <div>
+              <div className="hr section-eyebrow" style={{ marginBottom: 24 }}>
+                BOATTIME YC LUXURY
+              </div>
+              <h1
+                className="hr"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(40px, 6vw, 80px)',
+                  lineHeight: 0.95,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--cream)',
+                  marginBottom: 44,
+                }}
+              >
+                Luxury Valentines Cruise
+              </h1>
+              <div className="hr">
+                <a
+                  href="#book"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '14px 36px',
+                    background: 'var(--gold)',
+                    color: '#0A1628',
+                    textDecoration: 'none',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 10,
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                    transition: 'opacity 0.2s',
+                  }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.85'; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
+                >
+                  Book Now &rarr;
+                </a>
+              </div>
+            </div>
+
+            {/* Right: spec checklist */}
+            <div className="hr">
+              <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                {SPECS.map((spec) => (
+                  <li
+                    key={spec}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 14,
+                      padding: '10px 0',
+                      borderBottom: '1px solid rgba(201,168,76,0.12)',
+                    }}
+                  >
+                    {/* Gold checkmark */}
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M2 7L5.5 10.5L12 4" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 13,
+                        color: 'rgba(245,240,232,0.85)',
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      {spec}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Top CTA box ── */}
+        <ValCTABox
+          title="BOARDING 5:30PM ON THE 14TH OF FEBRUARY"
+          bookHref="#book"
         />
 
-        <CruiseEventBanner
-          date="14 February 2026"
-          vessel="Sun Goddess — 34m Superyacht"
-          tagline="Two decks · Professional photography · Gourmet dining"
-          urgency="Limited tickets available for Valentine's evening"
+        {/* ── Photo gallery ── */}
+        <CharterGallery folder="valentines-day-images" />
+
+        {/* ── Split: description left · menu card right ── */}
+        <section style={{ background: 'var(--navy)', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: '0 auto',
+              display: 'grid',
+              gridTemplateColumns: '1.1fr 0.9fr',
+              gap: 0,
+            }}
+          >
+            {/* Left: description */}
+            <div style={{ padding: '80px 56px 80px 48px' }}>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontStyle: 'italic',
+                  fontWeight: 300,
+                  fontSize: 'clamp(24px, 3vw, 40px)',
+                  color: 'var(--gold)',
+                  lineHeight: 1.15,
+                  marginBottom: 40,
+                }}
+              >
+                Spoil your loved one this Valentines Day
+              </h2>
+
+              <p style={pStyle}>
+                <span style={dropCap}>E</span>xperience the ultimate in luxury this Valentine&rsquo;s Day with Boattime Yacht
+                Charters&rsquo; exclusive Superyacht Cruise. As you board at 5.30pm, you&rsquo;ll be
+                welcomed aboard with a glass of sparkling, setting the tone for a lavish evening
+                on the open water.
+              </p>
+
+              <p style={{ ...pStyle, clear: 'both' }}>
+                Our professional photographers will be on hand to capture a memorable boarding photo,
+                the perfect memento of this special occasion. As the sun sets on the horizon, you&rsquo;ll
+                be treated to a gourmet dinner prepared by our talented culinary team, served in the
+                elegant dining room or al fresco on the deck.
+              </p>
+
+              <p style={pStyle}>
+                Throughout the evening, our fully stocked bar will offer a range of top-quality
+                drinks to choose from, ensuring that you and your loved one have a truly indulgent
+                experience. And with a variety of entertainment options on board, there&rsquo;s
+                something for everyone to enjoy.
+              </p>
+
+              <p style={pStyle}>
+                When the night comes to a close, our experienced crew will ensure a smooth and safe
+                return to shore at 8.30pm. Don&rsquo;t miss out on this unforgettable opportunity to
+                celebrate Valentine&rsquo;s Day in the lap of luxury. Book your tickets now for the
+                Boattime Yacht Charters Valentine&rsquo;s Day Superyacht Cruise.
+              </p>
+            </div>
+
+            {/* Right: dinner menu card */}
+            <div
+              style={{
+                padding: '80px 48px',
+                borderLeft: '1px solid rgba(201,168,76,0.1)',
+                background: '#060f1c',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <DinnerMenuCard />
+            </div>
+          </div>
+        </section>
+
+        {/* ── Itinerary accordion ── */}
+        <ItineraryAccordion />
+
+        {/* ── Bottom CTA box ── */}
+        <ValCTABox
+          title="DEPARTS 5:30PM ON THE 14TH OF FEBRUARY"
+          bookHref="#book"
         />
 
-        <CruiseOverview
-          title="Valentine's"
-          titleAccent="Cruise 2026"
-          description={[
-            'Give the gift of an evening they will never forget. Step aboard the Sun Goddess superyacht as the sun dissolves into the Broadwater, and spend two and a half golden hours adrift in absolute luxury.',
-            'From the welcome champagne to the gourmet multi-course dinner and complimentary photography, every detail is prepared so you can focus entirely on the person beside you.',
-          ]}
-          image="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80"
-        />
-
-        <CruisePhotographyFeature />
-
-        <CruiseInclusions
-          items={[
-            { title: 'Champagne on Arrival',     detail: 'Sparkling wine or premium beer to begin the evening as you board.' },
-            { title: 'Multi-Course Dinner',      detail: 'Gourmet canapés followed by a carefully crafted multi-course dining experience.' },
-            { title: 'Professional Photography', detail: 'Complimentary photography on boarding to capture the occasion forever.' },
-            { title: 'Full Bar Service',         detail: 'Fully stocked bar with cocktails, wine, beer, and spirits all evening.' },
-            { title: 'Sunset Views',             detail: 'Dine under the golden-hour sky with 360° views of the Broadwater.' },
-            { title: 'Premium Crew Service',     detail: 'Dedicated crew providing attentive, unhurried service throughout.' },
-          ]}
-        />
-
-        <CruiseScheduleDetails
-          schedule={[
-            { label: 'Boarding',  time: '5:30 PM' },
-            { label: 'Departure', time: '6:00 PM' },
-            { label: 'Return',    time: '8:00 PM' },
-          ]}
-          dates="Saturday, 14 February 2026"
-          location="Muriel Henchman Public Pontoon&#10;Seaworld Drive, Main Beach QLD 4217"
-          vessel="Sun Goddess — 34m superyacht"
-        />
-
-        <CruisePricingCards
-          pricing={[
-            { label: '2 Tickets', price: '$269', note: '$134.50 per person · all inclusive' },
-          ]}
-          bookingUrl="#book"
-        />
-
-        <CruiseGiftVoucherCallout bookingUrl="#book" />
-
-        {/* ── Inline booking widget ── */}
+        {/* ── Booking widget ── */}
         <section
           id="book"
           style={{
-            background: 'var(--navy-mid)',
-            borderTop: '1px solid var(--border-subtle)',
+            background: 'var(--navy-mid, #0d1f38)',
+            borderTop: '1px solid rgba(201,168,76,0.1)',
             padding: '80px 48px 100px',
           }}
         >
           <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ marginBottom: 48, textAlign: 'center' }}>
-              <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
-                Book Your Tickets
-              </div>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <div style={{ ...GL, marginBottom: 16, display: 'block' }}>Book Your Tickets</div>
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 300,
-                  fontSize: 'clamp(36px, 5vw, 60px)',
+                  fontSize: 'clamp(32px, 4.5vw, 56px)',
                   lineHeight: 1.0,
                   letterSpacing: '-0.02em',
                   color: 'var(--cream)',
                   marginBottom: 16,
                 }}
               >
-                Reserve your <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>spot</em>.
+                Reserve your <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>spot</em>.
               </h2>
               <p
                 style={{
                   fontFamily: 'var(--font-body)',
-                  fontSize: 15,
-                  color: 'var(--text-muted)',
+                  fontSize: 14,
+                  color: 'rgba(245,240,232,0.62)',
                   lineHeight: 1.75,
                   maxWidth: 520,
                   margin: '0 auto',
+                  fontWeight: 300,
                 }}
               >
-                Saturday, 14 February 2026. Limited tickets available for Valentine's evening.
-                Instant confirmation on booking.
+                Saturday, 14 February 2026. Limited tickets available. Instant confirmation on booking.
               </p>
             </div>
 
-            <div
-              style={{
-                border: '1px solid var(--border-subtle)',
-                background: 'rgba(255,255,255,0.02)',
-              }}
-            >
+            <div style={{ border: '1px solid rgba(201,168,76,0.15)', background: 'rgba(255,255,255,0.02)' }}>
               <iframe
                 seamless
                 width="100%"
                 height="1000px"
                 frameBorder="0"
-                className="rezdy"
                 src="https://boattimeyachtcharters.rezdy.com/542529/zzz-luxury-valentines-sunset-cruise?iframe=true"
                 style={{ display: 'block' }}
               />
             </div>
           </div>
         </section>
+
       </main>
       <Footer />
     </>

@@ -6,6 +6,7 @@ const ALLOWED = new Set([
   'private-charter-images',
   'corporate-charter-images',
   'wedding-charter-images',
+  'valentines-day-images',
 ]);
 
 export async function GET(

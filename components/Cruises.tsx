@@ -69,7 +69,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 5',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1610343744628-c8e13a666dc0?w=1200&q=80',
+    img: '/Riverfire.jpg',
     href: '/riverfire-2026',
   },
   {
@@ -81,7 +81,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 3',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1661858660542-51240df72dad?w=1200&q=80',
+    img: '/nye2026.webp',
     href: '/nye-2026',
   },
   {
@@ -93,7 +93,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Mermaid Spirit',
     col: 'span 4',
     row: 'span 2',
-    img: 'https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=1200&q=80',
+    img: '/valentines-day-images/valentine3.webp',
     href: '/valentines-day',
   },
   {
