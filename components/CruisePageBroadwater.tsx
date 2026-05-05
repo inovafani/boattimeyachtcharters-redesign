@@ -275,6 +275,7 @@ export default function BroadwaterPage() {
 
         {/* 2 ── PROMOTIONAL BANNER */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '72px 48px',
@@ -497,6 +498,7 @@ export default function BroadwaterPage() {
 
         {/* 4 ── SOCIAL PROOF */}
         <div
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -598,6 +600,7 @@ export default function BroadwaterPage() {
         {/* 8 ── INLINE BOOKING WIDGET */}
         <section
           id="book"
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             borderTop: '1px solid var(--border-subtle)',

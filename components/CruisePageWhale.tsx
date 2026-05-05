@@ -526,7 +526,7 @@ export default function WhalePage() {
 
         {/* 2 ── SOCIAL PROOF */}
         <div
-          className="light-adapt-section"
+          className="light-adapt-section cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -614,7 +614,7 @@ export default function WhalePage() {
 
         {/* 3 ── SESSION INFO BAR */}
         <div
-          className="light-adapt-section"
+          className="light-adapt-section cruise-section"
           style={{
             background: 'var(--navy)',
             padding: '16px 48px',
@@ -677,15 +677,16 @@ export default function WhalePage() {
         </div>
 
         {/* 4 ── WHY SUN GODDESS (new) */}
-        <section style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
           <div
+            className="cruise-page-split"
             style={{
               maxWidth: 1200,
               margin: '0 auto',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 80,
-              alignItems: 'center',
+              alignItems: 'start',
             }}
           >
             {/* Left — image */}
@@ -793,6 +794,7 @@ export default function WhalePage() {
               </p>
               {/* Specs strip */}
               <div
+                className="vessel-specs-grid"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
@@ -827,6 +829,7 @@ export default function WhalePage() {
 
         {/* 5 ── WHAT'S INCLUDED FEATURE GRID (new) */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '100px 48px',
@@ -894,6 +897,7 @@ export default function WhalePage() {
 
             {/* 3-column feature grid */}
             <div
+              className="cruise-3col-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
@@ -943,7 +947,7 @@ export default function WhalePage() {
 
         {/* 7 ── QUICK INFO GRID */}
         <div
-          className="light-adapt-section"
+          className="light-adapt-section cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '60px 48px',
@@ -952,6 +956,7 @@ export default function WhalePage() {
         >
           <div style={{ maxWidth: 1200, margin: '0 auto' }}>
             <div
+              className="cruise-3col-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
@@ -1017,6 +1022,7 @@ export default function WhalePage() {
         {/* 11 ── INLINE BOOKING WIDGET */}
         <section
           id="book"
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             borderTop: '1px solid var(--border-subtle)',

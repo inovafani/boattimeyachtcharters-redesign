@@ -130,6 +130,7 @@ function QldBadge() {
 function NYECTABox({ title, bookHref }: { title: string; bookHref: string }) {
   return (
     <section
+      className="cruise-section"
       style={{
         background: 'var(--navy)',
         padding: '72px 40px 0',
@@ -229,6 +230,7 @@ function EventDetails({
 }) {
   return (
     <section
+      className="cruise-section"
       style={{
         background: 'var(--navy)',
         padding: '60px 80px',
@@ -236,6 +238,7 @@ function EventDetails({
       }}
     >
       <div
+        className="cruise-page-split"
         style={{
           maxWidth: 1100,
           margin: '0 auto',
@@ -335,6 +338,7 @@ function NYEDetailsSection() {
 
   return (
     <section
+      className="cruise-section"
       style={{
         background: 'var(--navy)',
         padding: '0 80px 80px',
@@ -673,6 +677,7 @@ export default function NyePage() {
         {/* ── Booking widget ── */}
         <section
           id="book"
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid, #0d1f38)',
             borderTop: '1px solid rgba(201,168,76,0.1)',

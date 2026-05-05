@@ -17,13 +17,12 @@ const GL: React.CSSProperties = {
   fontWeight: 600,
 };
 
-const GALLERY_MAIN =
-  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80';
+const GALLERY_MAIN = '/sunset-buffet/sunset-buffet1.jpg';
 const GALLERY_THUMBS = [
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
-  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
-  'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&q=80',
-  'https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&q=80',
+  '/sunset-buffet/sunset-buffet2.jpg',
+  '/sunset-buffet/sunset-buffet3.jpg',
+  '/sunset-buffet/sunset-buffet4.jpg',
+  '/sunset-buffet/sunset-buffet5.jpg',
 ];
 const GALLERY_WIDE =
   'https://images.unsplash.com/photo-1548093237-8b67b5c8b5c1?w=2000&q=80';
@@ -307,6 +306,7 @@ export default function BuffetPage() {
 
         {/* 2 ── PROMO BANNER */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '72px 48px',
@@ -494,15 +494,19 @@ export default function BuffetPage() {
         </section>
 
         {/* 3 ── MERMAID SPIRIT OVERVIEW */}
-        <section style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section
+          className="cruise-section"
+          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+        >
           <div
+            className="cruise-page-split"
             style={{
               maxWidth: 1200,
               margin: '0 auto',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 80,
-              alignItems: 'center',
+              alignItems: 'start',
             }}
           >
             {/* Left — image */}
@@ -514,7 +518,7 @@ export default function BuffetPage() {
               }}
             >
               <img
-                src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=900&q=80"
+                src="/sunset-boat.jpg"
                 alt="Mermaid Spirit sunset cruise"
                 style={{
                   width: '100%',
@@ -625,6 +629,7 @@ export default function BuffetPage() {
 
               {/* Vessel specs */}
               <div
+                className="vessel-specs-grid"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
@@ -666,6 +671,7 @@ export default function BuffetPage() {
 
         {/* 5 ── CHEF BRENDAN */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '100px 48px',
@@ -673,6 +679,7 @@ export default function BuffetPage() {
           }}
         >
           <div
+            className="cruise-page-split"
             style={{
               maxWidth: 1200,
               margin: '0 auto',
@@ -826,6 +833,7 @@ export default function BuffetPage() {
 
         {/* 6 ── SOCIAL PROOF BAR */}
         <div
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -912,7 +920,10 @@ export default function BuffetPage() {
         </div>
 
         {/* 7 ── "ENJOY A MOMENT UNDER THE SUNSET" */}
-        <section style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section
+          className="cruise-section"
+          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+        >
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p
               style={{
@@ -999,6 +1010,7 @@ export default function BuffetPage() {
 
         {/* 8 ── MENU DISPLAY */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '100px 48px',
@@ -1066,6 +1078,7 @@ export default function BuffetPage() {
 
             {/* Menu card */}
             <div
+              className="cruise-menu-card-inner"
               style={{
                 border: '1px solid rgba(201,168,76,0.2)',
                 background: 'rgba(255,255,255,0.02)',
@@ -1160,6 +1173,7 @@ export default function BuffetPage() {
 
               {/* Menu columns */}
               <div
+                className="cruise-page-menu-cols"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
@@ -1259,6 +1273,7 @@ export default function BuffetPage() {
         {/* 11 ── INLINE BOOKING WIDGET */}
         <section
           id="book"
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             borderTop: '1px solid var(--border-subtle)',

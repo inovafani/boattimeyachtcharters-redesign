@@ -1477,12 +1477,14 @@ export function CharterInfoBox({
   return (
     <section
       ref={ref}
+      className="cruise-section"
       style={{
         padding: compact ? '40px 48px' : '64px 48px',
         background: 'var(--navy)',
       }}
     >
       <div
+        className="charter-info-inner"
         style={{
           maxWidth: 1200,
           margin: '0 auto',
@@ -1608,6 +1610,7 @@ export function CharterInfoBox({
 export function CharterPhotoRow({ images }: { images: string[] }) {
   return (
     <div
+      className="charter-photo-row"
       style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}
     >
       {images.map((img, i) => (
@@ -2162,6 +2165,7 @@ export function CharterSplitSection({
       }}
     >
       <div
+        className="charter-split-grid"
         style={{
           maxWidth: 1200,
           margin: '0 auto',
@@ -2169,11 +2173,11 @@ export function CharterSplitSection({
           gridTemplateColumns: '1.15fr 0.85fr',
         }}
       >
-        <div className="sp" style={{ padding: '72px 56px 72px 48px' }}>
+        <div className="sp charter-split-col" style={{ padding: '72px 56px 72px 48px' }}>
           {leftContent}
         </div>
         <div
-          className="sp"
+          className="sp charter-split-right"
           style={{
             padding: '72px 48px 72px 48px',
             borderLeft: '1px solid rgba(201,168,76,0.1)',

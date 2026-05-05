@@ -183,6 +183,7 @@ export default function Inquiry() {
       className="relative overflow-hidden inquiry-section"
       style={{
         padding: '110px 48px',
+        overflowX: 'hidden',
         background:
           'linear-gradient(to bottom, var(--navy-mid) 0%, var(--navy) 100%)',
       }}
@@ -203,6 +204,7 @@ export default function Inquiry() {
         style={{
           maxWidth: 1200,
           margin: '0 auto',
+          width: '100%',
           gridTemplateColumns: '1fr 1.1fr',
           gap: 80,
           alignItems: 'start',
@@ -286,7 +288,7 @@ export default function Inquiry() {
                   {d.key}
                 </span>
                 <Icon name={d.icon} size={14} color="var(--gold)" />
-                <span style={{ color: 'var(--text-muted)' }}>{d.val}</span>
+                <span style={{ color: 'var(--text-muted)', wordBreak: 'break-all', overflowWrap: 'anywhere' }}>{d.val}</span>
               </div>
             ))}
           </div>

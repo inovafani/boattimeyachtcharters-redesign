@@ -249,6 +249,7 @@ export default function YachtChartersSection() {
     <div
       ref={sectionRef}
       id="charters"
+      className="charters-section-wrap"
       style={{ padding: '110px 0', background: 'var(--navy)' }}
     >
       <div

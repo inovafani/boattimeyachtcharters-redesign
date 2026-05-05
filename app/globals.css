@@ -366,6 +366,119 @@
     grid-template-columns: 1fr !important;
     gap: 32px !important;
   }
+
+  /* ── Charter mosaic (YachtChartersSection) ── */
+  .charters-section-wrap {
+    padding: 64px 0 !important;
+  }
+  .charter-mosaic {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: auto !important;
+    padding: 0 16px !important;
+    gap: 8px !important;
+  }
+  .charter-card-wrap {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    height: 300px !important;
+  }
+
+  /* ── CruiseSessions — stack sessions vertically ── */
+  .cruise-sessions-inner {
+    flex-direction: column !important;
+  }
+  .cruise-sessions-inner > div:nth-child(2) {
+    width: 100% !important;
+    height: 1px !important;
+  }
+
+  /* ── CruisePhotographyFeature — stack image below text ── */
+  .cruise-photo-feature-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── CruiseGallery — stack main + thumbs vertically ── */
+  .cruise-gallery-top {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+  .cruise-gallery-top > div:nth-child(1) {
+    height: 240px !important;
+  }
+  .cruise-gallery-top > div:nth-child(2) {
+    display: none !important;
+  }
+
+  /* ── CruiseYachts vessel carousel ── */
+  .vessel-carousel-content {
+    padding: 48px 20px 72px !important;
+  }
+
+  /* ── CruiseGiftVoucherCallout ── */
+  .gift-voucher-inner {
+    padding: 32px 20px !important;
+  }
+
+  /* ── CruiseDealBanner ── */
+  .cruise-deal-banner {
+    padding: 20px 16px !important;
+  }
+
+  /* ── CharterSplitSection ── */
+  .charter-split-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .charter-split-col {
+    padding: 48px 20px !important;
+  }
+  .charter-split-right {
+    border-left: none !important;
+    border-top: 1px solid rgba(201, 168, 76, 0.1) !important;
+  }
+
+  /* ── CharterInfoBox inner ── */
+  .charter-info-inner {
+    padding: 32px 20px !important;
+  }
+
+  /* ── CharterPhotoRow ── */
+  .charter-photo-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── CruisePageBuffet inline page sections ── */
+  .cruise-page-split {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .cruise-page-menu-cols {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .cruise-menu-card-inner {
+    padding: 32px 20px !important;
+  }
+
+  /* ── CruiseItinerary — stack intro + accordion vertically ── */
+  .cruise-itinerary-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* ── Vessel specs mini-grid inside overview sections ── */
+  .vessel-specs-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* ── 3-column feature / info grids — stack to 1 column ── */
+  .cruise-3col-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Menu card — clip the absolute watermark so it never bleeds past card bounds */
+.cruise-menu-card-inner {
+  overflow: hidden;
 }
 
 /* TickerBar reserve button — always dark navy text on gold, both modes */

@@ -40,8 +40,8 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
         const { PageFlip } = await import('page-flip');
         const el = containerRef.current;
 
-        const containerWidth = el.parentElement?.clientWidth ?? 1100;
-        const pageW = Math.min(500, Math.floor((containerWidth - 120) / 2));
+        const containerWidth = el.parentElement?.parentElement?.clientWidth ?? 1100;
+        const pageW = Math.min(500, Math.floor((containerWidth - 160) / 2));
         const pageH = Math.round(pageW * 1.414);
 
         const book = new PageFlip(el, {
@@ -96,7 +96,7 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
   };
 
   return (
-    <section style={{ background: '#f2f2f2', padding: '60px 20px' }}>
+    <section style={{ background: '#f2f2f2', padding: '60px 20px', overflow: 'hidden' }}>
       <style>{`
         @keyframes flipbook-spin { to { transform: rotate(360deg); } }
         .fb-arrow:hover { background: rgba(10,22,40,0.16) !important; border-color: rgba(10,22,40,0.4) !important; }

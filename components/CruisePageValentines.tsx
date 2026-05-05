@@ -44,6 +44,7 @@ function AnchorSvg() {
 function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
   return (
     <section
+      className="cruise-section"
       style={{
         background: 'var(--navy)',
         padding: '72px 40px 0',
@@ -203,12 +204,14 @@ function ItineraryAccordion() {
 
   return (
     <section
+      className="cruise-section"
       style={{
         background: 'var(--navy)',
         borderTop: '1px solid rgba(201,168,76,0.1)',
+        padding: '0 48px',
       }}
     >
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <button
           onClick={() => setOpen((o) => !o)}
           style={{
@@ -507,7 +510,7 @@ export default function ValentinesPage() {
           {/* Two-column hero content */}
           <div
             ref={textRef}
-            className="relative z-10 w-full cruise-hero-content"
+            className="relative z-10 w-full cruise-hero-content cruise-page-split"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -607,8 +610,9 @@ export default function ValentinesPage() {
         <CharterGallery folder="valentines-day-images" />
 
         {/* ── Split: description left · menu card right ── */}
-        <section style={{ background: 'var(--navy)', borderTop: '1px solid rgba(201,168,76,0.08)' }}>
+        <section className="cruise-section" style={{ background: 'var(--navy)', borderTop: '1px solid rgba(201,168,76,0.08)', padding: '0 0' }}>
           <div
+            className="cruise-page-split"
             style={{
               maxWidth: 1200,
               margin: '0 auto',
@@ -618,7 +622,7 @@ export default function ValentinesPage() {
             }}
           >
             {/* Left: description */}
-            <div style={{ padding: '80px 56px 80px 48px' }}>
+            <div className="charter-split-col" style={{ padding: '80px 56px 80px 48px' }}>
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
@@ -664,6 +668,7 @@ export default function ValentinesPage() {
 
             {/* Right: dinner menu card */}
             <div
+              className="charter-split-right"
               style={{
                 padding: '80px 48px',
                 borderLeft: '1px solid rgba(201,168,76,0.1)',
@@ -689,6 +694,7 @@ export default function ValentinesPage() {
         {/* ── Booking widget ── */}
         <section
           id="book"
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid, #0d1f38)',
             borderTop: '1px solid rgba(201,168,76,0.1)',

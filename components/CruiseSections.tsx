@@ -975,6 +975,7 @@ export function CruiseSessions({
       style={{ padding: '0 48px', background: 'var(--navy-mid)' }}
     >
       <div
+        className="cruise-sessions-inner"
         style={{
           maxWidth: 1200,
           margin: '0 auto',
@@ -1081,7 +1082,7 @@ export function CruiseDealBanner({
   });
 
   return (
-    <div ref={ref} style={{ background: 'var(--gold)', padding: '24px 48px' }}>
+    <div ref={ref} className="cruise-deal-banner" style={{ background: 'var(--gold)', padding: '24px 48px' }}>
       <div
         style={{
           maxWidth: 1200,
@@ -1658,6 +1659,7 @@ export function CruisePhotographyFeature() {
       style={{ padding: '0 48px', background: 'var(--navy)' }}
     >
       <div
+        className="cruise-photo-feature-grid"
         style={{
           maxWidth: 1200,
           margin: '0 auto',
@@ -1743,6 +1745,7 @@ export function CruiseGallery({
   return (
     <section
       ref={ref}
+      className="cruise-section"
       style={{ background: 'var(--navy)', padding: '0 48px 130px' }}
     >
       <div
@@ -1756,7 +1759,7 @@ export function CruiseGallery({
       >
         {/* Top row: large left image + 2×2 thumbnail grid right */}
         <div
-          className="gl"
+          className="gl cruise-gallery-top"
           style={{
             display: 'grid',
             gridTemplateColumns: '3fr 2fr',
@@ -1835,6 +1838,7 @@ export function CruiseItinerary({
     <section
       id="itinerary"
       ref={ref}
+      className="cruise-section"
       style={{ padding: '100px 48px', background: 'var(--navy)' }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -1854,7 +1858,7 @@ export function CruiseItinerary({
           </h2>
         </div>
         <div
-          className="ia"
+          className="ia cruise-itinerary-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: intro ? '5fr 7fr' : '1fr',
@@ -1949,7 +1953,7 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
   return (
     <section style={{ background: 'var(--navy)' }}>
       {/* Section header */}
-      <div style={{ textAlign: 'center', padding: '80px 48px 48px' }}>
+      <div className="cruise-section" style={{ textAlign: 'center', padding: '80px 48px 48px' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Eyebrow>The Fleet</Eyebrow>
         </div>
@@ -1987,6 +1991,7 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
 
         {/* Centred content overlay */}
         <div
+          className="vessel-carousel-content"
           style={{
             position: 'relative',
             zIndex: 1,
@@ -2223,6 +2228,7 @@ export function CruiseExperience({ videoId }: { videoId: string }) {
   return (
     <section
       ref={ref}
+      className="cruise-section"
       style={{ padding: '100px 48px', background: 'var(--navy-mid)' }}
     >
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -2297,6 +2303,7 @@ export function CruiseGiftVoucherCallout({
       style={{ padding: '72px 48px', background: 'var(--navy)' }}
     >
       <div
+        className="gift-voucher-inner"
         style={{
           maxWidth: 900,
           margin: '0 auto',

@@ -306,6 +306,7 @@ export default function LunchPage() {
 
         {/* 2 ── PROMO BANNER */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '72px 48px',
@@ -492,15 +493,16 @@ export default function LunchPage() {
         </section>
 
         {/* 3 ── MERMAID SPIRIT OVERVIEW */}
-        <section style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
           <div
+            className="cruise-page-split"
             style={{
               maxWidth: 1200,
               margin: '0 auto',
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 80,
-              alignItems: 'center',
+              alignItems: 'start',
             }}
           >
             {/* Left — image */}
@@ -619,6 +621,7 @@ export default function LunchPage() {
               </div>
 
               <div
+                className="vessel-specs-grid"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
@@ -660,6 +663,7 @@ export default function LunchPage() {
 
         {/* 5 ── CHEF BRENDAN */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '100px 48px',
@@ -667,13 +671,14 @@ export default function LunchPage() {
           }}
         >
           <div
+            className="cruise-page-split"
             style={{
               maxWidth: 1200,
               margin: '0 auto',
               display: 'grid',
               gridTemplateColumns: '1fr 1.6fr',
               gap: 80,
-              alignItems: 'center',
+              alignItems: 'start',
             }}
           >
             <div style={{ position: 'relative' }}>
@@ -800,6 +805,7 @@ export default function LunchPage() {
 
         {/* 6 ── SOCIAL PROOF BAR */}
         <div
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -886,7 +892,7 @@ export default function LunchPage() {
         </div>
 
         {/* 7 ── MIDDAY ON THE WATER */}
-        <section style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p
               style={{
@@ -974,6 +980,7 @@ export default function LunchPage() {
 
         {/* 8 ── MENU DISPLAY */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '100px 48px',
@@ -1040,6 +1047,7 @@ export default function LunchPage() {
 
             {/* Menu card */}
             <div
+              className="cruise-menu-card-inner"
               style={{
                 border: '1px solid rgba(201,168,76,0.2)',
                 background: 'rgba(255,255,255,0.02)',
@@ -1130,6 +1138,7 @@ export default function LunchPage() {
               </div>
 
               <div
+                className="cruise-page-menu-cols"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(3, 1fr)',
@@ -1227,6 +1236,7 @@ export default function LunchPage() {
 
         {/* 10 ── GET YOUR TICKETS NOW */}
         <section
+          className="cruise-section"
           style={{
             background: 'var(--gold)',
             padding: '72px 48px',
@@ -1361,6 +1371,7 @@ export default function LunchPage() {
         {/* 11 ── INLINE BOOKING WIDGET */}
         <section
           id="book"
+          className="cruise-section"
           style={{
             background: 'var(--navy-mid)',
             borderTop: '1px solid var(--border-subtle)',
