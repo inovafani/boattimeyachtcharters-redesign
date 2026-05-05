@@ -26,10 +26,10 @@ export default function HomePage() {
         <StatsBar />
         <Fleet />
         <WhaleSection />
-        <LiveStream />
+        {/* <LiveStream /> */}
         <Cruises />
         <YachtChartersSection />
-        <DayTimeline />
+        {/* <DayTimeline /> */}
         <Reviews />
         <CtaBand />
         <Destinations />

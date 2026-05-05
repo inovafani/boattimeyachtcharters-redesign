@@ -47,7 +47,7 @@ const YACHTS: YachtData[] = [
     ],
     ctaLabel: 'Tour Sun Goddess',
     ctaHref: '/#inquiry',
-    img: '/EDI_2899.jpg',
+    img: '/sun-goddess-main.jpeg',
     reverse: false,
   },
   {
@@ -73,7 +73,7 @@ const YACHTS: YachtData[] = [
     ],
     ctaLabel: 'Tour Mermaid Spirit',
     ctaHref: '/#inquiry',
-    img: '/EDI_2760.jpg',
+    img: '/mermaid-spirit-main.jpg',
     reverse: true,
   },
 ];

@@ -264,7 +264,13 @@ export default function Hero() {
               on the water,
             </span>
           </div>
-          <div style={{ overflow: 'hidden', paddingBottom: '0.12em', marginBottom: '-0.12em' }}>
+          <div
+            style={{
+              overflow: 'hidden',
+              paddingBottom: '0.12em',
+              marginBottom: '-0.12em',
+            }}
+          >
             <span ref={line3Ref} style={{ display: 'block' }}>
               unforgettable.
             </span>
@@ -289,11 +295,14 @@ export default function Hero() {
 
         {/* Buttons */}
         <div ref={btnsRef} className="flex gap-4 flex-wrap">
-          <Button variant="primary" href="#cruises">
-            Sunset Cruises
-          </Button>
-          <Button variant="ghost" href="#inquiry">
+          <Button
+            variant="primary"
+            href="/cruise-tickets-luxury-whale-watching"
+          >
             Whale Watching
+          </Button>
+          <Button variant="ghost" href="/private-yacht-charter">
+            Private Charter
           </Button>
         </div>
       </div>
