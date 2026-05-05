@@ -500,7 +500,7 @@ export function VesselCards() {
     {
       name: 'Sun Goddess',
       tagline: '114ft luxury superyacht',
-      specs: ['135 day guests', 'Dual bars', 'Watersports deck'],
+      specs: ['150 day guests', 'Dual bars', 'Watersports deck'],
       description:
         "Gold Coast's premier luxury superyacht. Spacious decks, dual bars, state-of-the-art sound, and fully customisable routes for any occasion.",
       href: '/sun-goddess-gold-coast',

@@ -468,7 +468,7 @@ const VESSELS = [
     name: 'Sun Goddess',
     description:
       'Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
-    pax: '135 Guests',
+    pax: '150 Guests',
     size: '34m (114ft)',
     features: [
       'Primary Whale Vessel',
@@ -802,7 +802,7 @@ export default function WhalePage() {
                 {[
                   { label: 'Vessel', value: 'Sun Goddess' },
                   { label: 'Length', value: '34m (114ft)' },
-                  { label: 'Capacity', value: 'Up to 135 guests' },
+                  { label: 'Capacity', value: 'Up to 150 guests' },
                   { label: 'Speed', value: "Among Gold Coast's fastest" },
                 ].map((s) => (
                   <div key={s.label}>

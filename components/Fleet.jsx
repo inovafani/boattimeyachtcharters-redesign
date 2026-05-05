@@ -113,7 +113,7 @@ const YACHTS = [
     em: 'head-turner',
     body: 'Sleek, stylish, unmistakable on the Broadwater. Dual bars, two decks, a dual-level galley, and sound throughout — room to breathe without giving up a thing.',
     specs: [
-      ['Guests', '135'],
+      ['Guests', '150'],
       ['Length', '34m'],
       ['Decks', 'Two'],
     ],

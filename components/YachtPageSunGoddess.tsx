@@ -754,8 +754,8 @@ export default function SunGoddessPage() {
           titleAccent="114ft Superyacht"
           image="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=2000&q=85"
           stats={[
-            { label: 'Length', value: '110 ft' },
-            { label: 'Guests', value: 'Up to 135' },
+            { label: 'Length', value: '114 ft' },
+            { label: 'Guests', value: 'Up to 150' },
             { label: 'Location', value: 'Gold Coast' },
             { label: 'Bars', value: '2 on board' },
           ]}
