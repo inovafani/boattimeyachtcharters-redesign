@@ -50,7 +50,7 @@ const YACHTS: YachtData[] = [
     ctaHref: '/#inquiry',
     tourUrl:
       'https://kuula.co/share/collection/7M9TC?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
-    img: '/sun-goddess-main.jpeg',
+    img: '/sun-goddess-main-upscale.png',
     reverse: false,
   },
   {

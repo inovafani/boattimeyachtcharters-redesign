@@ -161,7 +161,7 @@ export default function Hero() {
         ref={bgRef}
         className="absolute inset-0 will-change-transform"
         style={{
-          backgroundImage: 'url(/hero-boattime.png)',
+          backgroundImage: 'url(/hero-boattime-upscale.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center 40%',
         }}
