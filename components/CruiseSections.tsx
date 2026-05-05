@@ -1082,7 +1082,11 @@ export function CruiseDealBanner({
   });
 
   return (
-    <div ref={ref} className="cruise-deal-banner" style={{ background: 'var(--gold)', padding: '24px 48px' }}>
+    <div
+      ref={ref}
+      className="cruise-deal-banner"
+      style={{ background: 'var(--gold)', padding: '24px 48px' }}
+    >
       <div
         style={{
           maxWidth: 1200,
@@ -1746,7 +1750,7 @@ export function CruiseGallery({
     <section
       ref={ref}
       className="cruise-section"
-      style={{ background: 'var(--navy)', padding: '0 48px 130px' }}
+      style={{ background: 'var(--navy)', padding: '80px 48px 80px' }}
     >
       <div
         style={{
@@ -1953,7 +1957,10 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
   return (
     <section style={{ background: 'var(--navy)' }}>
       {/* Section header */}
-      <div className="cruise-section" style={{ textAlign: 'center', padding: '80px 48px 48px' }}>
+      <div
+        className="cruise-section"
+        style={{ textAlign: 'center', padding: '80px 48px 48px' }}
+      >
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Eyebrow>The Fleet</Eyebrow>
         </div>
@@ -1970,7 +1977,10 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
       </div>
 
       {/* Full-bleed carousel */}
-      <div className="vessel-carousel-overlay" style={{ position: 'relative', minHeight: 580 }}>
+      <div
+        className="vessel-carousel-overlay"
+        style={{ position: 'relative', minHeight: 580 }}
+      >
         {/* Background image */}
         <div
           style={{

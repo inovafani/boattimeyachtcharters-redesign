@@ -24,9 +24,9 @@ const GL: React.CSSProperties = {
 };
 
 const GALLERY_THUMBS = [
-  'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80',
-  'https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=600&q=80',
-  'https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=600&q=80',
+  '/humpback-circle.jpg',
+  '/humpbacks.jpg',
+  '/luxury-whale.jpg',
   '/broadwater.jpeg',
 ];
 
