@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav';
+import HashScroll from '@/components/HashScroll';
 import Hero from '@/components/Hero';
 import StatsBar from '@/components/StatsBar';
 import Fleet from '@/components/Fleet';
@@ -21,6 +22,7 @@ export default function HomePage() {
   return (
     <>
       <Nav />
+      <HashScroll />
       <main>
         <Hero />
         <StatsBar />

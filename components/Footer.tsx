@@ -5,7 +5,6 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 function FootLink({
@@ -97,7 +96,11 @@ export default function Footer() {
         >
           {/* Brand */}
           <div>
-            <a href="/" className="site-header__logo" style={{ marginBottom: 20 }}>
+            <a
+              href="/"
+              className="site-header__logo"
+              style={{ marginBottom: 20 }}
+            >
               <img
                 src="/boattime-logo.png"
                 alt="Boattime Yacht Charters"
@@ -125,7 +128,7 @@ export default function Footer() {
             <div className="flex gap-2.5">
               {/* Facebook */}
               <a
-                href="#"
+                href="https://www.facebook.com/boattimeyachtcharters/"
                 aria-label="Facebook"
                 className="flex items-center justify-center"
                 style={{
@@ -146,13 +149,19 @@ export default function Footer() {
                   e.currentTarget.style.color = 'var(--gold)';
                 }}
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                 </svg>
               </a>
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/boattimeyachtcharters/"
                 aria-label="Instagram"
                 className="flex items-center justify-center"
                 style={{
@@ -173,10 +182,26 @@ export default function Footer() {
                   e.currentTarget.style.color = 'var(--gold)';
                 }}
               >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+                  <circle
+                    cx="17.5"
+                    cy="6.5"
+                    r="0.8"
+                    fill="currentColor"
+                    stroke="none"
+                  />
                 </svg>
               </a>
             </div>
@@ -206,14 +231,18 @@ export default function Footer() {
           <div>
             <ColHead>Yacht Charters</ColHead>
             <FootLink href="/private-yacht-charter">Private Charter</FootLink>
-            <FootLink href="/corporate-yacht-charter">Corporate Charter</FootLink>
+            <FootLink href="/corporate-yacht-charter">
+              Corporate Charter
+            </FootLink>
             <FootLink href="/wedding-yacht-charter">Wedding Charter</FootLink>
-            <FootLink href="/yacht-charter-menus">Catering &amp; Menus</FootLink>
+            <FootLink href="/yacht-charter-menus">
+              Catering &amp; Menus
+            </FootLink>
             <div style={{ marginTop: 28 }}>
               <ColHead>Our Yachts</ColHead>
             </div>
-            <FootLink>Sun Goddess</FootLink>
-            <FootLink>Mermaid Spirit</FootLink>
+            <FootLink href="#fleet">Sun Goddess</FootLink>
+            <FootLink href="#fleet">Mermaid Spirit</FootLink>
           </div>
 
           {/* Contact */}
@@ -223,12 +252,12 @@ export default function Footer() {
             <FootLink href="mailto:info@boattimeyachtcharters.com.au">
               info@boattimeyachtcharters.com.au
             </FootLink>
-            <div style={{ marginTop: 28 }}>
+            {/* <div style={{ marginTop: 28 }}>
               <ColHead>Company</ColHead>
             </div>
             <FootLink>About BoatTime</FootLink>
             <FootLink href="/boattime-news">Boattime News</FootLink>
-            <FootLink href="#inquiry">Booking Enquiry</FootLink>
+            <FootLink href="#inquiry">Booking Enquiry</FootLink> */}
           </div>
         </div>
 

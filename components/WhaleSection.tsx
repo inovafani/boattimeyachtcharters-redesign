@@ -120,7 +120,7 @@ export default function WhaleSection() {
           <div className="whale-cta-row">
             <Button
               variant="primary"
-              href="https://boattimeyachtcharters.com/cruise-tickets-luxury-whale-watching/"
+              href="/cruise-tickets-luxury-whale-watching"
             >
               Book Whale Watching
             </Button>

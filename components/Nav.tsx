@@ -3,6 +3,26 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeProvider';
 
+function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!href.startsWith('/#')) return;
+  const hash = href.slice(1); // e.g. '#fleet'
+  if (window.location.pathname === '/') {
+    // Already on homepage — smooth scroll with navbar offset
+    e.preventDefault();
+    const el = document.querySelector(hash);
+    if (!el) return;
+    const navH = (document.querySelector('.site-header') as HTMLElement)?.offsetHeight ?? 90;
+    const top = el.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top, behavior: 'smooth' });
+  } else {
+    // On a subpage — store target and navigate to home without hash
+    // (hash in URL conflicts with GSAP ScrollTrigger's init scroll reset)
+    e.preventDefault();
+    sessionStorage.setItem('scrollTo', hash);
+    window.location.href = '/';
+  }
+}
+
 const NAV_LINKS = [
   { label: 'Fleet', href: '/#fleet' },
   { label: 'Whale', href: '/#whale' },
@@ -54,7 +74,7 @@ export default function Nav() {
         {/* Desktop nav */}
         <nav className="site-header__nav">
           {NAV_LINKS.map((n) => (
-            <a key={n.label} href={n.href} className="site-header__nav-link">
+            <a key={n.label} href={n.href} className="site-header__nav-link" onClick={(e) => handleHashNav(e, n.href)}>
               {n.label}
             </a>
           ))}
@@ -95,7 +115,7 @@ export default function Nav() {
             <span>Tickets</span>
           </a>
 
-          <a href="/#inquiry" className="site-header__reserve">
+          <a href="/#inquiry" className="site-header__reserve" onClick={(e) => handleHashNav(e, '/#inquiry')}>
             <span>Reserve</span>
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path
@@ -136,7 +156,7 @@ export default function Nav() {
         <ul className="mobile-drawer__nav">
           {MOBILE_LINKS.map((n, i) => (
             <li key={n.num} style={{ '--i': i } as React.CSSProperties}>
-              <a href={n.href} data-num={n.num} onClick={() => setMobileOpen(false)}>
+              <a href={n.href} data-num={n.num} onClick={(e) => { handleHashNav(e, n.href); setMobileOpen(false); }}>
                 <span>
                   {n.pre} <em>{n.em}</em>
                 </span>
@@ -155,17 +175,17 @@ export default function Nav() {
             </div>
             <div className="mobile-drawer__footer-block">
               <span className="mobile-drawer__footer-label">Berth</span>
-              <span className="mobile-drawer__footer-value">Marina Mirage · Gold Coast</span>
+              <span className="mobile-drawer__footer-value">Muriel Henchman Public Pontoon · Main Beach 4217</span>
             </div>
           </div>
           <div className="mobile-drawer__footer-ctas">
-            <a href="/#inquiry" className="mobile-drawer__cta" onClick={() => setMobileOpen(false)}>
+            <a href="/#inquiry" className="mobile-drawer__cta" onClick={(e) => { handleHashNav(e, '/#inquiry'); setMobileOpen(false); }}>
               Reserve a Cruise →
             </a>
             <a
               href="/#inquiry"
               className="mobile-drawer__cta mobile-drawer__cta--secondary"
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => { handleHashNav(e, '/#inquiry'); setMobileOpen(false); }}
             >
               Custom Enquiry →
             </a>

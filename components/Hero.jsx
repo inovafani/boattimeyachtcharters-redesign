@@ -64,7 +64,7 @@ const Hero = ({ onReserve, onCruises }) => (
         Luxury <ItalicEm>on the water,</ItalicEm><br/>unforgettable.
       </h1>
       <p className="hd3" style={{ ...heroStyles.sub, ...heroStyles.fade }}>
-        Two superyachts berthed at Marina Mirage. Whale watching in season, sunset
+        Two superyachts berthed at Muriel Henchman Public Pontoon, Main Beach 4217. Whale watching in season, sunset
         cruises year-round, private charters on your afternoon. Tell us the occasion —
         we&rsquo;ll write the day.
       </p>

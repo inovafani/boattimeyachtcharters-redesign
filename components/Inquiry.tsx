@@ -250,7 +250,7 @@ export default function Inquiry() {
               {
                 key: 'Dock',
                 icon: 'pin' as const,
-                val: 'Muriel Henchman Pontoon, Marina Mirage',
+                val: 'Muriel Henchman Public Pontoon, Main Beach 4217',
               },
               {
                 key: 'Hours',

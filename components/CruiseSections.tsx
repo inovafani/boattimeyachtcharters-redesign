@@ -184,7 +184,7 @@ export function CruiseHero({
           <Button variant="primary" href={bookingUrl}>
             Book Now
           </Button>
-          <Button variant="ghost" href="#details">
+          <Button variant="ghost" href="#itinerary">
             View Details
           </Button>
         </div>
@@ -1833,6 +1833,7 @@ export function CruiseItinerary({
 
   return (
     <section
+      id="itinerary"
       ref={ref}
       style={{ padding: '100px 48px', background: 'var(--navy)' }}
     >

@@ -63,8 +63,8 @@ const Footer = () => (
         </div>
         <div>
           <div style={footStyles.colHead}>Contact</div>
-          <FootLink>Muriel Henchman Pontoon</FootLink>
-          <FootLink>Marina Mirage, Southport QLD</FootLink>
+          <FootLink>Muriel Henchman Public Pontoon</FootLink>
+          <FootLink>Main Beach 4217</FootLink>
           <FootLink>+61 7 5528 0400</FootLink>
           <FootLink>info@boattimeyachtcharters.com.au</FootLink>
           <div style={{ ...footStyles.colHead, marginTop: 32 }}>Studio</div>

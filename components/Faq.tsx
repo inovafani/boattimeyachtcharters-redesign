@@ -11,11 +11,11 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const FAQS = [
   {
     q: 'Where do your boats depart from?',
-    a: 'Our boats are berthed at Muriel Henchman Public Pontoon on the Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach. Look for our signage next to the Heli Tours at Marina Mirage.',
+    a: 'Our boats are berthed at Muriel Henchman Public Pontoon, Main Beach 4217 — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
   },
   {
     q: 'Do you offer pre-made charter packages?',
-    a: "Three starting points: Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o'clock out of Marina Mirage into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.",
+    a: "Three starting points: Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o'clock out of Muriel Henchman Public Pontoon into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.",
   },
   {
     q: 'What about food and drinks?',

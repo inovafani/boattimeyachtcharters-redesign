@@ -49,7 +49,7 @@ const Inquiry = React.forwardRef((_, ref) => {
           <h2 style={inqStyles.h}>Tell us the<br/><ItalicEm>occasion</ItalicEm>.</h2>
           <p style={inqStyles.body}>Every charter begins with a conversation. Share the afternoon you have in mind — the date, the guests, the reason — and our concierge replies within the hour.</p>
           <div style={inqStyles.details}>
-            <div style={inqStyles.d}><span style={inqStyles.dKey}>Dock</span><Icon name="pin" size={14} color="var(--gold)"/> Muriel Henchman Pontoon, Marina Mirage</div>
+            <div style={inqStyles.d}><span style={inqStyles.dKey}>Dock</span><Icon name="pin" size={14} color="var(--gold)"/> Muriel Henchman Public Pontoon, Main Beach 4217</div>
             <div style={inqStyles.d}><span style={inqStyles.dKey}>Hours</span><Icon name="clock" size={14} color="var(--gold)"/> 08:00 — 20:00 daily</div>
             <div style={inqStyles.d}><span style={inqStyles.dKey}>Direct</span><Icon name="phone" size={14} color="var(--gold)"/> +61 7 5528 0400</div>
             <div style={inqStyles.d}><span style={inqStyles.dKey}>Email</span><Icon name="mail" size={14} color="var(--gold)"/> info@boattimeyachtcharters.com.au</div>

@@ -377,7 +377,7 @@ export default function Fleet() {
           }}
         >
           Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks
-          of celebration. Both berthed at Marina Mirage — ready when you are.
+          of celebration. Both berthed at Muriel Henchman Public Pontoon, Main Beach 4217 — ready when you are.
         </p>
       </div>
 
