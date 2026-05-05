@@ -898,13 +898,12 @@ export default function RiverPage() {
               }}
             >
               <span
+                className="hero-gold-tag"
                 style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: 10,
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
-                  color: '#0A1628',
-                  background: 'var(--gold)',
                   padding: '6px 16px',
                   fontWeight: 700,
                 }}
@@ -929,13 +928,12 @@ export default function RiverPage() {
             <div className="hr">
               <a
                 href="#book"
+                className="hero-gold-tag"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 10,
                   padding: '14px 36px',
-                  background: 'var(--gold)',
-                  color: '#0A1628',
                   textDecoration: 'none',
                   fontFamily: 'var(--font-body)',
                   fontSize: 10,

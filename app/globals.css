@@ -133,6 +133,11 @@
     border-color: var(--gold);
   }
 
+  .hero-gold-tag {
+    background: var(--gold);
+    color: #0a1628;
+  }
+
   .btn-primary:hover {
     background: var(--gold-light);
     border-color: var(--gold-light);
@@ -424,9 +429,16 @@
 }
 
 /* ── Hero sections keep white text (dark overlay stays behind) */
-[data-theme='light'] .cruise-hero-content,
-[data-theme='light'] .cruise-hero-content * {
+[data-theme='light'] .cruise-hero-content {
   color: #f5f0e8 !important;
+}
+[data-theme='light'] .cruise-hero-content *:not(.hero-gold-tag):not(.btn-primary) {
+  color: #f5f0e8 !important;
+}
+/* Gold tags and primary buttons are excluded above — keep dark navy text on gold background */
+[data-theme='light'] .hero-gold-tag,
+[data-theme='light'] .btn-primary {
+  color: #0a1628 !important;
 }
 
 /* ── Homepage hero — photo overlay, text always stays cream ─── */
@@ -545,6 +557,9 @@
 }
 
 /* ── Buttons ────────────────────────────────────────────────── */
+[data-theme='light'] .btn-primary {
+  color: #0a1628 !important;
+}
 [data-theme='light'] .btn-ghost {
   border-color: rgba(10, 22, 40, 0.3) !important;
   color: #0a1628 !important;
@@ -556,6 +571,11 @@
 [data-theme='light'] .btn-outline {
   border-color: var(--gold) !important;
   color: var(--gold) !important;
+}
+/* Ghost button on dark photo overlay — must stay cream despite general ghost rule above */
+[data-theme='light'] .cruise-hero-content .btn-ghost {
+  color: #f5f0e8 !important;
+  border-color: rgba(245, 240, 232, 0.4) !important;
 }
 
 /* ============================================================

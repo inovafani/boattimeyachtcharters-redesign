@@ -507,7 +507,7 @@ export default function ValentinesPage() {
           {/* Two-column hero content */}
           <div
             ref={textRef}
-            className="relative z-10 w-full"
+            className="relative z-10 w-full cruise-hero-content"
             style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
@@ -540,13 +540,12 @@ export default function ValentinesPage() {
               <div className="hr">
                 <a
                   href="#book"
+                  className="hero-gold-tag"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: 10,
                     padding: '14px 36px',
-                    background: 'var(--gold)',
-                    color: '#0A1628',
                     textDecoration: 'none',
                     fontFamily: 'var(--font-body)',
                     fontSize: 10,
