@@ -729,6 +729,29 @@
   color: var(--navy);
 }
 
+/* Tickets button — solid gold fill, sits left of Reserve */
+.site-header__tickets {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--gold);
+  padding: 10px 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.site-header__tickets:hover {
+  background: #b8923e;
+  color: var(--navy);
+}
+
 /* Hamburger — 44px circle, hidden on desktop */
 .site-header__menu-btn {
   display: none;
@@ -985,6 +1008,10 @@
   }
 
   .site-header__phone {
+    display: none;
+  }
+
+  .site-header__tickets {
     display: none;
   }
 

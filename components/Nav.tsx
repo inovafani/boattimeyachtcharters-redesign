@@ -91,6 +91,10 @@ export default function Nav() {
             )}
           </button>
 
+          <a href="/tickets" className="site-header__tickets">
+            <span>Tickets</span>
+          </a>
+
           <a href="/#inquiry" className="site-header__reserve">
             <span>Reserve</span>
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">

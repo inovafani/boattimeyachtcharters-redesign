@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Icon } from './Shared';
+
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -97,51 +97,17 @@ export default function Footer() {
         >
           {/* Brand */}
           <div>
-            <div
-              className="flex items-center gap-3.5"
-              style={{ marginBottom: 20 }}
-            >
-              <div
-                className="flex items-center justify-center"
-                style={{
-                  width: 40,
-                  height: 40,
-                  border: '1px solid var(--gold)',
-                  fontFamily: 'var(--font-display)',
-                  fontStyle: 'italic',
-                  fontSize: 20,
-                  color: 'var(--gold)',
-                }}
-              >
-                B
+            <a href="/" className="site-header__logo" style={{ marginBottom: 20 }}>
+              <img
+                src="/boattime-logo.png"
+                alt="Boattime Yacht Charters"
+                className="site-header__logo-img"
+              />
+              <div className="site-header__logo-text">
+                <strong>Boattime</strong>
+                <em>Yacht Charters</em>
               </div>
-              <div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 600,
-                    fontSize: 26,
-                    letterSpacing: '0.02em',
-                  }}
-                >
-                  <span style={{ color: 'var(--gold)' }}>Boat</span>
-                  <span style={{ color: 'var(--cream)' }}>Time</span>
-                </div>
-                <div
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: 8,
-                    letterSpacing: '0.32em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-muted)',
-                    marginTop: 3,
-                    fontWeight: 500,
-                  }}
-                >
-                  Yacht Charters
-                </div>
-              </div>
-            </div>
+            </a>
             <p
               style={{
                 fontFamily: 'var(--font-body)',
@@ -157,31 +123,62 @@ export default function Footer() {
             </p>
             {/* Socials */}
             <div className="flex gap-2.5">
-              {(['instagram', 'facebook', 'mail'] as const).map((icon) => (
-                <a
-                  key={icon}
-                  href="#"
-                  className="flex items-center justify-center transition-colors duration-300"
-                  style={{
-                    width: 38,
-                    height: 38,
-                    border: '1px solid rgba(201,168,76,0.28)',
-                    color: 'var(--gold)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--gold)';
-                    e.currentTarget.style.borderColor = 'var(--gold)';
-                    e.currentTarget.style.color = 'var(--navy)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.28)';
-                    e.currentTarget.style.color = 'var(--gold)';
-                  }}
-                >
-                  <Icon name={icon} size={14} color="inherit" />
-                </a>
-              ))}
+              {/* Facebook */}
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="flex items-center justify-center"
+                style={{
+                  width: 38,
+                  height: 38,
+                  border: '1px solid rgba(201,168,76,0.28)',
+                  color: 'var(--gold)',
+                  transition: 'background 0.3s, border-color 0.3s, color 0.3s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--gold)';
+                  e.currentTarget.style.borderColor = 'var(--gold)';
+                  e.currentTarget.style.color = 'var(--navy)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.borderColor = 'rgba(201,168,76,0.28)';
+                  e.currentTarget.style.color = 'var(--gold)';
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="flex items-center justify-center"
+                style={{
+                  width: 38,
+                  height: 38,
+                  border: '1px solid rgba(201,168,76,0.28)',
+                  color: 'var(--gold)',
+                  transition: 'background 0.3s, border-color 0.3s, color 0.3s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--gold)';
+                  e.currentTarget.style.borderColor = 'var(--gold)';
+                  e.currentTarget.style.color = 'var(--navy)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.borderColor = 'rgba(201,168,76,0.28)';
+                  e.currentTarget.style.color = 'var(--gold)';
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
             </div>
           </div>
 
