@@ -288,6 +288,7 @@ export default function StatsBar() {
                 ref={(el) => {
                   numRefs.current[i] = el;
                 }}
+                className="stat-num"
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: 'clamp(80px, 9vw, 140px)',

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,6 +19,7 @@ interface YachtData {
   feats: string[];
   ctaLabel: string;
   ctaHref: string;
+  tourUrl?: string;
   img: string;
   reverse: boolean;
 }
@@ -47,6 +48,8 @@ const YACHTS: YachtData[] = [
     ],
     ctaLabel: 'Tour Sun Goddess',
     ctaHref: '/#inquiry',
+    tourUrl:
+      'https://kuula.co/share/collection/7M9TC?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
     img: '/sun-goddess-main.jpeg',
     reverse: false,
   },
@@ -73,12 +76,134 @@ const YACHTS: YachtData[] = [
     ],
     ctaLabel: 'Tour Mermaid Spirit',
     ctaHref: '/#inquiry',
+    tourUrl:
+      'https://kuula.co/share/collection/7MvRw?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
     img: '/mermaid-spirit-main.jpg',
     reverse: true,
   },
 ];
 
-function YachtShowcase({ y }: { y: YachtData }) {
+function TourModal({
+  url,
+  label,
+  onClose,
+}: {
+  url: string;
+  label: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.9)',
+        zIndex: 2000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+      }}
+      onClick={onClose}
+    >
+      <div
+        style={{ position: 'relative', width: '100%', maxWidth: 1100 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          aria-label="Close tour"
+          style={{
+            position: 'absolute',
+            top: -48,
+            right: 0,
+            background: 'transparent',
+            border: '1px solid rgba(201,168,76,0.5)',
+            color: 'var(--gold)',
+            width: 38,
+            height: 38,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 18,
+            lineHeight: 1,
+            transition: 'background 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background =
+              'rgba(201,168,76,0.15)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background =
+              'transparent';
+          }}
+        >
+          ✕
+        </button>
+
+        {/* Label */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -46,
+            left: 0,
+            fontFamily: 'var(--font-body)',
+            fontSize: 9,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+            color: 'rgba(201,168,76,0.7)',
+            fontWeight: 600,
+          }}
+        >
+          360° Virtual Tour — {label}
+        </div>
+
+        {/* iframe 16:9 */}
+        <div
+          style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}
+        >
+          <iframe
+            src={url}
+            title="Sun Goddess 360 Virtual Tour"
+            allowFullScreen
+            allow="xr-spatial-tracking; gyroscope; accelerometer"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              display: 'block',
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function YachtShowcase({
+  y,
+  onTourClick,
+}: {
+  y: YachtData;
+  onTourClick?: () => void;
+}) {
   const showcaseRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
@@ -292,24 +417,54 @@ function YachtShowcase({ y }: { y: YachtData }) {
         </div>
 
         {/* CTA */}
-        <a href={y.ctaHref} className="yacht-cta-link">
-          {y.ctaLabel}
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 12 12"
-            fill="none"
-            aria-hidden="true"
+        {y.tourUrl && onTourClick ? (
+          <button
+            onClick={onTourClick}
+            className="yacht-cta-link"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+            }}
           >
-            <path
-              d="M2 6h8M6 2l4 4-4 4"
-              stroke="currentColor"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
+            {y.ctaLabel}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 6h8M6 2l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        ) : (
+          <a href={y.ctaHref} className="yacht-cta-link">
+            {y.ctaLabel}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 6h8M6 2l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        )}
       </div>
     </div>
   );
@@ -318,6 +473,10 @@ function YachtShowcase({ y }: { y: YachtData }) {
 export default function Fleet() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [activeTour, setActiveTour] = useState<{
+    url: string;
+    label: string;
+  } | null>(null);
 
   useGSAP(
     () => {
@@ -377,14 +536,35 @@ export default function Fleet() {
           }}
         >
           Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks
-          of celebration. Both berthed at Muriel Henchman Public Pontoon, Main Beach 4217 — ready when you are.
+          of celebration. Both berthed at Muriel Henchman Public Pontoon, Main
+          Beach 4217 — ready when you are.
         </p>
       </div>
 
       {/* Yacht showcases */}
       {YACHTS.map((y) => (
-        <YachtShowcase key={y.name} y={y} />
+        <YachtShowcase
+          key={y.name}
+          y={y}
+          onTourClick={
+            y.tourUrl
+              ? () =>
+                  setActiveTour({
+                    url: y.tourUrl!,
+                    label: `${y.name} ${y.emWord}`,
+                  })
+              : undefined
+          }
+        />
       ))}
+
+      {activeTour && (
+        <TourModal
+          url={activeTour.url}
+          label={activeTour.label}
+          onClose={() => setActiveTour(null)}
+        />
+      )}
     </div>
   );
 }
