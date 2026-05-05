@@ -264,7 +264,7 @@ export default function Hero() {
               on the water,
             </span>
           </div>
-          <div style={{ overflow: 'hidden' }}>
+          <div style={{ overflow: 'hidden', paddingBottom: '0.12em', marginBottom: '-0.12em' }}>
             <span ref={line3Ref} style={{ display: 'block' }}>
               unforgettable.
             </span>
