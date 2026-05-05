@@ -495,8 +495,7 @@ function VesselCard() {
               style={{
                 position: 'absolute',
                 inset: 0,
-                backgroundImage:
-                  'url(https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=900&q=80)',
+                backgroundImage: 'url(/mermaid-spirit-main.jpg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 opacity: 0.6,

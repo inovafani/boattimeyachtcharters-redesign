@@ -19,7 +19,7 @@ const GL: React.CSSProperties = {
 
 const VESSELS = [
   {
-    image: '/broadwater.jpeg',
+    image: '/sun-goddess-main.jpeg',
     name: 'Sun Goddess',
     description:
       "Get ready to elevate your Gold Coast adventure with Boattime Yacht Charters aboard the stunning Sun Goddess! This luxury yacht offers 360-degree views and provides an unforgettable backdrop for a magical sunset experience. With top-notch amenities and breathtaking views of the Broadwater and the iconic Gold Coast skyline, you're in for an evening to remember.\n\nWhether you're celebrating a milestone or simply seeking an extraordinary escape, our dedicated team is here to ensure your sunset cruise is nothing short of spectacular. With room for up to 100 guests, there's plenty of space for everyone to relax, unwind, and soak in the beauty of the setting sun.",

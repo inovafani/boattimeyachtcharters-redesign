@@ -464,7 +464,7 @@ const ITINERARY = [
 // Sun Goddess listed first as primary vessel
 const VESSELS = [
   {
-    image: '/broadwater.jpeg',
+    image: '/sun-goddess-main.jpeg',
     name: 'Sun Goddess',
     description:
       'Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 150 guests who expect room to breathe without giving up a single luxury.',
@@ -480,8 +480,7 @@ const VESSELS = [
     href: '/sun-goddess-gold-coast',
   },
   {
-    image:
-      'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1600&q=80',
+    image: '/mermaid-spirit-main.jpg',
     name: 'Mermaid Spirit',
     description:
       "Our tri-deck catamaran for larger group charters and private events. Spacious sun lounge, chef's kitchen, stinger pool, and room for 100 guests. Available for private whale watching charters on request.",
