@@ -1965,7 +1965,7 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
       </div>
 
       {/* Full-bleed carousel */}
-      <div style={{ position: 'relative', minHeight: 580 }}>
+      <div className="vessel-carousel-overlay" style={{ position: 'relative', minHeight: 580 }}>
         {/* Background image */}
         <div
           style={{

@@ -526,6 +526,7 @@ export default function WhalePage() {
 
         {/* 2 ── SOCIAL PROOF */}
         <div
+          className="light-adapt-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
@@ -613,6 +614,7 @@ export default function WhalePage() {
 
         {/* 3 ── SESSION INFO BAR */}
         <div
+          className="light-adapt-section"
           style={{
             background: 'var(--navy)',
             padding: '16px 48px',
@@ -941,6 +943,7 @@ export default function WhalePage() {
 
         {/* 7 ── QUICK INFO GRID */}
         <div
+          className="light-adapt-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '60px 48px',

@@ -249,7 +249,8 @@ export default function YachtChartersSection() {
     <div
       ref={sectionRef}
       id="charters"
-      style={{ padding: '110px 0', background: '#060f1c' }}
+      className="light-adapt-section"
+      style={{ padding: '110px 0', background: 'var(--navy)' }}
     >
       <div
         ref={headerRef}

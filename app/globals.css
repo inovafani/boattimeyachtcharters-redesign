@@ -503,11 +503,44 @@
 }
 
 /* ── Restore inline-styled gold elements ───────────────────── */
-/* gold-light must come AFTER gold so it wins for gold-light elements */
-[data-theme='light'] [style*='var(--gold)'] {
+/* Exclude elements where gold is used as a BACKGROUND — those keep dark text */
+[data-theme='light'] [style*='var(--gold)']:not([style*='background: var(--gold)']) {
   color: var(--gold) !important;
 }
-[data-theme='light'] [style*='var(--gold-light)'] {
+[data-theme='light'] [style*='var(--gold-light)']:not([style*='background: var(--gold-light)']) {
+  color: var(--gold) !important;
+}
+/* Elements with gold backgrounds must keep dark navy text */
+[data-theme='light'] [style*='background: var(--gold)'] {
+  color: #0a1628 !important;
+}
+
+/* ── Tickets nav button — gold bg needs dark text in light mode ── */
+[data-theme='light'] .site-header__tickets {
+  color: #0a1628 !important;
+}
+
+/* ── Vessel carousel overlay — dark photo bg, text must stay cream ── */
+[data-theme='light'] .vessel-carousel-overlay,
+[data-theme='light'] .vessel-carousel-overlay * {
+  color: #f5f0e8 !important;
+}
+[data-theme='light'] .vessel-carousel-overlay [style*='var(--gold)'],
+[data-theme='light'] .vessel-carousel-overlay [style*='var(--gold-light)'] {
+  color: var(--gold) !important;
+}
+
+/* ── Footer logo — restore natural colors on light cream background ── */
+[data-theme='light'] .footer-section .site-header__logo-img {
+  filter: none;
+}
+
+/* ── <div>-based sections that miss the main section * rule ── */
+[data-theme='light'] .light-adapt-section * {
+  color: rgba(10, 22, 40, 0.75) !important;
+}
+[data-theme='light'] .light-adapt-section [style*='var(--gold)'],
+[data-theme='light'] .light-adapt-section [style*='var(--gold-light)'] {
   color: var(--gold) !important;
 }
 

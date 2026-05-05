@@ -361,7 +361,7 @@ function NYEDetailsSection() {
         {/* Content card */}
         <div
           style={{
-            background: '#060f1c',
+            background: 'var(--navy-mid)',
             border: '1px solid rgba(201,168,76,0.18)',
             padding: '52px 56px',
             position: 'relative',

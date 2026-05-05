@@ -466,13 +466,14 @@ function VesselCard() {
         </div>
         <div
           style={{
-            background: '#060f1c',
+            background: 'var(--navy-mid)',
             border: '1px solid rgba(201,168,76,0.18)',
             overflow: 'hidden',
           }}
         >
           {/* Vessel image */}
           <div
+            className="vessel-carousel-overlay"
             style={{
               height: 320,
               backgroundImage: 'url(/mermaid-spirit-gold-coast)',
@@ -575,7 +576,7 @@ function VesselCard() {
               ].map((spec) => (
                 <div
                   key={spec.label}
-                  style={{ background: '#060f1c', padding: '24px 28px' }}
+                  style={{ background: 'var(--navy)', padding: '24px 28px' }}
                 >
                   <div
                     style={{
@@ -695,7 +696,7 @@ function RiverfireDetailsSection() {
 
         <div
           style={{
-            background: '#060f1c',
+            background: 'var(--navy-mid)',
             border: '1px solid rgba(201,168,76,0.18)',
             padding: '52px 56px',
             position: 'relative',

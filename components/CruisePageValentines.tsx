@@ -310,7 +310,7 @@ function DinnerMenuCard() {
   return (
     <div
       style={{
-        background: '#060f1c',
+        background: 'var(--navy)',
         border: '1px solid rgba(201,168,76,0.25)',
         padding: '52px 40px 48px',
         position: 'relative',
@@ -668,7 +668,7 @@ export default function ValentinesPage() {
               style={{
                 padding: '80px 48px',
                 borderLeft: '1px solid rgba(201,168,76,0.1)',
-                background: '#060f1c',
+                background: 'var(--navy)',
                 display: 'flex',
                 alignItems: 'center',
               }}

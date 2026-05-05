@@ -1487,7 +1487,7 @@ export function CharterInfoBox({
           maxWidth: 1200,
           margin: '0 auto',
           border: '1px solid rgba(201,168,76,0.2)',
-          background: '#060f1c',
+          background: 'var(--navy-mid)',
           padding: compact ? '48px 64px' : '60px 72px',
           position: 'relative',
         }}
@@ -1702,7 +1702,7 @@ export function CharterGallery({ folder }: { folder: string }) {
   }, [activeIndex]);
 
   if (images.length === 0) {
-    return <div style={{ height: 340, background: '#060f1c' }} />;
+    return <div style={{ height: 340, background: 'var(--navy)' }} />;
   }
 
   const visible = images.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
@@ -1722,7 +1722,7 @@ export function CharterGallery({ folder }: { folder: string }) {
       `}</style>
 
       {/* ── Slider ── */}
-      <div style={{ background: '#060f1c', paddingBottom: 72 }}>
+      <div style={{ background: 'var(--navy)', paddingBottom: 72 }}>
         <div style={{ position: 'relative' }}>
           {/* Left arrow */}
           <button
@@ -2177,7 +2177,7 @@ export function CharterSplitSection({
           style={{
             padding: '72px 48px 72px 48px',
             borderLeft: '1px solid rgba(201,168,76,0.1)',
-            background: '#060f1c',
+            background: 'var(--navy-mid)',
           }}
         >
           <div style={{ borderTop: '1px solid rgba(201,168,76,0.14)' }}>
