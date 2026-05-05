@@ -223,9 +223,9 @@ export default function Faq() {
             destinations, mobility. Anything else, our concierge is at the other
             end of a phone.
           </p>
-          <Button variant="outline" href="#inquiry">
+          {/* <Button variant="outline" href="#inquiry">
             Contact Concierge
-          </Button>
+          </Button> */}
         </div>
 
         {/* Right — FAQ list */}
