@@ -144,7 +144,7 @@ export default function StatsBar() {
           >
             {[
               "Gold Coast's most-reviewed superyacht operator",
-              'Two vessels — up to 135 guests',
+              'Two vessels — up to 150 guests',
               'Est. 2017 · Family owned & operated',
             ].map((item) => (
               <div

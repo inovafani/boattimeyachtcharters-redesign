@@ -467,7 +467,7 @@ const VESSELS = [
     image: '/broadwater.jpeg',
     name: 'Sun Goddess',
     description:
-      'Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
+      'Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 150 guests who expect room to breathe without giving up a single luxury.',
     pax: '150 Guests',
     size: '34m (114ft)',
     features: [
@@ -677,7 +677,10 @@ export default function WhalePage() {
         </div>
 
         {/* 4 ── WHY SUN GODDESS (new) */}
-        <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section
+          className="cruise-section"
+          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+        >
           <div
             className="cruise-page-split"
             style={{

@@ -166,7 +166,7 @@ function VesselOverview() {
           </h2>
           {[
             "Sun Goddess is Gold Coast's most celebrated luxury superyacht — 110 feet of sweeping teak decks, open-air entertainer's spaces, and a professional crew dedicated to making every charter unforgettable.",
-            "Whether you're hosting a wedding on the foredeck, a corporate event for 135 guests, or a private sunset cruise for two, Sun Goddess adapts entirely to your vision. The Broadwater is her home.",
+            "Whether you're hosting a wedding on the foredeck, a corporate event for 150 guests, or a private sunset cruise for two, Sun Goddess adapts entirely to your vision. The Broadwater is her home.",
           ].map((p, i) => (
             <p
               key={i}

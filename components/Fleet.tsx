@@ -31,7 +31,7 @@ const YACHTS: YachtData[] = [
     name: 'Sun',
     emWord: 'Goddess',
     tagline: 'She turns every head in the marina — and earns it.',
-    body: 'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
+    body: 'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 150 guests who expect room to breathe without giving up a single luxury.',
     specs: [
       { label: 'Guests', value: '150', unit: 'pax' },
       { label: 'Length', value: '34m', unit: '/ 114ft' },

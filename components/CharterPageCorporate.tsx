@@ -37,7 +37,7 @@ const VESSEL_LAYOUT = (
     <p
       style={{ fontSize: 13, color: 'rgba(245,240,232,0.65)', lineHeight: 1.8 }}
     >
-      Our slightly larger vessel, Sun Goddess, can host up to 135 guests for day
+      Our slightly larger vessel, Sun Goddess, can host up to 150 guests for day
       charters. We have a variety of route options depending on the requirements
       of your event. Whether your event is a birthday party, a corporate event
       or even a wedding celebration, our huge range of options will allow for us

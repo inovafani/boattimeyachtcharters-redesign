@@ -222,7 +222,7 @@ const WEDDING_FAQ = (
     {[
       {
         q: 'How many guests can we have?',
-        a: 'The Sun Goddess accommodates up to 135 guests for a day charter. The Mermaid Spirit hosts up to 100 guests. Both vessels offer distinct experiences — get in touch and we can help you choose.',
+        a: 'The Sun Goddess accommodates up to 150 guests for a day charter. The Mermaid Spirit hosts up to 100 guests. Both vessels offer distinct experiences — get in touch and we can help you choose.',
       },
       {
         q: 'Where do we depart?',
@@ -330,7 +330,7 @@ const LEFT_VESSELS = (
 
     <h3 style={h3Style}>Sun Goddess –</h3>
     <p style={pStyle}>
-      Our slightly larger vessel, Sun Goddess, can host up to 135 guests for day
+      Our slightly larger vessel, Sun Goddess, can host up to 150 guests for day
       charters. We have a variety of route options depending on the requirements
       of your event. Whether your event is a corporate event or even a wedding
       celebration, our varying route options allow for us to work together to
