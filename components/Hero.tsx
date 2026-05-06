@@ -188,7 +188,7 @@ export default function Hero() {
       )}
 
       {/* Rating badge — top right */}
-      <div
+      {/* <div
         ref={badgeRef}
         className="absolute z-10 hero-rating-badge"
         style={{
@@ -211,8 +211,8 @@ export default function Hero() {
         }}
       >
         <Icon name="star" size={11} color="var(--gold)" />
-        4.9 · 3,900+ guest reviews
-      </div>
+        4.7 · 1,341+ guest reviews
+      </div> */}
 
       {/* Main content */}
       <div
@@ -364,7 +364,7 @@ export default function Hero() {
             color: '#F5F0E8',
           }}
         >
-          3,900+
+          1,341+
         </div>
         <div
           style={{

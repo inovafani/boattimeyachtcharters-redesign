@@ -101,7 +101,7 @@ export default function AboutOwners() {
           <div className="ao-stats">
             <div className="ao-stat">
               <span className="ao-stat-num">
-                3,900<em>+</em>
+                1,341<em>+</em>
               </span>
               <span className="ao-stat-label">5-star reviews</span>
             </div>

@@ -9,155 +9,92 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const REVIEWS = [
   {
-    source: 'Google',
-    text: (
-      <>
-        Easily a <em>must-do attraction</em>. Never imagined I&rsquo;d see so many whales
-        and even a pod of dolphins. Excellent service — friendly, knowledgeable staff that
-        made us feel welcome the whole time.
-      </>
-    ),
     name: 'Alex',
-    loc: 'Visiting from England',
+    rating: 5,
+    text: "Easily a must-do attraction. Never imagined I'd see so many whales and even a pod of dolphins. Excellent service — friendly, knowledgeable staff that made us feel welcome the whole time.",
+    when: 'a month ago',
     photo: 'https://i.pravatar.cc/80?img=11',
   },
   {
-    source: 'Tripadvisor',
-    text: (
-      <>
-        An <em>AMAZING day</em>. Staff were brilliant and my grandchildren (6 and 4) were
-        very excited. Loved the boat, the commentary, the crew. Five stars all round —
-        perfect day out.
-      </>
-    ),
     name: 'Linda Bernhardt',
-    loc: 'Family group · Gold Coast',
+    rating: 5,
+    text: "An AMAZING day. Staff were brilliant and my grandchildren (6 and 4) were very excited. Loved the boat, the commentary, the crew. Five stars all round — perfect day out.",
+    when: '2 months ago',
     photo: 'https://i.pravatar.cc/80?img=47',
   },
   {
-    source: 'Facebook',
-    text: (
-      <>
-        We watched a whale breach <em>fifty times</em>. At the end of the trip we saw three
-        whales breach and swim together. The trip was worthy, definitely — good seats up
-        top, professional crew.
-      </>
-    ),
     name: 'Helen C R',
-    loc: 'Weekend group · Brisbane',
+    rating: 5,
+    text: "We watched a whale breach fifty times. At the end of the trip we saw three whales breach and swim together. The trip was worthy, definitely — good seats up top, professional crew.",
+    when: '3 months ago',
     photo: 'https://i.pravatar.cc/80?img=44',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        Booked for my wife&rsquo;s birthday and it exceeded every expectation. The{' '}
-        <em>sunset over the Broadwater</em> was otherworldly. Worth every cent.
-      </>
-    ),
     name: 'James Nguyen',
-    loc: 'Couple · Sunset Cruise',
+    rating: 5,
+    text: "Booked for my wife's birthday and it exceeded every expectation. The sunset over the Broadwater was otherworldly. Worth every cent.",
+    when: '2 months ago',
     photo: 'https://i.pravatar.cc/80?img=13',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        We used Sun Goddess for our company Christmas party — 80 guests, three decks,{' '}
-        <em>completely seamless</em>. The catering team were exceptional.
-      </>
-    ),
     name: 'Sarah Mitchell',
-    loc: 'Corporate group · Gold Coast',
+    rating: 5,
+    text: "We used Sun Goddess for our company Christmas party — 80 guests, three decks, completely seamless. The catering team were exceptional.",
+    when: '4 months ago',
     photo: 'https://i.pravatar.cc/80?img=48',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        Got married on the foredeck at golden hour. The crew made the whole day feel{' '}
-        <em>completely effortless</em>. Every single guest still talks about it.
-      </>
-    ),
     name: 'Emily & Tom Barker',
-    loc: 'Wedding Charter',
+    rating: 5,
+    text: "Got married on the foredeck at golden hour. The crew made the whole day feel completely effortless. Every single guest still talks about it.",
+    when: '5 months ago',
     photo: 'https://i.pravatar.cc/80?img=36',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        We saw over 20 humpbacks including a full breach ten metres from the bow.{' '}
-        <em>Absolutely breathtaking.</em> Best day on the water I&rsquo;ve had.
-      </>
-    ),
     name: 'Robert Svensson',
-    loc: 'Whale Watching',
+    rating: 5,
+    text: "We saw over 20 humpbacks including a full breach ten metres from the bow. Absolutely breathtaking. Best day on the water I've had.",
+    when: '1 month ago',
     photo: 'https://i.pravatar.cc/80?img=3',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        Hired for grandfather&rsquo;s 80th — three generations on deck. The crew treated
-        everyone like <em>absolute royalty</em>. A perfect afternoon.
-      </>
-    ),
     name: 'Diane Kowalski',
-    loc: 'Private Charter',
+    rating: 5,
+    text: "Hired for grandfather's 80th — three generations on deck. The crew treated everyone like absolute royalty. A perfect afternoon.",
+    when: '3 months ago',
     photo: 'https://i.pravatar.cc/80?img=56',
   },
   {
-    source: 'Tripadvisor',
-    text: (
-      <>
-        Visiting from the UK and chose this on a whim — best decision of the trip. The{' '}
-        <em>Broadwater at sunset</em> is something I will never forget.
-      </>
-    ),
     name: 'Marcus Webb',
-    loc: 'Sunset Cruise',
+    rating: 5,
+    text: "Visiting from the UK and chose this on a whim — best decision of the trip. The Broadwater at sunset is something I will never forget.",
+    when: '6 months ago',
     photo: 'https://i.pravatar.cc/80?img=7',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        Hands down the best whale watching in south east Queensland. Informative without
-        overwhelming — we watched them <em>breach</em> several times. Unforgettable.
-      </>
-    ),
     name: 'Gleyn Hernandez',
-    loc: 'Whale Watching',
+    rating: 5,
+    text: "Hands down the best whale watching in south east Queensland. Informative without overwhelming — we watched them breach several times. Unforgettable.",
+    when: '2 months ago',
     photo: 'https://i.pravatar.cc/80?img=15',
   },
   {
-    source: 'Facebook',
-    text: (
-      <>
-        The crew went above and beyond for our group. Every detail was thought of before
-        we asked. <em>Truly world-class</em> service on the Gold Coast.
-      </>
-    ),
     name: 'Priya R',
-    loc: 'Group Charter',
+    rating: 5,
+    text: "The crew went above and beyond for our group. Every detail was thought of before we asked. Truly world-class service on the Gold Coast.",
+    when: '4 months ago',
     photo: 'https://i.pravatar.cc/80?img=49',
   },
   {
-    source: 'Google',
-    text: (
-      <>
-        From the moment we boarded to the last glass, the evening was <em>flawless</em>.
-        A standard you simply don&rsquo;t expect to find and then can&rsquo;t forget.
-      </>
-    ),
     name: 'Thomas A',
-    loc: 'Private Charter',
+    rating: 5,
+    text: "From the moment we boarded to the last glass, the evening was flawless. A standard you simply don't expect to find and then can't forget.",
+    when: '5 months ago',
     photo: 'https://i.pravatar.cc/80?img=25',
   },
 ];
 
-const PER_PAGE = 3;
+const PER_PAGE   = 3;
 const TOTAL_PAGES = Math.ceil(REVIEWS.length / PER_PAGE);
 
 function StarIcon() {
@@ -168,13 +105,24 @@ function StarIcon() {
   );
 }
 
+function GoogleLogo() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+      <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+    </svg>
+  );
+}
+
 export default function Reviews() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const sectionRef    = useRef<HTMLDivElement>(null);
+  const headerRef     = useRef<HTMLDivElement>(null);
+  const cardsRef      = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
 
-  const [page, setPage] = useState(0);
+  const [page, setPage]     = useState(0);
   const [locked, setLocked] = useState(false);
 
   const goToPage = useCallback(
@@ -205,7 +153,6 @@ export default function Reviews() {
         ease: 'power2.out',
         scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
       });
-
       gsap.from(cardsRef.current, {
         y: 50,
         opacity: 0,
@@ -219,35 +166,25 @@ export default function Reviews() {
 
   useGSAP(
     () => {
-      if (isFirstRender.current) {
-        isFirstRender.current = false;
-        return;
-      }
+      if (isFirstRender.current) { isFirstRender.current = false; return; }
       gsap.fromTo(
         cardsRef.current,
         { opacity: 0, y: -16 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.38,
-          ease: 'power2.out',
-          onComplete: () => setLocked(false),
-        },
+        { opacity: 1, y: 0, duration: 0.38, ease: 'power2.out', onComplete: () => setLocked(false) },
       );
     },
     { dependencies: [page] },
   );
 
-  const visible = REVIEWS.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
+  const visible  = REVIEWS.slice(page * PER_PAGE, (page + 1) * PER_PAGE);
   const prevPage = (page - 1 + TOTAL_PAGES) % TOTAL_PAGES;
   const nextPage = (page + 1) % TOTAL_PAGES;
 
   return (
     <div ref={sectionRef} id="reviews" className="testimonials">
-      {/* Header row */}
       <div ref={headerRef} className="testimonials-header">
         <h2 className="testimonials-title">
-          Four thousand guests<br />can&rsquo;t be <em>wrong.</em>
+          1,341 guests<br />can&rsquo;t be <em>wrong.</em>
         </h2>
 
         <div className="testimonials-nav">
@@ -279,7 +216,6 @@ export default function Reviews() {
         </div>
       </div>
 
-      {/* Cards grid */}
       <div ref={cardsRef} className="testimonials-grid">
         {visible.map((r, i) => (
           <div key={`${page}-${i}`} className="t-card">
@@ -287,16 +223,18 @@ export default function Reviews() {
               <div className="t-card-stars">
                 {[0, 1, 2, 3, 4].map((s) => <StarIcon key={s} />)}
               </div>
-              <span className="t-card-source">{r.source}</span>
+              <span className="t-card-source" style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                <GoogleLogo /> Google
+              </span>
             </div>
 
             <p className="t-card-text">{r.text}</p>
 
             <div className="t-card-attr">
-              <img className="t-card-avatar" src={r.photo} alt={r.name} />
+              <img className="t-card-avatar" src={r.photo} alt={r.name} referrerPolicy="no-referrer" />
               <div>
                 <div className="t-card-name">{r.name}</div>
-                <div className="t-card-loc">{r.loc}</div>
+                <div className="t-card-loc">{r.when}</div>
               </div>
             </div>
           </div>

@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const STATS = [
   {
-    end: 3910,
+    end: 1341,
     suffix: '+',
     unit: false,
     decimals: 0,
@@ -18,7 +18,7 @@ const STATS = [
     note: 'Across Google, Facebook & Tripadvisor — more than any other GC operator.',
   },
   {
-    end: 4.9,
+    end: 4.7,
     suffix: '★',
     unit: false,
     decimals: 1,
