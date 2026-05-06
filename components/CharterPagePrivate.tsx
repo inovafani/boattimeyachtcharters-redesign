@@ -363,7 +363,7 @@ export default function CharterPagePrivate() {
         {/* 1. Hero */}
         <CharterHero
           eyebrow="Boattime YC Luxury"
-          headline="Private Yacht Charter Gold Coast • Brisbane"
+          headline={'Private Yacht Charter Gold Coast • Brisbane'}
           subtext="Experience the best private yacht charter in Gold Coast with Boattime Yacht Charters. Whether it's an intimate gathering or a large event, we offer tailored luxury experiences that promise an unforgettable time on the water."
           image="/EDI_2899.jpg"
           ctas={[

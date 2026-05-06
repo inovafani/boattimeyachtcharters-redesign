@@ -132,7 +132,9 @@ export function CharterHero({
             marginBottom: 28,
           }}
         >
-          {headline}
+          Private Yacht Charter
+          <br />
+          Gold Coast • Brisbane
         </h1>
         <p
           className="hr"
@@ -2173,7 +2175,10 @@ export function CharterSplitSection({
           gridTemplateColumns: '1.15fr 0.85fr',
         }}
       >
-        <div className="sp charter-split-col" style={{ padding: '72px 56px 72px 48px' }}>
+        <div
+          className="sp charter-split-col"
+          style={{ padding: '72px 56px 72px 48px' }}
+        >
           {leftContent}
         </div>
         <div
