@@ -1733,6 +1733,7 @@ export function CruiseGallery({
   const ref = useRef<HTMLElement>(null);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [slideIdx, setSlideIdx] = useState(0);
+  const touchStartX = useRef<number>(0);
   const allImages = [main, ...thumbs.slice(0, 4)];
 
   useEffect(() => {
@@ -1784,6 +1785,14 @@ export function CruiseGallery({
       {lightbox !== null && (
         <div
           onClick={() => setLightbox(null)}
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            const diff = touchStartX.current - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+              if (diff > 0) setLightbox((lightbox + 1) % allImages.length);
+              else setLightbox((lightbox - 1 + allImages.length) % allImages.length);
+            }
+          }}
           style={{
             position: 'fixed',
             inset: 0,
@@ -1797,33 +1806,33 @@ export function CruiseGallery({
           {/* Prev */}
           <button
             onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + allImages.length) % allImages.length); }}
-            style={{ position: 'absolute', left: 20, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 48, height: 48, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(201,168,76,0.85)', border: 'none', borderRadius: '50%', width: 52, height: 52, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
             aria-label="Previous"
           >
-            <svg width="16" height="16" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="white" strokeWidth="1.5"/></svg>
+            <svg width="18" height="14" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
 
           {/* Image */}
           <img
             src={allImages[lightbox]}
             onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', userSelect: 'none' }}
+            style={{ maxWidth: '76vw', maxHeight: '88vh', objectFit: 'contain', userSelect: 'none' }}
             alt=""
           />
 
           {/* Next */}
           <button
             onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % allImages.length); }}
-            style={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 48, height: 48, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(201,168,76,0.85)', border: 'none', borderRadius: '50%', width: 52, height: 52, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
             aria-label="Next"
           >
-            <svg width="16" height="16" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="white" strokeWidth="1.5"/></svg>
+            <svg width="18" height="14" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
 
           {/* Close */}
           <button
             onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
-            style={{ position: 'absolute', top: 20, right: 20, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 18, lineHeight: 1 }}
+            style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 18, lineHeight: 1 }}
             aria-label="Close"
           >
             ✕

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<unknown>(null);
+  const touchStartX = useRef<number>(0);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [currentPage, setCurrentPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
@@ -117,31 +118,42 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
 
       {/* ── Lightbox overlay ── */}
       {lightbox !== null && (
-        <div onClick={() => setLightbox(null)} style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div
+          onClick={() => setLightbox(null)}
+          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+          onTouchEnd={(e) => {
+            const diff = touchStartX.current - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+              if (diff > 0) setLightbox((lightbox + 1) % images.length);
+              else setLightbox((lightbox - 1 + images.length) % images.length);
+            }
+          }}
+          style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
           <button
             onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + images.length) % images.length); }}
             aria-label="Previous"
-            style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 44, height: 44, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}
+            style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(201,168,76,0.85)', border: 'none', borderRadius: '50%', width: 52, height: 52, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
           >
-            <svg width="16" height="16" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="white" strokeWidth="1.5"/></svg>
+            <svg width="18" height="14" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
 
           <img
             src={images[lightbox]}
             onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: '96vw', maxHeight: '88vh', objectFit: 'contain', userSelect: 'none' }}
+            style={{ maxWidth: '76vw', maxHeight: '88vh', objectFit: 'contain', userSelect: 'none' }}
             alt=""
           />
 
           <button
             onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % images.length); }}
             aria-label="Next"
-            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 44, height: 44, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}
+            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(201,168,76,0.85)', border: 'none', borderRadius: '50%', width: 52, height: 52, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
           >
-            <svg width="16" height="16" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="white" strokeWidth="1.5"/></svg>
+            <svg width="18" height="14" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
 
-          <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} aria-label="Close" style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 18, zIndex: 2 }}>✕</button>
+          <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} aria-label="Close" style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 18, zIndex: 2 }}>✕</button>
 
           <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,0.4)', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.2em' }}>
             {lightbox + 1} / {images.length}
