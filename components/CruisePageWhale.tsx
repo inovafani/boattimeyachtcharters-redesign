@@ -512,7 +512,7 @@ export default function WhalePage() {
         <CruiseHero
           eyebrow="Cruise Tickets · Whale Watching"
           title="Luxury Whale Watching"
-          titleAccent="Gold Coast"
+          titleAccent="Gold Coast • Brisbane"
           image="/luxury-whale.jpg"
           stats={[
             { label: 'Duration', value: '2.5 hours' },
@@ -612,9 +612,7 @@ export default function WhalePage() {
         </div>
 
         {/* 3 ── SESSION INFO BAR */}
-        <div
-          className="light-adapt-section cruise-section whale-infobar-wrap"
-        >
+        <div className="light-adapt-section cruise-section whale-infobar-wrap">
           <div className="whale-infobar-inner">
             <svg
               width="16"
@@ -640,9 +638,15 @@ export default function WhalePage() {
             <span className="whale-infobar-divider" />
 
             <div className="whale-infobar-grid">
-              <div className="whale-infobar-cell">Morning Session · Departs 9:00 AM</div>
-              <div className="whale-infobar-cell">Afternoon Session · Departs 1:30 PM</div>
-              <div className="whale-infobar-cell whale-infobar-cell--wide">7 Days a Week · June – November</div>
+              <div className="whale-infobar-cell">
+                Morning Session · Departs 9:00 AM
+              </div>
+              <div className="whale-infobar-cell">
+                Afternoon Session · Departs 1:30 PM
+              </div>
+              <div className="whale-infobar-cell whale-infobar-cell--wide">
+                7 Days a Week · June – November
+              </div>
             </div>
           </div>
         </div>

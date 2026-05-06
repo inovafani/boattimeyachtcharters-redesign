@@ -2,14 +2,19 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const OWNER_EMAIL = 'info@boattimeyachtcharters.com.au';
-const FROM_EMAIL = process.env.FROM_EMAIL ?? 'Boattime Yacht Charters <noreply@boattimeyachtcharters.com.au>';
+const FROM_EMAIL =
+  process.env.FROM_EMAIL ??
+  'Boattime Yacht Charters <noreply@boattimeyachtcharters.com>';
 
 export async function POST(req: Request) {
   console.log('[inquiry] POST received');
 
   if (!process.env.RESEND_API_KEY) {
     console.error('[inquiry] RESEND_API_KEY not set');
-    return NextResponse.json({ error: 'Email service not configured.' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Email service not configured.' },
+      { status: 500 },
+    );
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -18,7 +23,10 @@ export async function POST(req: Request) {
   const { name, email, phone, date, guests, vessel, charter, note } = body;
 
   if (!name || !email) {
-    return NextResponse.json({ error: 'Name and email are required.' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Name and email are required.' },
+      { status: 400 },
+    );
   }
 
   try {
@@ -28,14 +36,23 @@ export async function POST(req: Request) {
       to: OWNER_EMAIL,
       replyTo: email,
       subject: `New Enquiry — ${name} · ${charter}`,
-      html: ownerEmail({ name, email, phone, date, guests, vessel, charter, note }),
+      html: ownerEmail({
+        name,
+        email,
+        phone,
+        date,
+        guests,
+        vessel,
+        charter,
+        note,
+      }),
     });
 
     // 2. Confirmation to the guest
     await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: 'Your Boattime Enquiry — We\'ll Be in Touch Shortly',
+      subject: "Your Boattime Enquiry — We'll Be in Touch Shortly",
       html: guestEmail({ name, charter, date, guests, vessel }),
     });
 
@@ -43,13 +60,23 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('[inquiry] send error', err);
-    return NextResponse.json({ error: 'Failed to send email.' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to send email.' },
+      { status: 500 },
+    );
   }
 }
 
 /* ── Owner notification ──────────────────────────────────────── */
 function ownerEmail({
-  name, email, phone, date, guests, vessel, charter, note,
+  name,
+  email,
+  phone,
+  date,
+  guests,
+  vessel,
+  charter,
+  note,
 }: Record<string, string>) {
   const row = (label: string, value: string) =>
     value
@@ -88,7 +115,9 @@ function ownerEmail({
           </td>
         </tr>
 
-        ${note ? `
+        ${
+          note
+            ? `
         <!-- Notes -->
         <tr>
           <td style="padding:8px 32px 0;">
@@ -99,7 +128,9 @@ function ownerEmail({
           <td style="padding:10px 32px 28px;">
             <p style="margin:0;font-family:Georgia,serif;font-size:15px;color:rgba(245,240,232,0.75);line-height:1.7;font-style:italic;">"${note}"</p>
           </td>
-        </tr>` : ''}
+        </tr>`
+            : ''
+        }
 
         <!-- Reply CTA -->
         <tr>
@@ -117,7 +148,11 @@ function ownerEmail({
 
 /* ── Guest confirmation ───────────────────────────────────────── */
 function guestEmail({
-  name, charter, date, guests, vessel,
+  name,
+  charter,
+  date,
+  guests,
+  vessel,
 }: Record<string, string>) {
   const firstName = name.split(' ')[0];
 
