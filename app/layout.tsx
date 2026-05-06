@@ -20,9 +20,40 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Boattime Yacht Charters — Gold Coast & Brisbane',
+  title: {
+    default: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
+    template: '%s | Boattime Yacht Charters',
+  },
   description:
-    "Private yacht charters, sunset cruises, and whale watching aboard Gold Coast's finest superyachts — Sun Goddess & Mermaid Spirit.",
+    'Our fleet includes two impressive yachts, Sun Goddess and the Mermaid Spirit, which are available for yacht hire and event boat hire for any occasion. Gold Coast\'s most-reviewed superyacht charter company.',
+  metadataBase: new URL('https://www.boattimeyachtcharters.com'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_AU',
+    url: 'https://www.boattimeyachtcharters.com',
+    siteName: 'Boattime Yacht Charters',
+    title: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
+    description:
+      'Our fleet includes two impressive yachts, Sun Goddess and the Mermaid Spirit, which are available for yacht hire and event boat hire for any occasion.',
+    images: [
+      {
+        url: '/sun-goddess-main-upscale.png',
+        width: 1200,
+        height: 630,
+        alt: 'Sun Goddess superyacht — Boattime Yacht Charters Gold Coast',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
+    description:
+      'Sun Goddess & Mermaid Spirit — Gold Coast\'s most-reviewed superyacht charter company.',
+    images: ['/sun-goddess-main-upscale.png'],
+  },
+  alternates: {
+    canonical: 'https://www.boattimeyachtcharters.com',
+  },
 };
 
 export const viewport: Viewport = {
