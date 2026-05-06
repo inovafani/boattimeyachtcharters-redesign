@@ -159,6 +159,7 @@ function NavyCTABox({ title }: { title: string }) {
 
         <a
           href="/#inquiry"
+          onClick={(e) => { e.preventDefault(); sessionStorage.setItem('scrollTo', '#inquiry'); window.location.href = '/'; }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -292,6 +293,7 @@ export default function CharterPageCatering() {
             <div className="hr">
               <a
                 href="/#inquiry"
+                onClick={(e) => { e.preventDefault(); sessionStorage.setItem('scrollTo', '#inquiry'); window.location.href = '/'; }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
