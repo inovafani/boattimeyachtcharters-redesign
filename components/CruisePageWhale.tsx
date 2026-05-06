@@ -477,7 +477,7 @@ const VESSELS = [
       'Dual-level Galley',
       'Bose Audio',
     ],
-    href: '/sun-goddess-gold-coast',
+    href: '/#fleet',
   },
   {
     image: '/mermaid-spirit-main.jpg',
@@ -493,7 +493,7 @@ const VESSELS = [
       "Chef's Kitchen",
       'Dual Bars',
     ],
-    href: '/mermaid-spirit-gold-coast',
+    href: '/#fleet',
   },
 ];
 

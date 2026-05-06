@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, type ReactNode } from 'react';
+import { useRef, useState, useEffect, type ReactNode } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -1725,13 +1725,27 @@ export function CruisePhotographyFeature() {
 export function CruiseGallery({
   main,
   thumbs,
-  wide,
 }: {
   main: string;
   thumbs: string[];
-  wide: string;
+  wide?: string;
 }) {
   const ref = useRef<HTMLElement>(null);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const [slideIdx, setSlideIdx] = useState(0);
+  const allImages = [main, ...thumbs.slice(0, 4)];
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowLeft') setLightbox((i) => (i === null ? null : (i - 1 + allImages.length) % allImages.length));
+      if (e.key === 'ArrowRight') setLightbox((i) => (i === null ? null : (i + 1) % allImages.length));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox, allImages.length]);
+
   useGSAP(
     () => {
       gsap.from(ref.current!.querySelectorAll('.gl'), {
@@ -1746,68 +1760,139 @@ export function CruiseGallery({
     { scope: ref },
   );
 
+  const imgTile = (src: string, idx: number, style: React.CSSProperties) => (
+    <div
+      key={idx}
+      onClick={() => setLightbox(idx)}
+      style={{
+        backgroundImage: `url(${src})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        cursor: 'zoom-in',
+        ...style,
+      }}
+    />
+  );
+
   return (
     <section
       ref={ref}
       className="cruise-section"
       style={{ background: 'var(--navy)', padding: '80px 48px 80px' }}
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-        }}
-      >
-        {/* Top row: large left image + 2×2 thumbnail grid right */}
+      {/* ── Lightbox overlay ── */}
+      {lightbox !== null && (
         <div
-          className="gl cruise-gallery-top"
+          onClick={() => setLightbox(null)}
           style={{
-            display: 'grid',
-            gridTemplateColumns: '3fr 2fr',
-            gap: 2,
-            height: 400,
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(0,0,0,0.92)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <div
-            style={{
-              backgroundImage: `url(${main})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: '1fr 1fr',
-              gap: 2,
-            }}
+          {/* Prev */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + allImages.length) % allImages.length); }}
+            style={{ position: 'absolute', left: 20, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 48, height: 48, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            aria-label="Previous"
           >
-            {thumbs.slice(0, 4).map((src, i) => (
+            <svg width="16" height="16" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="white" strokeWidth="1.5"/></svg>
+          </button>
+
+          {/* Image */}
+          <img
+            src={allImages[lightbox]}
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', userSelect: 'none' }}
+            alt=""
+          />
+
+          {/* Next */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % allImages.length); }}
+            style={{ position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 48, height: 48, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            aria-label="Next"
+          >
+            <svg width="16" height="16" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="white" strokeWidth="1.5"/></svg>
+          </button>
+
+          {/* Close */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+            style={{ position: 'absolute', top: 20, right: 20, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 18, lineHeight: 1 }}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+
+          {/* Counter */}
+          <div style={{ position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '0.2em' }}>
+            {lightbox + 1} / {allImages.length}
+          </div>
+        </div>
+      )}
+
+      {/* ── Desktop grid (hidden on mobile) ── */}
+      <div className="cruise-gallery-desktop" style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <div
+          className="gl cruise-gallery-top"
+          style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 2, height: 400 }}
+        >
+          {imgTile(main, 0, { minHeight: 400 })}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: 2 }}>
+            {thumbs.slice(0, 4).map((src, i) => imgTile(src, i + 1, {}))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile looping slider (hidden on desktop) ── */}
+      <div className="cruise-gallery-mobile">
+        <div style={{ position: 'relative', overflow: 'hidden' }}>
+          {/* Slides */}
+          <div style={{ display: 'flex', transform: `translateX(-${slideIdx * 100}%)`, transition: 'transform 0.35s ease' }}>
+            {allImages.map((src, i) => (
               <div
                 key={i}
-                style={{
-                  backgroundImage: `url(${src})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
+                onClick={() => setLightbox(i)}
+                style={{ flex: '0 0 100%', height: 280, backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center', cursor: 'zoom-in' }}
               />
             ))}
           </div>
+          {/* Prev arrow */}
+          <button
+            onClick={() => setSlideIdx((slideIdx - 1 + allImages.length) % allImages.length)}
+            aria-label="Previous"
+            style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 38, height: 38, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="white" strokeWidth="1.5"/></svg>
+          </button>
+          {/* Next arrow */}
+          <button
+            onClick={() => setSlideIdx((slideIdx + 1) % allImages.length)}
+            aria-label="Next"
+            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: 38, height: 38, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="white" strokeWidth="1.5"/></svg>
+          </button>
         </div>
-        {/* Full-width panoramic below */}
-        <div
-          className="gl"
-          style={{
-            height: 'auto',
-            backgroundImage: `url(${wide})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 40%',
-          }}
-        />
+        {/* Dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 14 }}>
+          {allImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setSlideIdx(i)}
+              aria-label={`Slide ${i + 1}`}
+              style={{ width: i === slideIdx ? 20 : 6, height: 6, borderRadius: 3, background: i === slideIdx ? 'var(--gold)' : 'rgba(245,240,232,0.25)', border: 'none', cursor: 'pointer', padding: 0, transition: 'width 0.25s, background 0.25s' }}
+            />
+          ))}
+        </div>
+        <p style={{ textAlign: 'center', marginTop: 10, fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.3)' }}>
+          Tap photo to enlarge
+        </p>
       </div>
     </section>
   );
@@ -2095,7 +2180,12 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
             {vessel.features.join(' · ')}
           </div>
           <a
-            href={vessel.href}
+            href="/#fleet"
+            onClick={(e) => {
+              e.preventDefault();
+              sessionStorage.setItem('scrollTo', '#fleet');
+              window.location.href = '/';
+            }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -2107,6 +2197,7 @@ export function CruiseYachts({ vessels }: { vessels: VesselData[] }) {
               color: 'var(--gold)',
               fontWeight: 600,
               textDecoration: 'none',
+              cursor: 'pointer',
             }}
           >
             View More

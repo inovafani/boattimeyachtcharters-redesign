@@ -413,16 +413,12 @@
     grid-template-columns: 1fr !important;
   }
 
-  /* ── CruiseGallery — stack main + thumbs vertically ── */
-  .cruise-gallery-top {
-    grid-template-columns: 1fr !important;
-    height: auto !important;
-  }
-  .cruise-gallery-top > div:nth-child(1) {
-    height: 240px !important;
-  }
-  .cruise-gallery-top > div:nth-child(2) {
+  /* ── CruiseGallery — hide desktop grid, show mobile slider ── */
+  .cruise-gallery-desktop {
     display: none !important;
+  }
+  .cruise-gallery-mobile {
+    display: block !important;
   }
 
   /* ── CruiseYachts vessel carousel ── */
@@ -3263,6 +3259,28 @@
     width: 100% !important;
     justify-content: center !important;
   }
+}
+
+/* ── CruiseGallery desktop/mobile split ────────────────────── */
+.cruise-gallery-desktop { display: flex; }
+.cruise-gallery-mobile  { display: none; }
+
+.cruise-gallery-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 2px;
+  scrollbar-width: none;
+}
+.cruise-gallery-slider::-webkit-scrollbar { display: none; }
+
+.cruise-gallery-slide {
+  flex: 0 0 100%;
+  height: 260px;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
 }
 
 /* ── Whale watching session info bar ───────────────────────── */

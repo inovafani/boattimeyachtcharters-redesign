@@ -496,7 +496,7 @@ export function VesselCards() {
       specs: ['100 day guests', '22 overnight guests', '3 decks'],
       description:
         'A stunning tri-deck catamaran offering three distinct levels of entertainment. Equipped with jet skis, kayaks, scuba gear, a stinger-proof pool, and paddle boards.',
-      href: '/mermaid-spirit-gold-coast',
+      href: '/#fleet',
       img: 'https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=800&q=80',
     },
     {
@@ -505,7 +505,7 @@ export function VesselCards() {
       specs: ['150 day guests', 'Dual bars', 'Watersports deck'],
       description:
         "Gold Coast's premier luxury superyacht. Spacious decks, dual bars, state-of-the-art sound, and fully customisable routes for any occasion.",
-      href: '/sun-goddess-gold-coast',
+      href: '/#fleet',
       img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80',
     },
   ];
@@ -630,7 +630,12 @@ export function VesselCards() {
                   {v.description}
                 </p>
                 <a
-                  href={v.href}
+                  href="/#fleet"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    sessionStorage.setItem('scrollTo', '#fleet');
+                    window.location.href = '/';
+                  }}
                   style={{
                     marginTop: 'auto',
                     fontFamily: 'var(--font-body)',
@@ -645,6 +650,7 @@ export function VesselCards() {
                     gap: 8,
                     borderTop: '1px solid rgba(201,168,76,0.15)',
                     paddingTop: 24,
+                    cursor: 'pointer',
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.opacity = '0.7';
@@ -1469,11 +1475,8 @@ export function CharterInfoBox({
 
   const buttons = vesselOrder.map((v) =>
     v === 'sun-goddess'
-      ? { label: 'View The Sun Goddess →', href: '/sun-goddess-gold-coast' }
-      : {
-          label: 'View The Mermaid Spirit →',
-          href: '/mermaid-spirit-gold-coast',
-        },
+      ? { label: 'View The Sun Goddess →', vessel: 'sun-goddess' }
+      : { label: 'View The Mermaid Spirit →', vessel: 'mermaid-spirit' },
   );
 
   return (
@@ -1563,8 +1566,13 @@ export function CharterInfoBox({
         >
           {buttons.map((b) => (
             <a
-              key={b.href}
-              href={b.href}
+              key={b.vessel}
+              href="/#fleet"
+              onClick={(e) => {
+                e.preventDefault();
+                sessionStorage.setItem('scrollTo', '#fleet');
+                window.location.href = '/';
+              }}
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 10,
@@ -1578,6 +1586,7 @@ export function CharterInfoBox({
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 8,
+                cursor: 'pointer',
               }}
             >
               {b.label}

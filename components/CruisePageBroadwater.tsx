@@ -32,7 +32,7 @@ const VESSELS = [
       '360° Views',
       'Licensed Bar',
     ],
-    href: '/sun-goddess-gold-coast',
+    href: '/#fleet',
   },
 ];
 
