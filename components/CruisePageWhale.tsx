@@ -613,27 +613,12 @@ export default function WhalePage() {
 
         {/* 3 ── SESSION INFO BAR */}
         <div
-          className="light-adapt-section cruise-section"
-          style={{
-            background: 'var(--navy)',
-            padding: '16px 48px',
-            borderBottom: '1px solid rgba(201,168,76,0.08)',
-          }}
+          className="light-adapt-section cruise-section whale-infobar-wrap"
         >
-          <div
-            style={{
-              maxWidth: 1200,
-              margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 32,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-            }}
-          >
+          <div className="whale-infobar-inner">
             <svg
-              width="18"
-              height="18"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="var(--gold)"
@@ -641,37 +626,24 @@ export default function WhalePage() {
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
-              style={{ flexShrink: 0 }}
+              className="whale-infobar-icon"
             >
               <circle cx="12" cy="5" r="3" />
               <line x1="12" y1="22" x2="12" y2="8" />
               <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
             </svg>
-            {[
-              'Muriel Henchman Public Pontoon · SeaWorld Drive, Gold Coast',
-              'Morning Session · Departs 9:00 AM',
-              'Afternoon Session · Departs 1:30 PM',
-              '7 Days a Week · June – November',
-            ].map((text, i, arr) => (
-              <span
-                key={i}
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 10,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(245,240,232,0.55)',
-                  fontWeight: 500,
-                  borderRight:
-                    i < arr.length - 1
-                      ? '1px solid rgba(201,168,76,0.15)'
-                      : 'none',
-                  paddingRight: i < arr.length - 1 ? 32 : 0,
-                }}
-              >
-                {text}
-              </span>
-            ))}
+
+            <div className="whale-infobar-location">
+              Muriel Henchman Public Pontoon · SeaWorld Drive, Gold Coast
+            </div>
+
+            <span className="whale-infobar-divider" />
+
+            <div className="whale-infobar-grid">
+              <div className="whale-infobar-cell">Morning Session · Departs 9:00 AM</div>
+              <div className="whale-infobar-cell">Afternoon Session · Departs 1:30 PM</div>
+              <div className="whale-infobar-cell whale-infobar-cell--wide">7 Days a Week · June – November</div>
+            </div>
           </div>
         </div>
 
