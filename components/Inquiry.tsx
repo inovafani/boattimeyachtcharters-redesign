@@ -142,7 +142,7 @@ export default function Inquiry() {
   const leftRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<FormState>(initialForm);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   const update = (name: keyof FormState, val: string) =>
     setForm((prev) => ({ ...prev, [name]: val }));
@@ -411,11 +411,33 @@ export default function Inquiry() {
             isLight={isLight}
           />
           <div style={{ marginTop: 8 }}>
-            <Button variant="primary" onClick={() => setSent(true)}>
-              Send Enquiry
+            <Button
+              variant="primary"
+              onClick={async () => {
+                if (status === 'sending') return;
+                setStatus('sending');
+                try {
+                  const res = await fetch('/api/inquiry', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(form),
+                  });
+                  if (res.ok) {
+                    setStatus('sent');
+                    setForm(initialForm);
+                  } else {
+                    setStatus('error');
+                  }
+                } catch {
+                  setStatus('error');
+                }
+              }}
+            >
+              {status === 'sending' ? 'Sending…' : 'Send Enquiry'}
             </Button>
           </div>
-          {sent && (
+
+          {status === 'sent' && (
             <div
               style={{
                 marginTop: 24,
@@ -431,6 +453,25 @@ export default function Inquiry() {
               }}
             >
               Received — our concierge replies within the hour.
+            </div>
+          )}
+
+          {status === 'error' && (
+            <div
+              style={{
+                marginTop: 24,
+                padding: '16px 20px',
+                border: '1px solid rgba(220,60,60,0.4)',
+                background: 'rgba(220,60,60,0.06)',
+                color: 'rgba(245,100,100,0.9)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 10,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                fontWeight: 500,
+              }}
+            >
+              Something went wrong — please email us directly at info@boattimeyachtcharters.com.au
             </div>
           )}
         </div>
