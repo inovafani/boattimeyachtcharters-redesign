@@ -288,7 +288,15 @@ export default function Inquiry() {
                   {d.key}
                 </span>
                 <Icon name={d.icon} size={14} color="var(--gold)" />
-                <span style={{ color: 'var(--text-muted)', wordBreak: 'break-all', overflowWrap: 'anywhere' }}>{d.val}</span>
+                <span
+                  style={{
+                    color: 'var(--text-muted)',
+                    wordBreak: 'break-all',
+                    overflowWrap: 'anywhere',
+                  }}
+                >
+                  {d.val}
+                </span>
               </div>
             ))}
           </div>
@@ -366,8 +374,7 @@ export default function Inquiry() {
                 'Private Charter',
                 'Corporate Charter',
                 'Wedding Charter',
-                'Sunset Cruise',
-                'Whale Watching',
+                'Cathering',
                 'Custom',
               ]}
               isLight={isLight}
