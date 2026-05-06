@@ -42,6 +42,7 @@ function Field({
   select,
   options,
   isLight,
+  hasError,
 }: {
   label: string;
   name: keyof FormState;
@@ -53,8 +54,11 @@ function Field({
   select?: boolean;
   options?: string[];
   isLight?: boolean;
+  hasError?: boolean;
 }) {
-  const borderColor = isLight
+  const borderColor = hasError
+    ? 'rgba(220,60,60,0.7)'
+    : isLight
     ? 'rgba(10,22,40,0.18)'
     : 'rgba(245,240,232,0.22)';
   const inputStyle: React.CSSProperties = {
@@ -143,9 +147,17 @@ export default function Inquiry() {
   const formRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [showErrors, setShowErrors] = useState(false);
 
   const update = (name: keyof FormState, val: string) =>
     setForm((prev) => ({ ...prev, [name]: val }));
+
+  const requiredFields: (keyof FormState)[] = ['name', 'email', 'phone', 'date', 'guests', 'note'];
+  const errors = requiredFields.reduce<Partial<Record<keyof FormState, boolean>>>(
+    (acc, key) => ({ ...acc, [key]: !form[key].trim() }),
+    {}
+  );
+  const hasErrors = requiredFields.some((key) => !form[key].trim());
 
   useGSAP(
     () => {
@@ -328,6 +340,7 @@ export default function Inquiry() {
               onChange={update}
               placeholder="Eleanor Vance"
               isLight={isLight}
+              hasError={showErrors && errors.name}
             />
             <Field
               label="Email"
@@ -337,6 +350,7 @@ export default function Inquiry() {
               type="email"
               placeholder="eleanor@vance.co"
               isLight={isLight}
+              hasError={showErrors && errors.email}
             />
           </div>
           <div
@@ -350,6 +364,7 @@ export default function Inquiry() {
               onChange={update}
               placeholder="+61"
               isLight={isLight}
+              hasError={showErrors && errors.phone}
             />
             <Field
               label="Preferred Date"
@@ -358,6 +373,7 @@ export default function Inquiry() {
               onChange={update}
               placeholder="Saturday, 3 May"
               isLight={isLight}
+              hasError={showErrors && errors.date}
             />
           </div>
           <div
@@ -386,6 +402,7 @@ export default function Inquiry() {
               onChange={update}
               placeholder="12"
               isLight={isLight}
+              hasError={showErrors && errors.guests}
             />
           </div>
           <Field
@@ -409,12 +426,30 @@ export default function Inquiry() {
             multi
             placeholder="A quiet afternoon, champagne on the foredeck."
             isLight={isLight}
+            hasError={showErrors && errors.note}
           />
+          {showErrors && hasErrors && (
+            <div
+              style={{
+                marginBottom: 16,
+                color: 'rgba(220,80,80,0.9)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 10,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                fontWeight: 500,
+              }}
+            >
+              Please fill in all fields before sending.
+            </div>
+          )}
           <div style={{ marginTop: 8 }}>
             <Button
               variant="primary"
               onClick={async () => {
                 if (status === 'sending') return;
+                if (hasErrors) { setShowErrors(true); return; }
+                setShowErrors(false);
                 setStatus('sending');
                 try {
                   const res = await fetch('/api/inquiry', {
