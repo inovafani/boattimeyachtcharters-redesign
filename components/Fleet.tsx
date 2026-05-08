@@ -1,12 +1,14 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm } from './Shared';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const GALLERY_VISIBLE = 4;
 
 interface YachtData {
   badge: string;
@@ -21,6 +23,7 @@ interface YachtData {
   ctaHref: string;
   tourUrl?: string;
   img: string;
+  interiorImages: string[];
   reverse: boolean;
 }
 
@@ -46,11 +49,19 @@ const YACHTS: YachtData[] = [
       'BBQ Facilities',
       'Weddings Licensed',
     ],
-    ctaLabel: 'Tour Sun Goddess',
+    ctaLabel: '360° Tour Sun Goddess',
     ctaHref: '/#inquiry',
     tourUrl:
       'https://kuula.co/share/collection/7M9TC?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
     img: '/sun-goddess-main-upscale.png',
+    interiorImages: [
+      '/sun-goddess-interior/sun1.jpeg',
+      '/sun-goddess-interior/sun2.jpeg',
+      '/sun-goddess-interior/sun3.jpeg',
+      '/sun-goddess-interior/sun4.jpeg',
+      '/sun-goddess-interior/sun5.jpeg',
+      '/sun-goddess-interior/sun6.jpg',
+    ],
     reverse: false,
   },
   {
@@ -74,14 +85,308 @@ const YACHTS: YachtData[] = [
       'Sun Lounge',
       'Scuba Gear',
     ],
-    ctaLabel: 'Tour Mermaid Spirit',
+    ctaLabel: '360° Tour Mermaid Spirit',
     ctaHref: '/#inquiry',
     tourUrl:
       'https://kuula.co/share/collection/7MvRw?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
     img: '/mermaid-spirit-main.jpg',
+    interiorImages: [
+      '/mermaid-spirit-interior/mermaid1.jpeg',
+      '/mermaid-spirit-interior/mermaid2.jpeg',
+      '/mermaid-spirit-interior/mermaid3.jpeg',
+      '/mermaid-spirit-interior/mermaid4.jpg',
+      '/mermaid-spirit-interior/mermaid5.jpeg',
+      '/mermaid-spirit-interior/mermaid6.jpeg',
+    ],
     reverse: true,
   },
 ];
+
+function InteriorGallery({
+  images,
+  label,
+}: {
+  images: string[];
+  label: string;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [slideIdx, setSlideIdx] = useState(0);
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const maxSlide = images.length - GALLERY_VISIBLE;
+
+  function goTo(idx: number) {
+    const clamped = Math.max(0, Math.min(maxSlide, idx));
+    if (trackRef.current) {
+      const first = trackRef.current.children[0] as HTMLElement;
+      if (first)
+        trackRef.current.scrollTo({
+          left: clamped * (first.offsetWidth + 8),
+          behavior: 'smooth',
+        });
+    }
+    setSlideIdx(clamped);
+  }
+
+  useEffect(() => {
+    if (lightboxIdx === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft')
+        setLightboxIdx((i) => (i !== null ? Math.max(0, i - 1) : null));
+      if (e.key === 'ArrowRight')
+        setLightboxIdx((i) =>
+          i !== null ? Math.min(images.length - 1, i + 1) : null,
+        );
+      if (e.key === 'Escape') setLightboxIdx(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxIdx, images.length]);
+
+  useEffect(() => {
+    if (lightboxIdx === null) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [lightboxIdx]);
+
+  const arrowStyle = (enabled: boolean): React.CSSProperties => ({
+    width: 36,
+    height: 36,
+    border: `1px solid ${enabled ? 'rgba(201,168,76,0.45)' : 'rgba(201,168,76,0.15)'}`,
+    background: 'transparent',
+    color: enabled ? 'var(--gold)' : 'rgba(201,168,76,0.25)',
+    cursor: enabled ? 'pointer' : 'default',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'background 0.2s',
+    flexShrink: 0,
+  });
+
+  const ChevronLeft = () => (
+    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+      <path
+        d="M8 2L4 6l4 4"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+  const ChevronRight = () => (
+    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+      <path
+        d="M4 2l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
+  return (
+    <>
+      <div className="fleet-gallery-section">
+        {/* Header */}
+        <div className="fleet-gallery-header">
+          <div
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: 9,
+              letterSpacing: '0.28em',
+              textTransform: 'uppercase',
+              color: 'var(--gold)',
+              fontWeight: 600,
+            }}
+          >
+            Interior Gallery
+          </div>
+          {maxSlide > 0 && (
+            <div style={{ display: 'flex', gap: 8 }}>
+              <button
+                aria-label="Previous"
+                onClick={() => goTo(slideIdx - 1)}
+                disabled={slideIdx <= 0}
+                style={arrowStyle(slideIdx > 0)}
+              >
+                <ChevronLeft />
+              </button>
+              <button
+                aria-label="Next"
+                onClick={() => goTo(slideIdx + 1)}
+                disabled={slideIdx >= maxSlide}
+                style={arrowStyle(slideIdx < maxSlide)}
+              >
+                <ChevronRight />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Thumbnail strip */}
+        <div ref={trackRef} className="fleet-gallery-track">
+          {images.map((src, i) => (
+            <div
+              key={i}
+              className="fleet-gallery-thumb"
+              onClick={() => setLightboxIdx(i)}
+            >
+              <img
+                src={src}
+                alt={`${label} interior ${i + 1}`}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxIdx !== null && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.93)',
+            zIndex: 2000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          onClick={() => setLightboxIdx(null)}
+        >
+          <div
+            style={{ position: 'relative' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Top bar */}
+            <div
+              style={{
+                position: 'absolute',
+                top: -44,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 9,
+                  letterSpacing: '0.3em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(201,168,76,0.7)',
+                  fontWeight: 600,
+                }}
+              >
+                {label} — Interior
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 9,
+                    letterSpacing: '0.2em',
+                    color: 'rgba(245,240,232,0.4)',
+                  }}
+                >
+                  {lightboxIdx + 1} / {images.length}
+                </span>
+                <button
+                  onClick={() => setLightboxIdx(null)}
+                  aria-label="Close"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(201,168,76,0.5)',
+                    color: 'var(--gold)',
+                    width: 34,
+                    height: 34,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 15,
+                  }}
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+
+            {/* Image */}
+            <img
+              src={images[lightboxIdx]}
+              alt={`${label} interior ${lightboxIdx + 1}`}
+              style={{
+                maxWidth: '88vw',
+                maxHeight: '82vh',
+                objectFit: 'contain',
+                display: 'block',
+                border: '1px solid rgba(201,168,76,0.18)',
+              }}
+            />
+
+            {/* Prev */}
+            {lightboxIdx > 0 && (
+              <button
+                onClick={() => setLightboxIdx(lightboxIdx - 1)}
+                aria-label="Previous image"
+                style={{
+                  position: 'absolute',
+                  left: -56,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(10,22,40,0.85)',
+                  border: '1px solid rgba(201,168,76,0.3)',
+                  color: 'var(--gold)',
+                  width: 44,
+                  height: 44,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ChevronLeft />
+              </button>
+            )}
+
+            {/* Next */}
+            {lightboxIdx < images.length - 1 && (
+              <button
+                onClick={() => setLightboxIdx(lightboxIdx + 1)}
+                aria-label="Next image"
+                style={{
+                  position: 'absolute',
+                  right: -56,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(10,22,40,0.85)',
+                  border: '1px solid rgba(201,168,76,0.3)',
+                  color: 'var(--gold)',
+                  width: 44,
+                  height: 44,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ChevronRight />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
 
 function TourModal({
   url,
@@ -541,21 +846,26 @@ export default function Fleet() {
         </p>
       </div>
 
-      {/* Yacht showcases */}
+      {/* Yacht showcases + interior galleries */}
       {YACHTS.map((y) => (
-        <YachtShowcase
-          key={y.name}
-          y={y}
-          onTourClick={
-            y.tourUrl
-              ? () =>
-                  setActiveTour({
-                    url: y.tourUrl!,
-                    label: `${y.name} ${y.emWord}`,
-                  })
-              : undefined
-          }
-        />
+        <React.Fragment key={y.name}>
+          <YachtShowcase
+            y={y}
+            onTourClick={
+              y.tourUrl
+                ? () =>
+                    setActiveTour({
+                      url: y.tourUrl!,
+                      label: `${y.name} ${y.emWord}`,
+                    })
+                : undefined
+            }
+          />
+          <InteriorGallery
+            images={y.interiorImages}
+            label={`${y.name} ${y.emWord}`}
+          />
+        </React.Fragment>
       ))}
 
       {activeTour && (

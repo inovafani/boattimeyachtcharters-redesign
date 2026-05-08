@@ -3244,6 +3244,78 @@
   }
 }
 
+/* ── Fleet interior gallery ─────────────────────────────────── */
+.fleet-gallery-section {
+  background: var(--navy);
+  padding: 0 80px 96px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.fleet-gallery-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.fleet-gallery-track {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.fleet-gallery-thumb {
+  flex: 0 0 calc(25% - 6px);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(201, 168, 76, 0.1);
+  transition: border-color 0.25s;
+}
+
+.fleet-gallery-thumb:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+}
+
+.fleet-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.fleet-gallery-thumb:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .fleet-gallery-section {
+    padding: 0 48px 72px;
+  }
+  .fleet-gallery-thumb {
+    flex: 0 0 calc(33.333% - 6px);
+  }
+}
+
+@media (max-width: 768px) {
+  .fleet-gallery-section {
+    padding: 0 24px 60px;
+  }
+  .fleet-gallery-track {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .fleet-gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+  .fleet-gallery-thumb {
+    flex: 0 0 calc(50% - 4px);
+  }
+}
+
 /* ── Final CTA — contact row wraps and centres ──────────────── */
 @media (max-width: 640px) {
   .final-contact-row {
