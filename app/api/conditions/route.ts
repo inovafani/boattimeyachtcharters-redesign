@@ -7,7 +7,16 @@ const BRISBANE_TZ = 'Australia/Brisbane';
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function nowBrisbane(): Date {
-  return new Date(new Date().toLocaleString('en-AU', { timeZone: BRISBANE_TZ }));
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat('en-AU', {
+    timeZone: BRISBANE_TZ,
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false,
+  }).formatToParts(now);
+  const get = (type: string) =>
+    Number(parts.find((p) => p.type === type)?.value ?? 0);
+  return new Date(get('year'), get('month') - 1, get('day'), get('hour'), get('minute'), get('second'));
 }
 
 function sunsetFallback(): string {
@@ -64,14 +73,7 @@ async function fetchSeaState(): Promise<string> {
     { next: { revalidate: 3600 } },
   );
   const data = await res.json();
-  const hour = parseInt(
-    new Date().toLocaleString('en-AU', {
-      timeZone: BRISBANE_TZ,
-      hour: 'numeric',
-      hour12: false,
-    }),
-    10,
-  );
+  const hour = nowBrisbane().getHours();
   const wh: number = data.hourly?.wave_height?.[hour] ?? 0.4;
   const label =
     wh <= 0.5 ? 'Calm' : wh <= 1.0 ? 'Light' : wh <= 2.0 ? 'Moderate' : 'Rough';
@@ -80,13 +82,20 @@ async function fetchSeaState(): Promise<string> {
 
 // ── Rezdy ────────────────────────────────────────────────────────────────────
 // Set REZDY_API_KEY and REZDY_WHALE_PRODUCT_CODE in .env.local to enable.
-// Get these from your Rezdy dashboard → Settings → API.
-// The product code is the alphanumeric code shown on the product page (e.g. P09XXXXX).
+// Correct endpoint: GET /v1/availability?productCode=...&startTime=YYYY-MM-DD&endTime=YYYY-MM-DD
+// Response contains `sessions` array with startTimeLocal (Brisbane local) and seatsAvailable.
 
 interface RezdySession {
   startTimeLocal: string;
   seatsAvailable: number;
-  status: string;
+}
+
+function fmtDate(d: Date): string {
+  return (
+    d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0')
+  );
 }
 
 async function fetchRezdyWhaleData(): Promise<{ nextWhale: string; availability: string } | null> {
@@ -95,51 +104,70 @@ async function fetchRezdyWhaleData(): Promise<{ nextWhale: string; availability:
   if (!apiKey || !productCode) return null;
 
   const now = nowBrisbane();
-  const end = new Date(now);
-  end.setDate(end.getDate() + 7);
 
-  const pad = (d: Date) =>
-    d.getFullYear() + '-' +
-    String(d.getMonth() + 1).padStart(2, '0') + '-' +
-    String(d.getDate()).padStart(2, '0') + ' 00:00:00';
+  // Look 60 days ahead so we catch the next session even if we're between seasons
+  const end = new Date(now);
+  end.setDate(end.getDate() + 60);
 
   const url =
-    `https://api.rezdy.com/v1/availability/${encodeURIComponent(productCode)}` +
+    `https://api.rezdy.com/v1/availability` +
     `?apiKey=${apiKey}` +
-    `&startTime=${encodeURIComponent(pad(now))}` +
-    `&endTime=${encodeURIComponent(pad(end))}`;
+    `&productCode=${encodeURIComponent(productCode)}` +
+    `&startTime=${fmtDate(now)}` +
+    `&endTime=${fmtDate(end)}`;
 
   const res = await fetch(url, { next: { revalidate: 1800 } });
   if (!res.ok) return null;
 
   const data = await res.json();
-  const sessions: RezdySession[] = data.availability ?? [];
+  // Rezdy returns `sessions` (not `availability`) for this endpoint
+  const all: RezdySession[] = data.sessions ?? [];
 
-  const available = sessions.filter(
-    (s) => s.seatsAvailable > 0 && s.status !== 'CLOSED' && s.status !== 'CANCELLED',
-  );
+  // Sessions with available seats
+  const available = all.filter((s) => s.seatsAvailable > 0);
 
-  if (available.length === 0) {
-    return { nextWhale: 'Sold out this week', availability: 'Check back soon' };
+  if (available.length === 0 && all.length === 0) {
+    // Truly no sessions scheduled yet — let the date-based fallback handle it
+    return null;
   }
 
-  // Format the next upcoming session
-  const next = available[0];
+  if (available.length === 0) {
+    // Sessions exist but all sold out
+    return { nextWhale: 'Sold out this week', availability: 'All booked — check back' };
+  }
+
+  // ── Format the next upcoming session ──────────────────────────────────────
   const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  // Rezdy returns Brisbane-local time already
+  const next = available[0];
+  // startTimeLocal is already Brisbane time: "2026-06-13 09:00:00"
   const [datePart, timePart] = next.startTimeLocal.split(' ');
   const [yr, mo, dy] = datePart.split('-').map(Number);
   const [hh, mm] = timePart.split(':').map(Number);
   const nextDate = new Date(yr, mo - 1, dy, hh, mm);
 
   const isToday =
-    nextDate.getDate() === now.getDate() && nextDate.getMonth() === now.getMonth();
+    nextDate.getDate() === now.getDate() &&
+    nextDate.getMonth() === now.getMonth() &&
+    nextDate.getFullYear() === now.getFullYear();
+
   const dayLabel = isToday ? 'Today' : DAYS[nextDate.getDay()];
   const timeLabel = `${hh}:${String(mm).padStart(2, '0')}`;
   const nextWhale = `${dayLabel} ${timeLabel} · Sun Goddess`;
 
-  const count = available.length;
-  const availability = `${count} session${count === 1 ? '' : 's'} this week`;
+  // ── Availability: count sessions with seats in the next 7 days ────────────
+  const weekEnd = new Date(now);
+  weekEnd.setDate(weekEnd.getDate() + 7);
+  const thisWeek = available.filter((s) => {
+    const [dp] = s.startTimeLocal.split(' ');
+    const d = new Date(dp);
+    return d <= weekEnd;
+  });
+
+  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const availability =
+    thisWeek.length > 0
+      ? `${thisWeek.length} session${thisWeek.length === 1 ? '' : 's'} this week`
+      : `Next: ${dayLabel} ${dy} ${MONTHS_SHORT[mo - 1]}`;
 
   return { nextWhale, availability };
 }
