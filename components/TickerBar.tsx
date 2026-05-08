@@ -13,6 +13,7 @@ interface Conditions {
   sunset: string;
   seaState: string;
   nextWhale: string;
+  availability: string;
 }
 
 export default function TickerBar() {
@@ -20,7 +21,8 @@ export default function TickerBar() {
   const [conditions, setConditions] = useState<Conditions>({
     sunset: sunsetFallback(),
     seaState: 'Calm · 0.4m',
-    nextWhale: 'Loading…',
+    nextWhale: '—',
+    availability: '—',
   });
 
   // Show/hide on scroll
@@ -42,7 +44,7 @@ export default function TickerBar() {
     { label: "Today's Sunset", value: conditions.sunset, accent: true },
     { label: 'Sea State',      value: conditions.seaState },
     { label: 'Next Whale',     value: conditions.nextWhale },
-    { label: 'Availability',   value: '3 dates this week' },
+    { label: 'Availability',   value: conditions.availability },
   ];
 
   return (

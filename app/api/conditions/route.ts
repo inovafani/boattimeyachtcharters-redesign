@@ -1,43 +1,13 @@
 import { NextResponse } from 'next/server';
 
-// Gold Coast Broadwater coordinates
 const LAT = -28.02;
 const LNG = 153.4;
+const BRISBANE_TZ = 'Australia/Brisbane';
 
-async function fetchSunset(): Promise<string> {
-  const res = await fetch(
-    `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LNG}&formatted=0`,
-    { next: { revalidate: 86400 } }, // re-fetch once per day — sunset doesn't change intra-day
-  );
-  const data = await res.json();
-  return new Date(data.results.sunset).toLocaleTimeString('en-AU', {
-    timeZone: 'Australia/Brisbane',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-}
+// ── Helpers ──────────────────────────────────────────────────────────────────
 
-async function fetchSeaState(): Promise<string> {
-  const res = await fetch(
-    `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LNG}&hourly=wave_height&timezone=Australia%2FBrisbane&forecast_days=1`,
-    { next: { revalidate: 3600 } }, // re-fetch hourly
-  );
-  const data = await res.json();
-
-  // Get current Brisbane hour as an index into the hourly array
-  const brisbaneHour = parseInt(
-    new Date().toLocaleString('en-AU', {
-      timeZone: 'Australia/Brisbane',
-      hour: 'numeric',
-      hour12: false,
-    }),
-    10,
-  );
-  const wh: number = data.hourly?.wave_height?.[brisbaneHour] ?? 0.4;
-  const label =
-    wh <= 0.5 ? 'Calm' : wh <= 1.0 ? 'Light' : wh <= 2.0 ? 'Moderate' : 'Rough';
-  return `${label} · ${wh.toFixed(1)}m`;
+function nowBrisbane(): Date {
+  return new Date(new Date().toLocaleString('en-AU', { timeZone: BRISBANE_TZ }));
 }
 
 function sunsetFallback(): string {
@@ -47,48 +17,150 @@ function sunsetFallback(): string {
   return `${h}:${String(m).padStart(2, '0')}`;
 }
 
-// Whale watching season: June (month 5) through November (month 10), daily sessions.
-// Morning boarding 08:30 — if that has passed for today, roll to tomorrow.
-// Out of season: show the opening date of the next season.
-function getNextWhaleDate(): string {
-  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function availabilityFallback(): string {
+  const month = nowBrisbane().getMonth();
+  return month >= 5 && month <= 10 ? 'Daily · book online' : 'Season opens June';
+}
 
-  // Work entirely in Brisbane local time
-  const now = new Date(
-    new Date().toLocaleString('en-AU', { timeZone: 'Australia/Brisbane' }),
-  );
-  const month = now.getMonth(); // 0-indexed
-
-  // In season = June–November (5–10)
+function nextWhaleFallback(): string {
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now = nowBrisbane();
+  const month = now.getMonth();
   const inSeason = month >= 5 && month <= 10;
 
   if (inSeason) {
-    // Morning session boards at 08:30 — if we're past that, advance to tomorrow
     const boardingPassed =
       now.getHours() > 8 || (now.getHours() === 8 && now.getMinutes() >= 30);
     const target = new Date(now);
     if (boardingPassed) target.setDate(target.getDate() + 1);
     return `${target.getDate()} ${MONTHS[target.getMonth()]} · 08:30 · Sun Goddess`;
   }
-
-  // Out of season — next June 1
   const nextJune = new Date(
     month > 10 ? now.getFullYear() + 1 : now.getFullYear(),
-    5, // June
-    1,
+    5, 1,
   );
   return `Season opens 1 Jun ${nextJune.getFullYear()}`;
 }
 
+// ── External fetches ─────────────────────────────────────────────────────────
+
+async function fetchSunset(): Promise<string> {
+  const res = await fetch(
+    `https://api.sunrise-sunset.org/json?lat=${LAT}&lng=${LNG}&formatted=0`,
+    { next: { revalidate: 86400 } },
+  );
+  const data = await res.json();
+  return new Date(data.results.sunset).toLocaleTimeString('en-AU', {
+    timeZone: BRISBANE_TZ,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
+
+async function fetchSeaState(): Promise<string> {
+  const res = await fetch(
+    `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LNG}&hourly=wave_height&timezone=Australia%2FBrisbane&forecast_days=1`,
+    { next: { revalidate: 3600 } },
+  );
+  const data = await res.json();
+  const hour = parseInt(
+    new Date().toLocaleString('en-AU', {
+      timeZone: BRISBANE_TZ,
+      hour: 'numeric',
+      hour12: false,
+    }),
+    10,
+  );
+  const wh: number = data.hourly?.wave_height?.[hour] ?? 0.4;
+  const label =
+    wh <= 0.5 ? 'Calm' : wh <= 1.0 ? 'Light' : wh <= 2.0 ? 'Moderate' : 'Rough';
+  return `${label} · ${wh.toFixed(1)}m`;
+}
+
+// ── Rezdy ────────────────────────────────────────────────────────────────────
+// Set REZDY_API_KEY and REZDY_WHALE_PRODUCT_CODE in .env.local to enable.
+// Get these from your Rezdy dashboard → Settings → API.
+// The product code is the alphanumeric code shown on the product page (e.g. P09XXXXX).
+
+interface RezdySession {
+  startTimeLocal: string;
+  seatsAvailable: number;
+  status: string;
+}
+
+async function fetchRezdyWhaleData(): Promise<{ nextWhale: string; availability: string } | null> {
+  const apiKey = process.env.REZDY_API_KEY;
+  const productCode = process.env.REZDY_WHALE_PRODUCT_CODE;
+  if (!apiKey || !productCode) return null;
+
+  const now = nowBrisbane();
+  const end = new Date(now);
+  end.setDate(end.getDate() + 7);
+
+  const pad = (d: Date) =>
+    d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0') + ' 00:00:00';
+
+  const url =
+    `https://api.rezdy.com/v1/availability/${encodeURIComponent(productCode)}` +
+    `?apiKey=${apiKey}` +
+    `&startTime=${encodeURIComponent(pad(now))}` +
+    `&endTime=${encodeURIComponent(pad(end))}`;
+
+  const res = await fetch(url, { next: { revalidate: 1800 } });
+  if (!res.ok) return null;
+
+  const data = await res.json();
+  const sessions: RezdySession[] = data.availability ?? [];
+
+  const available = sessions.filter(
+    (s) => s.seatsAvailable > 0 && s.status !== 'CLOSED' && s.status !== 'CANCELLED',
+  );
+
+  if (available.length === 0) {
+    return { nextWhale: 'Sold out this week', availability: 'Check back soon' };
+  }
+
+  // Format the next upcoming session
+  const next = available[0];
+  const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  // Rezdy returns Brisbane-local time already
+  const [datePart, timePart] = next.startTimeLocal.split(' ');
+  const [yr, mo, dy] = datePart.split('-').map(Number);
+  const [hh, mm] = timePart.split(':').map(Number);
+  const nextDate = new Date(yr, mo - 1, dy, hh, mm);
+
+  const isToday =
+    nextDate.getDate() === now.getDate() && nextDate.getMonth() === now.getMonth();
+  const dayLabel = isToday ? 'Today' : DAYS[nextDate.getDay()];
+  const timeLabel = `${hh}:${String(mm).padStart(2, '0')}`;
+  const nextWhale = `${dayLabel} ${timeLabel} · Sun Goddess`;
+
+  const count = available.length;
+  const availability = `${count} session${count === 1 ? '' : 's'} this week`;
+
+  return { nextWhale, availability };
+}
+
+// ── Route ─────────────────────────────────────────────────────────────────────
+
 export async function GET() {
-  const [sunsetResult, seaResult] = await Promise.allSettled([
+  console.log('[conditions] GET');
+
+  const [sunsetResult, seaResult, rezdyResult] = await Promise.allSettled([
     fetchSunset(),
     fetchSeaState(),
+    fetchRezdyWhaleData(),
   ]);
 
+  const rezdy = rezdyResult.status === 'fulfilled' ? rezdyResult.value : null;
+
   return NextResponse.json({
-    sunset: sunsetResult.status === 'fulfilled' ? sunsetResult.value : sunsetFallback(),
-    seaState: seaResult.status === 'fulfilled' ? seaResult.value : 'Calm · 0.4m',
-    nextWhale: getNextWhaleDate(),
+    sunset:       sunsetResult.status === 'fulfilled' ? sunsetResult.value : sunsetFallback(),
+    seaState:     seaResult.status === 'fulfilled'    ? seaResult.value    : 'Calm · 0.4m',
+    nextWhale:    rezdy?.nextWhale    ?? nextWhaleFallback(),
+    availability: rezdy?.availability ?? availabilityFallback(),
   });
 }

@@ -31,13 +31,35 @@ function getGoldCoastSunset(): string {
   return `${h}:${String(m).padStart(2, '0')}`;
 }
 
+// Split "Calm · 0.4m" → ["Calm", " · 0.4m"] for em-tag styling
+function splitVal(val: string): [string, string | null] {
+  const idx = val.indexOf(' · ');
+  if (idx === -1) return [val, null];
+  return [val.slice(0, idx), val.slice(idx)];
+}
+
+interface InfobarData {
+  sunset: string;
+  seaState: string;
+  nextWhale: string;
+  availability: string;
+}
+
 export default function Hero() {
   const { theme } = useTheme();
-  const [sunsetTime, setSunsetTime] = useState('—');
   const isLight = theme === 'light';
+  const [infobar, setInfobar] = useState<InfobarData>({
+    sunset: getGoldCoastSunset(),
+    seaState: 'Calm · 0.4m',
+    nextWhale: '—',
+    availability: '—',
+  });
 
   useEffect(() => {
-    setSunsetTime(getGoldCoastSunset());
+    fetch('/api/conditions')
+      .then((r) => r.json())
+      .then((data: InfobarData) => setInfobar(data))
+      .catch(() => {});
   }, []);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -312,24 +334,24 @@ export default function Hero() {
         <div className="hero-infobar-cell">
           <div className="hero-infobar-label">Today&apos;s Sunset</div>
           <div className="hero-infobar-value">
-            {sunsetTime} <em>· gold</em>
+            {infobar.sunset} <em>· gold</em>
           </div>
         </div>
         <div className="hero-infobar-cell">
           <div className="hero-infobar-label">Sea State</div>
           <div className="hero-infobar-value">
-            Calm <em>· &lt;0.5m swell</em>
+            {(() => { const [a, b] = splitVal(infobar.seaState); return <>{a}{b && <em>{b}</em>}</>; })()}
           </div>
         </div>
         <div className="hero-infobar-cell">
           <div className="hero-infobar-label">Next Whale</div>
           <div className="hero-infobar-value">
-            Sat 08:30 <em>· Sun Goddess</em>
+            {(() => { const [a, b] = splitVal(infobar.nextWhale); return <>{a}{b && <em>{b}</em>}</>; })()}
           </div>
         </div>
         <div className="hero-infobar-cell status">
           <div className="hero-infobar-label">Availability</div>
-          <div className="hero-infobar-value">3 dates this week</div>
+          <div className="hero-infobar-value">{infobar.availability}</div>
         </div>
       </div>
 
