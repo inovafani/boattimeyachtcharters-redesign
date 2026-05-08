@@ -3286,7 +3286,7 @@
 /* ── Whale watching session info bar ───────────────────────── */
 .whale-infobar-wrap {
   background: var(--navy);
-  padding: 18px 48px;
+  padding: 20px 48px;
   border-bottom: 1px solid rgba(201, 168, 76, 0.08);
 }
 
@@ -3294,15 +3294,20 @@
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 10px;
 }
 
 .whale-infobar-icon {
   flex-shrink: 0;
 }
 
+/* Row 1: icon + location */
 .whale-infobar-location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-body);
   font-size: 10px;
   letter-spacing: 0.16em;
@@ -3312,13 +3317,12 @@
   white-space: nowrap;
 }
 
+/* Horizontal rule between the two rows */
 .whale-infobar-divider {
-  width: 1px;
-  height: 28px;
-  background: rgba(201, 168, 76, 0.15);
-  flex-shrink: 0;
+  display: none;
 }
 
+/* Row 2: three session cells */
 .whale-infobar-grid {
   display: flex;
   align-items: center;
@@ -3328,13 +3332,17 @@
 .whale-infobar-cell {
   font-family: var(--font-body);
   font-size: 10px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(245, 240, 232, 0.55);
   font-weight: 500;
   padding: 0 24px;
   border-right: 1px solid rgba(201, 168, 76, 0.15);
   white-space: nowrap;
+}
+
+.whale-infobar-cell:first-child {
+  padding-left: 0;
 }
 
 .whale-infobar-cell:last-child {

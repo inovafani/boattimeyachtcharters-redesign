@@ -614,24 +614,22 @@ export default function WhalePage() {
         {/* 3 ── SESSION INFO BAR */}
         <div className="light-adapt-section cruise-section whale-infobar-wrap">
           <div className="whale-infobar-inner">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--gold)"
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-              className="whale-infobar-icon"
-            >
-              <circle cx="12" cy="5" r="3" />
-              <line x1="12" y1="22" x2="12" y2="8" />
-              <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
-            </svg>
-
             <div className="whale-infobar-location">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--gold)"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="5" r="3" />
+                <line x1="12" y1="22" x2="12" y2="8" />
+                <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+              </svg>
               Muriel Henchman Public Pontoon · SeaWorld Drive, Gold Coast
             </div>
 

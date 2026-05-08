@@ -28,7 +28,7 @@ const CRUISES: CruiseData[] = [
     title: 'Luxury whale',
     em: 'watching',
     body: 'Meet the humpbacks from the foredeck of Sun Goddess. Breach season June through October.',
-    dur: '4 hrs',
+    dur: '2.5 hrs',
     vessel: 'Sun Goddess',
     lg: true,
     col: 'span 7',
@@ -41,7 +41,7 @@ const CRUISES: CruiseData[] = [
     title: 'Broadwater',
     em: 'sunset cruise',
     body: null,
-    dur: '2.5 hrs',
+    dur: '2 hrs',
     vessel: 'Sun Goddess',
     col: 'span 5',
     row: 'span 2',
@@ -341,8 +341,9 @@ export default function Cruises() {
             lineHeight: 1.75,
           }}
         >
-          Seven scheduled cruises running year-round from Muriel Henchman Public Pontoon, Main Beach 4217 — from
-          whale season mornings to New Year&rsquo;s Eve across three decks.
+          Seven scheduled cruises running year-round from Muriel Henchman Public
+          Pontoon, Main Beach 4217 — from whale season mornings to New
+          Year&rsquo;s Eve across three decks.
         </p>
       </div>
 
