@@ -113,7 +113,7 @@ const YACHTS = [
     em: 'head-turner',
     body: 'Sleek, stylish, unmistakable on the Broadwater. Dual bars, two decks, a dual-level galley, and sound throughout — room to breathe without giving up a thing.',
     specs: [
-      ['Guests', '150'],
+      ['Guests', '135'],
       ['Length', '34m'],
       ['Decks', 'Two'],
     ],
@@ -186,8 +186,8 @@ const Fleet = () => (
         </h2>
         <p style={fleetStyles.sub}>
           Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks
-          of celebration. Both berthed at Muriel Henchman Public Pontoon, Main Beach 4217, ready for your
-          afternoon.
+          of celebration. Both berthed at Muriel Henchman Public Pontoon, Main
+          Beach 4217, ready for your afternoon.
         </p>
       </div>
       <div style={fleetStyles.grid}>

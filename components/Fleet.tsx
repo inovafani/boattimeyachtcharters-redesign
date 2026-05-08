@@ -31,9 +31,9 @@ const YACHTS: YachtData[] = [
     name: 'Sun',
     emWord: 'Goddess',
     tagline: 'She turns every head in the marina — and earns it.',
-    body: 'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 150 guests who expect room to breathe without giving up a single luxury.',
+    body: 'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
     specs: [
-      { label: 'Guests', value: '150', unit: 'pax' },
+      { label: 'Guests', value: '135', unit: 'pax' },
       { label: 'Length', value: '34m', unit: '/ 114ft' },
       { label: 'Decks', value: '2', unit: '' },
       { label: 'Bars', value: '2', unit: '' },
@@ -61,7 +61,7 @@ const YACHTS: YachtData[] = [
     tagline: 'Three decks built for the best night of your life.',
     body: "A tri-deck catamaran engineered for celebrations. Three full decks, a chef's kitchen, stinger pool, sun lounge, jet skis, and room for 150 by day or 22 overnight. The Gold Coast's ultimate floating venue.",
     specs: [
-      { label: 'Day Guests', value: '150', unit: 'pax' },
+      { label: 'Day Guests', value: '100', unit: 'pax' },
       { label: 'Length', value: '30m', unit: '/ 100ft' },
       { label: 'Decks', value: '3', unit: '' },
       { label: 'Sleeps', value: '22', unit: '' },

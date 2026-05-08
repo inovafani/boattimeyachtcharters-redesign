@@ -15,6 +15,7 @@ interface CruiseData {
   body: string | null;
   dur: string;
   vessel: string;
+  sessions?: string;
   lg?: boolean;
   col: string;
   row: string;
@@ -31,6 +32,7 @@ const CRUISES: CruiseData[] = [
     body: null,
     dur: '2.5 hrs',
     vessel: 'Sun Goddess',
+    sessions: 'Morning 9 AM · Afternoon 1:30 PM',
     lg: true,
     col: 'span 7',
     row: 'span 2',
@@ -248,6 +250,11 @@ function CruiseCard({ c }: { c: CruiseData }) {
           <span className="flex items-center gap-1.5">
             <Icon name="anchor" size={10} color="var(--gold)" /> {c.vessel}
           </span>
+          {c.sessions && (
+            <span className="flex items-center gap-1.5">
+              <Icon name="clock" size={10} color="var(--gold)" /> {c.sessions}
+            </span>
+          )}
         </div>
         <span
           ref={linkRef}
