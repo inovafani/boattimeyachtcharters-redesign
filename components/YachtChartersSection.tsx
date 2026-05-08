@@ -18,6 +18,7 @@ interface CharterCard {
   row: string;
   img: string;
   href: string;
+  linkLabel?: string;
 }
 
 const CHARTERS: CharterCard[] = [
@@ -64,6 +65,18 @@ const CHARTERS: CharterCard[] = [
     row: 'span 2',
     img: '/catering-charter.webp',
     href: '/yacht-charter-menus',
+  },
+  {
+    cat: 'Dining Cruise',
+    title: 'Buffet Dinner & Lunch',
+    em: 'Cruise',
+    body: '"Flavours of Australia" aboard the Mermaid Spirit on the Gold Coast Broadwater. Dinner cruise: boards 5:30 PM · departs 6:00 PM · returns 8:00 PM. Lunch cruise (from 3 Oct): boards 11:30 AM · departs 12:00 PM · returns 2:00 PM.',
+    stat: 'Adults from $99',
+    col: 'span 12',
+    row: 'span 1',
+    img: '/sunset-twilight.png',
+    href: '/buffet-dinner-and-lunch-cruise',
+    linkLabel: 'Book Now',
   },
 ];
 
@@ -204,7 +217,8 @@ function CharterCard({ c }: { c: CharterCard }) {
             display: 'inline-flex',
           }}
         >
-          View Charter <Icon name="arrow" size={11} color="var(--gold)" />
+          {c.linkLabel ?? 'View Charter'}{' '}
+          <Icon name="arrow" size={11} color="var(--gold)" />
         </span>
       </div>
     </a>
