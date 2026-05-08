@@ -74,7 +74,7 @@ const CHARTERS: CharterCard[] = [
     stat: 'Adults from $99',
     col: 'span 12',
     row: 'span 1',
-    img: '/sunset-twilight.png',
+    img: '/sunset-boat.jpg',
     href: '/buffet-dinner-and-lunch-cruise',
     linkLabel: 'Book Now',
   },

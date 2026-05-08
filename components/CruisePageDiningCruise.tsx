@@ -21,8 +21,8 @@ const GALLERY_MAIN = '/sunset-buffet/sunset-buffet1.jpg';
 const GALLERY_THUMBS = [
   '/sunset-buffet/sunset-buffet2.jpg',
   '/sunset-buffet/sunset-buffet3.jpg',
-  '/sunset-buffet/sunset-buffet4.jpg',
-  '/sunset-buffet/sunset-buffet5.jpg',
+  '/dinner-lunch-buffet/lunch1.jpg',
+  '/dinner-lunch-buffet/lunch2.jpg',
 ];
 const GALLERY_WIDE =
   'https://images.unsplash.com/photo-1548093237-8b67b5c8b5c1?w=2000&q=80';
@@ -302,7 +302,7 @@ export default function DiningCruisePage() {
           eyebrow="Cruise Tickets · Dinner & Lunch Cruise"
           title="Buffet Dinner & Lunch"
           titleAccent="Flavours of Australia"
-          image="/sunset-twilight.png"
+          image="/sunset-boat.jpg"
           stats={[
             { label: 'Commences', value: '3 October 2026' },
             { label: 'Adults from', value: '$99' },
