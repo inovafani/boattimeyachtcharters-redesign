@@ -18,7 +18,7 @@ const VESSEL_LAYOUT = (
       <strong style={{ color: 'var(--cream)' }}>Mermaid Spirit –</strong>
     </p>
     <p style={{ marginBottom: 24 }}>
-      Our newly renovated Mermaid Spirit can host up to 100 guests for day
+      Our newly renovated Mermaid Spirit can host up to 150 guests for day
       charters and can sleep 22 guests for overnight charters. A tri-deck
       catamaran, Mermaid Spirit boasts multiple entertainment decks and spaces
       and comes equipped with jet skis, kayaks, scuba diving gear, stinger proof

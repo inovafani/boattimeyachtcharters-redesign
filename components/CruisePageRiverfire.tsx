@@ -570,7 +570,7 @@ function VesselCard() {
               }}
             >
               {[
-                { label: 'PAX', value: '100 Guests' },
+                { label: 'PAX', value: '150 Guests' },
                 { label: 'SIZE', value: '30m (100ft)' },
                 {
                   label: 'FEATURES',

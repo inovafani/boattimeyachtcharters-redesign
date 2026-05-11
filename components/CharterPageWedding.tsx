@@ -222,7 +222,7 @@ const WEDDING_FAQ = (
     {[
       {
         q: 'How many guests can we have?',
-        a: 'The Sun Goddess accommodates up to 135 guests for a day charter. The Mermaid Spirit hosts up to 100 guests. Both vessels offer distinct experiences — get in touch and we can help you choose.',
+        a: 'The Sun Goddess accommodates up to 135 guests for a day charter. The Mermaid Spirit hosts up to 150 guests. Both vessels offer distinct experiences — get in touch and we can help you choose.',
       },
       {
         q: 'Where do we depart?',
@@ -302,7 +302,7 @@ const LEFT_VESSELS = (
 
     <h3 style={{ ...h3Style, marginTop: 0 }}>Mermaid Spirit –</h3>
     <p style={pStyle}>
-      Our newly renovated Mermaid Spirit can host up to 100 guests for day
+      Our newly renovated Mermaid Spirit can host up to 150 guests for day
       charters and can sleep 22 guests for overnight charters (Overnight
       Currently Unavailable). A tri-deck catamaran, Mermaid Spirit boasts
       multiple entertainment decks and spaces and comes equipped with jet skis,
@@ -404,7 +404,7 @@ export default function CharterPageWedding() {
             <p style={{ marginBottom: 16 }}>
               A yacht wedding in Gold Coast is unique and unforgettable.
               Boattime Yacht Charters offers luxurious vessels, Sun Goddess and
-              Mermaid Spirit, which can accommodate up to 135 and 100 guests
+              Mermaid Spirit, which can accommodate up to 135 and 150 guests
               respectively. Our experienced and professional staff are dedicated
               to delivering a truly luxurious and memorable experience.
             </p>

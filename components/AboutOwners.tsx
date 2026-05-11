@@ -114,7 +114,7 @@ export default function AboutOwners() {
             </div>
             <div className="ao-stat-divider" />
             <div className="ao-stat">
-              <span className="ao-stat-num">135</span>
+              <span className="ao-stat-num">150</span>
               <span className="ao-stat-label">guests capacity</span>
             </div>
           </div>

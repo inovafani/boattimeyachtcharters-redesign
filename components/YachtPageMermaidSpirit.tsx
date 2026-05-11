@@ -367,7 +367,7 @@ export default function MermaidSpiritPage() {
           image="https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=2000&q=85"
           stats={[
             { label: 'Length',   value: '100 ft' },
-            { label: 'Guests',   value: 'Up to 100' },
+            { label: 'Guests',   value: 'Up to 150' },
             { label: 'Decks',    value: '3 levels' },
             { label: 'Status',   value: 'New refit' },
           ]}

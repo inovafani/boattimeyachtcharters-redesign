@@ -493,7 +493,7 @@ export function VesselCards() {
     {
       name: 'Mermaid Spirit',
       tagline: 'Tri-deck catamaran',
-      specs: ['100 day guests', '22 overnight guests', '3 decks'],
+      specs: ['150 day guests', '22 overnight guests', '3 decks'],
       description:
         'A stunning tri-deck catamaran offering three distinct levels of entertainment. Equipped with jet skis, kayaks, scuba gear, a stinger-proof pool, and paddle boards.',
       href: '/#fleet',

@@ -107,7 +107,7 @@ export default function WhaleSection() {
             </div>
             <div className="whale-fact">
               <div className="whale-fact-num">
-                Jun<em>—Nov</em>
+                May<em>—Nov</em>
               </div>
               <div className="whale-fact-label">
                 Migration Season

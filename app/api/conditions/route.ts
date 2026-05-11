@@ -28,14 +28,14 @@ function sunsetFallback(): string {
 
 function availabilityFallback(): string {
   const month = nowBrisbane().getMonth();
-  return month >= 5 && month <= 10 ? 'Daily · book online' : 'Season opens June';
+  return month >= 4 && month <= 10 ? 'Daily · book online' : 'Season opens May';
 }
 
 function nextWhaleFallback(): string {
   const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const now = nowBrisbane();
   const month = now.getMonth();
-  const inSeason = month >= 5 && month <= 10;
+  const inSeason = month >= 4 && month <= 10;
 
   if (inSeason) {
     const boardingPassed =
@@ -44,11 +44,11 @@ function nextWhaleFallback(): string {
     if (boardingPassed) target.setDate(target.getDate() + 1);
     return `${target.getDate()} ${MONTHS[target.getMonth()]} · 08:30 · Sun Goddess`;
   }
-  const nextJune = new Date(
+  const nextMay = new Date(
     month > 10 ? now.getFullYear() + 1 : now.getFullYear(),
-    5, 1,
+    4, 1,
   );
-  return `Season opens 1 Jun ${nextJune.getFullYear()}`;
+  return `Season opens 1 May ${nextMay.getFullYear()}`;
 }
 
 // ── External fetches ─────────────────────────────────────────────────────────

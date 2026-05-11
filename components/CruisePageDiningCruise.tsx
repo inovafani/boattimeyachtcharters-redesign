@@ -637,7 +637,7 @@ export default function DiningCruisePage() {
               >
                 {[
                   { label: 'Vessel', value: 'Mermaid Spirit' },
-                  { label: 'Capacity', value: 'Up to 100 guests' },
+                  { label: 'Capacity', value: 'Up to 150 guests' },
                   { label: 'Type', value: 'Tri-deck catamaran' },
                   { label: 'Length', value: '30m (100ft)' },
                 ].map((s) => (

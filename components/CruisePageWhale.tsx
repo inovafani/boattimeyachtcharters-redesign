@@ -109,7 +109,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Two Sessions Daily',
-    desc: 'Morning (9:00 AM) and afternoon (1:30 PM) sessions run every day of the week from June through November — choose what suits your schedule.',
+    desc: 'Morning (9:00 AM) and afternoon (1:30 PM) sessions run every day of the week from May through November — choose what suits your schedule.',
   },
   {
     icon: (
@@ -262,7 +262,7 @@ const ITINERARY = [
           Boarding 1:00 PM &middot; Departs 1:30 PM &middot; Returns 4:00 PM
         </p>
         <p style={{ marginTop: 12, color: 'rgba(245,240,232,0.5)' }}>
-          Both sessions operate 7 days a week, June through November.
+          Both sessions operate 7 days a week, May through November.
         </p>
       </div>
     ),
@@ -320,7 +320,7 @@ const ITINERARY = [
         }}
       >
         <p style={{ marginBottom: 14 }}>
-          The Gold Coast humpback season runs June through November. Morning
+          The Gold Coast humpback season runs May through November. Morning
           sessions typically offer calmer sea conditions and more active whale
           behaviour.
         </p>
@@ -413,7 +413,7 @@ const ITINERARY = [
           simply enter your voucher code during checkout at our booking portal.
         </p>
         <p>
-          Vouchers are valid for any session during whale season (June –
+          Vouchers are valid for any session during whale season (May –
           November) and can be gifted via email instantly.
         </p>
       </div>
@@ -483,8 +483,8 @@ const VESSELS = [
     image: '/mermaid-spirit-main.jpg',
     name: 'Mermaid Spirit',
     description:
-      "Our tri-deck catamaran for larger group charters and private events. Spacious sun lounge, chef's kitchen, stinger pool, and room for 100 guests. Available for private whale watching charters on request.",
-    pax: '100 Guests',
+      "Our tri-deck catamaran for larger group charters and private events. Spacious sun lounge, chef's kitchen, stinger pool, and room for 150 guests. Available for private whale watching charters on request.",
+    pax: '150 Guests',
     size: '30m (100ft)',
     features: [
       '3 Decks',
@@ -643,7 +643,7 @@ export default function WhalePage() {
                 Afternoon Session · Departs 1:30 PM
               </div>
               <div className="whale-infobar-cell whale-infobar-cell--wide">
-                7 Days a Week · June – November
+                7 Days a Week · May – November
               </div>
             </div>
           </div>
@@ -947,7 +947,7 @@ export default function WhalePage() {
                   value: 'Muriel Henchman Public Pontoon, Gold Coast',
                 },
                 { label: 'Sessions Per Day', value: '2 — Morning & Afternoon' },
-                { label: 'Days Per Week', value: '7 Days — June to November' },
+                { label: 'Days Per Week', value: '7 Days — May to November' },
                 { label: 'Duration', value: '2.5 Hours Per Session' },
                 {
                   label: 'Primary Vessel',
@@ -1040,7 +1040,7 @@ export default function WhalePage() {
                   margin: '0 auto',
                 }}
               >
-                Morning and afternoon sessions run daily June through November.
+                Morning and afternoon sessions run daily May through November.
                 Instant confirmation — cancel up to 24 hours before for a full
                 refund.
               </p>

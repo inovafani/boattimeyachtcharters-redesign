@@ -113,7 +113,7 @@ export default function LiveStream() {
                 </h3>
 
                 <p className="ls-offline-body">
-                  Our bow camera launches with whale season. During June&ndash;November
+                  Our bow camera launches with whale season. During May&ndash;November
                   you&apos;ll be able to watch humpbacks breach in real time — streamed
                   live from fifty metres off Sun Goddess.
                 </p>
@@ -145,7 +145,7 @@ export default function LiveStream() {
           </div>
           <div className="ls-info-cell">
             <span className="ls-info-label">Season</span>
-            <span className="ls-info-value">June — November 2026</span>
+            <span className="ls-info-value">May — November 2026</span>
           </div>
           <div className="ls-info-cell ls-info-cell--cta">
             <Button

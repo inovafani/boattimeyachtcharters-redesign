@@ -103,7 +103,7 @@ const CHARTERS = [
     e: 'Private',
     t: 'Your',
     em: 'afternoon',
-    body: 'Up to 135 guests. Half-day or full-day on the Broadwater. BBQ, watersports, a swim stop at Wavebreak.',
+    body: 'Up to 150 guests. Half-day or full-day on the Broadwater. BBQ, watersports, a swim stop at Wavebreak.',
     img: 'https://images.unsplash.com/photo-1605281317010-fe5ffe798166?w=1200&q=80',
   },
   {
