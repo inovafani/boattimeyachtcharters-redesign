@@ -24,10 +24,10 @@ const GL: React.CSSProperties = {
 };
 
 const GALLERY_THUMBS = [
-  '/humpback-circle.jpg',
-  '/humpbacks.jpg',
-  '/luxury-whale.jpg',
-  '/broadwater.jpeg',
+  '/luxury-whale-watching/IMG_0151.jpg',
+  '/luxury-whale-watching/humpbacks.jpg',
+  '/luxury-whale-watching/IMG_1613.JPG',
+  '/luxury-whale-watching/IMG_1637.JPG',
 ];
 
 const FEATURES = [
@@ -916,7 +916,7 @@ export default function WhalePage() {
 
         {/* 6 ── GALLERY */}
         <CruiseGallery
-          main="https://images.unsplash.com/photo-1568430462989-44163eb1752f?w=1200&q=80"
+          main="/humpback-circle.jpg"
           thumbs={GALLERY_THUMBS}
           wide="/luxury-whale.jpg"
         />
