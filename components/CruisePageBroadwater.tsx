@@ -261,8 +261,8 @@ export default function BroadwaterPage() {
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Sunset Cruise"
-          title="Gold Coast"
-          titleAccent="Sunset Cruise"
+          title="Twilight Drift"
+          titleAccent="Broadwater Sunset Tour & Scenic Cruise"
           image="/broadwater.jpeg"
           stats={[
             { label: 'Duration', value: '2 hours' },

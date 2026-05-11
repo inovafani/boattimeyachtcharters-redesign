@@ -17,6 +17,7 @@ interface CruiseData {
   vessel: string;
   sessions?: string;
   lg?: boolean;
+  breakTitle?: boolean;
   col: string;
   row: string;
   img: string;
@@ -26,9 +27,9 @@ interface CruiseData {
 const CRUISES: CruiseData[] = [
   {
     cat: 'Whale Season',
-    title: 'Luxury whale',
-    em: 'watching',
-    // body: 'Meet the humpbacks from the foredeck of Sun Goddess. Breach season June through October.',
+    title: 'Gold Coast Whale Escape',
+    em: 'Luxury Whale Watching Cruise',
+    breakTitle: true,
     body: null,
     dur: '2.5 hrs',
     vessel: 'Sun Goddess',
@@ -41,8 +42,9 @@ const CRUISES: CruiseData[] = [
   },
   {
     cat: 'Sunset',
-    title: 'Broadwater',
-    em: 'sunset cruise',
+    title: 'Twilight Drift',
+    em: 'Broadwater Sunset Tour & Scenic Cruise',
+    breakTitle: true,
     body: null,
     dur: '2 hrs',
     vessel: 'Sun Goddess',
@@ -53,8 +55,9 @@ const CRUISES: CruiseData[] = [
   },
   {
     cat: 'Galley',
-    title: 'Relaxed',
-    em: 'lunch cruise',
+    title: 'Coastal Lunch Escape',
+    em: 'Gold Coast Daytime Dining Cruise',
+    breakTitle: true,
     body: null,
     dur: '3 hrs',
     vessel: 'Mermaid Spirit',
@@ -101,8 +104,9 @@ const CRUISES: CruiseData[] = [
   },
   {
     cat: 'Dining',
-    title: 'Sunset twilight',
-    em: 'buffet',
+    title: 'Broadwater Twilight Dining',
+    em: 'Gold Coast Buffet Dinner Cruise',
+    breakTitle: true,
     body: null,
     dur: '3.5 hrs',
     vessel: 'Mermaid Spirit',
@@ -207,7 +211,8 @@ function CruiseCard({ c }: { c: CruiseData }) {
             letterSpacing: '-0.01em',
           }}
         >
-          {c.title}{' '}
+          {c.title}
+          {c.breakTitle ? <br /> : ' '}
           <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
             {c.em}
           </span>
