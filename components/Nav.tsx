@@ -25,7 +25,6 @@ const EXPERIENCE_ITEMS = [
   { label: 'Twilight Drift', sub: 'Broadwater Sunset Tour', href: '/luxury-broadwater-cruise' },
   { label: 'Coastal Lunch Escape', sub: 'Daytime Dining Cruise', href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit' },
   { label: 'Broadwater Twilight Dining', sub: 'Buffet Dinner Cruise', href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit' },
-  { label: 'Buffet Dinner & Lunch', sub: 'Flavours of Australia', href: '/buffet-dinner-and-lunch-cruise' },
   { label: 'Riverfire 2026', sub: 'Brisbane Event', href: '/riverfire-2026' },
   { label: "New Year's Eve 2026", sub: 'Celebration Cruise', href: '/nye-2026' },
   { label: "Valentine's Day", sub: 'Romance Evening', href: '/valentines-day' },
