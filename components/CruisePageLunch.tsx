@@ -17,11 +17,11 @@ const GL: React.CSSProperties = {
   fontWeight: 600,
 };
 
-const GALLERY_MAIN = '/relaxed-lunch/relaxed_lunch_3.webp';
+const GALLERY_MAIN = '/relaxed-lunch/relaxed_lunch_7.jpg';
 const GALLERY_THUMBS = [
   '/relaxed-lunch/relaxed_lunch_4.webp',
   '/relaxed-lunch/relaxed_lunch_5.webp',
-  '/relaxed-lunch/relaxed_lunch_1.webp',
+  '/relaxed-lunch/relaxed_lunch_3.jpg',
   '/relaxed-lunch/relaxed_lunch_6.webp',
 ];
 const GALLERY_WIDE =
@@ -493,7 +493,10 @@ export default function LunchPage() {
         </section>
 
         {/* 3 ── MERMAID SPIRIT OVERVIEW */}
-        <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section
+          className="cruise-section"
+          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+        >
           <div
             className="cruise-page-split"
             style={{
@@ -892,7 +895,10 @@ export default function LunchPage() {
         </div>
 
         {/* 7 ── MIDDAY ON THE WATER */}
-        <section className="cruise-section" style={{ background: 'var(--navy)', padding: '100px 48px' }}>
+        <section
+          className="cruise-section"
+          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+        >
           <div style={{ maxWidth: 900, margin: '0 auto' }}>
             <p
               style={{
