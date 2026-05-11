@@ -35,7 +35,8 @@ const CHARTER_ITEMS = [
   { label: 'Private Yacht Charter', sub: 'Tailored experiences', href: '/private-yacht-charter' },
   { label: 'Corporate Charter', sub: 'Team & client events', href: '/corporate-yacht-charter' },
   { label: 'Wedding Yacht Charter', sub: 'Celebrate in style', href: '/wedding-yacht-charter' },
-  { label: 'Catering & Menus', sub: 'Flavours of Australia', href: '/yacht-charter-menus' },
+  { label: 'Buffet Dinner & Lunch Cruise', sub: 'Flavours of Australia', href: '/buffet-dinner-and-lunch-cruise' },
+  { label: 'Catering & Menus', sub: 'Menus & packages', href: '/yacht-charter-menus' },
 ];
 
 export default function Nav() {
