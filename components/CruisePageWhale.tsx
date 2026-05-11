@@ -517,7 +517,7 @@ export default function WhalePage() {
           stats={[
             { label: 'Duration', value: '2.5 hours' },
             { label: 'From', value: '$74.50 pp' },
-            { label: 'Season', value: 'Jun – Nov' },
+            { label: 'Season', value: 'May – Nov' },
             { label: 'Sessions', value: '2 Daily' },
           ]}
           bookingUrl="#book"
