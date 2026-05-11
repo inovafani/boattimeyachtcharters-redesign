@@ -204,7 +204,7 @@ function CruiseCard({ c }: { c: CruiseData }) {
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 400,
-            fontSize: c.lg ? 'clamp(22px, 5.5vw, 42px)' : 'clamp(17px, 3.8vw, 26px)',
+            fontSize: 'clamp(17px, 3.5vw, 26px)',
             color: 'var(--cream)',
             lineHeight: 1.1,
             marginBottom: 10,
