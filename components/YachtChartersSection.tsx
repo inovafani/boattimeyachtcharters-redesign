@@ -100,10 +100,8 @@ function CharterCard({ c }: { c: CharterCard }) {
         ease: 'power2.out',
       });
       gsap.to(linkRef.current, {
-        opacity: hovered ? 1 : 0,
-        y: hovered ? 0 : 6,
+        opacity: hovered ? 1 : 0.75,
         duration: 0.35,
-        delay: hovered ? 0.05 : 0,
         ease: 'power2.out',
       });
     },
@@ -208,12 +206,12 @@ function CharterCard({ c }: { c: CharterCard }) {
           className="flex items-center gap-2"
           style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 10,
+            fontSize: 12,
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
             color: 'var(--gold)',
             fontWeight: 600,
-            opacity: 0,
+            opacity: 0.75,
             display: 'inline-flex',
           }}
         >

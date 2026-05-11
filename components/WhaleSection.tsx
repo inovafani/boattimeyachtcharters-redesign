@@ -66,7 +66,7 @@ export default function WhaleSection() {
         <div ref={leftRef} className="whale-left">
           <div className="whale-tag">
             <span className="whale-tag-dot" />
-            <span>Season Opens · 12 June 2026</span>
+            <span>Season Opens · 30 May 2026</span>
           </div>
 
           <h2 className="whale-headline">
@@ -76,7 +76,7 @@ export default function WhaleSection() {
           </h2>
 
           <p className="whale-desc">
-            Every year from June to November, fifty thousand humpback whales
+            Every year from May to November, fifty thousand humpback whales
             migrate up the Australian East Coast — straight past the Gold Coast.
             Sun Goddess takes you out to meet them. Warm galley, hot coffee,
             marine biologist commentary, and the{' '}
