@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -101,6 +102,29 @@ const YACHTS: YachtData[] = [
   },
 ];
 
+const ChevronLeft = () => (
+  <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+    <path
+      d="M8 2L4 6l4 4"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+const ChevronRight = () => (
+  <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+    <path
+      d="M4 2l4 4-4 4"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 function InteriorGallery({
   images,
   label,
@@ -113,18 +137,21 @@ function InteriorGallery({
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
   const maxSlide = images.length - GALLERY_VISIBLE;
 
-  function goTo(idx: number) {
-    const clamped = Math.max(0, Math.min(maxSlide, idx));
-    if (trackRef.current) {
-      const first = trackRef.current.children[0] as HTMLElement;
-      if (first)
-        trackRef.current.scrollTo({
-          left: clamped * (first.offsetWidth + 8),
-          behavior: 'smooth',
-        });
-    }
-    setSlideIdx(clamped);
-  }
+  const goTo = useCallback(
+    (idx: number) => {
+      const clamped = Math.max(0, Math.min(maxSlide, idx));
+      if (trackRef.current) {
+        const first = trackRef.current.children[0] as HTMLElement;
+        if (first)
+          trackRef.current.scrollTo({
+            left: clamped * (first.offsetWidth + 8),
+            behavior: 'smooth',
+          });
+      }
+      setSlideIdx(clamped);
+    },
+    [maxSlide],
+  );
 
   useEffect(() => {
     if (lightboxIdx === null) return;
@@ -163,29 +190,6 @@ function InteriorGallery({
     transition: 'background 0.2s',
     flexShrink: 0,
   });
-
-  const ChevronLeft = () => (
-    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-      <path
-        d="M8 2L4 6l4 4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-  const ChevronRight = () => (
-    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
-      <path
-        d="M4 2l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
 
   return (
     <>
@@ -234,10 +238,11 @@ function InteriorGallery({
               className="fleet-gallery-thumb"
               onClick={() => setLightboxIdx(i)}
             >
-              <img
+              <Image
                 src={src}
                 alt={`${label} interior ${i + 1}`}
-                loading="lazy"
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
             </div>
           ))}
@@ -504,9 +509,11 @@ function TourModal({
 function YachtShowcase({
   y,
   onTourClick,
+  priority,
 }: {
   y: YachtData;
   onTourClick?: () => void;
+  priority?: boolean;
 }) {
   const showcaseRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
@@ -548,7 +555,13 @@ function YachtShowcase({
     >
       {/* Image panel */}
       <div ref={imgRef} className="yacht-visual">
-        <img src={y.img} alt={`${y.name} ${y.emWord}`} />
+        <Image
+          src={y.img}
+          alt={`${y.name} ${y.emWord}`}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          priority={priority}
+        />
         <div
           className="yacht-visual__badge"
           style={{
@@ -846,10 +859,11 @@ export default function Fleet() {
       </div>
 
       {/* Yacht showcases + interior galleries */}
-      {YACHTS.map((y) => (
+      {YACHTS.map((y, i) => (
         <React.Fragment key={y.name}>
           <YachtShowcase
             y={y}
+            priority={i === 0}
             onTourClick={
               y.tourUrl
                 ? () =>

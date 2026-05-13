@@ -1510,6 +1510,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 1.4s ease;
+  will-change: transform;
 }
 .yacht-showcase:hover .yacht-visual img {
   transform: scale(1.05);
@@ -3465,12 +3466,14 @@
 }
 
 .fleet-gallery-thumb {
+  position: relative;
   flex: 0 0 calc(25% - 6px);
   aspect-ratio: 4 / 3;
   overflow: hidden;
   cursor: pointer;
   border: 1px solid rgba(201, 168, 76, 0.1);
   transition: border-color 0.25s;
+  contain: layout style paint;
 }
 
 .fleet-gallery-thumb:hover {
@@ -3483,6 +3486,7 @@
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
+  will-change: transform;
 }
 
 .fleet-gallery-thumb:hover img {
