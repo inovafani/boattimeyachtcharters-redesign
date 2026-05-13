@@ -263,7 +263,7 @@ export default function BroadwaterPage() {
           eyebrow="Cruise Tickets · Sunset Cruise"
           title="Twilight Drift"
           titleAccent="Broadwater Sunset Tour & Scenic Cruise"
-          image="/twilight-drift.jpeg"
+          image="/dinner-lunch-buffet/sunset-buffet1.jpg"
           stats={[
             { label: 'Duration', value: '2 hours' },
             { label: 'From', value: '$64.50 pp' },

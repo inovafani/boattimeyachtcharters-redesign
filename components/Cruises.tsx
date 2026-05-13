@@ -50,7 +50,7 @@ const CRUISES: CruiseData[] = [
     vessel: 'Sun Goddess',
     col: 'span 5',
     row: 'span 2',
-    img: '/twilight-drift.jpeg',
+    img: '/dinner-lunch-buffet/sunset-buffet1.jpg',
     href: '/luxury-broadwater-cruise',
   },
   {
