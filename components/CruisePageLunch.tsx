@@ -368,10 +368,11 @@ export default function LunchPage() {
                   }}
                 >
                   <strong style={{ color: 'rgba(245,240,232,0.85)' }}>
-                    Departure:
+                    Boarding:
                   </strong>{' '}
-                  Muriel Henchman Public Pontoon, Seaworld Drive, Main Beach —
-                  12:00 PM sharp.
+                  Please arrive by 11:30 AM at Muriel Henchman Public Pontoon, Seaworld Drive, Main Beach.{' '}
+                  <strong style={{ color: 'rgba(245,240,232,0.85)' }}>Departure:</strong>{' '}
+                  12:00 PM sharp — late arrivals cannot be accommodated.
                 </p>
               </div>
               <div>
