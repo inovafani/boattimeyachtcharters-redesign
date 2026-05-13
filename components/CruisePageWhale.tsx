@@ -434,10 +434,14 @@ const ITINERARY = [
         }}
       >
         {[
-          'Premium drinks packages available from $35 pp — ask the crew on boarding',
+          'Mimosa on arrival — ask the crew when you board',
+          'Cheese platter to share between two — available on arrival',
+          'Bottle of bubbles with two glasses and strawberries — perfect for celebrations',
+          'Toasted banana bread with butter — ideal for morning sessions',
+          'Croissant with jam — pairs with your complimentary espresso',
+          'Corona bucket with lime — for the afternoon session in the sun',
           'Professional photography prints available to purchase on board during your cruise',
           'Whale watching guidebooks and keepsake gifts available in the on board gift shop',
-          'Souvenir merchandise available on board',
           'Gift vouchers from $74.50 — never expire, redeemable online',
         ].map((item, i) => (
           <li
@@ -447,7 +451,7 @@ const ITINERARY = [
               gap: 14,
               paddingBottom: 10,
               marginBottom: 10,
-              borderBottom: i < 4 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+              borderBottom: i < 8 ? '1px solid rgba(201,168,76,0.08)' : 'none',
             }}
           >
             <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 2 }}>
@@ -914,7 +918,168 @@ export default function WhalePage() {
           </div>
         </section>
 
-        {/* 6 ── GALLERY */}
+        {/* 6 ── ONBOARD UPGRADES */}
+        <section
+          className="cruise-section"
+          style={{
+            background: 'var(--navy)',
+            padding: '100px 48px',
+            borderTop: '1px solid rgba(201,168,76,0.08)',
+          }}
+        >
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+            {/* Header */}
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: 20,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 10,
+                    letterSpacing: '0.3em',
+                    textTransform: 'uppercase',
+                    color: 'var(--gold)',
+                    fontWeight: 500,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 14,
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'block',
+                      width: 32,
+                      height: 1,
+                      background: 'var(--gold)',
+                    }}
+                  />
+                  Onboard Upgrades
+                  <span
+                    style={{
+                      display: 'block',
+                      width: 32,
+                      height: 1,
+                      background: 'var(--gold)',
+                    }}
+                  />
+                </div>
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  lineHeight: 1.05,
+                  color: 'var(--cream)',
+                  letterSpacing: '-0.02em',
+                  marginBottom: 16,
+                }}
+              >
+                Enhance Your{' '}
+                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                  Experience
+                </em>
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 14,
+                  color: 'rgba(245,240,232,0.5)',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Optional upgrades available on arrival — ask the crew when you board
+              </p>
+            </div>
+
+            {/* Upgrade cards */}
+            <div
+              className="cruise-3col-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: 2,
+                background: 'rgba(201,168,76,0.06)',
+                border: '1px solid rgba(201,168,76,0.1)',
+              }}
+            >
+              {[
+                {
+                  name: 'Mimosa on Arrival',
+                  desc: 'Start your whale watching adventure the right way — a chilled mimosa ready as you step aboard.',
+                },
+                {
+                  name: 'Cheese Platter',
+                  desc: 'A curated cheese platter to share between two, perfect for grazing while you scan the horizon.',
+                },
+                {
+                  name: 'Bottle of Bubbles',
+                  desc: 'A bottle of sparkling with two glasses and fresh strawberries — ideal for birthdays or celebrations at sea.',
+                },
+                {
+                  name: 'Toasted Banana Bread',
+                  desc: 'Warm toasted banana bread served with butter — a comforting start to your morning session.',
+                },
+                {
+                  name: 'Croissant with Jam',
+                  desc: 'A freshly baked croissant served with jam — the perfect pairing with your complimentary espresso.',
+                },
+                {
+                  name: 'Corona Bucket with Lime',
+                  desc: 'A bucket of ice-cold Coronas with fresh lime — made for the afternoon session in the Gold Coast sun.',
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: '36px 32px',
+                    borderRight:
+                      (i + 1) % 3 !== 0
+                        ? '1px solid rgba(201,168,76,0.08)'
+                        : 'none',
+                    borderBottom:
+                      i < 3 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 10,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 9,
+                      letterSpacing: '0.28em',
+                      textTransform: 'uppercase',
+                      color: 'var(--gold)',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 13,
+                      color: 'rgba(245,240,232,0.6)',
+                      lineHeight: 1.75,
+                      margin: 0,
+                    }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 8 ── GALLERY */}
         <CruiseGallery
           main="/humpback-circle.jpg"
           thumbs={GALLERY_THUMBS}
