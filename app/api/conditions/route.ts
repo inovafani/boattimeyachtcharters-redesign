@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
-const LAT = -28.02;
-const LNG = 153.4;
+const LAT = -27.97;  // Gold Coast offshore — open Pacific, ~15 km east of Main Beach
+const LNG = 153.56;
 const BRISBANE_TZ = 'Australia/Brisbane';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -74,10 +74,12 @@ async function fetchSeaState(): Promise<string> {
   );
   const data = await res.json();
   const hour = nowBrisbane().getHours();
-  const wh: number = data.hourly?.wave_height?.[hour] ?? 0.4;
+  const wh: number | null = data.hourly?.wave_height?.[hour] ?? null;
+  if (wh === null) return '— · —';
+  const whNum = wh as number;
   const label =
-    wh <= 0.5 ? 'Calm' : wh <= 1.0 ? 'Light' : wh <= 2.0 ? 'Moderate' : 'Rough';
-  return `${label} · ${wh.toFixed(1)}m`;
+    whNum <= 0.5 ? 'Calm' : whNum <= 1.0 ? 'Light' : whNum <= 2.0 ? 'Moderate' : 'Rough';
+  return `${label} · ${whNum.toFixed(1)}m`;
 }
 
 // ── Rezdy ────────────────────────────────────────────────────────────────────
@@ -187,7 +189,7 @@ export async function GET() {
 
   return NextResponse.json({
     sunset:       sunsetResult.status === 'fulfilled' ? sunsetResult.value : sunsetFallback(),
-    seaState:     seaResult.status === 'fulfilled'    ? seaResult.value    : 'Calm · 0.4m',
+    seaState:     seaResult.status === 'fulfilled'    ? seaResult.value    : '— · —',
     nextWhale:    rezdy?.nextWhale    ?? nextWhaleFallback(),
     availability: rezdy?.availability ?? availabilityFallback(),
   });

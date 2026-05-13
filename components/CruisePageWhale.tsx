@@ -146,8 +146,8 @@ const FEATURES = [
         <path d="M16 10a4 4 0 0 1-8 0" />
       </svg>
     ),
-    title: 'Online Gift Store',
-    desc: 'Browse our online store for whale watching guidebooks, keepsake gifts, and souvenirs — available before your tour or as the perfect post-trip memento.',
+    title: 'On Board Gift Store',
+    desc: 'Browse our on board gift shop for whale watching guidebooks, keepsake gifts, and souvenirs — available to purchase during your cruise while the memories are still fresh.',
   },
 ];
 
@@ -195,7 +195,7 @@ const ITINERARY_INTRO: ReactNode = (
           'Two sessions daily — morning & afternoon',
           '100% whale sighting guarantee',
           'Fully licensed bar & galley',
-          'Online store for gifts & souvenirs',
+          'On board gift shop — souvenirs & keepsakes',
         ].map((item) => (
           <li
             key={item}
@@ -365,7 +365,7 @@ const ITINERARY = [
           },
           {
             q: 'Can I buy photos after the tour?',
-            a: "Yes — our onboard professional photographer's shots are available to purchase after the cruise through our online store, along with gifts and souvenirs.",
+            a: "Yes — our onboard professional photographer's shots are available to purchase during and after the cruise through our on board gift shop, along with keepsake gifts and souvenirs.",
           },
         ].map((faq, i, arr) => (
           <div
@@ -420,7 +420,7 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Optional Extras & Online Store',
+    title: 'Optional Extras & On Board Gift Shop',
     content: (
       <ul
         style={{
@@ -435,9 +435,9 @@ const ITINERARY = [
       >
         {[
           'Premium drinks packages available from $35 pp — ask the crew on boarding',
-          'Professional photography prints available after the tour via our online store',
-          'Whale watching guidebooks and keepsake gifts in the online store',
-          'Souvenir merchandise available online and on board',
+          'Professional photography prints available to purchase on board during your cruise',
+          'Whale watching guidebooks and keepsake gifts available in the on board gift shop',
+          'Souvenir merchandise available on board',
           'Gift vouchers from $74.50 — never expire, redeemable online',
         ].map((item, i) => (
           <li
