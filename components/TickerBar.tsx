@@ -20,7 +20,7 @@ export default function TickerBar() {
   const [visible, setVisible] = useState(false);
   const [conditions, setConditions] = useState<Conditions>({
     sunset: sunsetFallback(),
-    seaState: 'Calm · 0.4m',
+    seaState: '— · —',
     nextWhale: '—',
     availability: '—',
   });
@@ -100,9 +100,9 @@ export default function TickerBar() {
         ))}
       </div>
 
-      {/* Reserve CTA */}
+      {/* Tickets CTA */}
       <a
-        href="/#inquiry"
+        href="/cruise-tickets-luxury-whale-watching#book"
         style={{
           flexShrink: 0,
           fontFamily: 'var(--font-body)',
@@ -120,7 +120,7 @@ export default function TickerBar() {
         onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = '#E8C97A')}
         onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = '#C9A84C')}
       >
-        Reserve
+        Tickets
       </a>
     </div>
   );
