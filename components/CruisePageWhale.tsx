@@ -43,26 +43,6 @@ const FEATURES = [
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <circle cx="12" cy="12" r="3" />
-        <path d="M20.188 10.934c.2.519.312 1.077.312 1.662C20.5 15.53 16.642 18 12 18c-4.642 0-8.5-2.47-8.5-5.404 0-.585.112-1.143.312-1.662M3.5 12C3.5 8.47 7.358 6 12 6c4.642 0 8.5 2.47 8.5 6" />
-        <path d="M8 10V6M16 10V6" />
-      </svg>
-    ),
-    title: 'Professional Photographer',
-    desc: 'An onboard photographer captures every breach and tail slap. Your best shots are available to purchase after the tour — no camera skills required.',
-  },
-  {
-    icon: (
-      <svg
-        width="28"
-        height="28"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
         <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
         <path d="M12 8v4l3 3" />
       </svg>
@@ -189,7 +169,6 @@ const ITINERARY_INTRO: ReactNode = (
       <div style={{ ...GL, marginBottom: 14 }}>What&apos;s Included</div>
       <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
         {[
-          'Onboard professional photographer',
           'Marine biologist live commentary',
           'Complimentary hot chocolate & espresso coffee',
           'Two sessions daily — morning & afternoon',
@@ -363,10 +342,6 @@ const ITINERARY = [
             q: 'How close do we get to the whales?',
             a: 'We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel. Our marine biologist will explain their behaviour in real time.',
           },
-          {
-            q: 'Can I buy photos after the tour?',
-            a: "Yes — our onboard professional photographer's shots are available to purchase during and after the cruise through our on board gift shop, along with keepsake gifts and souvenirs.",
-          },
         ].map((faq, i, arr) => (
           <div
             key={i}
@@ -440,7 +415,6 @@ const ITINERARY = [
           'Toasted banana bread with butter — ideal for morning sessions',
           'Croissant with jam — pairs with your complimentary espresso',
           'Corona bucket with lime — for the afternoon session in the sun',
-          'Professional photography prints available to purchase on board during your cruise',
           'Whale watching guidebooks and keepsake gifts available in the on board gift shop',
           'Gift vouchers from $74.50 — never expire, redeemable online',
         ].map((item, i) => (
@@ -880,7 +854,7 @@ export default function WhalePage() {
               className="cruise-3col-grid"
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateColumns: 'repeat(6, 1fr)',
                 gap: 2,
                 background: 'rgba(201,168,76,0.06)',
                 border: '1px solid rgba(201,168,76,0.1)',
@@ -890,9 +864,15 @@ export default function WhalePage() {
                 <div
                   key={i}
                   style={{
+                    gridColumn:
+                      FEATURES.length === 5 && i === 3
+                        ? '2 / 4'
+                        : FEATURES.length === 5 && i === 4
+                          ? '4 / 6'
+                          : 'span 2',
                     padding: '40px 32px',
                     borderRight:
-                      (i + 1) % 3 !== 0
+                      (i + 1) % 3 !== 0 && i !== FEATURES.length - 1
                         ? '1px solid rgba(201,168,76,0.08)'
                         : 'none',
                     borderBottom:
