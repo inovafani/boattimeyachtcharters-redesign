@@ -486,6 +486,9 @@
   .cruise-3col-grid {
     grid-template-columns: 1fr !important;
   }
+  .cruise-3col-grid > div {
+    grid-column: auto !important;
+  }
 }
 
 /* Menu card — clip the absolute watermark so it never bleeds past card bounds */

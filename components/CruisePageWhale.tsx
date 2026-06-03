@@ -608,7 +608,14 @@ export default function WhalePage() {
                 <line x1="12" y1="22" x2="12" y2="8" />
                 <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
               </svg>
-              Muriel Henchman Public Pontoon · SeaWorld Drive, Gold Coast
+              <a
+                href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.35)' }}
+              >
+                Sea World Drive, Main Beach, Gold Coast
+              </a>
             </div>
 
             <span className="whale-infobar-divider" />
@@ -623,6 +630,65 @@ export default function WhalePage() {
               <div className="whale-infobar-cell whale-infobar-cell--wide">
                 7 Days a Week · May – November
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3b ── DEPARTURE MAP */}
+        <div
+          style={{
+            background: 'var(--navy)',
+            borderBottom: '1px solid rgba(201,168,76,0.08)',
+          }}
+        >
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px 40px' }}>
+            <div
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 9,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'rgba(245,240,232,0.35)',
+                marginBottom: 14,
+              }}
+            >
+              Departure Location
+            </div>
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                borderRadius: 4,
+                overflow: 'hidden',
+                border: '1px solid rgba(201,168,76,0.12)',
+              }}
+            >
+              <iframe
+                src="https://maps.google.com/maps?q=-27.9695146,153.4236605&z=17&output=embed"
+                width="100%"
+                height="300"
+                style={{ display: 'block', border: 'none', filter: 'grayscale(30%) contrast(1.05)' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Departure point — Sea World Drive, Main Beach, Gold Coast"
+              />
+            </div>
+            <div style={{ marginTop: 12, textAlign: 'right' }}>
+              <a
+                href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 10,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: 'var(--gold)',
+                  textDecoration: 'none',
+                }}
+              >
+                Open in Google Maps →
+              </a>
             </div>
           </div>
         </div>
@@ -1089,7 +1155,7 @@ export default function WhalePage() {
               {[
                 {
                   label: 'Departure Point',
-                  value: 'Muriel Henchman Public Pontoon, Gold Coast',
+                  value: 'Sea World Drive, Main Beach, Gold Coast',
                 },
                 { label: 'Sessions Per Day', value: '2 — Morning & Afternoon' },
                 { label: 'Days Per Week', value: '7 Days — May to November' },
