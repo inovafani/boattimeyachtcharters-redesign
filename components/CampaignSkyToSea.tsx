@@ -468,6 +468,7 @@ export default function CampaignSkyToSea() {
   const bgRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [videoReady, setVideoReady] = useState(false);
 
   useGSAP(
     () => {
@@ -618,13 +619,17 @@ export default function CampaignSkyToSea() {
               muted
               loop
               playsInline
-              poster="/gch-heli.jpg"
+              preload="auto"
+              onPlaying={() => setVideoReady(true)}
               style={{
                 position: 'absolute',
                 inset: 0,
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                background: 'var(--navy)',
+                opacity: videoReady ? 1 : 0,
+                transition: 'opacity 0.7s ease',
               }}
             >
               <source src="/gch-hero.mp4" type="video/mp4" />
