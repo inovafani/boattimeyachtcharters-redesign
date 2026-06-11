@@ -202,7 +202,7 @@ export default function IndustryPartnership() {
         >
           <div ref={bgRef} className="absolute inset-0 will-change-transform">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/luxury-whale.jpg" alt="" aria-hidden="true"
+            <img src="/twilight-drift.jpeg" alt="" aria-hidden="true"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }} />
           </div>
           <div className="absolute inset-0"
