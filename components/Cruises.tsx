@@ -352,8 +352,8 @@ export default function Cruises() {
             lineHeight: 1.75,
           }}
         >
-          Seven scheduled cruises running year-round from Muriel Henchman Public
-          Pontoon, Main Beach 4217 — from whale season mornings to New
+          Seven scheduled cruises running year-round from Sea World Drive,
+          Main Beach, Gold Coast — from whale season mornings to New
           Year&rsquo;s Eve across three decks.
         </p>
       </div>

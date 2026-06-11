@@ -116,7 +116,7 @@ function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
               fontFamily: 'var(--font-body)', fontSize: 12,
               color: 'rgba(245,240,232,0.85)', letterSpacing: '0.04em',
             }}>
-              Boarding at 5.30. From Muriel Henchman Public Pontoon
+              Boarding at 5.30. From Sea World Drive, Main Beach
             </span>
           </div>
 
@@ -195,11 +195,11 @@ function ItineraryAccordion() {
 
   const ITEMS = [
     { time: '5:30 PM', label: 'Boarding — Welcome aboard with sparkling wine or premium beer' },
-    { time: '6:00 PM', label: 'Departure from Muriel Henchman Public Pontoon' },
+    { time: '6:00 PM', label: 'Departure from Sea World Drive, Main Beach' },
     { time: '6:30 PM', label: 'Canapés served on deck as you cruise the Broadwater' },
     { time: '7:00 PM', label: 'Gourmet dinner served in the dining room or al fresco on deck' },
     { time: '8:00 PM', label: 'Return journey as you enjoy the Gold Coast city lights' },
-    { time: '8:30 PM', label: 'Arrival back at Muriel Henchman Public Pontoon' },
+    { time: '8:30 PM', label: 'Arrival back at Sea World Drive, Main Beach' },
   ];
 
   return (
@@ -451,7 +451,7 @@ export default function ValentinesPage() {
   }, { scope: heroRef });
 
   const SPECS = [
-    'Muriel Henchman Public Pontoon Gold Coast',
+    'Sea World Drive, Main Beach, Gold Coast',
     '2 for $269',
     '14th of February, 2026',
     '2.5 Hours',

@@ -304,7 +304,7 @@ export default function Nav() {
             </div>
             <div className="mobile-drawer__footer-block">
               <span className="mobile-drawer__footer-label">Berth</span>
-              <span className="mobile-drawer__footer-value">Muriel Henchman Public Pontoon · Main Beach 4217</span>
+              <span className="mobile-drawer__footer-value">Sea World Drive · Main Beach, Gold Coast</span>
             </div>
           </div>
           <div className="mobile-drawer__footer-ctas">

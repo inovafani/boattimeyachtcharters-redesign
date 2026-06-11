@@ -215,7 +215,7 @@ function guestEmail({
         <tr>
           <td style="padding:20px 40px;border-top:1px solid #1e3a5a;text-align:center;">
             <p style="margin:0;font-family:sans-serif;font-size:11px;color:rgba(245,240,232,0.3);line-height:1.6;">
-              Boattime Yacht Charters · Muriel Henchman Public Pontoon, Main Beach 4217<br>
+              Boattime Yacht Charters · Sea World Drive, Main Beach, Gold Coast<br>
               <a href="https://boattimeyachtcharters.com.au" style="color:#c9a84c;text-decoration:none;">boattimeyachtcharters.com.au</a>
             </p>
           </td>

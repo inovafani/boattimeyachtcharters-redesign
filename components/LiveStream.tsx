@@ -141,7 +141,7 @@ export default function LiveStream() {
           </div>
           <div className="ls-info-cell">
             <span className="ls-info-label">Departure point</span>
-            <span className="ls-info-value">Muriel Henchman · 08:30</span>
+            <span className="ls-info-value">Sea World Drive, Main Beach · 08:30</span>
           </div>
           <div className="ls-info-cell">
             <span className="ls-info-label">Season</span>

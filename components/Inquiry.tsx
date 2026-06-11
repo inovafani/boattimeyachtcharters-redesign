@@ -264,7 +264,7 @@ export default function Inquiry() {
               {
                 key: 'Dock',
                 icon: 'pin' as const,
-                val: 'Muriel Henchman Public Pontoon, Main Beach 4217',
+                val: 'Sea World Drive, Main Beach, Gold Coast',
               },
               {
                 key: 'Hours',

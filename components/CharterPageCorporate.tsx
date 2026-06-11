@@ -256,7 +256,7 @@ const CORPORATE_FAQ = (
     {[
       {
         q: 'Where do your boats depart from?',
-        a: 'Our boats are berthed at the Muriel Henchman Public Pontoon, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+        a: 'Our boats depart from Sea World Drive, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
       },
       {
         q: 'Can we customise the catering and drinks?',
