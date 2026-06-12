@@ -956,7 +956,7 @@ export default function CampaignSkyToSea() {
         </section>
 
         {/* ── Value stack / savings ── */}
-        <section
+        {/* <section
           className="cruise-section"
           style={{
             background: 'var(--navy)',
@@ -987,7 +987,6 @@ export default function CampaignSkyToSea() {
                 alignItems: 'stretch',
               }}
             >
-              {/* Inclusions */}
               <div
                 style={{
                   background: 'var(--navy-mid)',
@@ -1059,8 +1058,6 @@ export default function CampaignSkyToSea() {
                   ))}
                 </div>
               </div>
-
-              {/* Price card */}
               <div
                 style={{
                   background: 'var(--navy-mid)',
@@ -1209,7 +1206,7 @@ export default function CampaignSkyToSea() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* ── Trust band (risk reversal + reassurance) ── */}
         <section
