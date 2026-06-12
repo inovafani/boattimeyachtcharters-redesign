@@ -130,32 +130,12 @@ function Stars({ size = 14 }: { size?: number }) {
 
 function BrandLockup() {
   return (
-    <div
-      style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}
-    >
+    <div style={{ display: 'flex', alignItems: 'center' }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/boattime-logo.png"
-        alt="Boattime Yacht Charters"
-        style={{ height: 32, width: 'auto', filter: 'brightness(0) invert(1)' }}
-      />
-      <span
-        aria-hidden="true"
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 300,
-          fontSize: 22,
-          color: 'var(--gold)',
-          lineHeight: 1,
-        }}
-      >
-        &times;
-      </span>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/gch-logo.jpg"
+        src="/gch-logo.png"
         alt="Gold Coast Helitours"
-        style={{ height: 40, width: 'auto', mixBlendMode: 'screen' }}
+        style={{ height: 54, width: 'auto' }}
       />
     </div>
   );
