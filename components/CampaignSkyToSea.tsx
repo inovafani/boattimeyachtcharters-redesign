@@ -1683,81 +1683,17 @@ export default function CampaignSkyToSea() {
               </p>
             </div>
 
-            {/* Dummy booking widget — swap for live Rezdy embed when the
-                Sky to Sea product is created in Rezdy. */}
-            <div
-              style={{
-                border: '1px solid rgba(201,168,76,0.15)',
-                background: 'rgba(255,255,255,0.02)',
-                minHeight: 460,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                padding: '64px 32px',
-                gap: 18,
-              }}
-            >
-              <div
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: '50%',
-                  border: '1px solid rgba(201,168,76,0.4)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <WhaleIcon size={28} />
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 10,
-                  letterSpacing: '0.26em',
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
-                  fontWeight: 600,
-                }}
-              >
-                Rezdy booking widget · placeholder
-              </div>
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 13.5,
-                  color: 'rgba(245,240,232,0.55)',
-                  lineHeight: 1.7,
-                  maxWidth: 440,
-                  fontWeight: 300,
-                }}
-              >
-                The live Sky to Sea booking widget will appear here once the
-                joint product is set up in Rezdy. In the meantime, enquire below
-                and we&rsquo;ll hold a spot for you.
-              </p>
-              <a href="/#inquiry" className="btn btn-primary" style={{ marginTop: 8 }}>
-                Enquire Now
-              </a>
+            <div style={{ border: '1px solid rgba(201,168,76,0.15)', background: 'rgba(255,255,255,0.02)' }}>
+              <iframe
+                seamless
+                width="100%"
+                height="1000px"
+                frameBorder="0"
+                className="rezdy"
+                src="https://boattimeyachtcharters.rezdy.com/catalog/651100/helitours?iframe=true"
+                style={{ display: 'block' }}
+              />
             </div>
-
-            {/*
-              Live embed — uncomment & set the real product URL when ready:
-
-              <div style={{ border: '1px solid rgba(201,168,76,0.15)', background: 'rgba(255,255,255,0.02)' }}>
-                <iframe
-                  seamless
-                  width="100%"
-                  height="1000px"
-                  frameBorder="0"
-                  className="rezdy"
-                  src="https://boattimeyachtcharters.rezdy.com/PRODUCT_ID/sky-to-sea?iframe=true"
-                  style={{ display: 'block' }}
-                />
-              </div>
-            */}
           </div>
         </section>
       </main>
