@@ -904,9 +904,8 @@ export function CharterDestinations() {
               fontWeight: 300,
             }}
           >
-            Departing from the Muriel Henchman Public Pontoon, Gold Coast — 10
-            minutes from Surfers Paradise. Free parking available at the
-            pontoon.
+            Departing from Sea World Drive, Main Beach, Gold Coast — 10
+            minutes from Surfers Paradise. Free parking available.
           </p>
         </div>
         <div

@@ -150,7 +150,7 @@ const ITINERARY = [
           7:00 PM
         </p>
         <p style={{ marginBottom: 12 }}>
-          Return trip from Muriel Henchman Public Pontoon set the beautiful Main
+          Return trip from Sea World Drive, Main Beach, Gold Coast set the beautiful Main
           Beach Spit.
         </p>
         <p style={{ marginBottom: 12 }}>
@@ -350,8 +350,7 @@ export default function BroadwaterPage() {
                   <strong style={{ color: 'rgba(245,240,232,0.85)' }}>
                     Starting Point:
                   </strong>{' '}
-                  Depart from a convenient dock at Muriel Henchman Public
-                  Pontoon.
+                  Depart from Sea World Drive, Main Beach, Gold Coast.
                 </p>
               </div>
               <div>

@@ -12,7 +12,7 @@ const ACTS = [
     time: '17:00 · BOARDING',
     title: 'Champagne ',
     em: 'welcome',
-    desc: 'Relaxed boarding at Muriel Henchman pontoon. Welcome glass in hand before we slip the lines.',
+    desc: 'Relaxed boarding at Sea World Drive, Main Beach. Welcome glass in hand before we slip the lines.',
     img: '/EDI_2932.jpg',
     alt: 'Champagne welcome aboard',
   },

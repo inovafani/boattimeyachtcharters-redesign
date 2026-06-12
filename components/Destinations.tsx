@@ -171,7 +171,7 @@ export default function Destinations() {
                   <circle cx="155" cy="375" r="6" className="rm-home-pulse" />
                   <circle cx="155" cy="375" r="7" className="rm-home" />
                 </g>
-                <text x="170" y="373" className="rm-pin-label">Muriel Henchman</text>
+                <text x="170" y="373" className="rm-pin-label">Sea World Drive</text>
                 <text x="170" y="384" className="rm-pin-label-sub">Home Port · 27°56&apos;S</text>
 
                 {/* Animated yacht — desktop only (SMIL animations are janky on mobile) */}

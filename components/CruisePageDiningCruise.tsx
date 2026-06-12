@@ -173,7 +173,7 @@ const ITINERARY = [
           Boarding 11:30 AM &middot; Departure 12:00 PM &middot; Return 2:00 PM
         </p>
         <p style={{ marginBottom: 12 }}>
-          Departs from Muriel Henchman Public Pontoon, Main Beach, Gold Coast.
+          Departs from Sea World Drive, Main Beach, Gold Coast.
         </p>
         <p style={{ color: 'rgba(245,240,232,0.5)' }}>
           Operational Fridays, Saturdays and Sundays only.
@@ -1141,7 +1141,7 @@ export default function DiningCruisePage() {
                     fontWeight: 500,
                   }}
                 >
-                  Muriel Henchman Public Pontoon · Main Beach, Gold Coast
+                  Sea World Drive · Main Beach, Gold Coast
                 </div>
               </div>
             </div>
