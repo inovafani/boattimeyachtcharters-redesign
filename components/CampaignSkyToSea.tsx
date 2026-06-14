@@ -18,37 +18,18 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
    NOTE: prices are indicative placeholders — confirm with GCH.
    ============================================================ */
 
-const BUNDLE_PRICE = 349; // placeholder
-const HELI_PRICE = 285; // placeholder
-const CRUISE_PRICE = 129; // placeholder
-const SEPARATE_TOTAL = HELI_PRICE + CRUISE_PRICE; // 414
-const SAVING = SEPARATE_TOTAL - BUNDLE_PRICE; // 65
+const GCH_TOURS = [
+  { n: 1, duration: '5 min', name: 'Broadwater Scenic', adult: 85, child: 75, route: 'Main Beach, Sea World, Wave Break Island and South Stradbroke Island — a quick lap of the harbour from above.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour1.jpg' },
+  { n: 2, duration: '10 min', name: 'Local City Scenic', adult: 155, child: 135, route: 'Gold Coast Turf Club, The Star, Broadbeach, Surfers Paradise, Main Beach and Sea World — the full city skyline.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour2.jpg' },
+  { n: 3, duration: '15 min', name: 'Golf Course Scenic', adult: 235, child: 205, route: 'Royal Pines, Bond University, Robina, The Star Casino, Broadbeach and the coastal foreshores northward.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour3.jpg' },
+  { n: 4, duration: '20 min', name: 'Stadium & Island', adult: 295, child: 275, route: 'Sea World, Sovereign Islands, Runaway Bay, Royal Pines, Robina, Hedges Avenue ("Millionaires Row") and Q1.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour4.jpg' },
+  { n: 5, duration: '25 min', name: 'Hinze Dam & Island', adult: 345, child: 325, route: 'Westbound through hinterland to Hinze Dam, then eastbound returning via the beaches and Sovereign Islands.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour5.jpg' },
+  { n: 6, duration: '30 min', name: 'Theme Parks Scenic', adult: 395, child: 375, route: 'South Stradbroke Island, Sovereign Islands, Sanctuary Cove, Coomera, Dreamworld, Movie World and the beaches.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour6.jpg' },
+  { n: 7, duration: '45 min', name: 'Ultimate G.C. Scenic', adult: 595, child: 575, route: 'Royal Pines, Tallebudgera and Currumbin Valleys, Point Danger, Tweed River, Fingal — the full Gold Coast experience.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour7.jpg' },
+];
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
-function HeliIcon({ size = 26 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="var(--gold)"
-      strokeWidth="1.3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M3 6h18" />
-      <path d="M12 6v3" />
-      <path d="M7 12.5C7 10.6 8.6 9 12 9c4.5 0 7 1.6 7 4v1.5H9a2 2 0 0 1-2-2Z" />
-      <path d="M9 16.5h7" />
-      <path d="M19 14.5c1.6 0 1.6 2-0.6 2H16" />
-      <path d="M12 16.5V19" />
-      <path d="M9.5 19h5" />
-    </svg>
-  );
-}
 
 function WhaleIcon({ size = 26 }: { size?: number }) {
   return (
@@ -203,127 +184,13 @@ function SectionHead({
   );
 }
 
-// ── Experience half-card (Sky / Sea) ────────────────────────────────────────────
-
-function ExperienceCard({
-  kicker,
-  operator,
-  title,
-  body,
-  image,
-  icon,
-}: {
-  kicker: string;
-  operator: string;
-  title: string;
-  body: string;
-  image: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <div
-      style={{
-        background: 'var(--navy-mid)',
-        border: '1px solid rgba(201,168,76,0.16)',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <div style={{ height: 300, position: 'relative', overflow: 'hidden' }}>
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `url(${image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(to top, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.1) 70%)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            left: 28,
-            bottom: 24,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-          }}
-        >
-          {icon}
-          <div
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 10,
-              letterSpacing: '0.26em',
-              textTransform: 'uppercase',
-              color: 'var(--gold)',
-              fontWeight: 600,
-            }}
-          >
-            {kicker}
-          </div>
-        </div>
-      </div>
-
-      <div style={{ padding: '40px 40px 44px' }}>
-        <div
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 9,
-            letterSpacing: '0.24em',
-            textTransform: 'uppercase',
-            color: 'var(--text-muted)',
-            fontWeight: 600,
-            marginBottom: 14,
-          }}
-        >
-          {operator}
-        </div>
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 300,
-            fontSize: 'clamp(26px, 3vw, 36px)',
-            lineHeight: 1.05,
-            letterSpacing: '-0.01em',
-            color: 'var(--cream)',
-            marginBottom: 18,
-          }}
-        >
-          {title}
-        </h3>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 14,
-            color: 'rgba(245,240,232,0.72)',
-            lineHeight: 1.8,
-            fontWeight: 300,
-          }}
-        >
-          {body}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 // ── Marquee urgency strip ───────────────────────────────────────────────────────
 
 function UrgencyStrip() {
   const items = [
     'WHALE SEASON · JUNE – NOVEMBER',
     'LIMITED SEATS EACH DEPARTURE',
-    `BUNDLE & SAVE $${SAVING}`,
+    `TOURS FROM $85`,
     'SIGHTING GUARANTEE',
     'INSTANT CONFIRMATION',
   ];
@@ -413,7 +280,7 @@ function StickyBookBar() {
               fontWeight: 600,
             }}
           >
-            Sky to Sea Bundle
+            Gold Coast Helitours
           </div>
           <div
             style={{
@@ -423,12 +290,12 @@ function StickyBookBar() {
               marginTop: 3,
             }}
           >
-            from <strong style={{ color: 'var(--gold-light)' }}>${BUNDLE_PRICE}</strong> pp
+            from <strong style={{ color: 'var(--gold-light)' }}>$85</strong> pp
             <span
               className="skysea-stickybar-save"
               style={{ color: 'rgba(245,240,232,0.5)', marginLeft: 10 }}
             >
-              save ${SAVING}
+              5 to 45 min flights
             </span>
           </div>
         </div>
@@ -478,44 +345,6 @@ export default function CampaignSkyToSea() {
     },
     { scope: heroRef },
   );
-
-  const STEPS = [
-    {
-      n: '01',
-      title: 'Take flight',
-      body: 'Lift off from the Gold Coast heliport for a scenic flight along the coastline with Gold Coast Helitours.',
-    },
-    {
-      n: '02',
-      title: 'Spot from the sky',
-      body: 'See the first humpbacks breaching far below — a god&rsquo;s-eye view almost no one gets.',
-    },
-    {
-      n: '03',
-      title: 'Board the yacht',
-      body: 'Step aboard a Boattime luxury catamaran and cruise out across the Broadwater.',
-    },
-    {
-      n: '04',
-      title: 'Meet them at sea',
-      body: 'Drift right alongside the giants at the surface — close enough to hear them breathe.',
-    },
-  ];
-
-  const INCLUSIONS_SKY = [
-    'Scenic helicopter flight over the Gold Coast',
-    'Aerial humpback spotting from the air',
-    'Live commentary from an expert pilot',
-    'Window seat with sweeping ocean views',
-    'Departure from the Gold Coast heliport',
-  ];
-  const INCLUSIONS_SEA = [
-    'Luxury catamaran whale-watching cruise',
-    'Up-close, sea-level humpback encounters',
-    'Premium open decks & climate-controlled saloon',
-    'Onboard refreshments & licensed bar',
-    'Professional marine crew',
-  ];
 
   const TESTIMONIALS = [
     {
@@ -645,23 +474,18 @@ export default function CampaignSkyToSea() {
               style={{
                 fontFamily: 'var(--font-display)',
                 fontWeight: 300,
-                fontSize: 'clamp(42px, 6vw, 84px)',
-                lineHeight: 1.0,
+                fontSize: 'clamp(32px, 5vw, 80px)',
+                lineHeight: 1.05,
                 letterSpacing: '-0.02em',
                 color: 'var(--cream)',
                 marginBottom: 22,
-                maxWidth: 840,
-                textWrap: 'balance',
               }}
             >
               See the whales from the{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)', whiteSpace: 'nowrap' }}>
-                sky.
-              </em>{' '}
+              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>sky.</em>
+              <br />
               Then meet them at{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)', whiteSpace: 'nowrap' }}>
-                sea.
-              </em>
+              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>sea.</em>
             </h1>
             <p
               className="hr"
@@ -713,15 +537,11 @@ export default function CampaignSkyToSea() {
                   letterSpacing: '0.04em',
                 }}
               >
-                Bundle from{' '}
+                Flights from{' '}
                 <strong style={{ color: 'var(--gold-light)' }}>
-                  ${BUNDLE_PRICE}
+                  $85
                 </strong>{' '}
-                pp ·{' '}
-                <span style={{ textDecoration: 'line-through', opacity: 0.5 }}>
-                  ${SEPARATE_TOTAL}
-                </span>{' '}
-                separately
+                pp · 5 to 45 min tours
               </div>
             </div>
 
@@ -743,7 +563,7 @@ export default function CampaignSkyToSea() {
             {[
               { label: 'Season', value: 'Jun – Nov' },
               { label: 'Duration', value: 'Half day', em: 'sky + sea' },
-              { label: 'Departs', value: 'Gold Coast' },
+              { label: 'Departs', value: 'Marina Mirage' },
               { label: 'Seats', value: 'Limited', em: 'per flight' },
             ].map((c) => (
               <div key={c.label} className="hero-infobar-cell">
@@ -772,8 +592,9 @@ export default function CampaignSkyToSea() {
               eyebrow="ONE DAY · TWO PERSPECTIVES"
               title={
                 <>
-                  Most people see whales once.{' '}
-                  <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
+                  Most people see whales once.
+                  <br />
+                  <em style={{ fontStyle: 'italic', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
                     You&rsquo;ll see them twice.
                   </em>
                 </>
@@ -793,10 +614,10 @@ export default function CampaignSkyToSea() {
               }}
             >
               {[
-                { num: '2', label: 'Experiences · one day' },
+                { num: '7', label: 'Scenic routes' },
                 { num: '30+', label: 'Years of flight' },
-                { num: '2,600+', label: 'Five-star guests' },
-                { num: `$${SAVING}`, label: 'Saved per person' },
+                { num: '100%', label: 'Safety record' },
+                { num: '$85', label: 'Flights from' },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -839,7 +660,7 @@ export default function CampaignSkyToSea() {
           </div>
         </section>
 
-        {/* ── The Experience ── */}
+        {/* ── GCH Scenic Flights Catalog ── */}
         <section
           id="experience"
           className="cruise-section"
@@ -851,105 +672,446 @@ export default function CampaignSkyToSea() {
         >
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>
             <SectionHead
-              eyebrow="THE EXPERIENCE"
+              eyebrow="SCENIC FLIGHTS · CHOOSE YOUR TOUR"
               title={
                 <>
-                  Your day, from{' '}
-                  <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
-                    above & below
+                  Seven routes.{' '}
+                  <em style={{ fontStyle: 'italic', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
+                    One coast.
                   </em>
                 </>
               }
+              sub="From a five-minute harbour buzz to a 45-minute grand tour of the hinterland — every flight departs from Mirage Heliport at Marina Mirage, Main Beach. Minimum two adults per booking."
             />
 
+            {/* Tours 1–6 grid */}
             <div
-              className="cruise-overview-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: 24,
+                gap: 2,
                 marginTop: 56,
+                background: 'rgba(201,168,76,0.1)',
+                border: '1px solid rgba(201,168,76,0.14)',
               }}
             >
-              <ExperienceCard
-                kicker="The Sky"
-                operator="Gold Coast Helitours"
-                title="Scenic whale flight"
-                body="Lift off for a scenic flight along the Gold Coast coastline. From hundreds of feet up, watch for the tell-tale spouts and breaches of humpbacks tracing their migration — a view almost no one ever gets."
-                image="/gch-heli.jpg"
-                icon={<HeliIcon size={26} />}
-              />
-              <ExperienceCard
-                kicker="The Sea"
-                operator="Boattime Yacht Charters"
-                title="Luxury whale cruise"
-                body="Then trade altitude for intimacy. Board a Boattime luxury catamaran and cruise out to meet the whales at the surface — close enough to hear them breathe — with refreshments in hand and the skyline behind you."
-                image="/luxury-whale.jpg"
-                icon={<WhaleIcon size={26} />}
-              />
+              {GCH_TOURS.slice(0, 6).map((t) => (
+                <div key={t.n} style={{ background: 'var(--navy)', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
+                    <img
+                      src={t.img}
+                      alt={t.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(to top, rgba(10,22,40,0.7) 0%, transparent 55%)',
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        bottom: 16,
+                        left: 20,
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 9,
+                        letterSpacing: '0.22em',
+                        textTransform: 'uppercase',
+                        color: 'var(--gold)',
+                        fontWeight: 600,
+                      }}
+                    >
+                      Tour {t.n} · {t.duration} flight
+                    </div>
+                  </div>
+                  <div style={{ padding: '28px 28px 36px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontWeight: 400,
+                        fontSize: 24,
+                        color: 'var(--cream)',
+                        marginBottom: 10,
+                        lineHeight: 1.15,
+                      }}
+                    >
+                      {t.name}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-body)',
+                        fontSize: 13,
+                        color: 'rgba(245,240,232,0.55)',
+                        lineHeight: 1.75,
+                        fontWeight: 300,
+                        flex: 1,
+                        marginBottom: 22,
+                      }}
+                    >
+                      {t.route}
+                    </p>
+                    <div style={{ display: 'flex', gap: 24 }}>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Adult</div>
+                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 30, color: 'var(--gold)', lineHeight: 1 }}>${t.adult}</div>
+                      </div>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Child</div>
+                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 30, color: 'rgba(201,168,76,0.55)', lineHeight: 1 }}>${t.child}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* How it works */}
-            <div style={{ marginTop: 80 }}>
-              <div
-                className="section-eyebrow"
-                style={{ justifyContent: 'center', marginBottom: 44 }}
-              >
-                HOW YOUR DAY UNFOLDS
+            {/* Tour 7 — featured full-width */}
+            {(() => {
+              const t = GCH_TOURS[6];
+              return (
+                <div
+                  style={{
+                    marginTop: 2,
+                    background: 'var(--navy)',
+                    border: '1px solid rgba(201,168,76,0.28)',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <div style={{ position: 'relative', minHeight: 320 }}>
+                    <img
+                      src={t.img}
+                      alt={t.name}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(10,22,40,0.3) 0%, transparent 60%)' }} />
+                  </div>
+                  <div style={{ padding: '48px 48px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <div style={{ fontFamily: 'var(--font-body)', fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 600, marginBottom: 16 }}>
+                      Tour {t.n} · {t.duration} flight · Most comprehensive
+                    </div>
+                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 32, color: 'var(--cream)', marginBottom: 14, lineHeight: 1.1 }}>
+                      {t.name}
+                    </h3>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'rgba(245,240,232,0.62)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
+                      {t.route}
+                    </p>
+                    <div style={{ display: 'flex', gap: 32, marginBottom: 36 }}>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 6 }}>Adult</div>
+                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 42, color: 'var(--gold)', lineHeight: 1 }}>${t.adult}</div>
+                      </div>
+                      <div>
+                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 6 }}>Child</div>
+                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 42, color: 'rgba(201,168,76,0.55)', lineHeight: 1 }}>${t.child}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <a href="#book" className="btn btn-primary">Book via Rezdy</a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            <div style={{ textAlign: 'center', marginTop: 48, display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a href="#book" className="btn btn-primary">Book Below via Rezdy</a>
+              <a href="https://www.goldcoasthelitours.com.au/scenic-flights" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+                View on their website
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── GCH Brand Spotlight ── */}
+        <section
+          className="cruise-section"
+          style={{
+            background: 'var(--navy)',
+            borderTop: '1px solid rgba(201,168,76,0.08)',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            className="cruise-page-split"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              minHeight: 640,
+            }}
+          >
+            {/* Left: content */}
+            <div
+              style={{
+                padding: '96px 64px 96px 80px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <div style={{ marginBottom: 26 }}>
+                <img
+                  src="/gch-logo.png"
+                  alt="Gold Coast Helitours"
+                  style={{ height: 48, objectFit: 'contain', objectPosition: 'left' }}
+                />
               </div>
+              <div className="section-eyebrow" style={{ marginBottom: 20 }}>
+                OUR PARTNER IN THE SKY
+              </div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 300,
+                  fontSize: 'clamp(30px, 3.8vw, 56px)',
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--cream)',
+                  marginBottom: 26,
+                }}
+              >
+                Thirty years.<br />
+                <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>One heliport.</em><br />
+                Zero incidents.
+              </h2>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: 14.5,
+                  color: 'rgba(245,240,232,0.7)',
+                  lineHeight: 1.85,
+                  fontWeight: 300,
+                  maxWidth: 480,
+                  marginBottom: 38,
+                }}
+              >
+                Gold Coast Helitours has been lifting off from their private heliport at Marina Mirage since the early 1990s — CASA-certified, flown by the region&rsquo;s most experienced pilots, and recognised three years running as a Best of Queensland Experience. They are the reason your first view of the whales is from several hundred feet in the air.
+              </p>
               <div
-                className="timeline-grid"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(4, 1fr)',
                   gap: 2,
-                  background: 'rgba(201,168,76,0.1)',
-                  border: '1px solid rgba(201,168,76,0.14)',
+                  background: 'rgba(201,168,76,0.14)',
+                  border: '1px solid rgba(201,168,76,0.18)',
+                  marginBottom: 40,
                 }}
               >
-                {STEPS.map((s) => (
+                {[
+                  { num: '30+', label: 'Years of flight' },
+                  { num: '100%', label: 'Safety record' },
+                  { num: '3×', label: 'Best of QLD' },
+                  { num: '7 days', label: 'A week' },
+                ].map((s) => (
                   <div
-                    key={s.n}
-                    style={{ background: 'var(--navy)', padding: '38px 30px' }}
+                    key={s.label}
+                    style={{ background: 'var(--navy)', padding: '24px 16px', textAlign: 'center' }}
                   >
                     <div
                       style={{
                         fontFamily: 'var(--font-display)',
                         fontWeight: 300,
-                        fontSize: 40,
+                        fontSize: 28,
                         color: 'var(--gold)',
                         lineHeight: 1,
-                        marginBottom: 18,
+                        marginBottom: 8,
+                        letterSpacing: '-0.01em',
                       }}
                     >
-                      {s.n}
+                      {s.num}
                     </div>
-                    <h4
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontWeight: 400,
-                        fontSize: 21,
-                        color: 'var(--cream)',
-                        marginBottom: 12,
-                      }}
-                    >
-                      {s.title}
-                    </h4>
-                    <p
+                    <div
                       style={{
                         fontFamily: 'var(--font-body)',
-                        fontSize: 12.5,
-                        color: 'rgba(245,240,232,0.62)',
-                        lineHeight: 1.75,
-                        fontWeight: 300,
+                        fontSize: 8.5,
+                        letterSpacing: '0.16em',
+                        textTransform: 'uppercase',
+                        color: 'rgba(245,240,232,0.5)',
+                        fontWeight: 600,
                       }}
-                      dangerouslySetInnerHTML={{ __html: s.body }}
-                    />
+                    >
+                      {s.label}
+                    </div>
                   </div>
                 ))}
               </div>
-              <div style={{ textAlign: 'center', marginTop: 48 }}>
-                {ctaBlock('Reserve My Day')}
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <a
+                  href="https://www.goldcoasthelitours.com.au"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  Visit Gold Coast Helitours
+                </a>
+                <a href="tel:+61755918457" className="btn btn-ghost">
+                  07 5591 8457
+                </a>
+              </div>
+            </div>
+            {/* Right: image */}
+            <div style={{ position: 'relative', overflow: 'hidden', minHeight: 500 }}>
+              <img
+                src="/gch-heli.jpg"
+                alt="Gold Coast Helitours helicopter over the coast"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                  position: 'absolute',
+                  inset: 0,
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    'linear-gradient(to right, rgba(10,22,40,0.55) 0%, transparent 45%)',
+                }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ── GCH Location & Awards ── */}
+        <section
+          className="cruise-section"
+          style={{
+            background: 'var(--navy)',
+            padding: '104px 80px',
+            borderTop: '1px solid rgba(201,168,76,0.08)',
+          }}
+        >
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div
+              className="cruise-itinerary-grid"
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1.3fr 0.7fr',
+                gap: 80,
+                alignItems: 'center',
+              }}
+            >
+              <div>
+                <div className="section-eyebrow" style={{ marginBottom: 20 }}>
+                  VISIT THEM DIRECTLY
+                </div>
+                <h2
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 300,
+                    fontSize: 'clamp(28px, 3.5vw, 52px)',
+                    lineHeight: 1.1,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--cream)',
+                    marginBottom: 36,
+                  }}
+                >
+                  Find them at<br />
+                  <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Marina Mirage.</em>
+                </h2>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '24px 48px',
+                    marginBottom: 44,
+                  }}
+                >
+                  {[
+                    { label: 'Address', value: '74 Seaworld Drive, Main Beach QLD 4217' },
+                    { label: 'Phone', value: '07 5591 8457' },
+                    { label: 'Hours', value: '8:30am – 5:00pm · 7 days a week' },
+                    { label: 'Email', value: 'info@goldcoasthelitours.com.au' },
+                  ].map((d) => (
+                    <div key={d.label}>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-body)',
+                          fontSize: 8.5,
+                          letterSpacing: '0.2em',
+                          textTransform: 'uppercase',
+                          color: 'var(--gold)',
+                          fontWeight: 600,
+                          marginBottom: 7,
+                        }}
+                      >
+                        {d.label}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-body)',
+                          fontSize: 13.5,
+                          color: 'rgba(245,240,232,0.72)',
+                          lineHeight: 1.55,
+                          fontWeight: 300,
+                        }}
+                      >
+                        {d.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                  <a
+                    href="https://www.goldcoasthelitours.com.au"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    Visit their website
+                  </a>
+                  <a
+                    href="https://maps.google.com/?q=74+Seaworld+Drive+Main+Beach+QLD+4217"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-ghost"
+                  >
+                    Get directions
+                  </a>
+                </div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 8.5,
+                    letterSpacing: '0.22em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(245,240,232,0.35)',
+                    fontWeight: 600,
+                    marginBottom: 28,
+                  }}
+                >
+                  Recommended by Travellers
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
+                  {['2023', '2024', '2025'].map((year) => (
+                    <img
+                      key={year}
+                      src={`https://goldcoasthelitours-redesign.vercel.app/assets/badge-${year}.png`}
+                      alt={`Best of Queensland Experience ${year}`}
+                      style={{ height: 110, objectFit: 'contain' }}
+                    />
+                  ))}
+                </div>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 11,
+                    color: 'rgba(245,240,232,0.35)',
+                    lineHeight: 1.7,
+                    fontWeight: 300,
+                    marginTop: 22,
+                  }}
+                >
+                  Best of Queensland Experience<br />2023 · 2024 · 2025
+                </p>
               </div>
             </div>
           </div>
@@ -1606,7 +1768,7 @@ export default function CampaignSkyToSea() {
               }}
             >
               Don&rsquo;t watch from shore.{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)', whiteSpace: 'nowrap' }}>
                 Be in it.
               </em>
             </h2>
