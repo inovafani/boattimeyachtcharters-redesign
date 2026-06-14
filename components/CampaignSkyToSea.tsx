@@ -23,7 +23,6 @@ const GCH_TOURS = [
   { n: 2, duration: '10 min', name: 'Local City Scenic', adult: 155, child: 135, route: 'Gold Coast Turf Club, The Star, Broadbeach, Surfers Paradise, Main Beach and Sea World — the full city skyline.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour2.jpg' },
   { n: 3, duration: '15 min', name: 'Golf Course Scenic', adult: 235, child: 205, route: 'Royal Pines, Bond University, Robina, The Star Casino, Broadbeach and the coastal foreshores northward.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour3.jpg' },
   { n: 4, duration: '20 min', name: 'Stadium & Island', adult: 295, child: 275, route: 'Sea World, Sovereign Islands, Runaway Bay, Royal Pines, Robina, Hedges Avenue ("Millionaires Row") and Q1.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour4.jpg' },
-  { n: 5, duration: '25 min', name: 'Hinze Dam & Island', adult: 345, child: 325, route: 'Westbound through hinterland to Hinze Dam, then eastbound returning via the beaches and Sovereign Islands.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour5.jpg' },
   { n: 6, duration: '30 min', name: 'Theme Parks Scenic', adult: 395, child: 375, route: 'South Stradbroke Island, Sovereign Islands, Sanctuary Cove, Coomera, Dreamworld, Movie World and the beaches.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour6.jpg' },
   { n: 7, duration: '45 min', name: 'Ultimate G.C. Scenic', adult: 595, child: 575, route: 'Royal Pines, Tallebudgera and Currumbin Valleys, Point Danger, Tweed River, Fingal — the full Gold Coast experience.', img: 'https://goldcoasthelitours-redesign.vercel.app/assets/tours/tour7.jpg' },
 ];
@@ -695,7 +694,7 @@ export default function CampaignSkyToSea() {
                 border: '1px solid rgba(201,168,76,0.14)',
               }}
             >
-              {GCH_TOURS.slice(0, 6).map((t) => (
+              {GCH_TOURS.map((t) => (
                 <div key={t.n} style={{ background: 'var(--navy)', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
                     <img
@@ -726,7 +725,7 @@ export default function CampaignSkyToSea() {
                       Tour {t.n} · {t.duration} flight
                     </div>
                   </div>
-                  <div style={{ padding: '28px 28px 36px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ padding: '28px 28px 32px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <h3
                       style={{
                         fontFamily: 'var(--font-display)',
@@ -752,70 +751,25 @@ export default function CampaignSkyToSea() {
                     >
                       {t.route}
                     </p>
-                    <div style={{ display: 'flex', gap: 24 }}>
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Adult</div>
-                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 30, color: 'var(--gold)', lineHeight: 1 }}>${t.adult}</div>
+                    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 16 }}>
+                      <div style={{ display: 'flex', gap: 20 }}>
+                        <div>
+                          <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Adult</div>
+                          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 30, color: 'var(--gold)', lineHeight: 1 }}>${t.adult}</div>
+                        </div>
+                        <div>
+                          <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Child</div>
+                          <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 30, color: 'rgba(201,168,76,0.55)', lineHeight: 1 }}>${t.child}</div>
+                        </div>
                       </div>
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Child</div>
-                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 30, color: 'rgba(201,168,76,0.55)', lineHeight: 1 }}>${t.child}</div>
-                      </div>
+                      <a href="#book" className="btn btn-primary" style={{ fontSize: 11, padding: '10px 20px', whiteSpace: 'nowrap' }}>
+                        Book Now
+                      </a>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-
-            {/* Tour 7 — featured full-width */}
-            {(() => {
-              const t = GCH_TOURS[6];
-              return (
-                <div
-                  style={{
-                    marginTop: 2,
-                    background: 'var(--navy)',
-                    border: '1px solid rgba(201,168,76,0.28)',
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    overflow: 'hidden',
-                  }}
-                >
-                  <div style={{ position: 'relative', minHeight: 320 }}>
-                    <img
-                      src={t.img}
-                      alt={t.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(10,22,40,0.3) 0%, transparent 60%)' }} />
-                  </div>
-                  <div style={{ padding: '48px 48px 52px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <div style={{ fontFamily: 'var(--font-body)', fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 600, marginBottom: 16 }}>
-                      Tour {t.n} · {t.duration} flight · Most comprehensive
-                    </div>
-                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 32, color: 'var(--cream)', marginBottom: 14, lineHeight: 1.1 }}>
-                      {t.name}
-                    </h3>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'rgba(245,240,232,0.62)', lineHeight: 1.8, fontWeight: 300, marginBottom: 32 }}>
-                      {t.route}
-                    </p>
-                    <div style={{ display: 'flex', gap: 32, marginBottom: 36 }}>
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 6 }}>Adult</div>
-                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 42, color: 'var(--gold)', lineHeight: 1 }}>${t.adult}</div>
-                      </div>
-                      <div>
-                        <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 6 }}>Child</div>
-                        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: 42, color: 'rgba(201,168,76,0.55)', lineHeight: 1 }}>${t.child}</div>
-                      </div>
-                    </div>
-                    <div>
-                      <a href="#book" className="btn btn-primary">Book via Rezdy</a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
 
             <div style={{ textAlign: 'center', marginTop: 48, display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href="#book" className="btn btn-primary">Book Below via Rezdy</a>

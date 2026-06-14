@@ -156,6 +156,9 @@ export default function Nav() {
           <a href="/#faq" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#faq')}>
             FAQ
           </a>
+          <a href="/helitours-campaign" className="site-header__nav-link">
+            Gold Coast Helitours
+          </a>
         </nav>
 
         {/* Right side */}
@@ -290,6 +293,11 @@ export default function Nav() {
           <li style={{ '--i': 4 } as React.CSSProperties}>
             <a href="/#faq" data-num="05" onClick={(e) => { handleHashNav(e, '/#faq'); setMobileOpen(false); }}>
               <span><em>FAQ</em></span>
+            </a>
+          </li>
+          <li style={{ '--i': 5 } as React.CSSProperties}>
+            <a href="/helitours-campaign" data-num="06" onClick={() => setMobileOpen(false)}>
+              <span><em>Gold Coast Helitours</em></span>
             </a>
           </li>
         </ul>
