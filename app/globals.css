@@ -720,8 +720,8 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 60px;
-  padding: 24px 48px;
+  gap: 36px;
+  padding: 24px 44px;
   border-bottom: 1px solid transparent;
   transition:
     padding 0.5s ease,
@@ -777,6 +777,7 @@
   color: var(--gold);
   margin-top: 4px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 /* Desktop nav */
@@ -784,7 +785,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 36px;
+  gap: 28px;
 }
 
 .site-header__nav-link {
@@ -952,6 +953,7 @@
   color: var(--cream);
   text-decoration: none;
   transition: color 0.2s;
+  white-space: nowrap;
 }
 
 .site-header__phone:hover {
