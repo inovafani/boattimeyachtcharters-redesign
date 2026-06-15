@@ -791,6 +791,7 @@ export default function CampaignSkyToSea() {
             overflow: 'hidden',
           }}
         >
+          <style>{`@media (max-width:768px){.gch-spot-content{padding:56px 22px 44px !important;justify-content:flex-start !important}.gch-spot-stats{grid-template-columns:repeat(2,1fr) !important}.gch-spot-img{min-height:300px !important}.gch-contact-grid{grid-template-columns:1fr !important;gap:22px 0 !important}.gch-contact-val{word-break:break-word}.gch-badges img{height:84px !important}}`}</style>
           <div
             className="cruise-page-split"
             style={{
@@ -801,6 +802,7 @@ export default function CampaignSkyToSea() {
           >
             {/* Left: content */}
             <div
+              className="gch-spot-content"
               style={{
                 padding: '96px 64px 96px 80px',
                 display: 'flex',
@@ -847,6 +849,7 @@ export default function CampaignSkyToSea() {
                 Gold Coast Helitours has been lifting off from their private heliport at Marina Mirage since the early 1990s — CASA-certified, flown by the region&rsquo;s most experienced pilots, and recognised three years running as a Best of Queensland Experience. They are the reason your first view of the whales is from several hundred feet in the air.
               </p>
               <div
+                className="gch-spot-stats"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(4, 1fr)',
@@ -909,7 +912,7 @@ export default function CampaignSkyToSea() {
               </div>
             </div>
             {/* Right: image */}
-            <div style={{ position: 'relative', overflow: 'hidden', minHeight: 500 }}>
+            <div className="gch-spot-img" style={{ position: 'relative', overflow: 'hidden', minHeight: 500 }}>
               <img
                 src="/gch-heli.jpg"
                 alt="Gold Coast Helitours helicopter over the coast"
@@ -972,6 +975,7 @@ export default function CampaignSkyToSea() {
                   <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Marina Mirage.</em>
                 </h2>
                 <div
+                  className="gch-contact-grid"
                   style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
@@ -1000,6 +1004,7 @@ export default function CampaignSkyToSea() {
                         {d.label}
                       </div>
                       <div
+                        className="gch-contact-val"
                         style={{
                           fontFamily: 'var(--font-body)',
                           fontSize: 13.5,
@@ -1046,7 +1051,7 @@ export default function CampaignSkyToSea() {
                 >
                   Recommended by Travellers
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
+                <div className="gch-badges" style={{ display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
                   {['2023', '2024', '2025'].map((year) => (
                     <img
                       key={year}
