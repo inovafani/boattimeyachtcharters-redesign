@@ -683,8 +683,10 @@ export default function CampaignSkyToSea() {
               sub="From a five-minute harbour buzz to a 45-minute grand tour of the hinterland — every flight departs from Mirage Heliport at Marina Mirage, Main Beach. Minimum two adults per booking."
             />
 
-            {/* Tours 1–6 grid */}
+            {/* Tours grid */}
+            <style>{`@media (max-width:768px){.gch-tours-grid{grid-template-columns:1fr !important;margin-top:40px !important}.gch-tours-grid>div{min-width:0}.gch-tours-foot{flex-wrap:wrap;gap:14px !important}}`}</style>
             <div
+              className="gch-tours-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
@@ -751,7 +753,7 @@ export default function CampaignSkyToSea() {
                     >
                       {t.route}
                     </p>
-                    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 16 }}>
+                    <div className="gch-tours-foot" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 16 }}>
                       <div style={{ display: 'flex', gap: 20 }}>
                         <div>
                           <div style={{ fontFamily: 'var(--font-body)', fontSize: 8.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(245,240,232,0.4)', marginBottom: 4 }}>Adult</div>
