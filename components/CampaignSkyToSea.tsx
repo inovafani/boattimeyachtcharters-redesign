@@ -545,7 +545,7 @@ export default function CampaignSkyToSea() {
             </div>
 
             <div
-              className="hr"
+              className="hr gch-btn-row"
               style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}
             >
               <a href="#book" className="btn btn-primary">
@@ -773,7 +773,7 @@ export default function CampaignSkyToSea() {
               ))}
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: 48, display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className="gch-btn-row" style={{ textAlign: 'center', marginTop: 48, display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href="#book" className="btn btn-primary">Book Below via Rezdy</a>
               <a href="https://www.goldcoasthelitours.com.au/scenic-flights" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
                 View on their website
@@ -791,7 +791,7 @@ export default function CampaignSkyToSea() {
             overflow: 'hidden',
           }}
         >
-          <style>{`@media (max-width:768px){.gch-spot-content{padding:56px 22px 44px !important;justify-content:flex-start !important}.gch-spot-stats{grid-template-columns:repeat(2,1fr) !important}.gch-spot-img{min-height:300px !important}.gch-contact-grid{grid-template-columns:1fr !important;gap:22px 0 !important}.gch-contact-val{word-break:break-word}.gch-badges img{height:84px !important}}`}</style>
+          <style>{`@media (max-width:768px){.gch-spot-content{padding:56px 22px 44px !important;justify-content:flex-start !important}.gch-spot-stats{grid-template-columns:repeat(2,1fr) !important}.gch-spot-img{min-height:300px !important}.gch-contact-grid{grid-template-columns:1fr !important;gap:22px 0 !important}.gch-contact-val{word-break:break-word}.gch-badges img{height:84px !important}.gch-proof{gap:14px !important;flex-wrap:nowrap !important}.gch-proof-item{flex:1 1 0 !important;min-width:0 !important;flex-direction:column !important;align-items:center !important;text-align:center;gap:12px !important}.gch-proof-item>div{display:flex !important;flex-direction:column !important;align-items:center !important}.gch-btn-row{display:grid !important;grid-template-columns:max-content !important;justify-content:start !important;gap:12px !important}.gch-btn-row--center{justify-content:center !important}.gch-btn-row>.btn{width:auto !important;justify-self:stretch !important}}`}</style>
           <div
             className="cruise-page-split"
             style={{
@@ -897,7 +897,7 @@ export default function CampaignSkyToSea() {
                   </div>
                 ))}
               </div>
-              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <div className="gch-btn-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <a
                   href="https://www.goldcoasthelitours.com.au"
                   target="_blank"
@@ -1018,7 +1018,7 @@ export default function CampaignSkyToSea() {
                     </div>
                   ))}
                 </div>
-                <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <div className="gch-btn-row" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                   <a
                     href="https://www.goldcoasthelitours.com.au"
                     target="_blank"
@@ -1439,6 +1439,7 @@ export default function CampaignSkyToSea() {
             }
           />
           <div
+            className="gch-proof"
             style={{
               maxWidth: 760,
               margin: '48px auto 0',
@@ -1452,7 +1453,7 @@ export default function CampaignSkyToSea() {
               { name: 'Boattime Yacht Charters', rating: '5.0 Stars · 2,047 Reviews', net: 'fb' },
               { name: 'Gold Coast Helitours', rating: '4.9 Stars · 600+ Reviews', net: 'google' },
             ].map((b) => (
-              <div key={b.name} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <div key={b.name} className="gch-proof-item" style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                 {b.net === 'fb' ? (
                   <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877F2">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
