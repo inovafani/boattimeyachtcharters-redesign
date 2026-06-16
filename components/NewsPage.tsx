@@ -335,6 +335,12 @@ function CategoryFilter({
   active: string;
   onSelect: (cat: string) => void;
 }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  function scrollByAmount(amount: number) {
+    scrollRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+
   return (
     <div
       style={{
@@ -351,25 +357,79 @@ function CategoryFilter({
           maxWidth: 1200,
           margin: '0 auto',
           padding: '18px 48px',
-          overflowX: 'auto',
           display: 'flex',
-          gap: 8,
-          scrollbarWidth: 'none',
+          alignItems: 'center',
+          gap: 16,
         }}
       >
-        {CATEGORIES.map((cat) => {
-          const isActive = cat === active;
-          return (
-            <FilterPill
-              key={cat}
-              label={cat}
-              isActive={isActive}
-              onSelect={() => onSelect(cat)}
-            />
-          );
-        })}
+        <ScrollArrow direction="left" onClick={() => scrollByAmount(-240)} />
+        <div
+          ref={scrollRef}
+          style={{
+            flex: 1,
+            minWidth: 0,
+            overflowX: 'auto',
+            display: 'flex',
+            gap: 8,
+            scrollbarWidth: 'none',
+          }}
+        >
+          {CATEGORIES.map((cat) => {
+            const isActive = cat === active;
+            return (
+              <FilterPill
+                key={cat}
+                label={cat}
+                isActive={isActive}
+                onSelect={() => onSelect(cat)}
+              />
+            );
+          })}
+        </div>
+        <ScrollArrow direction="right" onClick={() => scrollByAmount(240)} />
       </div>
     </div>
+  );
+}
+
+function ScrollArrow({
+  direction,
+  onClick,
+}: {
+  direction: 'left' | 'right';
+  onClick: () => void;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      aria-label={direction === 'left' ? 'Scroll categories left' : 'Scroll categories right'}
+      style={{
+        flexShrink: 0,
+        width: 32,
+        height: 32,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '50%',
+        border: `1px solid ${hovered ? 'var(--gold)' : 'rgba(201,168,76,0.25)'}`,
+        background: 'var(--surface)',
+        cursor: 'pointer',
+        transition: 'border-color 0.2s',
+      }}
+    >
+      <span
+        style={{
+          display: 'flex',
+          transform: direction === 'left' ? 'rotate(180deg)' : undefined,
+        }}
+      >
+        <Icon name="chevron" size={12} color={hovered ? 'var(--gold)' : 'var(--text-muted)'} />
+      </span>
+    </button>
   );
 }
 

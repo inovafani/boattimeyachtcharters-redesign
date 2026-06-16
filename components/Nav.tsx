@@ -28,6 +28,7 @@ const EXPERIENCE_ITEMS = [
   { label: 'Riverfire 2026', sub: 'Brisbane Event', href: '/riverfire-2026' },
   { label: "New Year's Eve 2026", sub: 'Celebration Cruise', href: '/nye-2026' },
   { label: "Valentine's Day", sub: 'Romance Evening', href: '/valentines-day' },
+  { label: 'Gold Coast Helitours', sub: 'Sky to Sea Partnership', href: '/helitours-campaign' },
 ];
 
 const CHARTER_ITEMS = [
@@ -156,8 +157,8 @@ export default function Nav() {
           <a href="/#faq" className="site-header__nav-link" onClick={(e) => handleHashNav(e, '/#faq')}>
             FAQ
           </a>
-          <a href="/helitours-campaign" className="site-header__nav-link">
-            Gold Coast Helitours
+          <a href="/boattime-news" className="site-header__nav-link">
+            Blogs
           </a>
         </nav>
 
@@ -291,8 +292,8 @@ export default function Nav() {
           </li>
 
           <li style={{ '--i': 4 } as React.CSSProperties}>
-            <a href="/helitours-campaign" data-num="05" onClick={() => setMobileOpen(false)}>
-              <span><em>Gold Coast Helitours</em></span>
+            <a href="/boattime-news" data-num="05" onClick={() => setMobileOpen(false)}>
+              <span><em>Blogs</em></span>
             </a>
           </li>
           <li style={{ '--i': 5 } as React.CSSProperties}>
