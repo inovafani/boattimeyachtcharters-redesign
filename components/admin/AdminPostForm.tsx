@@ -495,10 +495,11 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
 const labelStyle: React.CSSProperties = {
   display: 'block',
   fontFamily: 'var(--font-body)',
-  fontSize: 9,
-  letterSpacing: '0.24em',
+  fontSize: 11,
+  fontWeight: 700,
+  letterSpacing: '0.2em',
   textTransform: 'uppercase',
-  color: 'var(--text-muted)',
+  color: 'var(--cream)',
   marginBottom: 8,
 };
 
