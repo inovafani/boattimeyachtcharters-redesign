@@ -1916,7 +1916,7 @@ export function CruiseItinerary({
   items: { title: string; content: ReactNode }[];
   intro?: ReactNode;
 }) {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(0);
   const ref = useRef<HTMLElement>(null);
   useGSAP(
     () => {

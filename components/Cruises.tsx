@@ -33,7 +33,7 @@ const CRUISES: CruiseData[] = [
     body: null,
     dur: '2.5 hrs',
     vessel: 'Sun Goddess',
-    sessions: 'Morning 9 AM · Afternoon 1:30 PM',
+    sessions: 'Morning 9 AM · Afternoon 12 PM',
     lg: true,
     col: 'span 7',
     row: 'span 2',

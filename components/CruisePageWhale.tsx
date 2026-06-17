@@ -89,7 +89,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Two Sessions Daily',
-    desc: 'Morning (9:00 AM) and afternoon (1:30 PM) sessions run every day of the week from May through November — choose what suits your schedule.',
+    desc: 'Morning (9:00 AM) and afternoon (12:00 PM) sessions run every day of the week from May through November — choose what suits your schedule.',
   },
   {
     icon: (
@@ -238,7 +238,7 @@ const ITINERARY = [
             Afternoon Session
           </strong>
           <br />
-          Boarding 1:00 PM &middot; Departs 1:30 PM &middot; Returns 4:00 PM
+          Boarding 11:30 AM &middot; Departs 12:00 PM &middot; Returns 2:30 PM
         </p>
         <p style={{ marginTop: 12, color: 'rgba(245,240,232,0.5)' }}>
           Both sessions operate 7 days a week, May through November.
@@ -625,7 +625,7 @@ export default function WhalePage() {
                 Morning Session · Departs 9:00 AM
               </div>
               <div className="whale-infobar-cell">
-                Afternoon Session · Departs 1:30 PM
+                Afternoon Session · Departs 12:00 PM
               </div>
               <div className="whale-infobar-cell whale-infobar-cell--wide">
                 7 Days a Week · May – November

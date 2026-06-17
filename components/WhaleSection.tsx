@@ -150,7 +150,7 @@ export default function WhaleSection() {
           <div className="whale-floating-stat whale-floating-stat-2">
             <div className="whale-floating-label">Daily Sessions</div>
             <div className="whale-floating-value">Morning · 9:00 AM</div>
-            <div className="whale-floating-value">Afternoon · 1:30 PM</div>
+            <div className="whale-floating-value">Afternoon · 12:00 PM</div>
           </div>
         </div>
       </div>
