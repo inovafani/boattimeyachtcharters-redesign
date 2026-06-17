@@ -20,7 +20,7 @@ export default async function Page() {
 
     const { data, error } = await supabase
       .from('posts')
-      .select('id, slug, title, excerpt, image_url, categories, published_at, created_at')
+      .select('id, slug, title, excerpt, image_url, categories, published_at, created_at, reading_time')
       .eq('published', true)
       .order('published_at', { ascending: false });
 

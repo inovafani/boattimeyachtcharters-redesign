@@ -22,6 +22,8 @@ interface Post {
   categories: string[];
   published_at: string | null;
   created_at: string;
+  reading_time?: number;
+  author?: string;
 }
 
 function fmtDate(dateStr: string | null | undefined) {
@@ -165,8 +167,14 @@ function ArticleHero({ post }: { post: Post }) {
           }}
         >
           <span>{fmtDate(post.published_at ?? post.created_at)}</span>
+          {post.reading_time && post.reading_time > 0 ? (
+            <>
+              <span style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.3)' }} />
+              <span>{post.reading_time} min read</span>
+            </>
+          ) : null}
           <span style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.3)' }} />
-          <span>Boattime Yacht Charters</span>
+          <span>{post.author || 'Boattime Yacht Charters'}</span>
         </div>
       </div>
     </section>
@@ -219,16 +227,10 @@ function ArticleBody({ post }: { post: Post }) {
         {/* Content */}
         {post.content ? (
           <div
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 16,
-              color: 'rgba(245,240,232,0.78)',
-              lineHeight: 1.85,
-              whiteSpace: 'pre-wrap',
-            }}
-          >
-            {post.content}
-          </div>
+            className="article-body"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+            style={{ fontFamily: 'var(--font-body)', fontSize: 16, color: 'rgba(245,240,232,0.78)', lineHeight: 1.85 }}
+          />
         ) : (
           <p
             style={{

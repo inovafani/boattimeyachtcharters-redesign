@@ -39,3 +39,18 @@ create policy "Public can view news images"
 create policy "Authenticated users upload news images"
   on storage.objects for insert
   with check (bucket_id = 'news-images' and auth.role() = 'authenticated');
+
+-- 3. SEO & content enhancement columns (run this if posts table already exists)
+alter table posts
+  add column if not exists meta_title       text,
+  add column if not exists meta_description text,
+  add column if not exists focus_keyword    text,
+  add column if not exists image_alt        text,
+  add column if not exists canonical_url    text,
+  add column if not exists schema_types     text[] not null default '{"Article"}',
+  add column if not exists tags             text[] not null default '{}',
+  add column if not exists og_title         text,
+  add column if not exists og_description   text,
+  add column if not exists updated_at       timestamptz,
+  add column if not exists author           text not null default 'Boattime Yacht Charters Editorial',
+  add column if not exists reading_time     int  not null default 0;

@@ -34,6 +34,7 @@ export interface Post {
   categories: string[];
   published_at: string | null;
   created_at: string;
+  reading_time?: number;
 }
 
 const FALLBACK_IMG = 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80';
@@ -533,6 +534,14 @@ function PostCard({ post }: { post: Post }) {
             >
               {fmtDate(post.published_at ?? post.created_at)}
             </div>
+            {post.reading_time && post.reading_time > 0 ? (
+              <>
+                <div style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.2)' }} />
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.14em', color: 'var(--text-muted)' }}>
+                  {post.reading_time} min read
+                </div>
+              </>
+            ) : null}
             <div style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.2)' }} />
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
               {post.categories.map((cat) => (
