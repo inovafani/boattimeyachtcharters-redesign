@@ -3815,3 +3815,30 @@
 .article-body a:hover { color: var(--cream); }
 .article-body img { max-width: 100%; height: auto; margin: 16px 0; }
 .article-body strong { color: var(--cream); font-weight: 600; }
+
+/* ── Admin light mode fixes ─────────────────────────────────── */
+[data-theme='light'] .admin-form input,
+[data-theme='light'] .admin-form textarea,
+[data-theme='light'] .admin-form select {
+  background: #ffffff !important;
+  border-color: rgba(10, 22, 40, 0.18) !important;
+  color: #0a1628 !important;
+}
+[data-theme='light'] .admin-form .rich-editor {
+  border-color: rgba(10, 22, 40, 0.18) !important;
+  background: #ffffff !important;
+}
+[data-theme='light'] .admin-form .rich-editor .ProseMirror {
+  color: #1a2d4a !important;
+}
+[data-theme='light'] .admin-form .rich-editor .ProseMirror h2,
+[data-theme='light'] .admin-form .rich-editor .ProseMirror h3 {
+  color: #0a1628 !important;
+}
+[data-theme='light'] .admin-form .rich-editor .ProseMirror p.is-empty:first-child::before {
+  color: rgba(10, 22, 40, 0.28) !important;
+}
+[data-theme='light'] .admin-form .tag-pill {
+  background: rgba(10, 22, 40, 0.06) !important;
+  border-color: rgba(10, 22, 40, 0.2) !important;
+}

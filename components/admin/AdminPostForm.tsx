@@ -115,7 +115,7 @@ function TagInput({ tags, onChange }: { tags: string[]; onChange: (t: string[]) 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', padding: '8px 12px', background: 'rgba(255,255,255,0.04)', border: '1px solid var(--border-subtle)', minHeight: 44 }}>
       {tags.map(tag => (
-        <span key={tag} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 10px', background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.25)', color: 'var(--cream)', fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '0.08em' }}>
+        <span key={tag} className="tag-pill" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 10px', background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.25)', color: 'var(--cream)', fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '0.08em' }}>
           {tag}
           <button type="button" onClick={() => onChange(tags.filter(t => t !== tag))} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 0, lineHeight: 1, fontSize: 15 }}>×</button>
         </span>
@@ -307,7 +307,7 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
           {isEdit ? 'Edit article' : 'Create new article'}
         </h1>
 
-        <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <form onSubmit={handleSave} className="admin-form" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 
           {/* ── ARTICLE INFO ── */}
           <Section title="Article">
