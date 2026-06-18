@@ -3804,13 +3804,48 @@
   }
 }
 
+/* ── Article 3-column grid layout ──────────────────────────── */
+.article-grid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 240px;
+  gap: 56px;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 72px 48px 96px;
+  align-items: start;
+}
+.article-sidebar {
+  position: sticky;
+  top: 96px;
+}
+@media (max-width: 1100px) {
+  .article-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    max-width: 760px;
+    padding: 48px 24px 80px;
+  }
+  .article-sidebar { display: none; }
+}
+
 /* ── Article body (rich text output from TipTap) ────────────── */
+.article-body { color: rgba(245,240,232,0.78); }
+[data-theme='light'] .article-body { color: rgba(10,22,40,0.82); }
+[data-theme='light'] .article-body h2,
+[data-theme='light'] .article-body h3 { color: #0a1628; }
+[data-theme='light'] .article-body blockquote:not(.instagram-media) { color: rgba(10,22,40,0.55); border-left-color: var(--gold); }
+[data-theme='light'] .article-body a { color: var(--gold); }
+[data-theme='light'] .article-body strong { color: #0a1628; }
 .article-body p { margin: 0 0 1.1em; }
 .article-body h2 { font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 26px); font-weight: 400; font-style: italic; color: var(--cream); margin: 2em 0 0.5em; line-height: 1.2; }
 .article-body h3 { font-family: var(--font-display); font-size: clamp(17px, 2vw, 21px); font-weight: 400; font-style: italic; color: var(--cream); margin: 1.6em 0 0.4em; line-height: 1.2; }
 .article-body ul, .article-body ol { padding-left: 24px; margin: 0 0 1.1em; }
 .article-body li { margin-bottom: 6px; }
-.article-body blockquote { border-left: 3px solid var(--gold); padding-left: 20px; margin: 1.4em 0; color: rgba(245,240,232,0.55); font-style: italic; font-size: 17px; }
+.article-body blockquote:not(.instagram-media) { border-left: 3px solid var(--gold); padding-left: 20px; margin: 1.4em 0; color: rgba(245,240,232,0.55); font-style: italic; font-size: 17px; }
+/* Instagram embed blockquote — reset article styles, centered, let embed.js resize it */
+.article-body blockquote.instagram-media { border-left: none !important; padding-left: 0 !important; color: inherit !important; font-style: normal !important; font-size: inherit !important; display: block !important; margin: 24px auto !important; }
+/* Old-format iframe embeds (saved before blockquote migration) */
+.article-body iframe[data-instagram] { width: 100% !important; max-width: 540px !important; height: 750px !important; border: none !important; display: block !important; margin: 24px auto !important; }
 .article-body a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
 .article-body a:hover { color: var(--cream); }
 .article-body img { max-width: 100%; height: auto; margin: 16px 0; }

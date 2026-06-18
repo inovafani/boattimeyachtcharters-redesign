@@ -6,7 +6,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import TiptapImage from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 // ── Instagram embed node ────────────────────────────────────────────────────────
@@ -16,28 +16,34 @@ const Instagram = Node.create({
   atom: true,
 
   addAttributes() {
-    return { src: { default: null } };
+    return { shortcode: { default: null } };
   },
 
   parseHTML() {
-    return [{ tag: 'iframe[data-instagram]' }];
+    return [{
+      tag: 'blockquote[data-instgrm-permalink]',
+      getAttrs: (el) => {
+        const href = (el as HTMLElement).getAttribute('data-instgrm-permalink') ?? '';
+        const match = href.match(/instagram\.com\/p\/([A-Za-z0-9_-]+)/);
+        return { shortcode: match ? match[1] : null };
+      },
+    }];
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['iframe', mergeAttributes({
-      'data-instagram': '',
-      width: '100%',
-      height: '480',
-      frameborder: '0',
-      scrolling: 'no',
-      allowtransparency: 'true',
-      style: 'border:none;max-width:540px;display:block;margin:0 auto;',
-      class: 'instagram-embed',
-    }, { src: HTMLAttributes.src })];
+    const sc = HTMLAttributes.shortcode;
+    return ['blockquote', mergeAttributes({
+      class: 'instagram-media',
+      'data-instgrm-captioned': '',
+      'data-instgrm-permalink': `https://www.instagram.com/p/${sc}/`,
+      'data-instgrm-version': '14',
+      style: 'background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,.5),0 1px 10px 0 rgba(0,0,0,.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;',
+    })];
   },
 
   addNodeView() {
     return ({ node }) => {
+      const sc = node.attrs.shortcode;
       const dom = document.createElement('div');
       dom.style.cssText = 'width:100%;max-width:540px;margin:16px auto;border:1px solid rgba(201,168,76,0.2);border-radius:4px;overflow:hidden;';
 
@@ -46,8 +52,8 @@ const Instagram = Node.create({
       label.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> Instagram Embed`;
 
       const iframe = document.createElement('iframe');
-      iframe.src = node.attrs.src;
-      iframe.style.cssText = 'width:100%;height:480px;border:none;display:block;';
+      iframe.src = `https://www.instagram.com/p/${sc}/embed/captioned/`;
+      iframe.style.cssText = 'width:100%;height:660px;border:none;display:block;';
       iframe.setAttribute('scrolling', 'no');
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('allowtransparency', 'true');
@@ -111,6 +117,17 @@ export default function RichEditor({ value, onChange, placeholder }: RichEditorP
   const [instaUrl, setInstaUrl] = useState('');
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const linkInputRef = useRef<HTMLInputElement>(null);
+  const instaInputRef = useRef<HTMLInputElement>(null);
+
+  // Focus without scrolling — prevents page jumping when toolbar is sticky
+  useEffect(() => {
+    if (showLinkBar) linkInputRef.current?.focus({ preventScroll: true });
+  }, [showLinkBar]);
+
+  useEffect(() => {
+    if (showInstaBar) instaInputRef.current?.focus({ preventScroll: true });
+  }, [showInstaBar]);
 
   const editor = useEditor({
     extensions: [
@@ -157,10 +174,7 @@ export default function RichEditor({ value, onChange, placeholder }: RichEditorP
   function insertInstagram() {
     const shortcode = extractShortcode(instaUrl);
     if (!shortcode || !editor) return;
-    editor.chain().focus().insertContent({
-      type: 'instagram',
-      attrs: { src: `https://www.instagram.com/p/${shortcode}/embed/captioned/` },
-    }).run();
+    editor.chain().focus().insertContent({ type: 'instagram', attrs: { shortcode } }).run();
     setInstaUrl('');
     setShowInstaBar(false);
   }
@@ -183,96 +197,95 @@ export default function RichEditor({ value, onChange, placeholder }: RichEditorP
         [data-theme='light'] .rich-editor .ProseMirror p.is-empty:first-child::before { color: rgba(10,22,40,0.28); }
       `}</style>
 
-      {/* Sticky toolbar */}
+      {/* ── Single sticky wrapper: toolbar + all inline bars ── */}
       <div style={{
         position: 'sticky',
         top: 0,
         zIndex: 10,
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 2,
-        padding: '8px 12px',
-        borderBottom: '1px solid var(--border-subtle)',
         background: 'var(--navy-mid)',
+        borderBottom: '1px solid var(--border-subtle)',
       }}>
-        <ToolBtn active={editor.isActive('bold')} onClick={() => editor.chain().focus().toggleBold().run()} title="Bold"><strong>B</strong></ToolBtn>
-        <ToolBtn active={editor.isActive('italic')} onClick={() => editor.chain().focus().toggleItalic().run()} title="Italic"><em>I</em></ToolBtn>
-        <Divider />
-        <ToolBtn active={editor.isActive('heading', { level: 2 })} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} title="Heading 2">H2</ToolBtn>
-        <ToolBtn active={editor.isActive('heading', { level: 3 })} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} title="Heading 3">H3</ToolBtn>
-        <Divider />
-        <ToolBtn active={editor.isActive('bulletList')} onClick={() => editor.chain().focus().toggleBulletList().run()} title="Bullet list">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor"/><circle cx="4" cy="12" r="1.5" fill="currentColor"/><circle cx="4" cy="18" r="1.5" fill="currentColor"/></svg>
-        </ToolBtn>
-        <ToolBtn active={editor.isActive('orderedList')} onClick={() => editor.chain().focus().toggleOrderedList().run()} title="Ordered list">1.</ToolBtn>
-        <ToolBtn active={editor.isActive('blockquote')} onClick={() => editor.chain().focus().toggleBlockquote().run()} title="Blockquote">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-        </ToolBtn>
-        <Divider />
-        <ToolBtn
-          active={editor.isActive('link') || showLinkBar}
-          onClick={() => { setShowInstaBar(false); setShowLinkBar(s => !s); setLinkUrl(editor.getAttributes('link').href || ''); }}
-          title="Insert / edit link"
-        >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        </ToolBtn>
+        {/* Toolbar row */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 2, padding: '8px 12px' }}>
+          <ToolBtn active={editor.isActive('bold')} onClick={() => editor.chain().focus().toggleBold().run()} title="Bold"><strong>B</strong></ToolBtn>
+          <ToolBtn active={editor.isActive('italic')} onClick={() => editor.chain().focus().toggleItalic().run()} title="Italic"><em>I</em></ToolBtn>
+          <Divider />
+          <ToolBtn active={editor.isActive('heading', { level: 2 })} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} title="Heading 2">H2</ToolBtn>
+          <ToolBtn active={editor.isActive('heading', { level: 3 })} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} title="Heading 3">H3</ToolBtn>
+          <Divider />
+          <ToolBtn active={editor.isActive('bulletList')} onClick={() => editor.chain().focus().toggleBulletList().run()} title="Bullet list">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5" fill="currentColor"/><circle cx="4" cy="12" r="1.5" fill="currentColor"/><circle cx="4" cy="18" r="1.5" fill="currentColor"/></svg>
+          </ToolBtn>
+          <ToolBtn active={editor.isActive('orderedList')} onClick={() => editor.chain().focus().toggleOrderedList().run()} title="Ordered list">1.</ToolBtn>
+          <ToolBtn active={editor.isActive('blockquote')} onClick={() => editor.chain().focus().toggleBlockquote().run()} title="Blockquote">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+          </ToolBtn>
+          <Divider />
+          <ToolBtn
+            active={editor.isActive('link') || showLinkBar}
+            onClick={() => { setShowInstaBar(false); setShowLinkBar(s => !s); setLinkUrl(editor.getAttributes('link').href || ''); }}
+            title="Insert / edit link"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </ToolBtn>
 
-        {/* Image upload — file picker, no URL bar */}
-        <ToolBtn active={uploading} loading={uploading} onClick={() => fileInputRef.current?.click()} title={uploading ? 'Uploading…' : 'Upload image'}>
-          {uploading
-            ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10" strokeDasharray="30" strokeDashoffset="10"/></svg>
-            : <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          }
-        </ToolBtn>
-        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+          {/* Image upload */}
+          <ToolBtn active={uploading} loading={uploading} onClick={() => fileInputRef.current?.click()} title={uploading ? 'Uploading…' : 'Upload image'}>
+            {uploading
+              ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              : <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            }
+          </ToolBtn>
+          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
 
-        {/* Instagram embed */}
-        <ToolBtn active={showInstaBar} onClick={() => { setShowLinkBar(false); setShowInstaBar(s => !s); }} title="Embed Instagram post">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-            <rect x="2" y="2" width="20" height="20" rx="5"/>
-            <circle cx="12" cy="12" r="4.5"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-          </svg>
-        </ToolBtn>
+          {/* Instagram embed */}
+          <ToolBtn active={showInstaBar} onClick={() => { setShowLinkBar(false); setShowInstaBar(s => !s); }} title="Embed Instagram post">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </ToolBtn>
+        </div>
+
+        {/* Link bar — inside sticky wrapper so it stays pinned */}
+        {showLinkBar && (
+          <div style={{ padding: '8px 12px', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: 8, alignItems: 'center' }}>
+            <input
+              ref={linkInputRef}
+              type="url"
+              value={linkUrl}
+              onChange={e => setLinkUrl(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && applyLink()}
+              placeholder="https://…"
+              style={inlineInputStyle}
+            />
+            <button type="button" onClick={applyLink} style={inlineBtnStyle}>Apply</button>
+            {editor.isActive('link') && (
+              <button type="button" onClick={() => { editor.chain().focus().unsetLink().run(); setShowLinkBar(false); }} style={{ ...inlineBtnStyle, background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-subtle)' }}>Remove</button>
+            )}
+          </div>
+        )}
+
+        {/* Instagram bar — inside sticky wrapper so it stays pinned */}
+        {showInstaBar && (
+          <div style={{ padding: '8px 12px', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+            <input
+              ref={instaInputRef}
+              type="url"
+              value={instaUrl}
+              onChange={e => setInstaUrl(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && insertInstagram()}
+              placeholder="Paste Instagram post or Reel URL…"
+              style={{ ...inlineInputStyle, flex: 1, minWidth: 260 }}
+            />
+            <button type="button" onClick={insertInstagram} style={inlineBtnStyle}>Embed</button>
+            <span style={{ fontFamily: 'var(--font-body)', fontSize: 10, color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
+              Works with /p/, /reel/, and /tv/ links
+            </span>
+          </div>
+        )}
       </div>
-
-      {/* Link bar */}
-      {showLinkBar && (
-        <div style={{ padding: '8px 12px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', gap: 8, alignItems: 'center', background: 'var(--navy-mid)' }}>
-          <input
-            autoFocus
-            type="url"
-            value={linkUrl}
-            onChange={e => setLinkUrl(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && applyLink()}
-            placeholder="https://…"
-            style={inlineInputStyle}
-          />
-          <button type="button" onClick={applyLink} style={inlineBtnStyle}>Apply</button>
-          {editor.isActive('link') && (
-            <button type="button" onClick={() => { editor.chain().focus().unsetLink().run(); setShowLinkBar(false); }} style={{ ...inlineBtnStyle, background: 'transparent', color: 'var(--text-muted)', border: '1px solid var(--border-subtle)' }}>Remove</button>
-          )}
-        </div>
-      )}
-
-      {/* Instagram bar */}
-      {showInstaBar && (
-        <div style={{ padding: '8px 12px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', background: 'var(--navy-mid)' }}>
-          <input
-            autoFocus
-            type="url"
-            value={instaUrl}
-            onChange={e => setInstaUrl(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && insertInstagram()}
-            placeholder="Paste Instagram post or Reel URL…"
-            style={{ ...inlineInputStyle, flex: 1, minWidth: 260 }}
-          />
-          <button type="button" onClick={insertInstagram} style={inlineBtnStyle}>Embed</button>
-          <span style={{ fontFamily: 'var(--font-body)', fontSize: 10, color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
-            Works with /p/, /reel/, and /tv/ links
-          </span>
-        </div>
-      )}
 
       {/* Editor content */}
       <div className="rich-editor">

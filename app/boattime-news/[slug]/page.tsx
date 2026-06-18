@@ -179,6 +179,24 @@ export default async function Page({ params }: Props) {
 
     const schemas = buildSchemas(post as PostData, slug);
 
+    // Fetch up to 3 related posts from the same categories
+    const categories = (post.categories as string[]) ?? [];
+    let relatedPosts: {
+      id: string; slug: string; title: string; image_url: string | null;
+      categories: string[]; published_at: string | null; reading_time: number;
+    }[] = [];
+    if (categories.length > 0) {
+      const { data: related } = await supabase
+        .from('posts')
+        .select('id, slug, title, image_url, categories, published_at, reading_time')
+        .eq('published', true)
+        .neq('slug', slug)
+        .overlaps('categories', categories)
+        .order('published_at', { ascending: false })
+        .limit(3);
+      relatedPosts = related ?? [];
+    }
+
     return (
       <>
         {schemas.map((schema, i) => (
@@ -188,7 +206,7 @@ export default async function Page({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
           />
         ))}
-        <ArticlePage post={post} />
+        <ArticlePage post={post} relatedPosts={relatedPosts} />
       </>
     );
   } catch {

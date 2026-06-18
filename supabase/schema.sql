@@ -40,8 +40,10 @@ create policy "Authenticated users upload news images"
   on storage.objects for insert
   with check (bucket_id = 'news-images' and auth.role() = 'authenticated');
 
--- 3. SEO & content enhancement columns (run this if posts table already exists)
+-- 3. Views counter + related products + SEO columns
 alter table posts
+  add column if not exists views             int  not null default 0,
+  add column if not exists related_products  text[] not null default '{}',
   add column if not exists meta_title       text,
   add column if not exists meta_description text,
   add column if not exists focus_keyword    text,
@@ -54,3 +56,16 @@ alter table posts
   add column if not exists updated_at       timestamptz,
   add column if not exists author           text not null default 'Boattime Yacht Charters Editorial',
   add column if not exists reading_time     int  not null default 0;
+
+-- 4. RPC function to safely increment views (security definer = anon can call it)
+create or replace function increment_post_views(post_slug text)
+returns void
+language plpgsql
+security definer
+as $$
+begin
+  update posts set views = views + 1 where slug = post_slug and published = true;
+end;
+$$;
+
+grant execute on function increment_post_views(text) to anon;

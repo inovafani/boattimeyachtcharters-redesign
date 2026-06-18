@@ -12,6 +12,7 @@ interface Post {
   published: boolean;
   published_at: string | null;
   created_at: string;
+  views: number;
 }
 
 export default function AdminNewsList() {
@@ -24,7 +25,7 @@ export default function AdminNewsList() {
     const supabase = createClient();
     const { data, error } = await supabase
       .from('posts')
-      .select('id, title, slug, categories, published, published_at, created_at')
+      .select('*')
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -210,13 +211,13 @@ export default function AdminNewsList() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 180px 120px 120px',
+                gridTemplateColumns: '1fr 180px 72px 120px 120px',
                 padding: '12px 24px',
                 borderBottom: '1px solid var(--border-subtle)',
                 background: 'rgba(201,168,76,0.04)',
               }}
             >
-              {['Title', 'Categories', 'Status', 'Actions'].map((h) => (
+              {['Title', 'Categories', 'Views', 'Status', 'Actions'].map((h) => (
                 <div
                   key={h}
                   style={{
@@ -238,7 +239,7 @@ export default function AdminNewsList() {
                 key={post.id}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '1fr 180px 120px 120px',
+                  gridTemplateColumns: '1fr 180px 72px 120px 120px',
                   padding: '18px 24px',
                   borderBottom:
                     i < posts.length - 1 ? '1px solid var(--border-subtle)' : 'none',
@@ -288,6 +289,10 @@ export default function AdminNewsList() {
                       {cat}
                     </span>
                   ))}
+                </div>
+
+                <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--cream)', letterSpacing: '0.04em' }}>
+                  {(post.views ?? 0).toLocaleString()}
                 </div>
 
                 <div>

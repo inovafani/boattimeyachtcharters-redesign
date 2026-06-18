@@ -4,6 +4,7 @@ import { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import RichEditor from './RichEditor';
+import { PRODUCTS } from '@/lib/products';
 
 const ALL_CATEGORIES = [
   'Business', 'Celebration', 'Company', 'Holiday Cruises', 'Lifestyle',
@@ -37,6 +38,7 @@ interface PostForm {
   author: string;
   updated_at: string;
   reading_time: number;
+  related_products: string[];
 }
 
 const empty: PostForm = {
@@ -45,6 +47,7 @@ const empty: PostForm = {
   meta_title: '', meta_description: '', focus_keyword: '', canonical_url: '',
   schema_types: ['Article'], og_title: '', og_description: '',
   author: 'Boattime Yacht Charters Editorial', updated_at: '', reading_time: 0,
+  related_products: [],
 };
 
 function slugify(str: string) {
@@ -187,6 +190,7 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
           author: data.author ?? 'Boattime Yacht Charters Editorial',
           updated_at: data.updated_at ? data.updated_at.slice(0, 10) : '',
           reading_time: data.reading_time ?? 0,
+          related_products: data.related_products ?? [],
         });
       }
       setLoading(false);
@@ -204,6 +208,10 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
 
   function toggleCategory(cat: string) {
     setForm(f => ({ ...f, categories: f.categories.includes(cat) ? f.categories.filter(c => c !== cat) : [...f.categories, cat] }));
+  }
+
+  function toggleProduct(id: string) {
+    setForm(f => ({ ...f, related_products: f.related_products.includes(id) ? f.related_products.filter(p => p !== id) : [...f.related_products, id] }));
   }
 
   function toggleSchema(val: string) {
@@ -257,6 +265,7 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
       author: form.author || 'Boattime Yacht Charters Editorial',
       updated_at: form.updated_at ? new Date(form.updated_at + 'T12:00:00').toISOString() : null,
       reading_time: readingTime,
+      related_products: form.related_products,
     };
 
     const { error: err } = isEdit
@@ -340,6 +349,19 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
             <div>
               <label style={labelStyle}>Tags <span style={{ color: 'var(--text-muted)', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'none', fontSize: 10 }}>— keyword labels (press Enter to add)</span></label>
               <TagInput tags={form.tags} onChange={tags => set('tags', tags)} />
+            </div>
+            <div>
+              <label style={labelStyle}>Related products <span style={{ color: 'var(--text-muted)', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'none', fontSize: 10 }}>— shown in the left sidebar of the article</span></label>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 4 }}>
+                {PRODUCTS.map(product => {
+                  const active = form.related_products.includes(product.id);
+                  return (
+                    <button key={product.id} type="button" onClick={() => toggleProduct(product.id)} style={{ padding: '7px 16px', border: `1px solid ${active ? 'var(--gold)' : 'rgba(201,168,76,0.2)'}`, background: active ? 'var(--gold)' : 'transparent', color: active ? 'var(--navy)' : 'var(--text-muted)', fontFamily: 'var(--font-body)', fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', cursor: 'pointer', transition: 'all 0.15s' }}>
+                      {product.label}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </Section>
 
