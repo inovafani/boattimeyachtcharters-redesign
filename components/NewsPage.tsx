@@ -85,7 +85,7 @@ function NewsHero() {
   return (
     <section
       ref={heroRef}
-      className="relative overflow-hidden flex items-end"
+      className="relative overflow-hidden flex items-end news-hero-section"
       style={{ minHeight: '60vh', background: 'var(--navy)' }}
     >
       <div
@@ -207,13 +207,12 @@ function FeaturedCard({ post }: { post: Post }) {
           {post.categories.map((cat) => (
             <span
               key={cat}
+              className="news-cat-label"
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: 8,
                 letterSpacing: '0.22em',
                 textTransform: 'uppercase',
-                color: 'var(--navy)',
-                background: 'var(--gold)',
                 padding: '3px 10px',
                 fontWeight: 600,
               }}
@@ -345,7 +344,7 @@ function CategoryFilter({
   return (
     <div
       style={{
-        background: 'var(--surface)',
+        background: 'var(--navy)',
         borderTop: '1px solid var(--border-subtle)',
         borderBottom: '1px solid var(--border-subtle)',
         position: 'sticky',
@@ -417,7 +416,7 @@ function ScrollArrow({
         justifyContent: 'center',
         borderRadius: '50%',
         border: `1px solid ${hovered ? 'var(--gold)' : 'rgba(201,168,76,0.25)'}`,
-        background: 'var(--surface)',
+        background: 'var(--navy)',
         cursor: 'pointer',
         transition: 'border-color 0.2s',
       }}
@@ -450,6 +449,7 @@ function FilterPill({
       onClick={onSelect}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className={isActive ? 'filter-pill filter-pill--active' : 'filter-pill'}
       style={{
         flexShrink: 0,
         fontFamily: 'var(--font-body)',
@@ -458,9 +458,9 @@ function FilterPill({
         textTransform: 'uppercase',
         fontWeight: 500,
         padding: '8px 18px',
-        border: `1px solid ${isActive || hovered ? 'var(--gold)' : 'rgba(201,168,76,0.2)'}`,
-        background: isActive ? 'var(--gold)' : 'transparent',
-        color: isActive ? '#0a1628' : hovered ? 'var(--cream)' : 'var(--text-muted)',
+        border: isActive ? undefined : `1px solid ${hovered ? 'var(--gold)' : 'rgba(201,168,76,0.2)'}`,
+        background: isActive ? undefined : 'transparent',
+        color: isActive ? undefined : hovered ? 'var(--cream)' : 'var(--text-muted)',
         cursor: 'pointer',
         transition: 'all 0.2s',
         whiteSpace: 'nowrap',

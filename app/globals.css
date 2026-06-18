@@ -3833,6 +3833,31 @@
   .article-sidebar { display: none; }
 }
 
+/* ── News hero — dark photo overlay, text must stay cream ───── */
+[data-theme='light'] .news-hero-section,
+[data-theme='light'] .news-hero-section * {
+  color: #f5f0e8 !important;
+}
+[data-theme='light'] .news-hero-section [style*='var(--gold)'] {
+  color: var(--gold) !important;
+}
+
+/* ── News page — gold-bg labels & active filter pills ────────── */
+/* background/color live here (not inline) so [style*='var(--gold)'] never fires */
+.news-cat-label {
+  background: var(--gold);
+  color: #0a1628;
+}
+.filter-pill--active {
+  background: var(--gold);
+  color: #0a1628;
+  border: 1px solid var(--gold);
+}
+[data-theme='light'] .news-cat-label,
+[data-theme='light'] .filter-pill--active {
+  color: #0a1628 !important;
+}
+
 /* ── Article body (rich text output from TipTap) ────────────── */
 .article-body { color: rgba(245,240,232,0.78); }
 [data-theme='light'] .article-body { color: rgba(10,22,40,0.82); }
