@@ -129,7 +129,7 @@ function NewsHero() {
             fontSize: 'clamp(38px, 6vw, 72px)',
             fontWeight: 300,
             fontStyle: 'italic',
-            color: 'var(--cream)',
+            color: '#f5f0e8',
             lineHeight: 1.05,
             margin: 0,
           }}
@@ -141,7 +141,7 @@ function NewsHero() {
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: 14,
-            color: 'rgba(245,240,232,0.6)',
+            color: 'rgba(245,240,232,0.65)',
             lineHeight: 1.8,
             marginTop: 20,
             maxWidth: 480,
@@ -460,7 +460,7 @@ function FilterPill({
         padding: '8px 18px',
         border: `1px solid ${isActive || hovered ? 'var(--gold)' : 'rgba(201,168,76,0.2)'}`,
         background: isActive ? 'var(--gold)' : 'transparent',
-        color: isActive ? 'var(--navy)' : hovered ? 'var(--cream)' : 'var(--text-muted)',
+        color: isActive ? '#0a1628' : hovered ? 'var(--cream)' : 'var(--text-muted)',
         cursor: 'pointer',
         transition: 'all 0.2s',
         whiteSpace: 'nowrap',
@@ -479,9 +479,10 @@ function PostCard({ post }: { post: Post }) {
   return (
     <a
       href={`/boattime-news/${post.slug}`}
-      className="post-card"
+      className="post-card post-card-link"
       style={{
         display: 'flex',
+        flexDirection: 'column',
         textDecoration: 'none',
         border: `1px solid ${hovered ? 'rgba(201,168,76,0.35)' : 'var(--border-subtle)'}`,
         overflow: 'hidden',
@@ -491,7 +492,25 @@ function PostCard({ post }: { post: Post }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Thumbnail */}
+      {/* Mobile thumbnail — full width at top */}
+      <div
+        className="block sm:hidden"
+        style={{ height: 180, flexShrink: 0, position: 'relative', overflow: 'hidden' }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url(${post.image_url || FALLBACK_IMG})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            transform: hovered ? 'scale(1.06)' : 'scale(1)',
+            transition: 'transform 0.5s ease',
+          }}
+        />
+      </div>
+
+      {/* Desktop thumbnail — side column */}
       <div
         className="hidden sm:block"
         style={{ width: 210, flexShrink: 0, position: 'relative', overflow: 'hidden' }}
@@ -738,7 +757,7 @@ function PaginationBtn({
         height: 40,
         border: `1px solid ${isActive ? 'var(--gold)' : hovered ? 'var(--gold)' : 'rgba(201,168,76,0.2)'}`,
         background: isActive ? 'var(--gold)' : 'transparent',
-        color: isActive ? 'var(--navy)' : hovered ? 'var(--cream)' : 'var(--text-muted)',
+        color: isActive ? '#0a1628' : hovered ? 'var(--cream)' : 'var(--text-muted)',
         fontFamily: 'var(--font-body)',
         fontSize: 12,
         letterSpacing: '0.1em',

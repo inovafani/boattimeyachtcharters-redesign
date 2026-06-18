@@ -39,6 +39,10 @@ export default function AdminNewsList() {
 
   useEffect(() => {
     fetchPosts();
+    // Re-fetch when admin switches back to this tab (e.g. after viewing an article)
+    function onFocus() { fetchPosts(); }
+    window.addEventListener('focus', onFocus);
+    return () => window.removeEventListener('focus', onFocus);
   }, []);
 
   async function togglePublished(post: Post) {

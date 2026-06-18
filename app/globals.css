@@ -3804,6 +3804,11 @@
   }
 }
 
+/* ── News post card: row layout on desktop ──────────────────── */
+@media (min-width: 640px) {
+  .post-card-link { flex-direction: row !important; }
+}
+
 /* ── Article 3-column grid layout ──────────────────────────── */
 .article-grid {
   display: grid;

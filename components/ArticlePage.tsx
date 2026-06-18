@@ -223,7 +223,10 @@ function ArticleBody({ post, relatedPosts }: { post: Post; relatedPosts: Related
   // Track views — fires once per article load
   useEffect(() => {
     const supabase = createClient();
-    supabase.rpc('increment_post_views', { post_slug: post.slug }).then(() => {});
+    supabase.rpc('increment_post_views', { post_slug: post.slug })
+      .then(({ error }) => {
+        if (error) console.warn('[views] increment failed:', error.message);
+      });
   }, [post.slug]);
 
   useGSAP(() => {
