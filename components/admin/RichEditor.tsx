@@ -186,7 +186,8 @@ export default function RichEditor({ value, onChange, placeholder }: RichEditorP
         .rich-editor .ProseMirror p { margin: 0 0 1em; }
         .rich-editor .ProseMirror h2 { font-family: var(--font-display); font-size: 22px; font-weight: 400; font-style: italic; color: var(--cream); margin: 1.6em 0 0.5em; }
         .rich-editor .ProseMirror h3 { font-family: var(--font-display); font-size: 18px; font-weight: 400; font-style: italic; color: var(--cream); margin: 1.4em 0 0.4em; }
-        .rich-editor .ProseMirror ul, .rich-editor .ProseMirror ol { padding-left: 24px; margin: 0 0 1em; }
+        .rich-editor .ProseMirror ul { padding-left: 24px; margin: 0 0 1em; list-style-type: disc; }
+        .rich-editor .ProseMirror ol { padding-left: 24px; margin: 0 0 1em; list-style-type: decimal; }
         .rich-editor .ProseMirror li { margin-bottom: 4px; }
         .rich-editor .ProseMirror blockquote { border-left: 3px solid var(--gold); padding-left: 16px; margin: 1.2em 0; color: rgba(245,240,232,0.55); font-style: italic; }
         .rich-editor .ProseMirror a { color: var(--gold); text-decoration: underline; }

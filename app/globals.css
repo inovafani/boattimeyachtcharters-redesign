@@ -3869,7 +3869,8 @@
 .article-body p { margin: 0 0 1.1em; }
 .article-body h2 { font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 26px); font-weight: 400; font-style: italic; color: var(--cream); margin: 2em 0 0.5em; line-height: 1.2; }
 .article-body h3 { font-family: var(--font-display); font-size: clamp(17px, 2vw, 21px); font-weight: 400; font-style: italic; color: var(--cream); margin: 1.6em 0 0.4em; line-height: 1.2; }
-.article-body ul, .article-body ol { padding-left: 24px; margin: 0 0 1.1em; }
+.article-body ul { padding-left: 24px; margin: 0 0 1.1em; list-style-type: disc; }
+.article-body ol { padding-left: 24px; margin: 0 0 1.1em; list-style-type: decimal; }
 .article-body li { margin-bottom: 6px; }
 .article-body blockquote:not(.instagram-media) { border-left: 3px solid var(--gold); padding-left: 20px; margin: 1.4em 0; color: rgba(245,240,232,0.55); font-style: italic; font-size: 17px; }
 /* Instagram embed blockquote — reset article styles, centered, let embed.js resize it */
