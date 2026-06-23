@@ -3,9 +3,9 @@ import CampaignSkyToSea from '@/components/CampaignSkyToSea';
 
 export const metadata: Metadata = {
   title:
-    'Sky to Sea — Whale Watching by Helicopter & Yacht · Boattime × Gold Coast Helitours',
+    'Gold Coast Helitours — Scenic Helicopter Flights over the Gold Coast · Presented by Boattime Yacht Charters',
   description:
-    "Two ways to witness one of nature's greatest journeys. A co-branded Gold Coast experience — scenic helicopter flight with Gold Coast Helitours and a luxury whale-watching cruise aboard Boattime Yacht Charters.",
+    'See the Gold Coast like never before. Scenic helicopter flights with Gold Coast Helitours — from a five-minute harbour lap to a 45-minute grand tour of the coast and hinterland. Proudly presented by Boattime Yacht Charters.',
 };
 
 export default function Page() {

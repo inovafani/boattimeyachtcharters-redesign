@@ -11,11 +11,11 @@ import Footer from './Footer';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /* ============================================================
-   Sky to Sea — Boattime × Gold Coast Helitours campaign page.
-   Sales-driven landing page for the co-branded whale bundle:
-   scenic helicopter flight (sky) + luxury yacht cruise (sea).
-   Boattime-led identity; Gold Coast Helitours real assets.
-   NOTE: prices are indicative placeholders — confirm with GCH.
+   Gold Coast Helitours campaign page — presented by Boattime.
+   Promotional landing page showcasing Gold Coast Helitours'
+   scenic helicopter flights over the Gold Coast coast & city.
+   Boattime presents this campaign as a thank-you to GCH for
+   hosting Boattime's departures; Gold Coast Helitours assets.
    ============================================================ */
 
 const GCH_TOURS = [
@@ -30,7 +30,7 @@ const GCH_TOURS = [
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
 
-function WhaleIcon({ size = 26 }: { size?: number }) {
+function HeliIcon({ size = 26 }: { size?: number }) {
   return (
     <svg
       width={size}
@@ -43,10 +43,11 @@ function WhaleIcon({ size = 26 }: { size?: number }) {
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M3 13c0 3.5 3.5 6 8 6 3 0 5.5-1.2 7-3.2" />
-      <path d="M3 13c0-2 1.4-3.5 3-3.5 1.2 0 2 0.7 2.4 1.6" />
-      <path d="M18 15.8c1.5-0.6 3-2 3-4 0-1.5-1-2.3-1.8-1.3-0.5 0.6-0.4 1.5 0.2 2" />
-      <path d="M7 13.5h0.01" />
+      <path d="M3 6.5h18" />
+      <path d="M12 6.5v3.2" />
+      <path d="M6.5 13.2a3 3 0 0 1 3-3h3c2.6 0 4.8 1.4 6 3.3l-2.2 1.2H8.5a2 2 0 0 1-2-1.5z" />
+      <path d="M9 16v2.2h6" />
+      <path d="M4.5 18.2H9" />
     </svg>
   );
 }
@@ -187,10 +188,10 @@ function SectionHead({
 
 function UrgencyStrip() {
   const items = [
-    'WHALE SEASON · JUNE – NOVEMBER',
-    'LIMITED SEATS EACH DEPARTURE',
+    'SCENIC FLIGHTS · 7 DAYS A WEEK',
+    'LIMITED SEATS EACH FLIGHT',
     `TOURS FROM $85`,
-    'SIGHTING GUARANTEE',
+    '30+ YEARS OF FLIGHT',
     'INSTANT CONFIRMATION',
   ];
   const row = [...items, ...items];
@@ -348,44 +349,44 @@ export default function CampaignSkyToSea() {
   const TESTIMONIALS = [
     {
       quote:
-        'Seeing the whales from the air and again from the water on the same day was unreal. Hands-down the best thing we did on the Gold Coast.',
+        'Seeing the whole Gold Coast laid out beneath us was unreal — the beaches, the skyline, the hinterland all in one loop. Hands-down the best thing we did on our trip.',
       name: 'Hannah & Marcus',
-      detail: 'Sky to Sea · Melbourne',
+      detail: 'Scenic Flight · Melbourne',
     },
     {
       quote:
-        'The flight was breathtaking and the yacht was pure luxury. Two ways to experience the same whales — worth every cent.',
+        'The flight was absolutely breathtaking. You don’t realise how beautiful this coastline is until you see it from the air — worth every cent.',
       name: 'David L.',
-      detail: 'Sky to Sea · Sydney',
+      detail: 'Scenic Flight · Sydney',
     },
     {
       quote:
-        'Faultless from the heliport to the harbour. Both crews made it feel seamless and genuinely special.',
+        'Faultless from the heliport to landing. The crew made it feel seamless and genuinely special — a memory we won’t forget.',
       name: 'Priya R.',
-      detail: 'Sky to Sea · Brisbane',
+      detail: 'Scenic Flight · Brisbane',
     },
   ];
 
   const FAQS = [
     {
-      q: 'When can I do the Sky to Sea experience?',
-      a: 'Humpback whale season on the Gold Coast runs from June to November, when thousands of whales migrate past the coastline. Departures run daily through the season, weather permitting.',
+      q: 'When can I take a scenic flight?',
+      a: 'Gold Coast Helitours flies 7 days a week, year round, from 8:30am to 5:00pm — weather permitting. With seven routes to choose from, there’s a flight for every schedule.',
     },
     {
-      q: 'What if we don’t see any whales?',
-      a: 'In peak season sightings are extremely common. If your cruise doesn’t spot a whale, we’ll have you back out on another cruise free of charge under our sighting guarantee.',
+      q: 'What will I see from the air?',
+      a: 'Depending on your route, you’ll take in Surfers Paradise, Main Beach, Sea World, the islands of the Broadwater, the hinterland golf courses, the theme parks and miles of coastline — the Gold Coast from a view most people never get.',
     },
     {
-      q: 'Do the helicopter and cruise happen on the same day?',
-      a: 'Yes — the bundle is designed as one seamless half-day: your scenic flight with Gold Coast Helitours, then your luxury cruise with Boattime. Exact timings are confirmed at booking.',
+      q: 'How long do the flights go for?',
+      a: 'Flights range from a quick 5-minute harbour lap right up to a 45-minute grand tour of the coast and hinterland, so you can pick the experience that suits you.',
     },
     {
-      q: 'Is it suitable for kids and non-flyers?',
-      a: 'Both experiences are family-friendly. If anyone in your group prefers to skip the flight, talk to us — we can tailor the package for your group.',
+      q: 'Is it suitable for kids and first-time flyers?',
+      a: 'Absolutely — the flights are family-friendly and the pilots are the most experienced on the coast. If it’s your first time in a helicopter, you’re in safe hands.',
     },
     {
       q: 'How do I secure my seats?',
-      a: 'Book online for instant confirmation, or enquire and our team will hold a spot for you. Seats per departure are strictly limited, so early booking is recommended.',
+      a: 'Book online for instant confirmation, or enquire and the team will hold a spot for you. Seats per flight are strictly limited, so early booking is recommended.',
     },
   ];
 
@@ -466,7 +467,7 @@ export default function CampaignSkyToSea() {
               <BrandLockup />
             </div>
             <div className="hr section-eyebrow" style={{ marginBottom: 22 }}>
-              GOLD COAST PARTNERSHIP · WHALE SEASON IS HERE
+              GOLD COAST HELITOURS · PRESENTED BY BOATTIME
             </div>
             <h1
               className="hr"
@@ -480,11 +481,11 @@ export default function CampaignSkyToSea() {
                 marginBottom: 22,
               }}
             >
-              See the whales from the{' '}
+              See the city from the{' '}
               <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>sky.</em>
               <br />
-              Then meet them at{' '}
-              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>sea.</em>
+              A coastline you&rsquo;ll never{' '}
+              <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>forget.</em>
             </h1>
             <p
               className="hr"
@@ -498,9 +499,9 @@ export default function CampaignSkyToSea() {
                 marginBottom: 30,
               }}
             >
-              One unforgettable day. A scenic helicopter flight and a luxury
-              whale-watching cruise — two ways to witness one of nature&rsquo;s
-              greatest journeys, bundled into a single Gold Coast experience.
+              A scenic helicopter flight over the Gold Coast with the region&rsquo;s
+              most experienced pilots. Beaches, skyline, islands and hinterland —
+              the whole coast laid out beneath you in one unforgettable loop.
             </p>
 
             {/* inline social proof + price */}
@@ -524,7 +525,7 @@ export default function CampaignSkyToSea() {
                     letterSpacing: '0.04em',
                   }}
                 >
-                  4.9 from 2,600+ guests
+                  4.9 from 600+ guests
                 </span>
               </div>
               <span style={{ color: 'rgba(201,168,76,0.4)' }}>|</span>
@@ -549,10 +550,10 @@ export default function CampaignSkyToSea() {
               style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}
             >
               <a href="#book" className="btn btn-primary">
-                Book the Bundle
+                Book Your Flight
               </a>
               <a href="#experience" className="btn btn-ghost">
-                See What&rsquo;s Included
+                Explore the Flights
               </a>
             </div>
           </div>
@@ -560,10 +561,10 @@ export default function CampaignSkyToSea() {
           {/* Hero info bar */}
           <div className="hero-infobar">
             {[
-              { label: 'Season', value: 'Jun – Nov' },
-              { label: 'Duration', value: 'Half day', em: 'sky + sea' },
+              { label: 'Flights', value: 'From $85' },
+              { label: 'Duration', value: '5 – 45 min', em: 'seven routes' },
               { label: 'Departs', value: 'Marina Mirage' },
-              { label: 'Seats', value: 'Limited', em: 'per flight' },
+              { label: 'Open', value: '7 days', em: 'a week' },
             ].map((c) => (
               <div key={c.label} className="hero-infobar-cell">
                 <div className="hero-infobar-label">{c.label}</div>
@@ -588,17 +589,17 @@ export default function CampaignSkyToSea() {
         >
           <div style={{ maxWidth: 1000, margin: '0 auto' }}>
             <SectionHead
-              eyebrow="ONE DAY · TWO PERSPECTIVES"
+              eyebrow="ONE COAST · A WHOLE NEW VIEW"
               title={
                 <>
-                  Most people see whales once.
+                  Most people see the Gold Coast from the ground.
                   <br />
                   <em style={{ fontStyle: 'italic', color: 'var(--gold)', whiteSpace: 'nowrap' }}>
-                    You&rsquo;ll see them twice.
+                    You&rsquo;ll see all of it.
                   </em>
                 </>
               }
-              sub="Every winter, thousands of humpbacks migrate past the Gold Coast. We&rsquo;ve teamed up with Gold Coast Helitours so you can witness it twice in one day — once from the sky, once from the sea."
+              sub="Boattime is proud to put Gold Coast Helitours in the spotlight — the region&rsquo;s most experienced scenic flight operator. From several hundred feet up, the beaches, skyline, islands and hinterland come together in a single breathtaking view."
             />
 
             <div
@@ -846,7 +847,7 @@ export default function CampaignSkyToSea() {
                   marginBottom: 38,
                 }}
               >
-                Gold Coast Helitours has been lifting off from their private heliport at Marina Mirage since the early 1990s — CASA-certified, flown by the region&rsquo;s most experienced pilots, and recognised three years running as a Best of Queensland Experience. They are the reason your first view of the whales is from several hundred feet in the air.
+                Gold Coast Helitours has been lifting off from their private heliport at Marina Mirage since the early 1990s — CASA-certified, flown by the region&rsquo;s most experienced pilots, and recognised three years running as a Best of Queensland Experience. They are the reason you&rsquo;ll see the Gold Coast from several hundred feet in the air.
               </p>
               <div
                 className="gch-spot-stats"
@@ -1347,7 +1348,7 @@ export default function CampaignSkyToSea() {
                 <>
                   No catch.{' '}
                   <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
-                    Just whales.
+                    Just the view.
                   </em>
                 </>
               }
@@ -1365,14 +1366,14 @@ export default function CampaignSkyToSea() {
             >
               {[
                 {
-                  icon: <WhaleIcon size={28} />,
-                  title: 'Sighting guarantee',
-                  body: 'Don’t spot a humpback on your cruise? We’ll have you back out again — completely free.',
+                  icon: <HeliIcon size={28} />,
+                  title: 'Every seat’s a window',
+                  body: 'Every flight gives you sweeping, unobstructed views of the coast — there’s no bad seat in the aircraft.',
                 },
                 {
                   icon: <BadgeCheckIcon />,
                   title: 'Instant confirmation',
-                  body: 'Book online in minutes and your seats in the sky and on the sea are locked in straight away.',
+                  body: 'Book online in minutes and your seats in the sky are locked in straight away.',
                 },
                 {
                   icon: (
@@ -1381,7 +1382,7 @@ export default function CampaignSkyToSea() {
                     </div>
                   ),
                   title: 'Rated five stars',
-                  body: 'Thousands of five-star reviews across both Boattime and Gold Coast Helitours.',
+                  body: 'Hundreds of five-star reviews for Gold Coast Helitours from travellers across the world.',
                 },
               ].map((c) => (
                 <div
@@ -1434,7 +1435,7 @@ export default function CampaignSkyToSea() {
                 <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
                   five stars
                 </em>{' '}
-                on both sides
+                by travellers
               </>
             }
           />
@@ -1716,7 +1717,7 @@ export default function CampaignSkyToSea() {
               className="section-eyebrow"
               style={{ justifyContent: 'center', marginBottom: 22 }}
             >
-              WHALE SEASON · SEATS ARE LIMITED
+              SCENIC FLIGHTS · SEATS ARE LIMITED
             </div>
             <h2
               style={{
@@ -1729,9 +1730,9 @@ export default function CampaignSkyToSea() {
                 marginBottom: 24,
               }}
             >
-              Don&rsquo;t watch from shore.{' '}
+              Don&rsquo;t just visit the Gold Coast.{' '}
               <em style={{ fontStyle: 'italic', color: 'var(--gold-light)', whiteSpace: 'nowrap' }}>
-                Be in it.
+                See all of it.
               </em>
             </h2>
             <p
@@ -1745,11 +1746,11 @@ export default function CampaignSkyToSea() {
                 margin: '0 auto 36px',
               }}
             >
-              The whales are here now — and there are only so many seats in the
-              sky each day. Lock in your Sky to Sea experience before the season
-              books out.
+              There are only so many seats in the sky each day. Lock in your
+              scenic flight with Gold Coast Helitours and see the coast the way it
+              was meant to be seen.
             </p>
-            {ctaBlock('Book the Bundle')}
+            {ctaBlock('Book Your Flight')}
           </div>
         </section>
 
@@ -1769,7 +1770,7 @@ export default function CampaignSkyToSea() {
                 className="section-eyebrow"
                 style={{ justifyContent: 'center', marginBottom: 18 }}
               >
-                BOOK YOUR SKY TO SEA
+                BOOK YOUR SCENIC FLIGHT
               </div>
               <h2
                 style={{
@@ -1799,8 +1800,8 @@ export default function CampaignSkyToSea() {
                   fontWeight: 300,
                 }}
               >
-                Whale season runs June to November. Limited daily departures —
-                book early to secure your seat in the sky and on the sea.
+                Gold Coast Helitours flies 7 days a week, year round. Limited
+                daily departures — book early to secure your seat in the sky.
               </p>
             </div>
 
