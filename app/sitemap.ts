@@ -30,7 +30,7 @@ const staticRoutes: Array<{
   { path: '/yacht-charter-menus', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/tickets', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/boattime-news', changeFrequency: 'daily', priority: 0.7 },
-  { path: '/helitours-campaign', changeFrequency: 'monthly', priority: 0.6 },
+  { path: '/humpbackhelitours', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/nye-2026', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/riverfire-2026', changeFrequency: 'monthly', priority: 0.6 },
   { path: '/valentines-day', changeFrequency: 'monthly', priority: 0.6 },

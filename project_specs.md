@@ -32,10 +32,10 @@ Admin routes are protected via middleware — unauthenticated users are redirect
 ## Campaign Page — Sky to Sea (Boattime × Gold Coast Helitours)
 
 ### What it is & who uses it
-A standalone partnership sales/landing page at **`/helitours-campaign`** promoting a co-branded bundle between **Boattime Yacht Charters** and **Gold Coast Helitours** — witnessing humpback whales from both a luxury yacht (sea) and a helicopter (sky). Built for ad/social traffic; conversion-focused, premium, single-scroll.
+A standalone partnership sales/landing page at **`/humpbackhelitours`** promoting a co-branded bundle between **Boattime Yacht Charters** and **Gold Coast Helitours** — witnessing humpback whales from both a luxury yacht (sea) and a helicopter (sky). Built for ad/social traffic; conversion-focused, premium, single-scroll.
 
 ### Tech & conventions (matches existing campaign pages)
-- Route `app/helitours-campaign/page.tsx` (metadata only) → renders client component `components/CampaignSkyToSea.tsx`.
+- Route `app/humpbackhelitours/page.tsx` (metadata only) → renders client component `components/CampaignSkyToSea.tsx`.
 - Same design system: `var(--navy)` / `var(--gold)` tokens, Cormorant + Montserrat, GSAP Ken-Burns + parallax hero, inline-styled sections, `Nav` + `Footer` wrappers, Rezdy `<Script>` + `<iframe>` booking widget.
 - Co-brand touch: dual logo lockup (Boattime + Gold Coast Helitours), a gold "partnership" eyebrow, subtle heli/sea split motifs — Boattime navy/gold stays the dominant identity.
 
@@ -55,7 +55,7 @@ A standalone partnership sales/landing page at **`/helitours-campaign`** promoti
 - **Pricing & exact inclusions**: placeholder copy — to be confirmed with Gold Coast Helitours.
 
 ### What "done" looks like (this page)
-- `npm run build` passes, no TS errors; page renders at `/helitours-campaign` with no console errors.
+- `npm run build` passes, no TS errors; page renders at `/humpbackhelitours` with no console errors.
 - Hero, experience, inclusions, pricing, social proof, and a clearly-marked dummy booking section all present and responsive (mobile overrides via existing `globals.css` patterns).
 - Visually consistent with existing premium Boattime pages; co-branding visible but Boattime-led.
 

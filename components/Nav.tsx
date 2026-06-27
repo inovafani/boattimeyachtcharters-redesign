@@ -28,7 +28,7 @@ const EXPERIENCE_ITEMS = [
   { label: 'Riverfire 2026', sub: 'Brisbane Event', href: '/riverfire-2026' },
   { label: "New Year's Eve 2026", sub: 'Celebration Cruise', href: '/nye-2026' },
   { label: "Valentine's Day", sub: 'Romance Evening', href: '/valentines-day' },
-  { label: 'Gold Coast Helitours', sub: 'Sky to Sea Partnership', href: '/helitours-campaign' },
+  { label: 'Gold Coast Helitours', sub: 'Sky to Sea Partnership', href: '/humpbackhelitours' },
 ];
 
 const CHARTER_ITEMS = [
