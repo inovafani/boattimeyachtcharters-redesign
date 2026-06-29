@@ -69,3 +69,52 @@ end;
 $$;
 
 grant execute on function increment_post_views(text) to anon;
+
+-- 5. Per-view location log — records each view with the visitor's approximate
+--    location (country / region / city). Privacy-friendly: NO raw IP is stored.
+create table if not exists post_views (
+  id         uuid primary key default gen_random_uuid(),
+  post_slug  text not null,
+  country    text,
+  region     text,
+  city       text,
+  viewed_at  timestamptz not null default now()
+);
+
+create index if not exists post_views_slug_idx on post_views (post_slug);
+
+alter table post_views enable row level security;
+
+-- Logged-in admins can read the view log. No public/anon read or write policy
+-- exists, so visitors can never query this table directly — inserts happen only
+-- through the security-definer function below.
+create policy "Authenticated users read post_views"
+  on post_views for select
+  using (auth.role() = 'authenticated');
+
+-- 6. RPC to record a view: logs the location row AND bumps posts.views, in one
+--    safe server-side call. security definer = anon can call it (like #4 above).
+create or replace function record_post_view(
+  p_slug    text,
+  p_country text default null,
+  p_region  text default null,
+  p_city    text default null
+)
+returns void
+language plpgsql
+security definer
+as $$
+begin
+  -- Only log views for articles that are actually published
+  if not exists (select 1 from posts where slug = p_slug and published = true) then
+    return;
+  end if;
+
+  insert into post_views (post_slug, country, region, city)
+  values (p_slug, p_country, p_region, p_city);
+
+  update posts set views = views + 1 where slug = p_slug;
+end;
+$$;
+
+grant execute on function record_post_view(text, text, text, text) to anon;

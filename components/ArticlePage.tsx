@@ -7,7 +7,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Nav from './Nav';
 import Footer from './Footer';
 import { Icon } from './Shared';
-import { createClient } from '@/lib/supabase/client';
 import { PRODUCTS } from '@/lib/products';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -220,13 +219,14 @@ function ArticleBody({ post, relatedPosts }: { post: Post; relatedPosts: Related
     return () => { document.body.contains(script) && document.body.removeChild(script); };
   }, [post.content]);
 
-  // Track views — fires once per article load
+  // Track views — fires once per article load. The API route logs the visitor's
+  // approximate location and bumps the views counter in one server-side call.
   useEffect(() => {
-    const supabase = createClient();
-    supabase.rpc('increment_post_views', { post_slug: post.slug })
-      .then(({ error }) => {
-        if (error) console.warn('[views] increment failed:', error.message);
-      });
+    fetch('/api/track-view', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: post.slug }),
+    }).catch((err) => console.warn('[views] track failed:', err));
   }, [post.slug]);
 
   useGSAP(() => {

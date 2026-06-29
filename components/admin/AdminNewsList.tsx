@@ -295,8 +295,38 @@ export default function AdminNewsList() {
                   ))}
                 </div>
 
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--cream)', letterSpacing: '0.04em' }}>
-                  {(post.views ?? 0).toLocaleString()}
+                <div>
+                  <button
+                    onClick={() => router.push(`/admin/news/${post.id}/views`)}
+                    title="View visitor details (location, date)"
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 13,
+                      color: 'var(--gold)',
+                      letterSpacing: '0.04em',
+                      textDecoration: 'underline',
+                      textUnderlineOffset: 3,
+                    }}
+                  >
+                    {(post.views ?? 0).toLocaleString()}
+                  </button>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: 9,
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                      color: 'var(--text-muted)',
+                      marginTop: 4,
+                    }}
+                  >
+                    Details
+                  </div>
                 </div>
 
                 <div>

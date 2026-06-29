@@ -80,6 +80,53 @@ A standalone partnership sales/landing page at **`/humpbackhelitours`** promotin
 - Public: SELECT where published = true only
 - Admin (authenticated): full SELECT, INSERT, UPDATE, DELETE
 
+## Feature — Blog viewer location tracking
+
+### What it is & who uses it
+Right now each article only stores a single `views` counter (via the `increment_post_views` RPC) — no information about *who* viewed or *from where*. This feature starts recording each individual view together with the visitor's approximate location (country / region / city), so the admin can see where their blog readers come from.
+
+### How location is detected (no third-party API)
+The site is deployed on Vercel, which automatically attaches the visitor's approximate location to every request via headers (`x-vercel-ip-country`, `x-vercel-ip-country-region`, `x-vercel-ip-city`). We read those server-side. **No raw IP address is stored** — only country/region/city. This keeps it privacy-friendly and free (no external geolocation service).
+- Note: these headers only exist in production on Vercel. In local dev they're empty → location saved as `Unknown`. That's expected.
+
+### Data model — new `post_views` table (Supabase Postgres)
+| Column     | Type        | Notes                                  |
+|------------|-------------|----------------------------------------|
+| id         | uuid        | Primary key, auto-generated            |
+| post_slug  | text        | Which article was viewed               |
+| country    | text        | e.g. "AU" (nullable / "Unknown")       |
+| region     | text        | State/region (nullable)                |
+| city       | text        | City (nullable)                        |
+| viewed_at  | timestamptz | Default now()                          |
+
+**RLS rules**
+- Public/anon: **cannot** read or write this table directly.
+- Inserts happen only through a server API route using the service-role key (bypasses RLS safely on the server).
+- Admin (authenticated): SELECT only (to read the breakdown).
+
+The existing `posts.views` counter stays as-is (kept in sync) so nothing else breaks.
+
+### How it works (flow)
+1. A visitor opens an article → `ArticlePage` sends a POST to a new route `app/api/track-view/route.ts` with the article slug (replaces the current direct `increment_post_views` RPC call).
+2. The route reads the Vercel location headers, then (a) inserts one row into `post_views` and (b) increments `posts.views` — both server-side with the service-role client. `console.log` at start and end per project rules.
+3. Admin opens `/admin/news` → each post shows its total views plus a small location breakdown (e.g. top countries: "AU 30 · US 8 · UK 4"). Fetched by querying `post_views` grouped by country.
+
+### Files touched
+- `supabase/schema.sql` — add `post_views` table + RLS policies (admin SELECT only).
+- `app/api/track-view/route.ts` — **new** API route (insert view + read geo headers + increment counter).
+- `components/ArticlePage.tsx` — swap the direct RPC call for a `fetch('/api/track-view')`.
+- `components/admin/AdminNewsList.tsx` — show per-post location breakdown.
+
+### Privacy note
+Country/region/city are personal-ish data under Australian Privacy Principles / GDPR. We store only coarse location (no raw IP, no names, no tracking cookie), which is the low-risk approach. If you later want a "we collect anonymous location analytics" line in a privacy policy, that's a separate copy task.
+
+### What "done" looks like (this feature)
+- `npm run build` passes, no TS errors.
+- Opening an article inserts a `post_views` row (verifiable in Supabase) and still bumps `posts.views`.
+- Admin list shows total views + a country breakdown per article.
+- Anon users cannot read `post_views` directly (RLS verified).
+- No console errors.
+
 ## What "done" looks like
 
 - `npm run build` succeeds with no TypeScript errors
