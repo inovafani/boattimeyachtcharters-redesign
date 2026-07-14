@@ -641,9 +641,43 @@ export default function BroadwaterPage() {
                   margin: '0 auto',
                 }}
               >
-                Fridays, Saturdays, and Sundays at 5:00 PM year-round. Instant
+                Fridays, Saturdays, and Sundays at 5:00 PM. Instant
                 confirmation — cancel up to 24 hours before for a full refund.
               </p>
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  marginTop: 24,
+                  padding: '10px 20px',
+                  border: '1px solid rgba(201,168,76,0.4)',
+                  background: 'rgba(201,168,76,0.08)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 9,
+                    letterSpacing: '0.24em',
+                    textTransform: 'uppercase',
+                    color: 'var(--gold)',
+                    fontWeight: 600,
+                  }}
+                >
+                  Now Booking
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 13,
+                    letterSpacing: '0.02em',
+                    color: 'var(--cream)',
+                  }}
+                >
+                  Tours commence 1 September 2026
+                </span>
+              </div>
             </div>
             <div
               style={{
@@ -657,7 +691,7 @@ export default function BroadwaterPage() {
                 height="1000px"
                 frameBorder="0"
                 className="rezdy"
-                src="https://boattimeyachtcharters.rezdy.com/700304/gold-coast-sunset-cruise-on-board-sun-goddess?iframe=true"
+                src="https://boattimeyachtcharters.rezdy.com/414058/twilight-drift-broadwater-sunset-tour-scenic-cruise?iframe=true"
                 style={{ display: 'block' }}
               />
             </div>
