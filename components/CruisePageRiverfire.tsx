@@ -981,8 +981,8 @@ export default function RiverPage() {
         {/* ── Event details ── */}
         <EventDetails
           items={[
-            { label: 'Date', value: '7th September' },
-            { label: 'Location', value: 'New Farm' },
+            { label: 'Date', value: '5th September 2026' },
+            { label: 'Pickup', value: 'New Farm Recreational Hub, New Farm QLD 4005' },
             { label: 'Venue', value: 'Mermaid Spirit on the Brisbane River' },
             {
               label: 'Time',
@@ -1057,7 +1057,7 @@ export default function RiverPage() {
                   fontWeight: 300,
                 }}
               >
-                Saturday, 7 September 2026. Limited tickets — this event sells
+                Saturday, 5 September 2026. Limited tickets — this event sells
                 out every year. Instant confirmation on booking.
               </p>
             </div>
