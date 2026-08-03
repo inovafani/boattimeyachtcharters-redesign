@@ -1,33 +1,33 @@
-'use client';
+"use client";
 
-import Script from 'next/script';
-import Nav from './Nav';
-import Footer from './Footer';
+import Script from "next/script";
+import Nav from "./Nav";
+import Footer from "./Footer";
 import {
   CruiseHero,
   CruiseGallery,
   CruiseItinerary,
   CruiseYachts,
   CruiseExperience,
-} from './CruiseSections';
-import type { ReactNode } from 'react';
+} from "./CruiseSections";
+import type { ReactNode } from "react";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 const GL: React.CSSProperties = {
-  fontFamily: 'var(--font-body)',
+  fontFamily: "var(--font-body)",
   fontSize: 9,
-  letterSpacing: '0.28em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--gold)',
+  letterSpacing: "0.28em",
+  textTransform: "uppercase" as const,
+  color: "var(--gold)",
   fontWeight: 600,
 };
 
 const GALLERY_THUMBS = [
-  '/luxury-whale-watching/IMG_0151.jpg',
-  '/luxury-whale-watching/humpbacks.jpg',
-  '/luxury-whale-watching/IMG_1613.JPG',
-  '/luxury-whale-watching/IMG_1637.JPG',
+  "/luxury-whale-watching/IMG_0151.jpg",
+  "/luxury-whale-watching/humpbacks.jpg",
+  "/luxury-whale-watching/IMG_1613.JPG",
+  "/luxury-whale-watching/IMG_1637.JPG",
 ];
 
 const FEATURES = [
@@ -47,8 +47,8 @@ const FEATURES = [
         <path d="M12 8v4l3 3" />
       </svg>
     ),
-    title: 'Marine Biologist Commentary',
-    desc: 'A qualified marine biologist provides live commentary throughout the tour — whale behaviour, migration patterns, and the Gold Coast&apos;s unique marine ecosystem.',
+    title: "Marine Biologist Commentary",
+    desc: "A qualified marine biologist provides live commentary throughout the tour — whale behaviour, migration patterns, and the Gold Coast&apos;s unique marine ecosystem.",
   },
   {
     icon: (
@@ -69,8 +69,8 @@ const FEATURES = [
         <line x1="14" y1="1" x2="14" y2="4" />
       </svg>
     ),
-    title: 'Complimentary Refreshments',
-    desc: 'Hot chocolate and espresso coffee are complimentary throughout the tour. The fully licensed bar and galley are also open for additional food and drinks.',
+    title: "Complimentary Refreshments",
+    desc: "Hot chocolate and espresso coffee are complimentary throughout the tour. The fully licensed bar and galley are also open for additional food and drinks.",
   },
   {
     icon: (
@@ -88,8 +88,8 @@ const FEATURES = [
         <polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    title: 'Two Sessions Daily',
-    desc: 'Morning (9:00 AM) and afternoon (12:00 PM) sessions run every day of the week from May through November — choose what suits your schedule.',
+    title: "Two Sessions Daily",
+    desc: "Morning (9:00 AM) and afternoon (12:00 PM) sessions run every day of the week from May through November — choose what suits your schedule.",
   },
   {
     icon: (
@@ -106,7 +106,7 @@ const FEATURES = [
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       </svg>
     ),
-    title: '100% Sighting Guarantee',
+    title: "100% Sighting Guarantee",
     desc: "If we don't spot a whale, you come back free. In over a decade of tours, we've maintained one of the best sighting records on the Gold Coast.",
   },
   {
@@ -126,30 +126,30 @@ const FEATURES = [
         <path d="M16 10a4 4 0 0 1-8 0" />
       </svg>
     ),
-    title: 'On Board Gift Store',
-    desc: 'Browse our on board gift shop for whale watching guidebooks, keepsake gifts, and souvenirs — available to purchase during your cruise while the memories are still fresh.',
+    title: "On Board Gift Store",
+    desc: "Browse our on board gift shop for whale watching guidebooks, keepsake gifts, and souvenirs — available to purchase during your cruise while the memories are still fresh.",
   },
 ];
 
 const ITINERARY_INTRO: ReactNode = (
   <div
     style={{
-      fontFamily: 'var(--font-body)',
-      color: 'rgba(245,240,232,0.75)',
+      fontFamily: "var(--font-body)",
+      color: "rgba(245,240,232,0.75)",
       lineHeight: 1.9,
     }}
   >
     <p style={{ marginBottom: 20, fontSize: 15 }}>
       <span
         style={{
-          fontFamily: 'var(--font-display)',
+          fontFamily: "var(--font-display)",
           fontSize: 72,
-          float: 'left',
+          float: "left",
           lineHeight: 0.78,
-          color: 'var(--gold)',
+          color: "var(--gold)",
           marginRight: 10,
           marginTop: 6,
-          fontStyle: 'italic',
+          fontStyle: "italic",
         }}
       >
         S
@@ -159,7 +159,7 @@ const ITINERARY_INTRO: ReactNode = (
       Coast. A stylish 34 metre superyacht with a fully licensed bar and
       rotating viewing decks so everyone gets an amazing view.
     </p>
-    <p style={{ fontSize: 14, clear: 'both', marginBottom: 20 }}>
+    <p style={{ fontSize: 14, clear: "both", marginBottom: 20 }}>
       Jump aboard a clean, well appointed vessel for a truly international
       operation, away from the crowded big players. Live commentary from an
       onboard marine biologist guides you through an epic adventure learning
@@ -167,27 +167,27 @@ const ITINERARY_INTRO: ReactNode = (
     </p>
     <div style={{ marginBottom: 28 }}>
       <div style={{ ...GL, marginBottom: 14 }}>What&apos;s Included</div>
-      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+      <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
         {[
-          'Marine biologist live commentary',
-          'Complimentary hot chocolate & espresso coffee',
-          'Two sessions daily — morning & afternoon',
-          '100% whale sighting guarantee',
-          'Fully licensed bar & galley',
-          'On board gift shop — souvenirs & keepsakes',
+          "Marine biologist live commentary",
+          "Complimentary hot chocolate & espresso coffee",
+          "Two sessions daily — morning & afternoon",
+          "100% whale sighting guarantee",
+          "Fully licensed bar & galley",
+          "On board gift shop — souvenirs & keepsakes",
         ].map((item) => (
           <li
             key={item}
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 10,
-              alignItems: 'flex-start',
+              alignItems: "flex-start",
               fontSize: 13,
-              color: 'rgba(245,240,232,0.7)',
+              color: "rgba(245,240,232,0.7)",
               marginBottom: 10,
             }}
           >
-            <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 1 }}>
+            <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: 1 }}>
               ✓
             </span>
             {item}
@@ -200,24 +200,24 @@ const ITINERARY_INTRO: ReactNode = (
 
 const ITINERARY = [
   {
-    title: 'Schedule',
+    title: "Schedule",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
         <p style={{ marginBottom: 10 }}>
           <strong
             style={{
-              color: 'var(--gold)',
+              color: "var(--gold)",
               fontWeight: 600,
-              letterSpacing: '0.1em',
+              letterSpacing: "0.1em",
               fontSize: 11,
-              textTransform: 'uppercase' as const,
+              textTransform: "uppercase" as const,
             }}
           >
             Morning Session
@@ -228,11 +228,11 @@ const ITINERARY = [
         <p>
           <strong
             style={{
-              color: 'var(--gold)',
+              color: "var(--gold)",
               fontWeight: 600,
-              letterSpacing: '0.1em',
+              letterSpacing: "0.1em",
               fontSize: 11,
-              textTransform: 'uppercase' as const,
+              textTransform: "uppercase" as const,
             }}
           >
             Afternoon Session
@@ -240,45 +240,45 @@ const ITINERARY = [
           <br />
           Boarding 11:30 AM &middot; Departs 12:00 PM &middot; Returns 2:30 PM
         </p>
-        <p style={{ marginTop: 12, color: 'rgba(245,240,232,0.5)' }}>
+        <p style={{ marginTop: 12, color: "rgba(245,240,232,0.5)" }}>
           Both sessions operate 7 days a week, May through November.
         </p>
       </div>
     ),
   },
   {
-    title: 'What You Should Bring',
+    title: "What You Should Bring",
     content: (
       <ul
         style={{
           margin: 0,
           padding: 0,
-          listStyle: 'none',
-          fontFamily: 'var(--font-body)',
+          listStyle: "none",
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
         {[
-          'Sunscreen and sunglasses',
-          'A camera or fully charged phone — you will want it',
-          'A warm layer for open-deck viewing (the ocean breeze can be cool)',
-          'Non-slip, comfortable shoes',
+          "Sunscreen and sunglasses",
+          "A camera or fully charged phone — you will want it",
+          "A warm layer for open-deck viewing (the ocean breeze can be cool)",
+          "Non-slip, comfortable shoes",
           "Seasickness medication if you're prone — take 30 minutes before boarding",
-          'Photo ID for the licensed bar',
+          "Photo ID for the licensed bar",
         ].map((item, i) => (
           <li
             key={i}
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 14,
               paddingBottom: 10,
               marginBottom: 10,
-              borderBottom: i < 5 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+              borderBottom: i < 5 ? "1px solid rgba(201,168,76,0.08)" : "none",
             }}
           >
-            <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 2 }}>
+            <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: 2 }}>
               —
             </span>
             {item}
@@ -288,13 +288,13 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Best Times For This Excursion',
+    title: "Best Times For This Excursion",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
@@ -315,32 +315,32 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Frequently Asked',
+    title: "Frequently Asked",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
         {[
           {
-            q: 'Will I get seasick?',
-            a: 'If you are prone to seasickness, we recommend taking a motion sickness tablet at least 30 minutes prior to departure. Sun Goddess is a large, stable superyacht — one of the fastest and most stable whale watching vessels on the Gold Coast.',
+            q: "Will I get seasick?",
+            a: "If you are prone to seasickness, we recommend taking a motion sickness tablet at least 30 minutes prior to departure. Sun Goddess is a large, stable superyacht — one of the fastest and most stable whale watching vessels on the Gold Coast.",
           },
           {
-            q: 'Are children welcome?',
-            a: 'Absolutely — all ages are welcome aboard. Life jackets and full safety briefings are provided. Our marine biologist makes the commentary fun and engaging for kids too.',
+            q: "Are children welcome?",
+            a: "Absolutely — all ages are welcome aboard. Life jackets and full safety briefings are provided. Our marine biologist makes the commentary fun and engaging for kids too.",
           },
           {
-            q: 'What if it rains?',
-            a: 'All cruises operate in all weather unless conditions are unsafe. Sun Goddess has covered viewing areas on every deck, plus a warm galley with complimentary hot chocolate and coffee.',
+            q: "What if it rains?",
+            a: "All cruises operate in all weather unless conditions are unsafe. Sun Goddess has covered viewing areas on every deck, plus a warm galley with complimentary hot chocolate and coffee.",
           },
           {
-            q: 'How close do we get to the whales?',
-            a: 'We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel. Our marine biologist will explain their behaviour in real time.',
+            q: "How close do we get to the whales?",
+            a: "We follow all marine park regulations and maintain a respectful distance — but humpbacks are naturally curious and often approach the vessel. Our marine biologist will explain their behaviour in real time.",
           },
         ].map((faq, i, arr) => (
           <div
@@ -349,12 +349,12 @@ const ITINERARY = [
               paddingBottom: 16,
               marginBottom: 16,
               borderBottom:
-                i < arr.length - 1 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+                i < arr.length - 1 ? "1px solid rgba(201,168,76,0.08)" : "none",
             }}
           >
             <div
               style={{
-                color: 'var(--cream)',
+                color: "var(--cream)",
                 fontWeight: 500,
                 marginBottom: 6,
               }}
@@ -368,13 +368,13 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Gift Voucher T&Cs',
+    title: "Gift Voucher T&Cs",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
@@ -395,40 +395,40 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Optional Extras & On Board Gift Shop',
+    title: "Optional Extras & On Board Gift Shop",
     content: (
       <ul
         style={{
           margin: 0,
           padding: 0,
-          listStyle: 'none',
-          fontFamily: 'var(--font-body)',
+          listStyle: "none",
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
         {[
-          'Mimosa on arrival — ask the crew when you board',
-          'Cheese platter to share between two — available on arrival',
-          'Bottle of bubbles with two glasses and strawberries — perfect for celebrations',
-          'Toasted banana bread with butter — ideal for morning sessions',
-          'Croissant with jam — pairs with your complimentary espresso',
-          'Corona bucket with lime — for the afternoon session in the sun',
-          'Whale watching guidebooks and keepsake gifts available in the on board gift shop',
-          'Gift vouchers from $74.50 — never expire, redeemable online',
+          "Mimosa on arrival — ask the crew when you board",
+          "Cheese platter to share between two — available on arrival",
+          "Bottle of bubbles with two glasses and strawberries — perfect for celebrations",
+          "Toasted banana bread with butter — ideal for morning sessions",
+          "Croissant with jam — pairs with your complimentary espresso",
+          "Corona bucket with lime — for the afternoon session in the sun",
+          "Whale watching guidebooks and keepsake gifts available in the on board gift shop",
+          "Gift vouchers from $74.50 — never expire, redeemable online",
         ].map((item, i) => (
           <li
             key={i}
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 14,
               paddingBottom: 10,
               marginBottom: 10,
-              borderBottom: i < 8 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+              borderBottom: i < 8 ? "1px solid rgba(201,168,76,0.08)" : "none",
             }}
           >
-            <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 2 }}>
+            <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: 2 }}>
               —
             </span>
             {item}
@@ -442,36 +442,36 @@ const ITINERARY = [
 // Sun Goddess listed first as primary vessel
 const VESSELS = [
   {
-    image: '/sun-goddess-main.jpeg',
-    name: 'Sun Goddess',
+    image: "/sun-goddess-main.jpeg",
+    name: "Sun Goddess",
     description:
-      'Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
-    pax: '135 Guests',
-    size: '34m (114ft)',
+      "Sun Goddess is our primary whale watching vessel — and one of the fastest on the Gold Coast. This sleek 34-metre superyacht offers rotating viewing decks, dual bars, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.",
+    pax: "135 Guests",
+    size: "34m (114ft)",
     features: [
-      'Primary Whale Vessel',
-      'Rotating Viewing Decks',
-      'Dual Bars',
-      'Dual-level Galley',
-      'Bose Audio',
+      "Primary Whale Vessel",
+      "Rotating Viewing Decks",
+      "Dual Bars",
+      "Dual-level Galley",
+      "Bose Audio",
     ],
-    href: '/#fleet',
+    href: "/#fleet",
   },
   {
-    image: '/mermaid-spirit-main.jpg',
-    name: 'Mermaid Spirit',
+    image: "/mermaid-spirit-main.jpg",
+    name: "Mermaid Spirit",
     description:
       "Our tri-deck catamaran for larger group charters and private events. Spacious sun lounge, chef's kitchen, stinger pool, and room for 150 guests. Available for private whale watching charters on request.",
-    pax: '150 Guests',
-    size: '30m (100ft)',
+    pax: "150 Guests",
+    size: "30m (100ft)",
     features: [
-      '3 Decks',
-      'Well-Appointed Galley',
-      'Sun Lounge',
+      "3 Decks",
+      "Well-Appointed Galley",
+      "Sun Lounge",
       "Chef's Kitchen",
-      'Dual Bars',
+      "Dual Bars",
     ],
-    href: '/#fleet',
+    href: "/#fleet",
   },
 ];
 
@@ -493,10 +493,10 @@ export default function WhalePage() {
           titleAccent="Luxury Whale Watching Cruise"
           image="/luxury-whale.jpg"
           stats={[
-            { label: 'Duration', value: '2.5 hours' },
-            { label: 'From', value: '$74.50 pp' },
-            { label: 'Season', value: 'May – Nov' },
-            { label: 'Sessions', value: '2 Daily' },
+            { label: "Duration", value: "2.5 hours" },
+            { label: "From", value: "$79.50 pp" },
+            { label: "Season", value: "May – Nov" },
+            { label: "Sessions", value: "2 Daily" },
           ]}
           bookingUrl="#book"
         />
@@ -505,40 +505,40 @@ export default function WhalePage() {
         <div
           className="light-adapt-section cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '28px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.1)',
-            borderBottom: '1px solid rgba(201,168,76,0.1)',
+            background: "var(--navy-mid)",
+            padding: "28px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.1)",
+            borderBottom: "1px solid rgba(201,168,76,0.1)",
           }}
         >
           <div
             style={{
               maxWidth: 1200,
-              margin: '0 auto',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               gap: 64,
-              flexWrap: 'wrap',
+              flexWrap: "wrap",
             }}
           >
             {[
               {
-                platform: 'Facebook',
-                score: '5.0',
-                reviews: '2,047 reviews',
+                platform: "Facebook",
+                score: "5.0",
+                reviews: "2,047 reviews",
                 stars: 5,
               },
               {
-                platform: 'Google',
-                score: '4.7',
-                reviews: '1,863 reviews',
+                platform: "Google",
+                score: "4.7",
+                reviews: "1,863 reviews",
                 stars: 5,
               },
             ].map((r) => (
               <div
                 key={r.platform}
-                style={{ display: 'flex', alignItems: 'center', gap: 14 }}
+                style={{ display: "flex", alignItems: "center", gap: 14 }}
               >
                 <div>
                   <div style={{ ...GL, marginBottom: 4 }}>
@@ -546,27 +546,27 @@ export default function WhalePage() {
                   </div>
                   <div
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 10,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(245,240,232,0.45)',
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "rgba(245,240,232,0.45)",
                       marginBottom: 6,
                     }}
                   >
                     {r.platform}
                   </div>
                   <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+                    style={{ display: "flex", alignItems: "center", gap: 8 }}
                   >
-                    <span style={{ color: 'var(--gold)', fontSize: 13 }}>
-                      {'★'.repeat(r.stars)}
+                    <span style={{ color: "var(--gold)", fontSize: 13 }}>
+                      {"★".repeat(r.stars)}
                     </span>
                     <span
                       style={{
-                        fontFamily: 'var(--font-display)',
+                        fontFamily: "var(--font-display)",
                         fontSize: 18,
-                        color: 'var(--cream)',
+                        color: "var(--cream)",
                         lineHeight: 1,
                       }}
                     >
@@ -574,10 +574,10 @@ export default function WhalePage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: 'var(--font-body)',
+                        fontFamily: "var(--font-body)",
                         fontSize: 10,
-                        color: 'rgba(245,240,232,0.45)',
-                        letterSpacing: '0.06em',
+                        color: "rgba(245,240,232,0.45)",
+                        letterSpacing: "0.06em",
                       }}
                     >
                       {r.reviews}
@@ -612,7 +612,11 @@ export default function WhalePage() {
                 href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'inherit', textDecoration: 'none', borderBottom: '1px solid rgba(201,168,76,0.35)' }}
+                style={{
+                  color: "inherit",
+                  textDecoration: "none",
+                  borderBottom: "1px solid rgba(201,168,76,0.35)",
+                }}
               >
                 Sea World Drive, Main Beach, Gold Coast
               </a>
@@ -637,18 +641,20 @@ export default function WhalePage() {
         {/* 3b ── DEPARTURE MAP */}
         <div
           style={{
-            background: 'var(--navy)',
-            borderBottom: '1px solid rgba(201,168,76,0.08)',
+            background: "var(--navy)",
+            borderBottom: "1px solid rgba(201,168,76,0.08)",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 48px 40px' }}>
+          <div
+            style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px 40px" }}
+          >
             <div
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 9,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: 'rgba(245,240,232,0.35)',
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(245,240,232,0.35)",
                 marginBottom: 14,
               }}
             >
@@ -656,35 +662,39 @@ export default function WhalePage() {
             </div>
             <div
               style={{
-                position: 'relative',
-                width: '100%',
+                position: "relative",
+                width: "100%",
                 borderRadius: 4,
-                overflow: 'hidden',
-                border: '1px solid rgba(201,168,76,0.12)',
+                overflow: "hidden",
+                border: "1px solid rgba(201,168,76,0.12)",
               }}
             >
               <iframe
                 src="https://maps.google.com/maps?q=-27.9695146,153.4236605&z=17&output=embed"
                 width="100%"
                 height="300"
-                style={{ display: 'block', border: 'none', filter: 'grayscale(30%) contrast(1.05)' }}
+                style={{
+                  display: "block",
+                  border: "none",
+                  filter: "grayscale(30%) contrast(1.05)",
+                }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Departure point — Sea World Drive, Main Beach, Gold Coast"
               />
             </div>
-            <div style={{ marginTop: 12, textAlign: 'right' }}>
+            <div style={{ marginTop: 12, textAlign: "right" }}>
               <a
                 href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.16em',
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
-                  textDecoration: 'none',
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                  textDecoration: "none",
                 }}
               >
                 Open in Google Maps →
@@ -696,56 +706,56 @@ export default function WhalePage() {
         {/* 4 ── WHY SUN GODDESS (new) */}
         <section
           className="cruise-section"
-          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+          style={{ background: "var(--navy)", padding: "100px 48px" }}
         >
           <div
             className="cruise-page-split"
             style={{
               maxWidth: 1200,
-              margin: '0 auto',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
               gap: 80,
-              alignItems: 'start',
+              alignItems: "start",
             }}
           >
             {/* Left — image */}
             <div
               style={{
-                position: 'relative',
-                aspectRatio: '4/3',
-                overflow: 'hidden',
+                position: "relative",
+                aspectRatio: "4/3",
+                overflow: "hidden",
               }}
             >
               <img
                 src="/sungoddess-page-boat.jpeg"
                 alt="Sun Goddess whale watching"
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
                 }}
               />
               {/* Fastest vessel badge */}
               <div
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   bottom: 24,
                   left: 24,
-                  background: 'rgba(10,22,40,0.92)',
-                  border: '1px solid rgba(201,168,76,0.3)',
-                  padding: '16px 24px',
-                  backdropFilter: 'blur(8px)',
+                  background: "rgba(10,22,40,0.92)",
+                  border: "1px solid rgba(201,168,76,0.3)",
+                  padding: "16px 24px",
+                  backdropFilter: "blur(8px)",
                 }}
               >
                 <div style={{ ...GL, marginBottom: 6 }}>Primary Vessel</div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: "var(--font-display)",
                     fontSize: 22,
                     fontWeight: 300,
-                    color: 'var(--cream)',
+                    color: "var(--cream)",
                     lineHeight: 1,
                   }}
                 >
@@ -753,11 +763,11 @@ export default function WhalePage() {
                 </div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 11,
-                    color: 'rgba(245,240,232,0.5)',
+                    color: "rgba(245,240,232,0.5)",
                     marginTop: 4,
-                    letterSpacing: '0.05em',
+                    letterSpacing: "0.05em",
                   }}
                 >
                   34m · One of the fastest on the Gold Coast
@@ -770,25 +780,25 @@ export default function WhalePage() {
               <div style={{ ...GL, marginBottom: 20 }}>The Vessel</div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(28px, 3.5vw, 48px)',
+                  fontSize: "clamp(28px, 3.5vw, 48px)",
                   lineHeight: 1.05,
-                  letterSpacing: '-0.01em',
-                  color: 'var(--cream)',
+                  letterSpacing: "-0.01em",
+                  color: "var(--cream)",
                   marginBottom: 24,
                 }}
               >
-                Sun Goddess —{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                Sun Goddess —{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   the fastest way to the whales
                 </em>
               </h2>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
-                  color: 'rgba(245,240,232,0.72)',
+                  color: "rgba(245,240,232,0.72)",
                   lineHeight: 1.85,
                   marginBottom: 32,
                 }}
@@ -800,9 +810,9 @@ export default function WhalePage() {
               </p>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 14,
-                  color: 'rgba(245,240,232,0.58)',
+                  color: "rgba(245,240,232,0.58)",
                   lineHeight: 1.85,
                   marginBottom: 36,
                 }}
@@ -816,26 +826,26 @@ export default function WhalePage() {
               <div
                 className="vessel-specs-grid"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
                   gap: 16,
                   paddingTop: 28,
-                  borderTop: '1px solid rgba(201,168,76,0.12)',
+                  borderTop: "1px solid rgba(201,168,76,0.12)",
                 }}
               >
                 {[
-                  { label: 'Vessel', value: 'Sun Goddess' },
-                  { label: 'Length', value: '34m (114ft)' },
-                  { label: 'Capacity', value: 'Up to 135 guests' },
-                  { label: 'Speed', value: "Among Gold Coast's fastest" },
+                  { label: "Vessel", value: "Sun Goddess" },
+                  { label: "Length", value: "34m (114ft)" },
+                  { label: "Capacity", value: "Up to 135 guests" },
+                  { label: "Speed", value: "Among Gold Coast's fastest" },
                 ].map((s) => (
                   <div key={s.label}>
                     <div style={{ ...GL, marginBottom: 4 }}>{s.label}</div>
                     <div
                       style={{
-                        fontFamily: 'var(--font-body)',
+                        fontFamily: "var(--font-body)",
                         fontSize: 13,
-                        color: 'rgba(245,240,232,0.75)',
+                        color: "rgba(245,240,232,0.75)",
                       }}
                     >
                       {s.value}
@@ -851,65 +861,65 @@ export default function WhalePage() {
         <section
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '100px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.08)',
+            background: "var(--navy-mid)",
+            padding: "100px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.08)",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             {/* Header */}
-            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+            <div style={{ textAlign: "center", marginBottom: 64 }}>
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   marginBottom: 20,
                 }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 10,
-                    letterSpacing: '0.3em',
-                    textTransform: 'uppercase',
-                    color: 'var(--gold)',
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
                     fontWeight: 500,
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     gap: 14,
                   }}
                 >
                   <span
                     style={{
-                      display: 'block',
+                      display: "block",
                       width: 32,
                       height: 1,
-                      background: 'var(--gold)',
+                      background: "var(--gold)",
                     }}
                   />
                   Every Ticket Includes
                   <span
                     style={{
-                      display: 'block',
+                      display: "block",
                       width: 32,
                       height: 1,
-                      background: 'var(--gold)',
+                      background: "var(--gold)",
                     }}
                   />
                 </div>
               </div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontSize: "clamp(32px, 4vw, 52px)",
                   lineHeight: 1.05,
-                  color: 'var(--cream)',
-                  letterSpacing: '-0.02em',
+                  color: "var(--cream)",
+                  letterSpacing: "-0.02em",
                 }}
               >
-                What&apos;s{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                What&apos;s{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   Included
                 </em>
               </h2>
@@ -919,11 +929,11 @@ export default function WhalePage() {
             <div
               className="cruise-3col-grid"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(6, 1fr)',
+                display: "grid",
+                gridTemplateColumns: "repeat(6, 1fr)",
                 gap: 2,
-                background: 'rgba(201,168,76,0.06)',
-                border: '1px solid rgba(201,168,76,0.1)',
+                background: "rgba(201,168,76,0.06)",
+                border: "1px solid rgba(201,168,76,0.1)",
               }}
             >
               {FEATURES.map((f, i) => (
@@ -932,28 +942,28 @@ export default function WhalePage() {
                   style={{
                     gridColumn:
                       FEATURES.length === 5 && i === 3
-                        ? '2 / 4'
+                        ? "2 / 4"
                         : FEATURES.length === 5 && i === 4
-                          ? '4 / 6'
-                          : 'span 2',
-                    padding: '40px 32px',
+                          ? "4 / 6"
+                          : "span 2",
+                    padding: "40px 32px",
                     borderRight:
                       (i + 1) % 3 !== 0 && i !== FEATURES.length - 1
-                        ? '1px solid rgba(201,168,76,0.08)'
-                        : 'none',
+                        ? "1px solid rgba(201,168,76,0.08)"
+                        : "none",
                     borderBottom:
-                      i < 3 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+                      i < 3 ? "1px solid rgba(201,168,76,0.08)" : "none",
                   }}
                 >
-                  <div style={{ color: 'var(--gold)', marginBottom: 20 }}>
+                  <div style={{ color: "var(--gold)", marginBottom: 20 }}>
                     {f.icon}
                   </div>
                   <div style={{ ...GL, marginBottom: 12 }}>{f.title}</div>
                   <p
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 13,
-                      color: 'rgba(245,240,232,0.65)',
+                      color: "rgba(245,240,232,0.65)",
                       lineHeight: 1.75,
                     }}
                     dangerouslySetInnerHTML={{ __html: f.desc }}
@@ -968,79 +978,80 @@ export default function WhalePage() {
         <section
           className="cruise-section"
           style={{
-            background: 'var(--navy)',
-            padding: '100px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.08)',
+            background: "var(--navy)",
+            padding: "100px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.08)",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             {/* Header */}
-            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+            <div style={{ textAlign: "center", marginBottom: 64 }}>
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   marginBottom: 20,
                 }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 10,
-                    letterSpacing: '0.3em',
-                    textTransform: 'uppercase',
-                    color: 'var(--gold)',
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
                     fontWeight: 500,
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     gap: 14,
                   }}
                 >
                   <span
                     style={{
-                      display: 'block',
+                      display: "block",
                       width: 32,
                       height: 1,
-                      background: 'var(--gold)',
+                      background: "var(--gold)",
                     }}
                   />
                   Onboard Upgrades
                   <span
                     style={{
-                      display: 'block',
+                      display: "block",
                       width: 32,
                       height: 1,
-                      background: 'var(--gold)',
+                      background: "var(--gold)",
                     }}
                   />
                 </div>
               </div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontSize: "clamp(32px, 4vw, 52px)",
                   lineHeight: 1.05,
-                  color: 'var(--cream)',
-                  letterSpacing: '-0.02em',
+                  color: "var(--cream)",
+                  letterSpacing: "-0.02em",
                   marginBottom: 16,
                 }}
               >
-                Enhance Your{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                Enhance Your{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   Experience
                 </em>
               </h2>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 14,
-                  color: 'rgba(245,240,232,0.5)',
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
+                  color: "rgba(245,240,232,0.5)",
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
                 }}
               >
-                Optional upgrades available on arrival — ask the crew when you board
+                Optional upgrades available on arrival — ask the crew when you
+                board
               </p>
             </div>
 
@@ -1048,61 +1059,61 @@ export default function WhalePage() {
             <div
               className="cruise-3col-grid"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: 2,
-                background: 'rgba(201,168,76,0.06)',
-                border: '1px solid rgba(201,168,76,0.1)',
+                background: "rgba(201,168,76,0.06)",
+                border: "1px solid rgba(201,168,76,0.1)",
               }}
             >
               {[
                 {
-                  name: 'Mimosa on Arrival',
-                  desc: 'Start your whale watching adventure the right way — a chilled mimosa ready as you step aboard.',
+                  name: "Mimosa on Arrival",
+                  desc: "Start your whale watching adventure the right way — a chilled mimosa ready as you step aboard.",
                 },
                 {
-                  name: 'Cheese Platter',
-                  desc: 'A curated cheese platter to share between two, perfect for grazing while you scan the horizon.',
+                  name: "Cheese Platter",
+                  desc: "A curated cheese platter to share between two, perfect for grazing while you scan the horizon.",
                 },
                 {
-                  name: 'Bottle of Bubbles',
-                  desc: 'A bottle of sparkling with two glasses and fresh strawberries — ideal for birthdays or celebrations at sea.',
+                  name: "Bottle of Bubbles",
+                  desc: "A bottle of sparkling with two glasses and fresh strawberries — ideal for birthdays or celebrations at sea.",
                 },
                 {
-                  name: 'Toasted Banana Bread',
-                  desc: 'Warm toasted banana bread served with butter — a comforting start to your morning session.',
+                  name: "Toasted Banana Bread",
+                  desc: "Warm toasted banana bread served with butter — a comforting start to your morning session.",
                 },
                 {
-                  name: 'Croissant with Jam',
-                  desc: 'A freshly baked croissant served with jam — the perfect pairing with your complimentary espresso.',
+                  name: "Croissant with Jam",
+                  desc: "A freshly baked croissant served with jam — the perfect pairing with your complimentary espresso.",
                 },
                 {
-                  name: 'Corona Bucket with Lime',
-                  desc: 'A bucket of ice-cold Coronas with fresh lime — made for the afternoon session in the Gold Coast sun.',
+                  name: "Corona Bucket with Lime",
+                  desc: "A bucket of ice-cold Coronas with fresh lime — made for the afternoon session in the Gold Coast sun.",
                 },
               ].map((item, i) => (
                 <div
                   key={i}
                   style={{
-                    padding: '36px 32px',
+                    padding: "36px 32px",
                     borderRight:
                       (i + 1) % 3 !== 0
-                        ? '1px solid rgba(201,168,76,0.08)'
-                        : 'none',
+                        ? "1px solid rgba(201,168,76,0.08)"
+                        : "none",
                     borderBottom:
-                      i < 3 ? '1px solid rgba(201,168,76,0.08)' : 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
+                      i < 3 ? "1px solid rgba(201,168,76,0.08)" : "none",
+                    display: "flex",
+                    flexDirection: "column",
                     gap: 10,
                   }}
                 >
                   <div
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 9,
-                      letterSpacing: '0.28em',
-                      textTransform: 'uppercase',
-                      color: 'var(--gold)',
+                      letterSpacing: "0.28em",
+                      textTransform: "uppercase",
+                      color: "var(--gold)",
                       fontWeight: 600,
                     }}
                   >
@@ -1110,9 +1121,9 @@ export default function WhalePage() {
                   </div>
                   <p
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 13,
-                      color: 'rgba(245,240,232,0.6)',
+                      color: "rgba(245,240,232,0.6)",
                       lineHeight: 1.75,
                       margin: 0,
                     }}
@@ -1136,56 +1147,56 @@ export default function WhalePage() {
         <div
           className="light-adapt-section cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '60px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.08)',
+            background: "var(--navy-mid)",
+            padding: "60px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.08)",
           }}
         >
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <div
               className="cruise-3col-grid"
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: 2,
-                background: 'rgba(201,168,76,0.06)',
-                border: '1px solid rgba(201,168,76,0.1)',
+                background: "rgba(201,168,76,0.06)",
+                border: "1px solid rgba(201,168,76,0.1)",
               }}
             >
               {[
                 {
-                  label: 'Departure Point',
-                  value: 'Sea World Drive, Main Beach, Gold Coast',
+                  label: "Departure Point",
+                  value: "Sea World Drive, Main Beach, Gold Coast",
                 },
-                { label: 'Sessions Per Day', value: '2 — Morning & Afternoon' },
-                { label: 'Days Per Week', value: '7 Days — May to November' },
-                { label: 'Duration', value: '2.5 Hours Per Session' },
+                { label: "Sessions Per Day", value: "2 — Morning & Afternoon" },
+                { label: "Days Per Week", value: "7 Days — May to November" },
+                { label: "Duration", value: "2.5 Hours Per Session" },
                 {
-                  label: 'Primary Vessel',
-                  value: 'Sun Goddess · 34m Superyacht',
+                  label: "Primary Vessel",
+                  value: "Sun Goddess · 34m Superyacht",
                 },
-                { label: 'Guarantee', value: 'Whale Sighting Guaranteed' },
+                { label: "Guarantee", value: "Whale Sighting Guaranteed" },
               ].map((item, i, arr) => (
                 <div
                   key={i}
                   style={{
-                    padding: '32px 28px',
+                    padding: "32px 28px",
                     borderRight:
                       (i + 1) % 3 !== 0
-                        ? '1px solid rgba(201,168,76,0.08)'
-                        : 'none',
+                        ? "1px solid rgba(201,168,76,0.08)"
+                        : "none",
                     borderBottom:
                       i < arr.length - 3
-                        ? '1px solid rgba(201,168,76,0.08)'
-                        : 'none',
+                        ? "1px solid rgba(201,168,76,0.08)"
+                        : "none",
                   }}
                 >
                   <div style={{ ...GL, marginBottom: 8 }}>{item.label}</div>
                   <div
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 13,
-                      color: 'rgba(245,240,232,0.78)',
+                      color: "rgba(245,240,232,0.78)",
                       lineHeight: 1.5,
                     }}
                   >
@@ -1211,44 +1222,44 @@ export default function WhalePage() {
           id="book"
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            borderTop: '1px solid var(--border-subtle)',
-            padding: '80px 48px 100px',
+            background: "var(--navy-mid)",
+            borderTop: "1px solid var(--border-subtle)",
+            padding: "80px 48px 100px",
           }}
         >
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ marginBottom: 48, textAlign: 'center' }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <div style={{ marginBottom: 48, textAlign: "center" }}>
               <div
                 className="section-eyebrow"
-                style={{ justifyContent: 'center' }}
+                style={{ justifyContent: "center" }}
               >
                 Book Your Session
               </div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(36px, 5vw, 60px)',
+                  fontSize: "clamp(36px, 5vw, 60px)",
                   lineHeight: 1.0,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--cream)',
+                  letterSpacing: "-0.02em",
+                  color: "var(--cream)",
                   marginBottom: 16,
                 }}
               >
-                Reserve your{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                Reserve your{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   spot
                 </em>
                 .
               </h2>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
-                  color: 'var(--text-muted)',
+                  color: "var(--text-muted)",
                   lineHeight: 1.75,
                   maxWidth: 520,
-                  margin: '0 auto',
+                  margin: "0 auto",
                 }}
               >
                 Morning and afternoon sessions run daily May through November.
@@ -1258,8 +1269,8 @@ export default function WhalePage() {
             </div>
             <div
               style={{
-                border: '1px solid var(--border-subtle)',
-                background: 'rgba(255,255,255,0.02)',
+                border: "1px solid var(--border-subtle)",
+                background: "rgba(255,255,255,0.02)",
               }}
             >
               <iframe
@@ -1269,7 +1280,7 @@ export default function WhalePage() {
                 frameBorder="0"
                 className="rezdy"
                 src="https://boattimeyachtcharters.rezdy.com/431872/luxury-whale-watching-experience?iframe=true"
-                style={{ display: 'block' }}
+                style={{ display: "block" }}
               />
             </div>
           </div>
