@@ -53,6 +53,7 @@ export function CruiseHero({
   image,
   stats,
   bookingUrl,
+  titleFontSize,
 }: {
   eyebrow: string;
   title: string;
@@ -60,6 +61,7 @@ export function CruiseHero({
   image: string;
   stats: StatPill[];
   bookingUrl: string;
+  titleFontSize?: string;
 }) {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -134,7 +136,7 @@ export function CruiseHero({
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 300,
-            fontSize: 'clamp(48px, 7vw, 96px)',
+            fontSize: titleFontSize ?? 'clamp(48px, 7vw, 96px)',
             lineHeight: 0.95,
             letterSpacing: '-0.02em',
             color: 'var(--cream)',

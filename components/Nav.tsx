@@ -23,8 +23,8 @@ function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
 const EXPERIENCE_ITEMS = [
   { label: 'Gold Coast Whale Escape', sub: 'Luxury Whale Watching', href: '/cruise-tickets-luxury-whale-watching' },
   { label: 'Twilight Drift', sub: 'Broadwater Sunset Tour', href: '/luxury-broadwater-cruise' },
-  { label: 'Coastal Lunch Escape', sub: 'Daytime Dining Cruise', href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit' },
-  { label: 'Broadwater Twilight Dining', sub: 'Buffet Dinner Cruise', href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit' },
+  { label: "Chef's Table – Flavours of Australia", sub: 'Lunch Cruise', href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit' },
+  { label: "Chef's Table Dinner – Flavours of Australia", sub: 'Dinner Cruise', href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit' },
   { label: 'Riverfire 2026', sub: 'Brisbane Event', href: '/riverfire-2026' },
   { label: "New Year's Eve 2026", sub: 'Celebration Cruise', href: '/nye-2026' },
   { label: "Valentine's Day", sub: 'Romance Evening', href: '/valentines-day' },

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Script from 'next/script';
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Nav from './Nav';
-import Footer from './Footer';
+import Script from "next/script";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Nav from "./Nav";
+import Footer from "./Footer";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -23,7 +23,7 @@ function AnchorSvg() {
       strokeWidth="1.3"
       strokeLinecap="round"
       strokeLinejoin="round"
-      style={{ display: 'block', margin: '0 auto' }}
+      style={{ display: "block", margin: "0 auto" }}
     >
       <circle cx="12" cy="5" r="2.5" />
       <line x1="12" y1="7.5" x2="12" y2="19" />
@@ -39,7 +39,7 @@ function GoldRope() {
       style={{
         height: 10,
         background:
-          'repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 8px, transparent 8px, transparent 14px)',
+          "repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 8px, transparent 8px, transparent 14px)",
         opacity: 0.45,
       }}
     />
@@ -52,33 +52,33 @@ function QldBadge() {
       style={{
         width: 148,
         height: 148,
-        borderRadius: '50%',
-        border: '2px solid #C9A84C',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
+        borderRadius: "50%",
+        border: "2px solid #C9A84C",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
         gap: 2,
         padding: 16,
-        textAlign: 'center',
-        position: 'relative',
+        textAlign: "center",
+        position: "relative",
       }}
     >
       <div
         style={{
-          position: 'absolute',
+          position: "absolute",
           inset: 6,
-          borderRadius: '50%',
-          border: '1px solid rgba(201,168,76,0.4)',
+          borderRadius: "50%",
+          border: "1px solid rgba(201,168,76,0.4)",
         }}
       />
       <span
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 7,
-          letterSpacing: '0.2em',
-          color: '#C9A84C',
-          textTransform: 'uppercase',
+          letterSpacing: "0.2em",
+          color: "#C9A84C",
+          textTransform: "uppercase",
           lineHeight: 1.3,
         }}
       >
@@ -86,11 +86,11 @@ function QldBadge() {
       </span>
       <span
         style={{
-          fontFamily: 'Georgia, serif',
-          fontStyle: 'italic',
+          fontFamily: "Georgia, serif",
+          fontStyle: "italic",
           fontWeight: 700,
           fontSize: 36,
-          color: '#C9A84C',
+          color: "#C9A84C",
           lineHeight: 1,
         }}
       >
@@ -98,11 +98,11 @@ function QldBadge() {
       </span>
       <span
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 6,
-          letterSpacing: '0.14em',
-          color: '#C9A84C',
-          textTransform: 'uppercase',
+          letterSpacing: "0.14em",
+          color: "#C9A84C",
+          textTransform: "uppercase",
           lineHeight: 1.4,
         }}
       >
@@ -112,11 +112,11 @@ function QldBadge() {
       </span>
       <span
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontWeight: 700,
           fontSize: 8,
-          color: '#C9A84C',
-          letterSpacing: '0.1em',
+          color: "#C9A84C",
+          letterSpacing: "0.1em",
         }}
       >
         2023
@@ -140,22 +140,22 @@ function RiverCTABox({
     <section
       className="cruise-section"
       style={{
-        background: 'var(--navy)',
-        padding: '72px 40px 0',
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
+        background: "var(--navy)",
+        padding: "72px 40px 0",
+        textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
       <svg
         aria-hidden="true"
         style={{
-          position: 'absolute',
+          position: "absolute",
           inset: 0,
-          width: '100%',
-          height: '100%',
+          width: "100%",
+          height: "100%",
           opacity: 0.06,
-          pointerEvents: 'none',
+          pointerEvents: "none",
         }}
         preserveAspectRatio="none"
         viewBox="0 0 1200 300"
@@ -173,18 +173,18 @@ function RiverCTABox({
           );
         })}
       </svg>
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div style={{ position: "relative", zIndex: 1 }}>
         <h2
           style={{
-            fontFamily: 'var(--font-body)',
-            color: 'var(--gold)',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
+            fontFamily: "var(--font-body)",
+            color: "var(--gold)",
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
             fontSize: 17,
             fontWeight: 700,
             marginBottom: description ? 24 : 44,
             maxWidth: 800,
-            margin: description ? '0 auto 24px' : '0 auto 44px',
+            margin: description ? "0 auto 24px" : "0 auto 44px",
           }}
         >
           {title}
@@ -192,12 +192,12 @@ function RiverCTABox({
         {description && (
           <p
             style={{
-              fontFamily: 'var(--font-body)',
+              fontFamily: "var(--font-body)",
               fontSize: 14,
-              color: 'rgba(245,240,232,0.78)',
+              color: "rgba(245,240,232,0.78)",
               lineHeight: 1.8,
               maxWidth: 700,
-              margin: '0 auto 44px',
+              margin: "0 auto 44px",
               fontWeight: 300,
             }}
           >
@@ -207,30 +207,30 @@ function RiverCTABox({
         <a
           href={bookHref}
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
+            display: "inline-flex",
+            alignItems: "center",
             gap: 10,
-            padding: '13px 44px',
-            border: '1px solid var(--gold)',
-            color: 'var(--gold)',
-            textDecoration: 'none',
-            fontFamily: 'var(--font-body)',
+            padding: "13px 44px",
+            border: "1px solid var(--gold)",
+            color: "var(--gold)",
+            textDecoration: "none",
+            fontFamily: "var(--font-body)",
             fontSize: 10,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
             fontWeight: 600,
             marginBottom: 44,
-            transition: 'background 0.25s, color 0.25s',
+            transition: "background 0.25s, color 0.25s",
           }}
           onMouseEnter={(e) => {
             const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = 'var(--gold)';
-            el.style.color = '#0A1628';
+            el.style.background = "var(--gold)";
+            el.style.color = "#0A1628";
           }}
           onMouseLeave={(e) => {
             const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = 'transparent';
-            el.style.color = 'var(--gold)';
+            el.style.background = "transparent";
+            el.style.color = "var(--gold)";
           }}
         >
           Buy Tickets &rarr;
@@ -248,7 +248,7 @@ function RiverCTABox({
 
 function SocialProof() {
   const Stars = () => (
-    <div style={{ display: 'flex', gap: 3 }}>
+    <div style={{ display: "flex", gap: 3 }}>
       {Array.from({ length: 5 }).map((_, i) => (
         <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#C9A84C">
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -261,32 +261,32 @@ function SocialProof() {
     <section
       className="cruise-section"
       style={{
-        background: 'var(--navy)',
-        padding: '60px 40px',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        background: "var(--navy)",
+        padding: "60px 40px",
+        borderTop: "1px solid rgba(201,168,76,0.08)",
       }}
     >
       <div
         style={{
           maxWidth: 700,
-          margin: '0 auto',
-          display: 'flex',
-          justifyContent: 'center',
+          margin: "0 auto",
+          display: "flex",
+          justifyContent: "center",
           gap: 80,
-          flexWrap: 'wrap',
+          flexWrap: "wrap",
         }}
       >
         {/* Facebook */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877F2">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
           </svg>
           <div>
             <div
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 12,
-                color: 'var(--cream)',
+                color: "var(--cream)",
                 fontWeight: 600,
                 marginBottom: 4,
               }}
@@ -296,11 +296,11 @@ function SocialProof() {
             <Stars />
             <div
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 10,
-                color: 'rgba(245,240,232,0.55)',
+                color: "rgba(245,240,232,0.55)",
                 marginTop: 3,
-                letterSpacing: '0.05em',
+                letterSpacing: "0.05em",
               }}
             >
               5.0 Stars · Based on 2,047 User Reviews
@@ -308,7 +308,7 @@ function SocialProof() {
           </div>
         </div>
         {/* Google */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <svg width="36" height="36" viewBox="0 0 24 24">
             <path
               fill="#4285F4"
@@ -330,9 +330,9 @@ function SocialProof() {
           <div>
             <div
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 12,
-                color: 'var(--cream)',
+                color: "var(--cream)",
                 fontWeight: 600,
                 marginBottom: 4,
               }}
@@ -342,11 +342,11 @@ function SocialProof() {
             <Stars />
             <div
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 10,
-                color: 'rgba(245,240,232,0.55)',
+                color: "rgba(245,240,232,0.55)",
                 marginTop: 3,
-                letterSpacing: '0.05em',
+                letterSpacing: "0.05em",
               }}
             >
               4.7 Stars · Based on 1,863 User Reviews
@@ -369,30 +369,30 @@ function EventDetails({
     <section
       className="cruise-section"
       style={{
-        background: 'var(--navy)',
-        padding: '60px 80px',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        background: "var(--navy)",
+        padding: "60px 80px",
+        borderTop: "1px solid rgba(201,168,76,0.08)",
       }}
     >
       <div
         className="cruise-page-split"
         style={{
           maxWidth: 1100,
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '20px 60px',
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "20px 60px",
         }}
       >
         {items.map((item) => (
           <div
             key={item.label}
             style={{
-              display: 'flex',
-              alignItems: 'flex-start',
+              display: "flex",
+              alignItems: "flex-start",
               gap: 14,
-              padding: '14px 0',
-              borderBottom: '1px solid rgba(201,168,76,0.1)',
+              padding: "14px 0",
+              borderBottom: "1px solid rgba(201,168,76,0.1)",
             }}
           >
             <svg
@@ -413,11 +413,11 @@ function EventDetails({
             <div>
               <div
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 9,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
                   fontWeight: 600,
                   marginBottom: 4,
                 }}
@@ -426,9 +426,9 @@ function EventDetails({
               </div>
               <div
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 13,
-                  color: 'rgba(245,240,232,0.82)',
+                  color: "rgba(245,240,232,0.82)",
                   lineHeight: 1.6,
                 }}
               >
@@ -449,20 +449,20 @@ function VesselCard() {
     <section
       className="cruise-section"
       style={{
-        background: 'var(--navy)',
-        padding: '0 80px 80px',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        background: "var(--navy)",
+        padding: "0 80px 80px",
+        borderTop: "1px solid rgba(201,168,76,0.08)",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', padding: '60px 0 40px' }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", padding: "60px 0 40px" }}>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
+              fontFamily: "var(--font-display)",
+              fontStyle: "italic",
               fontWeight: 300,
-              fontSize: 'clamp(24px, 3vw, 36px)',
-              color: 'var(--gold)',
+              fontSize: "clamp(24px, 3vw, 36px)",
+              color: "var(--gold)",
               lineHeight: 1.2,
             }}
           >
@@ -471,9 +471,9 @@ function VesselCard() {
         </div>
         <div
           style={{
-            background: 'var(--navy-mid)',
-            border: '1px solid rgba(201,168,76,0.18)',
-            overflow: 'hidden',
+            background: "var(--navy-mid)",
+            border: "1px solid rgba(201,168,76,0.18)",
+            overflow: "hidden",
           }}
         >
           {/* Vessel image */}
@@ -481,40 +481,40 @@ function VesselCard() {
             className="vessel-carousel-overlay"
             style={{
               height: 320,
-              backgroundImage: 'url(/mermaid-spirit-gold-coast)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              background: 'linear-gradient(135deg, #0d1f38 0%, #060f1c 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'relative',
+              backgroundImage: "url(/mermaid-spirit-gold-coast)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              background: "linear-gradient(135deg, #0d1f38 0%, #060f1c 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
             }}
           >
             <div
               style={{
-                position: 'absolute',
+                position: "absolute",
                 inset: 0,
-                backgroundImage: 'url(/mermaid-spirit-main.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundImage: "url(/mermaid-spirit-main.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 opacity: 0.6,
               }}
             />
             <div
               style={{
-                position: 'relative',
+                position: "relative",
                 zIndex: 1,
-                textAlign: 'center',
-                padding: '0 40px',
+                textAlign: "center",
+                padding: "0 40px",
               }}
             >
               <h3
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(22px, 3vw, 36px)',
-                  color: 'var(--cream)',
+                  fontSize: "clamp(22px, 3vw, 36px)",
+                  color: "var(--cream)",
                   marginBottom: 12,
                   lineHeight: 1.1,
                 }}
@@ -523,10 +523,10 @@ function VesselCard() {
               </h3>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 13,
-                  color: 'var(--gold)',
-                  letterSpacing: '0.1em',
+                  color: "var(--gold)",
+                  letterSpacing: "0.1em",
                   fontWeight: 600,
                 }}
               >
@@ -536,12 +536,12 @@ function VesselCard() {
           </div>
 
           {/* Card content */}
-          <div style={{ padding: '44px 52px' }}>
+          <div style={{ padding: "44px 52px" }}>
             <p
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 14,
-                color: 'rgba(245,240,232,0.72)',
+                color: "rgba(245,240,232,0.72)",
                 lineHeight: 1.8,
                 marginBottom: 36,
                 fontWeight: 300,
@@ -562,33 +562,33 @@ function VesselCard() {
             {/* Specs */}
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
                 gap: 2,
                 marginBottom: 36,
-                background: 'rgba(201,168,76,0.06)',
+                background: "rgba(201,168,76,0.06)",
               }}
             >
               {[
-                { label: 'PAX', value: '150 Guests' },
-                { label: 'SIZE', value: '30m (100ft)' },
+                { label: "PAX", value: "150 Guests" },
+                { label: "SIZE", value: "30m (100ft)" },
                 {
-                  label: 'FEATURES',
+                  label: "FEATURES",
                   value:
-                    'Dual Bars · 3 Spacious Decks · Dual Level Galley · Speakers Throughout · Epic Views!',
+                    "Dual Bars · 3 Spacious Decks · Dual Level Galley · Speakers Throughout · Epic Views!",
                 },
               ].map((spec) => (
                 <div
                   key={spec.label}
-                  style={{ background: 'var(--navy)', padding: '24px 28px' }}
+                  style={{ background: "var(--navy)", padding: "24px 28px" }}
                 >
                   <div
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 9,
-                      letterSpacing: '0.24em',
-                      textTransform: 'uppercase',
-                      color: 'var(--gold)',
+                      letterSpacing: "0.24em",
+                      textTransform: "uppercase",
+                      color: "var(--gold)",
                       fontWeight: 600,
                       marginBottom: 8,
                     }}
@@ -597,9 +597,9 @@ function VesselCard() {
                   </div>
                   <div
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 13,
-                      color: 'var(--cream)',
+                      color: "var(--cream)",
                       lineHeight: 1.6,
                     }}
                   >
@@ -609,29 +609,29 @@ function VesselCard() {
               ))}
             </div>
 
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: "center" }}>
               <a
                 href="#book"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   gap: 10,
-                  padding: '13px 44px',
-                  background: 'var(--gold)',
-                  color: '#0A1628',
-                  textDecoration: 'none',
-                  fontFamily: 'var(--font-body)',
+                  padding: "13px 44px",
+                  background: "var(--gold)",
+                  color: "#0A1628",
+                  textDecoration: "none",
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   fontWeight: 700,
-                  transition: 'opacity 0.2s',
+                  transition: "opacity 0.2s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = '0.85';
+                  (e.currentTarget as HTMLElement).style.opacity = "0.85";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = '1';
+                  (e.currentTarget as HTMLElement).style.opacity = "1";
                 }}
               >
                 Book Now!
@@ -647,17 +647,17 @@ function VesselCard() {
 // ── Details & Itinerary ───────────────────────────────────────────────────────
 
 const h3s: React.CSSProperties = {
-  fontFamily: 'var(--font-body)',
+  fontFamily: "var(--font-body)",
   fontSize: 14,
   fontWeight: 700,
-  color: 'var(--cream)',
+  color: "var(--cream)",
   marginBottom: 10,
   marginTop: 28,
 };
 const ps: React.CSSProperties = {
-  fontFamily: 'var(--font-body)',
+  fontFamily: "var(--font-body)",
   fontSize: 13,
-  color: 'rgba(245,240,232,0.72)',
+  color: "rgba(245,240,232,0.72)",
   lineHeight: 1.8,
   marginBottom: 10,
   fontWeight: 300,
@@ -665,33 +665,33 @@ const ps: React.CSSProperties = {
 
 function RiverfireDetailsSection() {
   const MENU = [
-    'Beef Arancini wrapped in Aged Prosciutto with a Horseradish and Onion Jam',
-    'Chicken Chardonnay Pie',
-    'Chicken Satay Skewer with a 3-Nut Crumble (GF)',
-    'Thick Vegetable Spring Rolls with a Plum Sauce (VG)',
-    'Roasted Sweet Potato and Pumpkin Arancini (GF, VG)',
-    'Oysters Kilpatrick (GF, DF)',
-    'Tempura Battered Tiger Prawn with a Black Caviar Aioli',
+    "Beef Arancini wrapped in Aged Prosciutto with a Horseradish and Onion Jam",
+    "Chicken Chardonnay Pie",
+    "Chicken Satay Skewer with a 3-Nut Crumble (GF)",
+    "Thick Vegetable Spring Rolls with a Plum Sauce (VG)",
+    "Roasted Sweet Potato and Pumpkin Arancini (GF, VG)",
+    "Oysters Kilpatrick (GF, DF)",
+    "Tempura Battered Tiger Prawn with a Black Caviar Aioli",
   ];
 
   return (
     <section
       className="cruise-section"
       style={{
-        background: 'var(--navy)',
-        padding: '0 80px 80px',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        background: "var(--navy)",
+        padding: "0 80px 80px",
+        borderTop: "1px solid rgba(201,168,76,0.08)",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', padding: '60px 0 48px' }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", padding: "60px 0 48px" }}>
           <h2
             style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
+              fontFamily: "var(--font-display)",
+              fontStyle: "italic",
               fontWeight: 300,
-              fontSize: 'clamp(24px, 3vw, 36px)',
-              color: 'var(--gold)',
+              fontSize: "clamp(24px, 3vw, 36px)",
+              color: "var(--gold)",
               lineHeight: 1.2,
             }}
           >
@@ -701,10 +701,10 @@ function RiverfireDetailsSection() {
 
         <div
           style={{
-            background: 'var(--navy-mid)',
-            border: '1px solid rgba(201,168,76,0.18)',
-            padding: '52px 56px',
-            position: 'relative',
+            background: "var(--navy-mid)",
+            border: "1px solid rgba(201,168,76,0.18)",
+            padding: "52px 56px",
+            position: "relative",
           }}
         >
           <h3 style={h3s}>Luxurious Tri-Deck Catamaran: Mermaid Spirit</h3>
@@ -736,16 +736,16 @@ function RiverfireDetailsSection() {
             wine, or a premium beer. As the evening progresses, treat your
             palate to a selection of gourmet canapés:
           </p>
-          <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none' }}>
+          <ul style={{ margin: "0 0 16px", padding: 0, listStyle: "none" }}>
             {MENU.map((item) => (
               <li
                 key={item}
                 style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
+                  display: "flex",
+                  alignItems: "flex-start",
                   gap: 12,
-                  padding: '6px 0',
-                  borderBottom: '1px solid rgba(201,168,76,0.06)',
+                  padding: "6px 0",
+                  borderBottom: "1px solid rgba(201,168,76,0.06)",
                 }}
               >
                 <svg
@@ -765,9 +765,9 @@ function RiverfireDetailsSection() {
                 </svg>
                 <span
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 13,
-                    color: 'rgba(245,240,232,0.72)',
+                    color: "rgba(245,240,232,0.72)",
                     lineHeight: 1.65,
                   }}
                 >
@@ -804,23 +804,23 @@ export default function RiverPage() {
       gsap.fromTo(
         bgRef.current,
         { scale: 1.08 },
-        { scale: 1, duration: 14, ease: 'none' },
+        { scale: 1, duration: 14, ease: "none" },
       );
-      gsap.from(textRef.current!.querySelectorAll('.hr'), {
+      gsap.from(textRef.current!.querySelectorAll(".hr"), {
         y: 30,
         opacity: 0,
         duration: 0.85,
         stagger: 0.1,
-        ease: 'power2.out',
+        ease: "power2.out",
         delay: 0.15,
       });
       gsap.to(bgRef.current, {
         yPercent: 25,
-        ease: 'none',
+        ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
+          start: "top top",
+          end: "bottom top",
           scrub: true,
         },
       });
@@ -841,26 +841,26 @@ export default function RiverPage() {
           ref={heroRef}
           className="relative overflow-hidden"
           style={{
-            minHeight: '100vh',
-            background: 'var(--navy)',
-            display: 'flex',
-            alignItems: 'flex-end',
+            minHeight: "100vh",
+            background: "var(--navy)",
+            display: "flex",
+            alignItems: "flex-end",
           }}
         >
           <div
             ref={bgRef}
             className="absolute inset-0 will-change-transform"
             style={{
-              backgroundImage: 'url(/Riverfire.jpg)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundImage: "url(/Riverfire.jpg)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(to right, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.6) 55%, rgba(10,22,40,0.22) 100%), linear-gradient(to top, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.08) 50%)',
+                "linear-gradient(to right, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.6) 55%, rgba(10,22,40,0.22) 100%), linear-gradient(to top, rgba(10,22,40,0.94) 0%, rgba(10,22,40,0.08) 50%)",
             }}
           />
 
@@ -881,12 +881,12 @@ export default function RiverPage() {
             <h1
               className="hr"
               style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: "var(--font-display)",
                 fontWeight: 300,
-                fontSize: 'clamp(48px, 7vw, 92px)',
+                fontSize: "clamp(48px, 7vw, 92px)",
                 lineHeight: 0.95,
-                letterSpacing: '-0.02em',
-                color: 'var(--cream)',
+                letterSpacing: "-0.02em",
+                color: "var(--cream)",
                 marginBottom: 28,
               }}
             >
@@ -896,34 +896,34 @@ export default function RiverPage() {
             <div
               className="hr"
               style={{
-                display: 'flex',
+                display: "flex",
                 gap: 10,
                 marginBottom: 36,
-                flexWrap: 'wrap',
+                flexWrap: "wrap",
               }}
             >
               <span
                 className="hero-gold-tag"
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  padding: '6px 16px',
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  padding: "6px 16px",
                   fontWeight: 700,
                 }}
               >
-                COST PER TICKET $349
+                COST PER TICKET $249
               </span>
               <span
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
-                  border: '1px solid rgba(201,168,76,0.5)',
-                  padding: '6px 16px',
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                  border: "1px solid rgba(201,168,76,0.5)",
+                  padding: "6px 16px",
                   fontWeight: 600,
                 }}
               >
@@ -935,23 +935,23 @@ export default function RiverPage() {
                 href="#book"
                 className="hero-gold-tag"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   gap: 10,
-                  padding: '14px 36px',
-                  textDecoration: 'none',
-                  fontFamily: 'var(--font-body)',
+                  padding: "14px 36px",
+                  textDecoration: "none",
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   fontWeight: 700,
-                  transition: 'opacity 0.2s',
+                  transition: "opacity 0.2s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = '0.85';
+                  (e.currentTarget as HTMLElement).style.opacity = "0.85";
                 }}
                 onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.opacity = '1';
+                  (e.currentTarget as HTMLElement).style.opacity = "1";
                 }}
               >
                 Buy Tickets &rarr;
@@ -981,12 +981,15 @@ export default function RiverPage() {
         {/* ── Event details ── */}
         <EventDetails
           items={[
-            { label: 'Date', value: '5th September 2026' },
-            { label: 'Pickup', value: 'New Farm Recreational Hub, New Farm QLD 4005' },
-            { label: 'Venue', value: 'Mermaid Spirit on the Brisbane River' },
+            { label: "Date", value: "5th September 2026" },
             {
-              label: 'Time',
-              value: 'Boarding 3:30pm | Departing 5:30pm | Returning 9:30pm',
+              label: "Pickup",
+              value: "New Farm Recreational Hub, New Farm QLD 4005",
+            },
+            { label: "Venue", value: "Mermaid Spirit on the Brisbane River" },
+            {
+              label: "Time",
+              value: "Boarding 3:00pm | Departing 3:30pm | Returning 8:30pm",
             },
           ]}
         />
@@ -1009,20 +1012,20 @@ export default function RiverPage() {
           id="book"
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid, #0d1f38)',
-            borderTop: '1px solid rgba(201,168,76,0.1)',
-            padding: '80px 48px 100px',
+            background: "var(--navy-mid, #0d1f38)",
+            borderTop: "1px solid rgba(201,168,76,0.1)",
+            padding: "80px 48px 100px",
           }}
         >
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: 48 }}>
               <div
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 9,
-                  letterSpacing: '0.28em',
-                  textTransform: 'uppercase',
-                  color: 'var(--gold)',
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
                   fontWeight: 600,
                   marginBottom: 16,
                 }}
@@ -1031,29 +1034,29 @@ export default function RiverPage() {
               </div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(32px, 4.5vw, 56px)',
+                  fontSize: "clamp(32px, 4.5vw, 56px)",
                   lineHeight: 1.0,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--cream)',
+                  letterSpacing: "-0.02em",
+                  color: "var(--cream)",
                   marginBottom: 16,
                 }}
               >
-                Reserve your{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
+                Reserve your{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold)" }}>
                   spot
                 </em>
                 .
               </h2>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 14,
-                  color: 'rgba(245,240,232,0.62)',
+                  color: "rgba(245,240,232,0.62)",
                   lineHeight: 1.75,
                   maxWidth: 520,
-                  margin: '0 auto',
+                  margin: "0 auto",
                   fontWeight: 300,
                 }}
               >
@@ -1063,8 +1066,8 @@ export default function RiverPage() {
             </div>
             <div
               style={{
-                border: '1px solid rgba(201,168,76,0.15)',
-                background: 'rgba(255,255,255,0.02)',
+                border: "1px solid rgba(201,168,76,0.15)",
+                background: "rgba(255,255,255,0.02)",
               }}
             >
               <iframe
@@ -1074,7 +1077,7 @@ export default function RiverPage() {
                 frameBorder="0"
                 className="rezdy"
                 src="https://boattimeyachtcharters.rezdy.com/595142/mermaid-spirit-brisbane-riverfire-2026?iframe=true"
-                style={{ display: 'block' }}
+                style={{ display: "block" }}
               />
             </div>
           </div>

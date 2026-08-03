@@ -292,8 +292,9 @@ export default function BuffetPage() {
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Dinner Cruise"
-          title="Sunset Twilight Buffet"
+          title="Gold Coast: Chef's Table Dinner"
           titleAccent="Flavours of Australia"
+          titleFontSize="clamp(36px, 5vw, 72px)"
           image="/sunset-twilight.png"
           stats={[
             { label: 'Duration', value: '2.5 hours' },

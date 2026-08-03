@@ -292,8 +292,8 @@ export default function LunchPage() {
         {/* 1 ── HERO */}
         <CruiseHero
           eyebrow="Cruise Tickets · Lunch Cruise"
-          title="Coastal Lunch Escape"
-          titleAccent="Gold Coast Daytime Dining Cruise"
+          title="Gold Coast: Chef's Table"
+          titleAccent="Flavours of Australia"
           image="/relaxed-lunch/relaxed_lunch_6.webp"
           stats={[
             { label: 'Duration', value: '2 hours' },
