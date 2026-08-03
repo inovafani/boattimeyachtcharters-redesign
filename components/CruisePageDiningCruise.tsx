@@ -688,7 +688,7 @@ export default function DiningCruisePage() {
           >
             <div style={{ position: 'relative' }}>
               <img
-                src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=700&q=80"
+                src="/chef-brandon.jpeg"
                 alt="Executive Chef Brendan Ward"
                 style={{
                   width: '100%',

@@ -1,56 +1,57 @@
-'use client';
+"use client";
 
-import Script from 'next/script';
-import Nav from './Nav';
-import Footer from './Footer';
-import { CruiseHero, CruiseGallery, CruiseItinerary } from './CruiseSections';
-import type { ReactNode } from 'react';
+import Script from "next/script";
+import Nav from "./Nav";
+import Footer from "./Footer";
+import { CruiseHero, CruiseGallery, CruiseItinerary } from "./CruiseSections";
+import type { ReactNode } from "react";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
 const GL: React.CSSProperties = {
-  fontFamily: 'var(--font-body)',
+  fontFamily: "var(--font-body)",
   fontSize: 9,
-  letterSpacing: '0.28em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--gold)',
+  letterSpacing: "0.28em",
+  textTransform: "uppercase" as const,
+  color: "var(--gold)",
   fontWeight: 600,
 };
 
-const GALLERY_MAIN = '/relaxed-lunch/relaxed_lunch_7.jpg';
+const GALLERY_MAIN = "/relaxed-lunch/mermaid4.jpg";
 const GALLERY_THUMBS = [
-  '/relaxed-lunch/relaxed_lunch_4.webp',
-  '/relaxed-lunch/relaxed_lunch_5.webp',
-  '/relaxed-lunch/relaxed_lunch_3.jpg',
-  '/relaxed-lunch/relaxed_lunch_6.webp',
+  "/relaxed-lunch/relaxed_lunch_4.webp",
+  "/relaxed-lunch/relaxed_lunch_5.webp",
+  "/relaxed-lunch/relaxed_lunch_7.jpeg",
+  "/relaxed-lunch/relaxed_lunch_8.jpeg",
+  "/relaxed-lunch/relaxed_lunch_6.webp",
 ];
 const GALLERY_WIDE =
-  'https://images.unsplash.com/photo-1548093237-8b67b5c8b5c1?w=2000&q=80';
+  "https://images.unsplash.com/photo-1548093237-8b67b5c8b5c1?w=2000&q=80";
 
 const MENU_SECTIONS = [
   {
-    heading: 'Cold',
+    heading: "Cold",
     items: [
-      'Local Queensland king prawns served with 1000 island dressing and fresh lemon wedges (gf)',
+      "Local Queensland king prawns served with 1000 island dressing and fresh lemon wedges (gf)",
       "Chef's Mango, lime and chilli mussels (gf, df)",
     ],
   },
   {
-    heading: 'Hot',
+    heading: "Hot",
     items: [
-      'Succulent Queensland Bangalow salt and pepper pork belly with a crackling crumble (gf, df)',
-      'Australian tender sovereign lamb served with a pan jus',
-      'Penne pasta with a rich tomato Napoli sauce infused with Barossa reserve red wine and wild spinach (vg, v)',
+      "Succulent Queensland Bangalow salt and pepper pork belly with a crackling crumble (gf, df)",
+      "Australian tender sovereign lamb served with a pan jus",
+      "Penne pasta with a rich tomato Napoli sauce infused with Barossa reserve red wine and wild spinach (vg, v)",
     ],
   },
   {
-    heading: 'Sides',
+    heading: "Sides",
     items: [
       "Tender potato salad with parsley, chives, shallots, salt, pepper, farmer's market mustard and whole egg mayonnaise (v,gf)",
-      'Roasted sweet potato and cauliflower tossed through cous cous with chickpeas, dried fruits and toasted sliced almonds',
-      'Dressed with house-made Moroccan inspired dressing (V,df)',
-      'Australian green Leaf salad with a green goddess dressing (v,vg, gf, df)',
-      'Assorted array of bakers warm bread rolls with butter',
+      "Roasted sweet potato and cauliflower tossed through cous cous with chickpeas, dried fruits and toasted sliced almonds",
+      "Dressed with house-made Moroccan inspired dressing (V,df)",
+      "Australian green Leaf salad with a green goddess dressing (v,vg, gf, df)",
+      "Assorted array of bakers warm bread rolls with butter",
     ],
   },
 ];
@@ -58,22 +59,22 @@ const MENU_SECTIONS = [
 const ITINERARY_INTRO: ReactNode = (
   <div
     style={{
-      fontFamily: 'var(--font-body)',
-      color: 'rgba(245,240,232,0.75)',
+      fontFamily: "var(--font-body)",
+      color: "rgba(245,240,232,0.75)",
       lineHeight: 1.9,
     }}
   >
     <p style={{ marginBottom: 20, fontSize: 15 }}>
       <span
         style={{
-          fontFamily: 'var(--font-display)',
+          fontFamily: "var(--font-display)",
           fontSize: 72,
-          float: 'left',
+          float: "left",
           lineHeight: 0.78,
-          color: 'var(--gold)',
+          color: "var(--gold)",
           marginRight: 10,
           marginTop: 6,
-          fontStyle: 'italic',
+          fontStyle: "italic",
         }}
       >
         A
@@ -82,36 +83,36 @@ const ITINERARY_INTRO: ReactNode = (
       waterways of the Gold Coast Broadwater. Australian produce, prepared with
       care, served with genuine warmth.
     </p>
-    <p style={{ fontSize: 14, clear: 'both', marginBottom: 28 }}>
-      <strong style={{ color: 'var(--cream)', fontWeight: 500 }}>
+    <p style={{ fontSize: 14, clear: "both", marginBottom: 28 }}>
+      <strong style={{ color: "var(--cream)", fontWeight: 500 }}>
         Flavours of Australia:
-      </strong>{' '}
+      </strong>{" "}
       Perfect for families, friends, or a relaxed midday escape. Spot dolphins,
       enjoy 360° panoramic views, and let a beautiful Broadwater afternoon do
       what it does best.
     </p>
     <div style={{ marginBottom: 28 }}>
       <div style={{ ...GL, marginBottom: 14 }}>Inclusions</div>
-      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+      <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
         {[
-          'Full Australian-inspired lunch — cold, hot, sides included',
-          'Beverage service including licensed bar',
-          'Scenic Broadwater cruise with 360° views',
-          'Wildlife spotting — dolphins, turtles & dugongs',
-          'Indoor & open-air outdoor seating',
+          "Full Australian-inspired lunch — cold, hot, sides included",
+          "Beverage service including licensed bar",
+          "Scenic Broadwater cruise with 360° views",
+          "Wildlife spotting — dolphins, turtles & dugongs",
+          "Indoor & open-air outdoor seating",
         ].map((item) => (
           <li
             key={item}
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 10,
-              alignItems: 'flex-start',
+              alignItems: "flex-start",
               fontSize: 13,
-              color: 'rgba(245,240,232,0.7)',
+              color: "rgba(245,240,232,0.7)",
               marginBottom: 10,
             }}
           >
-            <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 1 }}>
+            <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: 1 }}>
               ✓
             </span>
             {item}
@@ -121,23 +122,23 @@ const ITINERARY_INTRO: ReactNode = (
     </div>
     <div>
       <div style={{ ...GL, marginBottom: 14 }}>Optional Extras</div>
-      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+      <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
         {[
-          'Cocktail packages on request',
-          'Upgrade to premium seating on the top deck',
+          "Cocktail packages on request",
+          "Upgrade to premium seating on the top deck",
         ].map((item) => (
           <li
             key={item}
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 10,
-              alignItems: 'flex-start',
+              alignItems: "flex-start",
               fontSize: 13,
-              color: 'rgba(245,240,232,0.7)',
+              color: "rgba(245,240,232,0.7)",
               marginBottom: 10,
             }}
           >
-            <span style={{ color: 'var(--gold)', flexShrink: 0, marginTop: 1 }}>
+            <span style={{ color: "var(--gold)", flexShrink: 0, marginTop: 1 }}>
               —
             </span>
             {item}
@@ -150,13 +151,13 @@ const ITINERARY_INTRO: ReactNode = (
 
 const ITINERARY = [
   {
-    title: 'Schedule',
+    title: "Schedule",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
@@ -167,47 +168,47 @@ const ITINERARY = [
         <p style={{ marginBottom: 12 }}>
           Departs from Sea World Drive, Main Beach, Gold Coast.
         </p>
-        <p style={{ color: 'rgba(245,240,232,0.5)' }}>
+        <p style={{ color: "rgba(245,240,232,0.5)" }}>
           Operational Fridays, Saturdays and Sundays only.
         </p>
       </div>
     ),
   },
   {
-    title: 'Pricing',
+    title: "Pricing",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
         {[
-          { label: 'Adult', price: '$99', note: 'per person' },
-          { label: 'Child (3–12)', price: '$79', note: 'per child' },
-          { label: 'Family', price: '$349', note: '2 adults + 2 children' },
+          { label: "Adult", price: "$99", note: "per person" },
+          { label: "Child (3–12)", price: "$79", note: "per child" },
+          { label: "Family", price: "$349", note: "2 adults + 2 children" },
         ].map((p, i, arr) => (
           <div
             key={i}
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "baseline",
               paddingBottom: 12,
               marginBottom: 12,
               borderBottom:
-                i < arr.length - 1 ? '1px solid rgba(201,168,76,0.08)' : 'none',
+                i < arr.length - 1 ? "1px solid rgba(201,168,76,0.08)" : "none",
             }}
           >
             <div>
-              <span style={{ color: 'var(--cream)', fontWeight: 500 }}>
+              <span style={{ color: "var(--cream)", fontWeight: 500 }}>
                 {p.label}
               </span>
               <span
                 style={{
-                  color: 'rgba(245,240,232,0.45)',
+                  color: "rgba(245,240,232,0.45)",
                   fontSize: 12,
                   marginLeft: 8,
                 }}
@@ -217,9 +218,9 @@ const ITINERARY = [
             </div>
             <div
               style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: "var(--font-display)",
                 fontSize: 22,
-                color: 'var(--gold)',
+                color: "var(--gold)",
                 lineHeight: 1,
               }}
             >
@@ -231,13 +232,13 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Dietary & Accessibility',
+    title: "Dietary & Accessibility",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
@@ -253,13 +254,13 @@ const ITINERARY = [
     ),
   },
   {
-    title: 'Gift Voucher T&Cs',
+    title: "Gift Voucher T&Cs",
     content: (
       <div
         style={{
-          fontFamily: 'var(--font-body)',
+          fontFamily: "var(--font-body)",
           fontSize: 14,
-          color: 'rgba(245,240,232,0.7)',
+          color: "rgba(245,240,232,0.7)",
           lineHeight: 1.85,
         }}
       >
@@ -296,10 +297,10 @@ export default function LunchPage() {
           titleAccent="Flavours of Australia"
           image="/relaxed-lunch/relaxed_lunch_6.webp"
           stats={[
-            { label: 'Duration', value: '2 hours' },
-            { label: 'Adults from', value: '$99' },
-            { label: 'Departs', value: '12:00 PM' },
-            { label: 'Days', value: 'Fri Sat Sun' },
+            { label: "Duration", value: "2 hours" },
+            { label: "Adults from", value: "$99" },
+            { label: "Departs", value: "12:00 PM" },
+            { label: "Days", value: "Fri Sat Sun" },
           ]}
           bookingUrl="#book"
         />
@@ -308,20 +309,20 @@ export default function LunchPage() {
         <section
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '72px 48px',
-            borderBottom: '1px solid rgba(201,168,76,0.12)',
+            background: "var(--navy-mid)",
+            padding: "72px 48px",
+            borderBottom: "1px solid rgba(201,168,76,0.12)",
           }}
         >
-          <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ maxWidth: 860, margin: "0 auto", textAlign: "center" }}>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: "var(--font-display)",
                 fontWeight: 600,
-                fontSize: 'clamp(22px, 3vw, 34px)',
-                color: 'var(--gold-light)',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
+                fontSize: "clamp(22px, 3vw, 34px)",
+                color: "var(--gold-light)",
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
                 lineHeight: 1.2,
                 marginBottom: 24,
               }}
@@ -331,14 +332,14 @@ export default function LunchPage() {
             </h2>
             <p
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 15,
-                color: 'rgba(245,240,232,0.75)',
+                color: "rgba(245,240,232,0.75)",
                 lineHeight: 1.85,
                 marginBottom: 28,
                 maxWidth: 680,
-                marginLeft: 'auto',
-                marginRight: 'auto',
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
               Step aboard the Mermaid Spirit for a leisurely two-hour lunch
@@ -350,10 +351,10 @@ export default function LunchPage() {
             <div
               style={{
                 maxWidth: 620,
-                margin: '0 auto 32px',
-                textAlign: 'left',
-                display: 'flex',
-                flexDirection: 'column',
+                margin: "0 auto 32px",
+                textAlign: "left",
+                display: "flex",
+                flexDirection: "column",
                 gap: 16,
               }}
             >
@@ -361,17 +362,20 @@ export default function LunchPage() {
                 <div style={{ ...GL, marginBottom: 6 }}>The Experience</div>
                 <p
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 14,
-                    color: 'rgba(245,240,232,0.65)',
+                    color: "rgba(245,240,232,0.65)",
                     lineHeight: 1.75,
                   }}
                 >
-                  <strong style={{ color: 'rgba(245,240,232,0.85)' }}>
+                  <strong style={{ color: "rgba(245,240,232,0.85)" }}>
                     Boarding:
-                  </strong>{' '}
-                  Please arrive by 11:30 AM at Sea World Drive, Main Beach, Gold Coast.{' '}
-                  <strong style={{ color: 'rgba(245,240,232,0.85)' }}>Departure:</strong>{' '}
+                  </strong>{" "}
+                  Please arrive by 11:30 AM at Sea World Drive, Main Beach, Gold
+                  Coast.{" "}
+                  <strong style={{ color: "rgba(245,240,232,0.85)" }}>
+                    Departure:
+                  </strong>{" "}
                   12:00 PM sharp — late arrivals cannot be accommodated.
                 </p>
               </div>
@@ -379,9 +383,9 @@ export default function LunchPage() {
                 <div style={{ ...GL, marginBottom: 6 }}>What Awaits</div>
                 <p
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 14,
-                    color: 'rgba(245,240,232,0.65)',
+                    color: "rgba(245,240,232,0.65)",
                     lineHeight: 1.75,
                   }}
                 >
@@ -396,28 +400,28 @@ export default function LunchPage() {
 
             <div
               style={{
-                display: 'flex',
+                display: "flex",
                 gap: 12,
-                justifyContent: 'center',
-                flexWrap: 'wrap',
+                justifyContent: "center",
+                flexWrap: "wrap",
                 marginBottom: 32,
               }}
             >
               <a
                 href="#book"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   gap: 8,
-                  background: 'var(--gold)',
-                  color: 'var(--navy)',
-                  fontFamily: 'var(--font-body)',
+                  background: "var(--gold)",
+                  color: "var(--navy)",
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   fontWeight: 700,
-                  textDecoration: 'none',
-                  padding: '14px 28px',
+                  textDecoration: "none",
+                  padding: "14px 28px",
                 }}
               >
                 Buy Tickets
@@ -440,19 +444,19 @@ export default function LunchPage() {
               <a
                 href="#book"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   gap: 8,
-                  background: 'transparent',
-                  color: 'var(--gold)',
-                  border: '1px solid rgba(201,168,76,0.5)',
-                  fontFamily: 'var(--font-body)',
+                  background: "transparent",
+                  color: "var(--gold)",
+                  border: "1px solid rgba(201,168,76,0.5)",
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   fontWeight: 600,
-                  textDecoration: 'none',
-                  padding: '14px 28px',
+                  textDecoration: "none",
+                  padding: "14px 28px",
                 }}
               >
                 Gift Vouchers
@@ -484,7 +488,7 @@ export default function LunchPage() {
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
-              style={{ margin: '0 auto' }}
+              style={{ margin: "0 auto" }}
             >
               <circle cx="12" cy="5" r="3" />
               <line x1="12" y1="22" x2="12" y2="8" />
@@ -496,64 +500,64 @@ export default function LunchPage() {
         {/* 3 ── MERMAID SPIRIT OVERVIEW */}
         <section
           className="cruise-section"
-          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+          style={{ background: "var(--navy)", padding: "100px 48px" }}
         >
           <div
             className="cruise-page-split"
             style={{
               maxWidth: 1200,
-              margin: '0 auto',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
               gap: 80,
-              alignItems: 'start',
+              alignItems: "start",
             }}
           >
             {/* Left — image */}
             <div
               style={{
-                position: 'relative',
-                aspectRatio: '4/3',
-                overflow: 'hidden',
+                position: "relative",
+                aspectRatio: "4/3",
+                overflow: "hidden",
               }}
             >
               <img
                 src="/relaxed-lunch/relaxed_lunch_2.webp"
                 alt="Relaxed lunch cruise on the Mermaid Spirit"
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
                 }}
               />
               <div
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   top: 24,
                   right: 24,
                   width: 96,
                   height: 96,
-                  borderRadius: '50%',
-                  background: 'var(--gold)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center',
+                  borderRadius: "50%",
+                  background: "var(--gold)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
                   padding: 12,
-                  boxShadow: '0 8px 32px rgba(201,168,76,0.35)',
+                  boxShadow: "0 8px 32px rgba(201,168,76,0.35)",
                 }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: "var(--font-display)",
                     fontSize: 11,
                     fontWeight: 700,
-                    color: 'var(--navy)',
-                    letterSpacing: '0.05em',
+                    color: "var(--navy)",
+                    letterSpacing: "0.05em",
                     lineHeight: 1.2,
-                    textTransform: 'uppercase',
+                    textTransform: "uppercase",
                   }}
                 >
                   Best of
@@ -570,26 +574,26 @@ export default function LunchPage() {
               <div style={{ ...GL, marginBottom: 20 }}>Mermaid Spirit</div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(28px, 3.5vw, 48px)',
+                  fontSize: "clamp(28px, 3.5vw, 48px)",
                   lineHeight: 1.05,
-                  letterSpacing: '-0.01em',
-                  color: 'var(--cream)',
+                  letterSpacing: "-0.01em",
+                  color: "var(--cream)",
                   marginBottom: 24,
                 }}
               >
-                A Leisurely Escape on{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                A Leisurely Escape on{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   the Broadwater
                 </em>
               </h2>
 
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
-                  color: 'rgba(245,240,232,0.72)',
+                  color: "rgba(245,240,232,0.72)",
                   lineHeight: 1.85,
                   marginBottom: 32,
                 }}
@@ -601,7 +605,7 @@ export default function LunchPage() {
 
               <div
                 style={{
-                  borderLeft: '2px solid var(--gold)',
+                  borderLeft: "2px solid var(--gold)",
                   paddingLeft: 24,
                   marginBottom: 36,
                 }}
@@ -611,9 +615,9 @@ export default function LunchPage() {
                 </div>
                 <p
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 14,
-                    color: 'rgba(245,240,232,0.65)',
+                    color: "rgba(245,240,232,0.65)",
                     lineHeight: 1.8,
                   }}
                 >
@@ -627,26 +631,26 @@ export default function LunchPage() {
               <div
                 className="vessel-specs-grid"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
                   gap: 16,
                   paddingTop: 28,
-                  borderTop: '1px solid rgba(201,168,76,0.12)',
+                  borderTop: "1px solid rgba(201,168,76,0.12)",
                 }}
               >
                 {[
-                  { label: 'Vessel', value: 'Mermaid Spirit' },
-                  { label: 'Capacity', value: 'Up to 150 guests' },
-                  { label: 'Type', value: 'Tri-deck catamaran' },
-                  { label: 'Length', value: '30m (100ft)' },
+                  { label: "Vessel", value: "Mermaid Spirit" },
+                  { label: "Capacity", value: "Up to 150 guests" },
+                  { label: "Type", value: "Tri-deck catamaran" },
+                  { label: "Length", value: "30m (100ft)" },
                 ].map((s) => (
                   <div key={s.label}>
                     <div style={{ ...GL, marginBottom: 4 }}>{s.label}</div>
                     <div
                       style={{
-                        fontFamily: 'var(--font-body)',
+                        fontFamily: "var(--font-body)",
                         fontSize: 13,
-                        color: 'rgba(245,240,232,0.75)',
+                        color: "rgba(245,240,232,0.75)",
                       }}
                     >
                       {s.value}
@@ -669,51 +673,51 @@ export default function LunchPage() {
         <section
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '100px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.08)',
+            background: "var(--navy-mid)",
+            padding: "100px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.08)",
           }}
         >
           <div
             className="cruise-page-split"
             style={{
               maxWidth: 1200,
-              margin: '0 auto',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1.6fr',
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "1fr 1.6fr",
               gap: 80,
-              alignItems: 'start',
+              alignItems: "start",
             }}
           >
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: "relative" }}>
               <img
-                src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=700&q=80"
+                src="/chef-brandon.jpeg"
                 alt="Executive Chef Brendan Ward"
                 style={{
-                  width: '100%',
-                  aspectRatio: '3/4',
-                  objectFit: 'cover',
-                  display: 'block',
+                  width: "100%",
+                  aspectRatio: "3/4",
+                  objectFit: "cover",
+                  display: "block",
                 }}
               />
               <div
                 style={{
-                  position: 'absolute',
+                  position: "absolute",
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  padding: '48px 32px 32px',
+                  padding: "48px 32px 32px",
                   background:
-                    'linear-gradient(to top, rgba(10,22,40,0.95) 0%, transparent 100%)',
+                    "linear-gradient(to top, rgba(10,22,40,0.95) 0%, transparent 100%)",
                 }}
               >
                 <div style={{ ...GL, marginBottom: 6 }}>Executive Chef</div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: "var(--font-display)",
                     fontSize: 24,
                     fontWeight: 300,
-                    color: 'var(--cream)',
+                    color: "var(--cream)",
                     lineHeight: 1.1,
                   }}
                 >
@@ -726,26 +730,26 @@ export default function LunchPage() {
               <div style={{ ...GL, marginBottom: 20 }}>Meet the Chef</div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(28px, 3.5vw, 48px)',
+                  fontSize: "clamp(28px, 3.5vw, 48px)",
                   lineHeight: 1.05,
-                  letterSpacing: '-0.01em',
-                  color: 'var(--cream)',
+                  letterSpacing: "-0.01em",
+                  color: "var(--cream)",
                   marginBottom: 28,
                 }}
               >
-                Chef{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                Chef{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   Brendan Ward
                 </em>
               </h2>
 
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
-                  color: 'rgba(245,240,232,0.72)',
+                  color: "rgba(245,240,232,0.72)",
                   lineHeight: 1.9,
                   marginBottom: 24,
                 }}
@@ -758,9 +762,9 @@ export default function LunchPage() {
 
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 14,
-                  color: 'rgba(245,240,232,0.58)',
+                  color: "rgba(245,240,232,0.58)",
                   lineHeight: 1.85,
                   marginBottom: 36,
                 }}
@@ -775,28 +779,28 @@ export default function LunchPage() {
 
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 16,
                   paddingTop: 28,
-                  borderTop: '1px solid rgba(201,168,76,0.15)',
+                  borderTop: "1px solid rgba(201,168,76,0.15)",
                 }}
               >
                 <div
                   style={{
                     width: 40,
                     height: 1,
-                    background: 'var(--gold)',
+                    background: "var(--gold)",
                     flexShrink: 0,
                   }}
                 />
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 10,
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: 'var(--gold)',
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
                     fontWeight: 600,
                   }}
                 >
@@ -811,40 +815,40 @@ export default function LunchPage() {
         <div
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '28px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.1)',
-            borderBottom: '1px solid rgba(201,168,76,0.1)',
+            background: "var(--navy-mid)",
+            padding: "28px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.1)",
+            borderBottom: "1px solid rgba(201,168,76,0.1)",
           }}
         >
           <div
             style={{
               maxWidth: 1200,
-              margin: '0 auto',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              margin: "0 auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               gap: 64,
-              flexWrap: 'wrap',
+              flexWrap: "wrap",
             }}
           >
             {[
               {
-                platform: 'Facebook',
-                score: '5.0',
-                reviews: '2,047 reviews',
+                platform: "Facebook",
+                score: "5.0",
+                reviews: "2,047 reviews",
                 stars: 5,
               },
               {
-                platform: 'Google',
-                score: '4.7',
-                reviews: '1,863 reviews',
+                platform: "Google",
+                score: "4.7",
+                reviews: "1,863 reviews",
                 stars: 5,
               },
             ].map((r) => (
               <div
                 key={r.platform}
-                style={{ display: 'flex', alignItems: 'center', gap: 14 }}
+                style={{ display: "flex", alignItems: "center", gap: 14 }}
               >
                 <div>
                   <div style={{ ...GL, marginBottom: 4 }}>
@@ -852,27 +856,27 @@ export default function LunchPage() {
                   </div>
                   <div
                     style={{
-                      fontFamily: 'var(--font-body)',
+                      fontFamily: "var(--font-body)",
                       fontSize: 10,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                      color: 'rgba(245,240,232,0.45)',
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      color: "rgba(245,240,232,0.45)",
                       marginBottom: 6,
                     }}
                   >
                     {r.platform}
                   </div>
                   <div
-                    style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+                    style={{ display: "flex", alignItems: "center", gap: 8 }}
                   >
-                    <span style={{ color: 'var(--gold)', fontSize: 13 }}>
-                      {'★'.repeat(r.stars)}
+                    <span style={{ color: "var(--gold)", fontSize: 13 }}>
+                      {"★".repeat(r.stars)}
                     </span>
                     <span
                       style={{
-                        fontFamily: 'var(--font-display)',
+                        fontFamily: "var(--font-display)",
                         fontSize: 18,
-                        color: 'var(--cream)',
+                        color: "var(--cream)",
                         lineHeight: 1,
                       }}
                     >
@@ -880,10 +884,10 @@ export default function LunchPage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: 'var(--font-body)',
+                        fontFamily: "var(--font-body)",
                         fontSize: 10,
-                        color: 'rgba(245,240,232,0.45)',
-                        letterSpacing: '0.06em',
+                        color: "rgba(245,240,232,0.45)",
+                        letterSpacing: "0.06em",
                       }}
                     >
                       {r.reviews}
@@ -898,28 +902,28 @@ export default function LunchPage() {
         {/* 7 ── MIDDAY ON THE WATER */}
         <section
           className="cruise-section"
-          style={{ background: 'var(--navy)', padding: '100px 48px' }}
+          style={{ background: "var(--navy)", padding: "100px 48px" }}
         >
-          <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <p
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 16,
-                color: 'rgba(245,240,232,0.75)',
+                color: "rgba(245,240,232,0.75)",
                 lineHeight: 1.9,
                 marginBottom: 20,
               }}
             >
               <span
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontSize: 72,
-                  float: 'left',
+                  float: "left",
                   lineHeight: 0.78,
-                  color: 'var(--gold)',
+                  color: "var(--gold)",
                   marginRight: 10,
                   marginTop: 6,
-                  fontStyle: 'italic',
+                  fontStyle: "italic",
                 }}
               >
                 S
@@ -933,12 +937,12 @@ export default function LunchPage() {
 
             <p
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 15,
-                color: 'rgba(245,240,232,0.62)',
+                color: "rgba(245,240,232,0.62)",
                 lineHeight: 1.85,
                 marginBottom: 40,
-                clear: 'both',
+                clear: "both",
               }}
             >
               With a return to the dock at 2:00 PM, you&apos;ll step ashore
@@ -951,18 +955,18 @@ export default function LunchPage() {
             <a
               href="#book"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
+                display: "inline-flex",
+                alignItems: "center",
                 gap: 8,
-                background: 'var(--gold)',
-                color: 'var(--navy)',
-                fontFamily: 'var(--font-body)',
+                background: "var(--gold)",
+                color: "var(--navy)",
+                fontFamily: "var(--font-body)",
                 fontSize: 10,
-                letterSpacing: '0.22em',
-                textTransform: 'uppercase',
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
                 fontWeight: 700,
-                textDecoration: 'none',
-                padding: '14px 32px',
+                textDecoration: "none",
+                padding: "14px 32px",
               }}
             >
               Buy Tickets
@@ -989,64 +993,64 @@ export default function LunchPage() {
         <section
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            padding: '100px 48px',
-            borderTop: '1px solid rgba(201,168,76,0.08)',
+            background: "var(--navy-mid)",
+            padding: "100px 48px",
+            borderTop: "1px solid rgba(201,168,76,0.08)",
           }}
         >
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <div style={{ textAlign: "center", marginBottom: 64 }}>
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   marginBottom: 20,
                 }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 10,
-                    letterSpacing: '0.3em',
-                    textTransform: 'uppercase',
-                    color: 'var(--gold)',
+                    letterSpacing: "0.3em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
                     fontWeight: 500,
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     gap: 14,
                   }}
                 >
                   <span
                     style={{
-                      display: 'block',
+                      display: "block",
                       width: 32,
                       height: 1,
-                      background: 'var(--gold)',
+                      background: "var(--gold)",
                     }}
                   />
                   Flavours of Australia
                   <span
                     style={{
-                      display: 'block',
+                      display: "block",
                       width: 32,
                       height: 1,
-                      background: 'var(--gold)',
+                      background: "var(--gold)",
                     }}
                   />
                 </div>
               </div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(32px, 4vw, 52px)',
+                  fontSize: "clamp(32px, 4vw, 52px)",
                   lineHeight: 1.05,
-                  color: 'var(--cream)',
-                  letterSpacing: '-0.02em',
+                  color: "var(--cream)",
+                  letterSpacing: "-0.02em",
                 }}
               >
-                The{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                The{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   Lunch Menu
                 </em>
               </h2>
@@ -1056,26 +1060,26 @@ export default function LunchPage() {
             <div
               className="cruise-menu-card-inner"
               style={{
-                border: '1px solid rgba(201,168,76,0.2)',
-                background: 'rgba(255,255,255,0.02)',
-                padding: '60px 72px',
-                position: 'relative',
+                border: "1px solid rgba(201,168,76,0.2)",
+                background: "rgba(255,255,255,0.02)",
+                padding: "60px 72px",
+                position: "relative",
               }}
             >
               <div
                 style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
                   opacity: 0.04,
                   fontSize: 120,
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 700,
-                  color: 'var(--gold)',
-                  pointerEvents: 'none',
-                  whiteSpace: 'nowrap',
-                  userSelect: 'none',
+                  color: "var(--gold)",
+                  pointerEvents: "none",
+                  whiteSpace: "nowrap",
+                  userSelect: "none",
                 }}
               >
                 boattime
@@ -1083,20 +1087,20 @@ export default function LunchPage() {
 
               <div
                 style={{
-                  textAlign: 'center',
+                  textAlign: "center",
                   marginBottom: 48,
                   paddingBottom: 40,
-                  borderBottom: '1px solid rgba(201,168,76,0.15)',
+                  borderBottom: "1px solid rgba(201,168,76,0.15)",
                 }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-display)',
+                    fontFamily: "var(--font-display)",
                     fontSize: 28,
                     fontWeight: 600,
-                    letterSpacing: '0.12em',
-                    color: 'var(--gold)',
-                    textTransform: 'lowercase',
+                    letterSpacing: "0.12em",
+                    color: "var(--gold)",
+                    textTransform: "lowercase",
                     marginBottom: 8,
                   }}
                 >
@@ -1104,11 +1108,11 @@ export default function LunchPage() {
                 </div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 9,
-                    letterSpacing: '0.35em',
-                    textTransform: 'uppercase',
-                    color: 'rgba(201,168,76,0.5)',
+                    letterSpacing: "0.35em",
+                    textTransform: "uppercase",
+                    color: "rgba(201,168,76,0.5)",
                     fontWeight: 500,
                   }}
                 >
@@ -1116,15 +1120,15 @@ export default function LunchPage() {
                 </div>
               </div>
 
-              <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <div style={{ textAlign: "center", marginBottom: 48 }}>
                 <div
                   style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(36px, 5vw, 60px)',
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(36px, 5vw, 60px)",
                     fontWeight: 300,
-                    color: 'var(--cream)',
+                    color: "var(--cream)",
                     lineHeight: 1,
-                    letterSpacing: '-0.02em',
+                    letterSpacing: "-0.02em",
                     marginBottom: 10,
                   }}
                 >
@@ -1132,11 +1136,11 @@ export default function LunchPage() {
                 </div>
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 9,
-                    letterSpacing: '0.35em',
-                    textTransform: 'uppercase',
-                    color: 'var(--gold)',
+                    letterSpacing: "0.35em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
                     fontWeight: 600,
                   }}
                 >
@@ -1147,8 +1151,8 @@ export default function LunchPage() {
               <div
                 className="cruise-page-menu-cols"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
                   gap: 40,
                 }}
               >
@@ -1159,29 +1163,29 @@ export default function LunchPage() {
                         ...GL,
                         marginBottom: 20,
                         paddingBottom: 12,
-                        borderBottom: '1px solid rgba(201,168,76,0.15)',
+                        borderBottom: "1px solid rgba(201,168,76,0.15)",
                       }}
                     >
                       {section.heading}
                     </div>
-                    <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                    <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
                       {section.items.map((item) => (
                         <li
                           key={item}
                           style={{
-                            fontFamily: 'var(--font-body)',
+                            fontFamily: "var(--font-body)",
                             fontSize: 13,
-                            color: 'rgba(245,240,232,0.72)',
+                            color: "rgba(245,240,232,0.72)",
                             lineHeight: 1.7,
                             marginBottom: 10,
-                            display: 'flex',
+                            display: "flex",
                             gap: 10,
-                            alignItems: 'flex-start',
+                            alignItems: "flex-start",
                           }}
                         >
                           <span
                             style={{
-                              color: 'var(--gold)',
+                              color: "var(--gold)",
                               flexShrink: 0,
                               fontSize: 11,
                               marginTop: 2,
@@ -1201,8 +1205,8 @@ export default function LunchPage() {
                 style={{
                   marginTop: 48,
                   paddingTop: 40,
-                  borderTop: '1px solid rgba(201,168,76,0.12)',
-                  textAlign: 'center',
+                  borderTop: "1px solid rgba(201,168,76,0.12)",
+                  textAlign: "center",
                 }}
               >
                 <svg
@@ -1215,7 +1219,7 @@ export default function LunchPage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"
-                  style={{ margin: '0 auto 12px' }}
+                  style={{ margin: "0 auto 12px" }}
                 >
                   <circle cx="12" cy="5" r="3" />
                   <line x1="12" y1="22" x2="12" y2="8" />
@@ -1223,11 +1227,11 @@ export default function LunchPage() {
                 </svg>
                 <div
                   style={{
-                    fontFamily: 'var(--font-body)',
+                    fontFamily: "var(--font-body)",
                     fontSize: 9,
-                    letterSpacing: '0.28em',
-                    textTransform: 'uppercase',
-                    color: 'rgba(201,168,76,0.4)',
+                    letterSpacing: "0.28em",
+                    textTransform: "uppercase",
+                    color: "rgba(201,168,76,0.4)",
                     fontWeight: 500,
                   }}
                 >
@@ -1245,12 +1249,12 @@ export default function LunchPage() {
         <section
           className="cruise-section"
           style={{
-            background: 'var(--gold)',
-            padding: '72px 48px',
-            textAlign: 'center',
+            background: "var(--gold)",
+            padding: "72px 48px",
+            textAlign: "center",
           }}
         >
-          <div style={{ maxWidth: 680, margin: '0 auto' }}>
+          <div style={{ maxWidth: 680, margin: "0 auto" }}>
             <svg
               width="40"
               height="40"
@@ -1269,12 +1273,12 @@ export default function LunchPage() {
             </svg>
             <h2
               style={{
-                fontFamily: 'var(--font-display)',
+                fontFamily: "var(--font-display)",
                 fontWeight: 600,
-                fontSize: 'clamp(24px, 3.5vw, 40px)',
-                color: 'var(--navy)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.04em',
+                fontSize: "clamp(24px, 3.5vw, 40px)",
+                color: "var(--navy)",
+                textTransform: "uppercase",
+                letterSpacing: "0.04em",
                 lineHeight: 1.15,
                 marginBottom: 16,
               }}
@@ -1283,11 +1287,11 @@ export default function LunchPage() {
             </h2>
             <p
               style={{
-                fontFamily: 'var(--font-body)',
+                fontFamily: "var(--font-body)",
                 fontSize: 12,
-                color: 'rgba(10,22,40,0.65)',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
+                color: "rgba(10,22,40,0.65)",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
                 marginBottom: 32,
               }}
             >
@@ -1295,27 +1299,27 @@ export default function LunchPage() {
             </p>
             <div
               style={{
-                display: 'flex',
+                display: "flex",
                 gap: 12,
-                justifyContent: 'center',
-                flexWrap: 'wrap',
+                justifyContent: "center",
+                flexWrap: "wrap",
               }}
             >
               <a
                 href="#book"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   gap: 8,
-                  background: 'var(--navy)',
-                  color: 'var(--cream)',
-                  fontFamily: 'var(--font-body)',
+                  background: "var(--navy)",
+                  color: "var(--cream)",
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   fontWeight: 600,
-                  textDecoration: 'none',
-                  padding: '14px 28px',
+                  textDecoration: "none",
+                  padding: "14px 28px",
                 }}
               >
                 Buy Tickets
@@ -1338,19 +1342,19 @@ export default function LunchPage() {
               <a
                 href="#book"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   gap: 8,
-                  background: 'transparent',
-                  color: 'var(--navy)',
-                  border: '1px solid rgba(10,22,40,0.4)',
-                  fontFamily: 'var(--font-body)',
+                  background: "transparent",
+                  color: "var(--navy)",
+                  border: "1px solid rgba(10,22,40,0.4)",
+                  fontFamily: "var(--font-body)",
                   fontSize: 10,
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
                   fontWeight: 600,
-                  textDecoration: 'none',
-                  padding: '14px 28px',
+                  textDecoration: "none",
+                  padding: "14px 28px",
                 }}
               >
                 Gift Vouchers
@@ -1379,44 +1383,44 @@ export default function LunchPage() {
           id="book"
           className="cruise-section"
           style={{
-            background: 'var(--navy-mid)',
-            borderTop: '1px solid var(--border-subtle)',
-            padding: '80px 48px 100px',
+            background: "var(--navy-mid)",
+            borderTop: "1px solid var(--border-subtle)",
+            padding: "80px 48px 100px",
           }}
         >
-          <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-            <div style={{ marginBottom: 48, textAlign: 'center' }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+            <div style={{ marginBottom: 48, textAlign: "center" }}>
               <div
                 className="section-eyebrow"
-                style={{ justifyContent: 'center' }}
+                style={{ justifyContent: "center" }}
               >
                 Book Your Session
               </div>
               <h2
                 style={{
-                  fontFamily: 'var(--font-display)',
+                  fontFamily: "var(--font-display)",
                   fontWeight: 300,
-                  fontSize: 'clamp(36px, 5vw, 60px)',
+                  fontSize: "clamp(36px, 5vw, 60px)",
                   lineHeight: 1.0,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--cream)',
+                  letterSpacing: "-0.02em",
+                  color: "var(--cream)",
                   marginBottom: 16,
                 }}
               >
-                Reserve your{' '}
-                <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>
+                Reserve your{" "}
+                <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>
                   spot
                 </em>
                 .
               </h2>
               <p
                 style={{
-                  fontFamily: 'var(--font-body)',
+                  fontFamily: "var(--font-body)",
                   fontSize: 15,
-                  color: 'var(--text-muted)',
+                  color: "var(--text-muted)",
                   lineHeight: 1.75,
                   maxWidth: 520,
-                  margin: '0 auto',
+                  margin: "0 auto",
                 }}
               >
                 Fridays, Saturdays, and Sundays at noon year-round. Instant
@@ -1426,8 +1430,8 @@ export default function LunchPage() {
 
             <div
               style={{
-                border: '1px solid var(--border-subtle)',
-                background: 'rgba(255,255,255,0.02)',
+                border: "1px solid var(--border-subtle)",
+                background: "rgba(255,255,255,0.02)",
               }}
             >
               <iframe
@@ -1437,7 +1441,7 @@ export default function LunchPage() {
                 frameBorder="0"
                 className="rezdy"
                 src="https://boattimeyachtcharters.rezdy.com/730190/relaxed-lunch-cruise-flavors-of-australia-aboard-the-mermaid-spirit?iframe=true"
-                style={{ display: 'block' }}
+                style={{ display: "block" }}
               />
             </div>
           </div>
