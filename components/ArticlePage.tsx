@@ -23,6 +23,7 @@ interface Post {
   categories: string[];
   published_at: string | null;
   created_at: string;
+  updated_at?: string | null;
   reading_time?: number;
   author?: string;
   related_products?: string[];
@@ -170,6 +171,11 @@ function ArticleHero({ post }: { post: Post }) {
     });
   }, { scope: heroRef });
 
+  // Only show "Updated" once a real edit happened after it first went live
+  const publishedOn = post.published_at ?? post.created_at;
+  const showUpdated =
+    !!post.updated_at && new Date(post.updated_at).getTime() > new Date(publishedOn).getTime() + 60_000;
+
   return (
     <section ref={heroRef} className="relative overflow-hidden flex items-end" style={{ minHeight: '65vh', background: 'var(--navy)' }}>
       <div ref={bgRef} className="absolute inset-0 will-change-transform" style={{ backgroundImage: `url(${post.image_url || FALLBACK_IMG})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
@@ -191,6 +197,9 @@ function ArticleHero({ post }: { post: Post }) {
         </h1>
         <div className="hr" style={{ display: 'flex', alignItems: 'center', gap: 16, fontFamily: 'var(--font-body)', fontSize: 11, color: 'rgba(245,240,232,0.55)', letterSpacing: '0.12em' }}>
           <span>{fmtDate(post.published_at ?? post.created_at)}</span>
+          {showUpdated ? (
+            <><span style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.3)' }} /><span>Updated {fmtDate(post.updated_at)}</span></>
+          ) : null}
           {post.reading_time && post.reading_time > 0 ? (
             <><span style={{ width: 1, height: 12, background: 'rgba(201,168,76,0.3)' }} /><span>{post.reading_time} min read</span></>
           ) : null}

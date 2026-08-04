@@ -12,7 +12,13 @@ interface Post {
   published: boolean;
   published_at: string | null;
   created_at: string;
+  updated_at: string | null;
   views: number;
+}
+
+function fmtShort(iso: string | null | undefined) {
+  if (!iso) return null;
+  return new Date(iso).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
 export default function AdminNewsList() {
@@ -52,7 +58,8 @@ export default function AdminNewsList() {
       .from('posts')
       .update({
         published: nowPublished,
-        published_at: nowPublished ? new Date().toISOString() : null,
+        // Keep the original go-live date — un-publishing must not erase it
+        published_at: nowPublished ? (post.published_at || new Date().toISOString()) : post.published_at,
       })
       .eq('id', post.id);
 
@@ -268,11 +275,10 @@ export default function AdminNewsList() {
                       color: 'var(--text-muted)',
                     }}
                   >
-                    {new Date(post.created_at).toLocaleDateString('en-AU', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric',
-                    })}
+                    {post.published_at
+                      ? `Published ${fmtShort(post.published_at)}`
+                      : `Created ${fmtShort(post.created_at)}`}
+                    {post.updated_at ? ` · Last edited ${fmtShort(post.updated_at)}` : ''}
                   </div>
                 </div>
 

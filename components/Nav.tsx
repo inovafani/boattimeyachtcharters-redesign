@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useTheme } from './ThemeProvider';
+import { EXPERIENCE_PRODUCTS as EXPERIENCE_ITEMS, CHARTER_PRODUCTS as CHARTER_ITEMS } from '@/lib/products';
 
 function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
   if (!href.startsWith('/#')) return;
@@ -19,25 +20,6 @@ function handleHashNav(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     window.location.href = '/';
   }
 }
-
-const EXPERIENCE_ITEMS = [
-  { label: 'Gold Coast Whale Escape', sub: 'Luxury Whale Watching', href: '/cruise-tickets-luxury-whale-watching' },
-  { label: 'Twilight Drift', sub: 'Broadwater Sunset Tour', href: '/luxury-broadwater-cruise' },
-  { label: "Chef's Table – Flavours of Australia", sub: 'Lunch Cruise', href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit' },
-  { label: "Chef's Table Dinner – Flavours of Australia", sub: 'Dinner Cruise', href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit' },
-  { label: 'Riverfire 2026', sub: 'Brisbane Event', href: '/riverfire-2026' },
-  { label: "New Year's Eve 2026", sub: 'Celebration Cruise', href: '/nye-2026' },
-  { label: "Valentine's Day", sub: 'Romance Evening', href: '/valentines-day' },
-  { label: 'Gold Coast Helitours', sub: 'Sky to Sea Partnership', href: '/humpbackhelitours' },
-];
-
-const CHARTER_ITEMS = [
-  { label: 'Private Yacht Charter', sub: 'Tailored experiences', href: '/private-yacht-charter' },
-  { label: 'Corporate Charter', sub: 'Team & client events', href: '/corporate-yacht-charter' },
-  { label: 'Wedding Yacht Charter', sub: 'Celebrate in style', href: '/wedding-yacht-charter' },
-  { label: 'Buffet Dinner & Lunch Cruise', sub: 'Flavours of Australia', href: '/buffet-dinner-and-lunch-cruise' },
-  { label: 'Catering & Menus', sub: 'Menus & packages', href: '/yacht-charter-menus' },
-];
 
 export default function Nav() {
   const { theme, toggle } = useTheme();

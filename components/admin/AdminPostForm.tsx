@@ -36,7 +36,7 @@ interface PostForm {
   og_title: string;
   og_description: string;
   author: string;
-  updated_at: string;
+  updated_at: string | null;
   reading_time: number;
   related_products: string[];
 }
@@ -46,7 +46,7 @@ const empty: PostForm = {
   categories: [], tags: [], published: false, published_at: null,
   meta_title: '', meta_description: '', focus_keyword: '', canonical_url: '',
   schema_types: ['Article'], og_title: '', og_description: '',
-  author: 'Boattime Yacht Charters Editorial', updated_at: '', reading_time: 0,
+  author: 'Boattime Yacht Charters Editorial', updated_at: null, reading_time: 0,
   related_products: [],
 };
 
@@ -136,6 +136,26 @@ function TagInput({ tags, onChange }: { tags: string[]; onChange: (t: string[]) 
   );
 }
 
+function fmtStamp(iso: string | null) {
+  if (!iso) return null;
+  return new Date(iso).toLocaleString('en-AU', {
+    day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+  });
+}
+
+function Stamp({ label, value }: { label: string; value: string | null }) {
+  return (
+    <div>
+      <div style={{ fontFamily: 'var(--font-body)', fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 6 }}>
+        {label}
+      </div>
+      <div style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: value ? 'var(--cream)' : 'var(--text-muted)' }}>
+        {value ?? '—'}
+      </div>
+    </div>
+  );
+}
+
 function KwCheck({ label, ok }: { label: string; ok: boolean }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: 'var(--font-body)', fontSize: 10, letterSpacing: '0.1em', color: ok ? '#5cb85c' : 'var(--text-muted)' }}>
@@ -188,7 +208,7 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
           og_title: data.og_title ?? '',
           og_description: data.og_description ?? '',
           author: data.author ?? 'Boattime Yacht Charters Editorial',
-          updated_at: data.updated_at ? data.updated_at.slice(0, 10) : '',
+          updated_at: data.updated_at ?? null,
           reading_time: data.reading_time ?? 0,
           related_products: data.related_products ?? [],
         });
@@ -244,6 +264,15 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
 
     const supabase = createClient();
     const readingTime = calcReadingTime(form.content);
+    const now = new Date().toISOString();
+
+    // Timestamps are automatic:
+    //  · published_at  = the moment it went live the FIRST time, then never changes
+    //  · updated_at    = the moment of this save, but only once it's been live before
+    const firstPublish = form.published && !form.published_at;
+    const publishedAt = form.published ? (form.published_at || now) : form.published_at;
+    const updatedAt = isEdit && form.published_at && !firstPublish ? now : null;
+
     const payload = {
       title: form.title,
       slug: form.slug,
@@ -254,7 +283,7 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
       categories: form.categories,
       tags: form.tags,
       published: form.published,
-      published_at: form.published ? (form.published_at || new Date().toISOString()) : null,
+      published_at: publishedAt,
       meta_title: form.meta_title || null,
       meta_description: form.meta_description || null,
       focus_keyword: form.focus_keyword || null,
@@ -263,7 +292,7 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
       og_title: form.og_title || null,
       og_description: form.og_description || null,
       author: form.author || 'Boattime Yacht Charters Editorial',
-      updated_at: form.updated_at ? new Date(form.updated_at + 'T12:00:00').toISOString() : null,
+      updated_at: updatedAt,
       reading_time: readingTime,
       related_products: form.related_products,
     };
@@ -489,8 +518,14 @@ export default function AdminPostForm({ params }: { params?: Promise<{ id: strin
               </div>
             </div>
             <div>
-              <label style={labelStyle}>Last updated date <span style={{ color: 'var(--text-muted)', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'none', fontSize: 10 }}>— outputs as dateModified in schema (for evergreen content)</span></label>
-              <input type="date" value={form.updated_at} onChange={e => set('updated_at', e.target.value)} style={{ ...inputStyle, colorScheme: 'dark' }} />
+              <label style={labelStyle}>Timestamps <span style={{ color: 'var(--text-muted)', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'none', fontSize: 10 }}>— recorded automatically every time you save</span></label>
+              <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', padding: '16px 18px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border-subtle)' }}>
+                <Stamp label="First published" value={fmtStamp(form.published_at)} />
+                <Stamp label="Last edited" value={fmtStamp(form.updated_at)} />
+              </div>
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: 11, color: 'var(--text-muted)', marginTop: 6 }}>
+                Shown on the article and sent to Google as datePublished / dateModified.
+              </div>
             </div>
           </Section>
 
