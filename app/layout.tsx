@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Montserrat } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import KaiWidget from '@/components/kai/KaiWidget';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -77,7 +78,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <KaiWidget />
+        </ThemeProvider>
 
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">

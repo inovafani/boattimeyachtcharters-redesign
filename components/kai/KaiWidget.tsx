@@ -1,0 +1,372 @@
+'use client';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
+import type { KaiChatTurn, KaiContactRequest, KaiPaymentRequest, KaiProductCard } from '@/lib/kai';
+import KaiProductCardView from './KaiProductCard';
+import KaiContactForm from './KaiContactForm';
+
+type ChatMessage = {
+  id: string;
+  role: 'traveller' | 'assistant';
+  content: string;
+  cards?: KaiProductCard[];
+  contactRequest?: KaiContactRequest | null;
+  paymentRequest?: KaiPaymentRequest | null;
+  /** Set once the traveller has sent their details, so the form isn't offered twice. */
+  contactAnswered?: boolean;
+};
+
+let messageCounter = 0;
+const nextId = () => `m${++messageCounter}`;
+
+/**
+ * Kai sends payment links as plain text inside its reply. Render them as real links so nobody has
+ * to select and copy a URL by hand. The trailing character class keeps sentence punctuation out of
+ * the href. New tab, because this chat only lives in memory — navigating away would lose it.
+ */
+const URL_PATTERN = /(https?:\/\/[^\s]*[^\s.,;:!?)\]])/g;
+
+/** Checkout URLs run to 300+ characters; showing them raw buries the message. */
+function linkLabel(url: string) {
+  if (url.length <= 48) return url;
+  try {
+    return `${new URL(url).hostname}/…`;
+  } catch {
+    return `${url.slice(0, 45)}…`;
+  }
+}
+
+function withLinks(text: string) {
+  return text.split(URL_PATTERN).map((part, i) =>
+    /^https?:\/\//.test(part) ? (
+      <a key={i} className="kai-link" href={part} target="_blank" rel="noopener noreferrer">
+        {linkLabel(part)}
+      </a>
+    ) : (
+      part
+    ),
+  );
+}
+
+export default function KaiWidget() {
+  const [open, setOpen] = useState(false);
+  const [starting, setStarting] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [draft, setDraft] = useState('');
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+  const [retryText, setRetryText] = useState('');
+  const [tickerVisible, setTickerVisible] = useState(false);
+
+  const streamRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  /**
+   * Guards against starting two conversations at once. This has to be a ref, not state: state
+   * changes re-run the effect, whose cleanup would then cancel the very request it just started.
+   */
+  const startedRef = useRef(false);
+
+  const startConversation = useCallback(async () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+
+    setStarting(true);
+    setError('');
+
+    try {
+      const [sessionRes, configRes] = await Promise.all([
+        fetch('/api/kai/session', { method: 'POST' }),
+        fetch('/api/kai/config'),
+      ]);
+
+      if (!sessionRes.ok) throw new Error('session failed');
+
+      const session = await sessionRes.json();
+      const config = configRes.ok ? await configRes.json() : null;
+
+      setConversationId(session.conversationId);
+      setMessages([
+        {
+          id: nextId(),
+          role: 'assistant',
+          content: config?.welcomeMessage ?? 'Hi, I am Kai. How can I help with your charter?',
+        },
+      ]);
+    } catch {
+      setError("Kai isn't responding right now — please try again.");
+      startedRef.current = false; // let the retry button try again
+    } finally {
+      setStarting(false);
+    }
+  }, []);
+
+  /* Start a conversation the first time the panel opens. */
+  useEffect(() => {
+    if (open) startConversation();
+  }, [open, startConversation]);
+
+  /**
+   * Lift the widget clear of the sticky ticker bar. TickerBar (components/TickerBar.tsx) slides in
+   * at this same 300px threshold and stands 52px tall — without this the launcher lands on top of
+   * its Tickets button.
+   */
+  useEffect(() => {
+    const onScroll = () => setTickerVisible(window.scrollY > 300);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  /**
+   * Keep the newest message in view. Deliberately instant, not smooth: a tall block (product
+   * cards, the contact form) arriving mid-animation left its buttons below the fold and
+   * unclickable until the animation finished.
+   */
+  useEffect(() => {
+    const stream = streamRef.current;
+    if (!stream) return;
+    // Second pass on the next frame, once the new block has been laid out and measured.
+    stream.scrollTop = stream.scrollHeight;
+    const frame = requestAnimationFrame(() => {
+      stream.scrollTop = stream.scrollHeight;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [messages, pending]);
+
+  useEffect(() => {
+    if (open && !pending && conversationId) inputRef.current?.focus();
+  }, [open, pending, conversationId]);
+
+  async function send(content: string) {
+    const text = content.trim();
+    if (!text || !conversationId || pending) return;
+
+    setMessages((prev) => [...prev, { id: nextId(), role: 'traveller', content: text }]);
+    setDraft('');
+    setError('');
+    setRetryText('');
+    setPending(true);
+
+    try {
+      const res = await fetch('/api/kai/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ conversationId, content: text }),
+      });
+
+      if (!res.ok) throw new Error('message failed');
+
+      const turn: KaiChatTurn = await res.json();
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: nextId(),
+          role: 'assistant',
+          content: turn.reply,
+          cards: turn.productCards,
+          contactRequest: turn.contactRequest,
+          paymentRequest: turn.paymentRequest,
+        },
+      ]);
+    } catch {
+      setError("Kai isn't responding right now — please try again.");
+      setRetryText(text);
+    } finally {
+      setPending(false);
+    }
+  }
+
+  function resetConversation() {
+    startedRef.current = false;
+    setConversationId(null);
+    setMessages([]);
+    setDraft('');
+    setError('');
+    setRetryText('');
+    startConversation();
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send(draft);
+    }
+  }
+
+  const busy = pending || starting;
+
+  return (
+    <>
+      <button
+        className={`kai-launcher${open ? ' kai-launcher--hidden' : ''}${
+          tickerVisible ? ' kai-launcher--raised' : ''
+        }`}
+        onClick={() => setOpen(true)}
+        aria-label="Open the booking assistant"
+      >
+        <span className="kai-launcher-dot" aria-hidden="true" />
+        <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">
+          <path
+            d="M3 5.5h18v11H8.5L4 20.5v-4H3z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span>Ask Kai</span>
+      </button>
+
+      <div
+        className={`kai-panel${open ? ' kai-panel--open' : ''}${
+          tickerVisible ? ' kai-panel--raised' : ''
+        }`}
+        role="dialog"
+        aria-label="Booking assistant"
+      >
+        <header className="kai-header">
+          <div>
+            <p className="kai-eyebrow">Booking Assistant</p>
+            <h2 className="kai-title">Kai</h2>
+          </div>
+          <div className="kai-header-actions">
+            <button className="kai-icon-btn" onClick={resetConversation} aria-label="Start a new conversation">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+                <path
+                  d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <button className="kai-icon-btn" onClick={() => setOpen(false)} aria-label="Close the booking assistant">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+                <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div className="kai-stream" ref={streamRef}>
+          {starting && <p className="kai-status">Starting a conversation…</p>}
+
+          {messages.map((message) => (
+            <div key={message.id} className={`kai-msg kai-msg--${message.role}`}>
+              <div className="kai-bubble">{withLinks(message.content)}</div>
+
+              {message.cards && message.cards.length > 0 && (
+                <div className="kai-cards">
+                  {message.cards.map((card) => (
+                    <KaiProductCardView key={card.slug} card={card} />
+                  ))}
+                </div>
+              )}
+
+              {message.paymentRequest && (
+                <div className="kai-payment">
+                  <p className="kai-payment-label">Booking summary</p>
+                  {message.paymentRequest.productTitle && (
+                    <p className="kai-payment-row">{message.paymentRequest.productTitle}</p>
+                  )}
+                  {message.paymentRequest.dateText && (
+                    <p className="kai-payment-row">{message.paymentRequest.dateText}</p>
+                  )}
+                  {message.paymentRequest.guests != null && (
+                    <p className="kai-payment-row">{message.paymentRequest.guests} guests</p>
+                  )}
+                  {message.paymentRequest.checkoutUrl ? (
+                    <a
+                      className="kai-pay-btn"
+                      href={message.paymentRequest.checkoutUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Complete secure payment
+                    </a>
+                  ) : (
+                    <p className="kai-payment-note">We&rsquo;ll be in touch to complete payment.</p>
+                  )}
+                </div>
+              )}
+
+              {message.contactRequest && !message.contactAnswered && (
+                <KaiContactForm
+                  disabled={busy}
+                  onSubmit={(text) => {
+                    setMessages((prev) =>
+                      prev.map((m) => (m.id === message.id ? { ...m, contactAnswered: true } : m)),
+                    );
+                    send(text);
+                  }}
+                />
+              )}
+            </div>
+          ))}
+
+          {pending && (
+            <div className="kai-msg kai-msg--assistant">
+              <div className="kai-bubble kai-typing">
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+          )}
+
+          {error && (
+            <div className="kai-error">
+              <p>{error}</p>
+              <button
+                onClick={() => {
+                  if (!conversationId) {
+                    // The conversation never started — try opening one again.
+                    setError('');
+                    startConversation();
+                  } else if (retryText) {
+                    setMessages((prev) =>
+                      prev.filter((m) => m.content !== retryText || m.role !== 'traveller'),
+                    );
+                    send(retryText);
+                  } else {
+                    setError('');
+                  }
+                }}
+              >
+                Try again
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="kai-composer">
+          <textarea
+            ref={inputRef}
+            className="kai-textarea"
+            rows={1}
+            placeholder="Ask about a cruise, a date, or group size…"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={handleKeyDown}
+            disabled={busy || !conversationId}
+          />
+          <button
+            className="kai-send"
+            onClick={() => send(draft)}
+            disabled={busy || !conversationId || !draft.trim()}
+            aria-label="Send message"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}

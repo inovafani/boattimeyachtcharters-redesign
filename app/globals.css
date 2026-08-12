@@ -3908,3 +3908,554 @@
   background: rgba(10, 22, 40, 0.06) !important;
   border-color: rgba(10, 22, 40, 0.2) !important;
 }
+
+/* =========================================================
+   KAI — AI BOOKING ASSISTANT WIDGET
+   Built entirely on brand tokens, so it follows the site's
+   light/dark theme automatically. Kai's own teal branding
+   is deliberately ignored.
+   ========================================================= */
+
+/* ── Launcher ───────────────────────────────────────────── */
+.kai-launcher {
+  position: fixed;
+  /* 44px matches the RESERVE button's gap from the viewport edge, so the two line up vertically. */
+  right: 44px;
+  bottom: 28px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 24px;
+  /* Metallic sweep rather than flat gold — catches the eye without shouting. */
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  color: #0a1628;
+  border: none;
+  /* Deliberate exception to the sharp-corner rule: the pill reads as a floating control rather
+     than part of the page, which is what stops visitors missing it. */
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow:
+    0 2px 8px rgba(10, 22, 40, 0.3),
+    0 14px 34px rgba(10, 22, 40, 0.45);
+  transition:
+    transform 0.4s var(--ease-brand),
+    opacity 0.3s var(--ease-brand),
+    bottom 0.4s var(--ease-brand),
+    box-shadow 0.4s var(--ease-brand),
+    background 0.4s var(--ease-brand);
+}
+/* Clears the 52px sticky ticker bar once it slides in. */
+.kai-launcher--raised {
+  bottom: 72px;
+}
+.kai-launcher:hover {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-light) 100%);
+  transform: translateY(-3px);
+  box-shadow:
+    0 4px 12px rgba(10, 22, 40, 0.34),
+    0 20px 44px rgba(10, 22, 40, 0.5);
+}
+
+/* "Online" dot — same colour, size and 2s rhythm as .nav-phone-dot beside the phone number.
+   The navy ring separates the green from the gold behind it. */
+.kai-launcher-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+  box-shadow:
+    0 0 0 2px rgba(10, 22, 40, 0.22),
+    0 0 8px #4ade80;
+  animation: kaiLauncherDot 2s ease infinite;
+}
+
+@keyframes kaiLauncherDot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 2px rgba(10, 22, 40, 0.22),
+      0 0 8px #4ade80;
+  }
+  50% {
+    opacity: 0.55;
+    box-shadow:
+      0 0 0 2px rgba(10, 22, 40, 0.22),
+      0 0 16px #4ade80,
+      0 0 4px #4ade80;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kai-launcher-dot {
+    animation: none;
+  }
+}
+.kai-launcher--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
+}
+
+/* ── Panel ──────────────────────────────────────────────── */
+.kai-panel {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: min(620px, calc(100vh - 56px));
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  transform: translateY(16px) scale(0.985);
+  pointer-events: none;
+  transition:
+    opacity 0.4s var(--ease-brand),
+    bottom 0.4s var(--ease-brand),
+    transform 0.4s var(--ease-brand);
+}
+.kai-panel--raised {
+  bottom: 72px;
+  height: min(620px, calc(100vh - 100px));
+}
+.kai-panel--open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.kai-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.kai-eyebrow {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+.kai-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1;
+  margin: 0;
+}
+.kai-header-actions {
+  display: flex;
+  gap: 4px;
+}
+.kai-icon-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-brand);
+}
+.kai-icon-btn:hover {
+  color: var(--gold);
+  border-color: var(--border-hover);
+}
+
+/* ── Message stream ─────────────────────────────────────── */
+.kai-stream {
+  flex: 1;
+  overflow-y: auto;
+  /* Nothing may ever scroll sideways — long unbroken URLs from Kai used to widen the panel. */
+  overflow-x: hidden;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kai-stream::-webkit-scrollbar {
+  width: 4px;
+}
+.kai-stream::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+}
+
+.kai-status {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.kai-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+}
+.kai-msg--traveller {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.kai-msg--assistant {
+  align-self: flex-start;
+}
+
+.kai-bubble {
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  /* Break inside long tokens (payment URLs) instead of forcing the panel wider. */
+  overflow-wrap: anywhere;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Links inside a message (payment links Kai sends as plain text). */
+.kai-link {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+  transition: color 0.3s var(--ease-brand);
+}
+.kai-link:hover {
+  color: var(--gold-light);
+}
+.kai-msg--traveller .kai-link {
+  color: #0a1628;
+}
+.kai-msg--assistant .kai-bubble {
+  background: var(--navy-mid);
+  color: var(--cream);
+}
+.kai-msg--traveller .kai-bubble {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #0a1628;
+}
+
+/* Typing indicator */
+.kai-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 16px;
+}
+.kai-typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.35;
+  animation: kai-blink 1.3s infinite ease-in-out;
+}
+.kai-typing span:nth-child(2) {
+  animation-delay: 0.18s;
+}
+.kai-typing span:nth-child(3) {
+  animation-delay: 0.36s;
+}
+@keyframes kai-blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* ── Product cards ──────────────────────────────────────── */
+.kai-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+}
+.kai-card {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  background: var(--navy);
+  text-decoration: none;
+  transition:
+    border-color 0.4s var(--ease-brand),
+    background 0.4s var(--ease-brand);
+}
+.kai-card--link:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.05);
+}
+.kai-card-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.25;
+  margin: 0 0 6px;
+}
+.kai-card-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  margin: 0 0 10px;
+}
+.kai-card-price {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+.kai-card-price--muted {
+  color: var(--text-muted);
+}
+
+/* ── Payment summary (phase 1: display only) ────────────── */
+.kai-payment {
+  margin-top: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  background: var(--navy);
+}
+.kai-payment-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.kai-payment-row {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--cream);
+  overflow-wrap: anywhere;
+  margin: 0 0 4px;
+}
+.kai-payment-note {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 10px 0 0;
+}
+
+/* Checkout call-to-action — opens Kai's hosted Stripe page in a new tab so the chat survives. */
+.kai-pay-btn {
+  display: block;
+  margin-top: 12px;
+  padding: 12px 20px;
+  background: var(--gold);
+  color: #0a1628;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s var(--ease-brand);
+}
+.kai-pay-btn:hover {
+  background: var(--gold-light);
+}
+
+/* ── Contact form ───────────────────────────────────────── */
+.kai-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+  background: var(--navy);
+  width: 100%;
+}
+.kai-contact-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+.kai-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.3s var(--ease-brand);
+}
+.kai-input::placeholder {
+  color: var(--text-muted);
+}
+.kai-input:focus {
+  border-color: var(--gold);
+}
+.kai-contact-error {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: #e0736b;
+  margin: 0;
+}
+.kai-contact-submit {
+  margin-top: 4px;
+  padding: 12px 20px;
+  background: var(--gold);
+  border: none;
+  border-radius: 0;
+  color: #0a1628;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s var(--ease-brand);
+}
+.kai-contact-submit:hover:not(:disabled) {
+  background: var(--gold-light);
+}
+.kai-contact-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Error ──────────────────────────────────────────────── */
+.kai-error {
+  padding: 14px 16px;
+  border: 1px solid rgba(224, 115, 107, 0.4);
+  background: rgba(224, 115, 107, 0.07);
+}
+.kai-error p {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--cream);
+  margin: 0 0 10px;
+}
+.kai-error button {
+  background: transparent;
+  border: 1px solid var(--border-hover);
+  border-radius: 0;
+  padding: 8px 16px;
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-brand);
+}
+.kai-error button:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #0a1628;
+}
+
+/* ── Composer ───────────────────────────────────────────── */
+.kai-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+.kai-textarea {
+  flex: 1;
+  resize: none;
+  max-height: 110px;
+  padding: 11px 12px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.3s var(--ease-brand);
+}
+.kai-textarea::placeholder {
+  color: var(--text-muted);
+}
+.kai-textarea:focus {
+  border-color: var(--gold);
+}
+.kai-textarea:disabled {
+  opacity: 0.5;
+}
+.kai-send {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: var(--gold);
+  border: none;
+  border-radius: 0;
+  color: #0a1628;
+  cursor: pointer;
+  transition:
+    background 0.3s var(--ease-brand),
+    opacity 0.3s var(--ease-brand);
+}
+.kai-send:hover:not(:disabled) {
+  background: var(--gold-light);
+}
+.kai-send:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .kai-launcher {
+    right: 24px; /* matches --section-x-mobile */
+    bottom: 20px;
+    padding: 14px 22px;
+  }
+  .kai-panel {
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100dvh;
+    border: none;
+  }
+}
