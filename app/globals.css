@@ -4200,14 +4200,54 @@
   padding: 14px 16px;
   border: 1px solid var(--border-subtle);
   background: var(--navy);
-  text-decoration: none;
-  transition:
-    border-color 0.4s var(--ease-brand),
-    background 0.4s var(--ease-brand);
+  transition: border-color 0.4s var(--ease-brand);
 }
-.kai-card--link:hover {
+.kai-card:hover {
+  border-color: var(--border-hover);
+}
+
+/* Two explicit actions instead of one ambiguous whole-card link. */
+.kai-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.kai-card-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s var(--ease-brand);
+}
+.kai-card-btn--primary {
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: #0a1628;
+}
+.kai-card-btn--primary:hover:not(:disabled) {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+}
+.kai-card-btn--primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.kai-card-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--border-hover);
+  color: var(--cream);
+}
+.kai-card-btn--ghost:hover {
   border-color: var(--gold);
-  background: rgba(201, 168, 76, 0.05);
+  color: var(--gold);
 }
 .kai-card-title {
   font-family: var(--font-display);

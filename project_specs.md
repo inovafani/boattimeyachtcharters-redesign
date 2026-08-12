@@ -211,7 +211,10 @@ Price line logic:
 | `priceLabel` null **and** `dateChecked` true | "Not available on this date" |
 | `priceLabel` null **and** `dateChecked` false/absent | "Share your date for pricing" |
 
-`productUrl` present → card is a link (new tab). `productUrl` null → plain non-link card.
+**Card actions.** The card is *not* a single big link. Making the whole card clickable was ambiguous — the price line ("Share your date for pricing") reads as an instruction, so a click could equally mean "pick this one" or "open the page", and the surprise was always a page navigation. Each intention now gets its own labelled button:
+
+- **Choose this** (gold, primary) — sends `I'd like the <title>` as a normal chat message, keeping the traveller in the conversation. Disabled while a turn is in flight.
+- **View page** (ghost, secondary) — opens `productUrl` in a new tab. Hidden entirely when `productUrl` is null.
 
 **⚠️ Known data issue — flagged, not fixed:** the `productUrl` values Kai has on file for our products point at a demo/localhost URL, not our real product pages. Cards will link wherever Kai says until that's corrected on the Kai side. Nothing in this repo will paper over it.
 

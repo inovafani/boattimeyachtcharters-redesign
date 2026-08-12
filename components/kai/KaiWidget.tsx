@@ -263,7 +263,12 @@ export default function KaiWidget() {
               {message.cards && message.cards.length > 0 && (
                 <div className="kai-cards">
                   {message.cards.map((card) => (
-                    <KaiProductCardView key={card.slug} card={card} />
+                    <KaiProductCardView
+                      key={card.slug}
+                      card={card}
+                      disabled={busy}
+                      onSelect={(title) => send(`I'd like the ${title}`)}
+                    />
                   ))}
                 </div>
               )}
