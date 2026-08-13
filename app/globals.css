@@ -3921,7 +3921,8 @@
   position: fixed;
   /* 44px matches the RESERVE button's gap from the viewport edge, so the two line up vertically. */
   right: 44px;
-  bottom: 28px;
+  /* --kai-lift is the measured height of the sticky ticker bar (0 when it is hidden). */
+  bottom: calc(28px + var(--kai-lift, 0px));
   z-index: 900;
   display: flex;
   align-items: center;
@@ -3949,10 +3950,6 @@
     bottom 0.4s var(--ease-brand),
     box-shadow 0.4s var(--ease-brand),
     background 0.4s var(--ease-brand);
-}
-/* Clears the 52px sticky ticker bar once it slides in. */
-.kai-launcher--raised {
-  bottom: 72px;
 }
 .kai-launcher:hover {
   background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-light) 100%);
@@ -4008,12 +4005,12 @@
 .kai-panel {
   position: fixed;
   right: 28px;
-  bottom: 28px;
+  bottom: calc(28px + var(--kai-lift, 0px));
   z-index: 950;
   display: flex;
   flex-direction: column;
   width: 380px;
-  height: min(620px, calc(100vh - 56px));
+  height: min(620px, calc(100vh - 56px - var(--kai-lift, 0px)));
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
   border: 1px solid var(--border-subtle);
@@ -4025,10 +4022,6 @@
     opacity 0.4s var(--ease-brand),
     bottom 0.4s var(--ease-brand),
     transform 0.4s var(--ease-brand);
-}
-.kai-panel--raised {
-  bottom: 72px;
-  height: min(620px, calc(100vh - 100px));
 }
 .kai-panel--open {
   opacity: 1;
@@ -4488,9 +4481,10 @@
 @media (max-width: 560px) {
   .kai-launcher {
     right: 24px; /* matches --section-x-mobile */
-    bottom: 20px;
+    bottom: calc(20px + var(--kai-lift, 0px));
     padding: 14px 22px;
   }
+  /* Full-screen on mobile, so it covers the ticker bar rather than sitting above it. */
   .kai-panel {
     right: 0;
     bottom: 0;

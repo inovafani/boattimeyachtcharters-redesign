@@ -57,7 +57,7 @@ export default function KaiWidget() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
   const [retryText, setRetryText] = useState('');
-  const [tickerVisible, setTickerVisible] = useState(false);
+  const [lift, setLift] = useState(0);
 
   const streamRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -109,15 +109,39 @@ export default function KaiWidget() {
 
   /**
    * Lift the widget clear of the sticky ticker bar. TickerBar (components/TickerBar.tsx) slides in
-   * at this same 300px threshold and stands 52px tall — without this the launcher lands on top of
-   * its Tickets button.
+   * past 300px of scroll; without this the launcher lands on top of its Tickets button.
+   *
+   * Its height is measured rather than hard-coded: on desktop the bar is a 52px single row, but on
+   * mobile it is `height: auto` and reflows into two rows, so any fixed number is wrong on one of
+   * them. A ResizeObserver catches rotation and reflow too.
    */
+  const tickerRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    const onScroll = () => setTickerVisible(window.scrollY > 300);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const update = () => {
+      if (!tickerRef.current?.isConnected) {
+        tickerRef.current = document.querySelector<HTMLElement>('.ticker-bar-wrap');
+      }
+      const bar = tickerRef.current;
+      setLift(window.scrollY > 300 && bar ? bar.offsetHeight : 0);
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+
+    const observer = new ResizeObserver(update);
+    if (tickerRef.current) observer.observe(tickerRef.current);
+
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+      observer.disconnect();
+    };
   }, []);
+
+  // Consumed by .kai-launcher / .kai-panel as calc(<base offset> + var(--kai-lift)).
+  const liftStyle = { '--kai-lift': `${lift}px` } as React.CSSProperties;
 
   /**
    * Keep the newest message in view. Deliberately instant, not smooth: a tall block (product
@@ -201,9 +225,8 @@ export default function KaiWidget() {
   return (
     <>
       <button
-        className={`kai-launcher${open ? ' kai-launcher--hidden' : ''}${
-          tickerVisible ? ' kai-launcher--raised' : ''
-        }`}
+        className={`kai-launcher${open ? ' kai-launcher--hidden' : ''}`}
+        style={liftStyle}
         onClick={() => setOpen(true)}
         aria-label="Open the booking assistant"
       >
@@ -221,9 +244,8 @@ export default function KaiWidget() {
       </button>
 
       <div
-        className={`kai-panel${open ? ' kai-panel--open' : ''}${
-          tickerVisible ? ' kai-panel--raised' : ''
-        }`}
+        className={`kai-panel${open ? ' kai-panel--open' : ''}`}
+        style={liftStyle}
         role="dialog"
         aria-label="Booking assistant"
       >
