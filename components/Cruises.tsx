@@ -81,8 +81,9 @@ const CRUISES: CruiseData[] = [
   },
   {
     cat: 'Event',
-    title: 'Riverfire',
-    em: '2026',
+    title: 'Riverfire 2026',
+    em: 'Brisbane Fireworks Yacht Cruise',
+    breakTitle: true,
     body: null,
     dur: '4 hrs',
     vessel: 'Mermaid Spirit',

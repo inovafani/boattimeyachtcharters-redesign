@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import Link from "next/link";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -130,10 +131,12 @@ function QldBadge() {
 function RiverCTABox({
   title,
   description,
+  footnote,
   bookHref,
 }: {
   title: string;
   description?: string;
+  footnote?: React.ReactNode;
   bookHref: string;
 }) {
   return (
@@ -202,6 +205,21 @@ function RiverCTABox({
             }}
           >
             {description}
+          </p>
+        )}
+        {footnote && (
+          <p
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 14,
+              color: "rgba(245,240,232,0.78)",
+              lineHeight: 1.8,
+              maxWidth: 700,
+              margin: "-24px auto 44px",
+              fontWeight: 300,
+            }}
+          >
+            {footnote}
           </p>
         )}
         <a
@@ -547,10 +565,10 @@ function VesselCard() {
                 fontWeight: 300,
               }}
             >
-              Secure the best vantage point on the Brisbane River with Mermaid
-              Spirit, ensuring an unobstructed view of the fireworks display.
-              But the experience aboard Mermaid Spirit is not just about the
-              view; it&rsquo;s a journey into luxury and sophistication. As you
+              Experience Riverfire from a premium vantage point aboard Mermaid
+              Spirit, with wide views across the Brisbane River and city
+              skyline. But the experience aboard Mermaid Spirit is not just
+              about the view; it&rsquo;s a journey into luxury and sophistication. As you
               witness Riverfire like never before, you&rsquo;ll revel in the
               opulence of our yacht. To complement the evening, indulge in a
               lavish spread of roaming canapés and bar services. And to ensure a
@@ -890,7 +908,7 @@ export default function RiverPage() {
                 marginBottom: 28,
               }}
             >
-              River Fire 2026
+              Riverfire 2026 Brisbane Fireworks Yacht Cruise
             </h1>
             {/* Event tags */}
             <div
@@ -971,7 +989,24 @@ export default function RiverPage() {
         {/* ── ABOUT THE EVENT CTA box ── */}
         <RiverCTABox
           title="ABOUT THE EVENT"
-          description="Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks & Jets, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere."
+          description="Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks and scheduled flyovers, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere. The official 2026 flyover period is confirmed, but the specific ADF aircraft have not yet been announced."
+          footnote={
+            <>
+              Planning your Riverfire day? Read our{" "}
+              <Link
+                href="/boattime-news/riverfire-brisbane-2026-everything-you-need-to-know"
+                style={{
+                  color: "var(--gold)",
+                  textDecoration: "underline",
+                  textUnderlineOffset: 3,
+                }}
+              >
+                complete Riverfire Brisbane 2026 guide
+              </Link>{" "}
+              for event times, viewing information, transport advice and
+              practical planning.
+            </>
+          }
           bookHref="#book"
         />
 
@@ -1003,7 +1038,7 @@ export default function RiverPage() {
         {/* ── GET YOUR TICKETS NOW CTA box ── */}
         <RiverCTABox
           title="GET YOUR TICKETS NOW."
-          description="Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks & Jets, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere."
+          description="Experience the Grandeur of Brisbane's most awaited night, Riverfire 2026, from the luxurious decks of Mermaid Spirit. As the cityscape of Brisbane lights up with a mesmerizing display of fireworks and scheduled flyovers, find yourself at the heart of the spectacle, surrounded by elegance, comfort, and an electric atmosphere. The official 2026 flyover period is confirmed, but the specific ADF aircraft have not yet been announced."
           bookHref="#book"
         />
 

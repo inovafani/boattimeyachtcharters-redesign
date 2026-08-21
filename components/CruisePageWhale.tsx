@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import Link from "next/link";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import {
@@ -164,6 +165,21 @@ const ITINERARY_INTRO: ReactNode = (
       operation, away from the crowded big players. Live commentary from an
       onboard marine biologist guides you through an epic adventure learning
       about the unique marine life and whale migration off the Gold Coast.
+    </p>
+    <p style={{ fontSize: 14, marginBottom: 20 }}>
+      Planning your whale watching trip? Read our{" "}
+      <Link
+        href="/boattime-news/luxury-whale-watching-on-the-gold-coast-the-complete-guide"
+        style={{
+          color: "var(--gold)",
+          textDecoration: "underline",
+          textUnderlineOffset: 3,
+        }}
+      >
+        complete guide to luxury whale watching on the Gold Coast
+      </Link>{" "}
+      for season dates, sighting information, what to bring and practical
+      planning.
     </p>
     <div style={{ marginBottom: 28 }}>
       <div style={{ ...GL, marginBottom: 14 }}>What&apos;s Included</div>
