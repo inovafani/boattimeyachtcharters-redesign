@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import WhalePage from '@/components/CruisePageWhale';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 
 export const metadata: Metadata = {
   title: 'Gold Coast Whale Escape — Luxury Whale Watching Cruise | Boattime Yacht Charters',
@@ -18,5 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <WhalePage />;
+  return (
+    <>
+      <GoogleAdsTag />
+      <WhalePage />
+    </>
+  );
 }

@@ -2,11 +2,19 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { createPublicClient } from '@/lib/supabase/public';
 import ArticlePage from '@/components/ArticlePage';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 
 export const dynamic = 'force-dynamic';
 
 const BASE_URL = 'https://www.boattimeyachtcharters.com';
 const FALLBACK_OG = `${BASE_URL}/sun-goddess-main-upscale.png`;
+
+// Artikel yang memakai Google Ads tag (AW-18035686182)
+const GOOGLE_ADS_SLUGS = [
+  'can-children-go-whale-watching-on-the-gold-coast-a-family-guide',
+  'best-time-for-whale-watching-on-the-gold-coast-a-month-by-month-guide',
+  'what-are-your-chances-of-seeing-whales-on-the-gold-coast',
+];
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -199,6 +207,7 @@ export default async function Page({ params }: Props) {
 
     return (
       <>
+        {GOOGLE_ADS_SLUGS.includes(slug) && <GoogleAdsTag />}
         {schemas.map((schema, i) => (
           <script
             key={i}

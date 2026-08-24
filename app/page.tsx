@@ -17,10 +17,12 @@ import Faq from '@/components/Faq';
 import Inquiry from '@/components/Inquiry';
 import Footer from '@/components/Footer';
 import TickerBar from '@/components/TickerBar';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 
 export default function HomePage() {
   return (
     <>
+      <GoogleAdsTag />
       <Nav />
       <HashScroll />
       <main>
