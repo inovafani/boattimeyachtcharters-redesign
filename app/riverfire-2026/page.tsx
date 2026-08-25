@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import RiverPage from '@/components/CruisePageRiverfire';
+import GoogleAdsTag from '@/components/GoogleAdsTag';
 
 export const metadata: Metadata = {
   title: 'Riverfire 2026 — Brisbane Fireworks Yacht Cruise · Boattime Yacht Charters',
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <RiverPage />;
+  return (
+    <>
+      <GoogleAdsTag />
+      <RiverPage />
+    </>
+  );
 }
