@@ -82,6 +82,20 @@ export type KaiContactRequest = {
   status: 'CONTACT_DETAILS_REQUIRED';
 };
 
+export type KaiTimeOption = {
+  label: string;
+};
+
+export type KaiTicketOption = {
+  label: string;
+  unitPriceCents: number;
+};
+
+export type KaiExtraOption = {
+  label: string;
+  unitPriceCents: number;
+};
+
 export type KaiMessageResponse = {
   message?: { id: string; role: 'TRAVELLER'; content: string; conversationId: string };
   assistantMessage?: { id: string; role: 'ASSISTANT'; content: string; conversationId: string };
@@ -89,6 +103,19 @@ export type KaiMessageResponse = {
   paymentRequest?: KaiPaymentRequest | null;
   contactRequest?: KaiContactRequest | null;
   productCards?: KaiProductCard[] | null;
+  /** ISO yyyy-mm-dd dates with real room, sent alongside a "not available" reply so the traveller
+   * can pick a real open date instead of guessing one. */
+  dateOptions?: string[] | null;
+  /** Present alongside "which time works best?" - clicking one sends its own label back verbatim,
+   * which Kai's time parser already matches against the option's own label. */
+  timeOptions?: KaiTimeOption[] | null;
+  /** Present alongside a ticket-option prompt - clicking sends "option N" (1-indexed by array
+   * position), which puts every guest on that one ticket type. Splitting guests across multiple
+   * ticket types still needs the text box. */
+  ticketOptions?: KaiTicketOption[] | null;
+  /** Present alongside an optional-extras prompt - same "option N" convention as ticketOptions,
+   * plus a "No extras" choice the widget always offers alongside these. */
+  extraOptions?: KaiExtraOption[] | null;
 };
 
 /** What our own /api/kai/messages route hands back to the widget. */
@@ -97,6 +124,10 @@ export type KaiChatTurn = {
   productCards: KaiProductCard[];
   contactRequest: KaiContactRequest | null;
   paymentRequest: KaiPaymentRequest | null;
+  dateOptions: string[] | null;
+  timeOptions: KaiTimeOption[] | null;
+  ticketOptions: KaiTicketOption[] | null;
+  extraOptions: KaiExtraOption[] | null;
 };
 
 /* ── Fetch helper ────────────────────────────────────────────────────────── */
@@ -169,5 +200,9 @@ export async function sendKaiMessage(input: {
     productCards: data.productCards ?? [],
     contactRequest: data.contactRequest ?? null,
     paymentRequest: data.paymentRequest ?? null,
+    dateOptions: data.dateOptions ?? null,
+    timeOptions: data.timeOptions ?? null,
+    ticketOptions: data.ticketOptions ?? null,
+    extraOptions: data.extraOptions ?? null,
   };
 }

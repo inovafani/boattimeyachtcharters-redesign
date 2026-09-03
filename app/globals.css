@@ -4271,6 +4271,145 @@
   color: var(--text-muted);
 }
 
+/* ── Date calendar (offered on an unavailable check, real dates from PmsAdapter.findAvailableDates
+   on the Kai side) ──────────────────────────────────────── */
+.kai-calendar {
+  margin-top: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-subtle);
+  background: var(--navy);
+}
+.kai-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.kai-calendar-nav-btn {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--border-hover);
+  background: transparent;
+  color: var(--cream);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-brand);
+}
+.kai-calendar-nav-btn:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.kai-calendar-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.kai-calendar-month {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin: 0;
+}
+.kai-calendar-weekdays,
+.kai-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.kai-calendar-weekdays {
+  margin-bottom: 4px;
+}
+.kai-calendar-weekdays span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--text-muted);
+}
+.kai-calendar-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+.kai-calendar-cell--blank {
+  border: none;
+}
+.kai-calendar-cell--available {
+  border-color: var(--border-hover);
+  color: var(--cream);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-brand);
+}
+.kai-calendar-cell--available:hover:not(:disabled) {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #0a1628;
+}
+.kai-calendar-cell:disabled {
+  opacity: 0.7;
+}
+.kai-calendar-cell--available:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Priced/time option buttons (ticket, extras, time-of-day selection) ─── */
+.kai-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+}
+.kai-option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-subtle);
+  background: var(--navy);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-brand);
+}
+.kai-option-btn:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.kai-option-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.kai-option-btn__price {
+  flex: none;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.kai-option-btn--secondary {
+  color: var(--text-muted);
+}
+.kai-option-btn--secondary:hover:not(:disabled) {
+  color: var(--gold);
+}
+
 /* ── Payment summary (phase 1: display only) ────────────── */
 .kai-payment {
   margin-top: 10px;

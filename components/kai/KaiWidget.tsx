@@ -1,9 +1,20 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { KaiChatTurn, KaiContactRequest, KaiPaymentRequest, KaiProductCard } from '@/lib/kai';
+import type {
+  KaiChatTurn,
+  KaiContactRequest,
+  KaiExtraOption,
+  KaiPaymentRequest,
+  KaiProductCard,
+  KaiTicketOption,
+  KaiTimeOption,
+} from '@/lib/kai';
 import KaiProductCardView from './KaiProductCard';
 import KaiContactForm from './KaiContactForm';
+import KaiDateCalendar from './KaiDateCalendar';
+import KaiTimeOptions from './KaiTimeOptions';
+import KaiPricedOptions from './KaiPricedOptions';
 
 type ChatMessage = {
   id: string;
@@ -14,10 +25,70 @@ type ChatMessage = {
   paymentRequest?: KaiPaymentRequest | null;
   /** Set once the traveller has sent their details, so the form isn't offered twice. */
   contactAnswered?: boolean;
+  dateOptions?: string[] | null;
+  /** Set once a date has been picked from this message's calendar, so it isn't offered twice. */
+  dateAnswered?: boolean;
+  timeOptions?: KaiTimeOption[] | null;
+  ticketOptions?: KaiTicketOption[] | null;
+  extraOptions?: KaiExtraOption[] | null;
+  /** Set once one of timeOptions/ticketOptions/extraOptions has been picked, so those buttons
+   * aren't offered again once the conversation has moved past that choice. */
+  choiceAnswered?: boolean;
 };
 
 let messageCounter = 0;
 const nextId = () => `m${++messageCounter}`;
+
+/**
+ * Persists the conversation across a page navigation, not just component re-renders - KaiWidget
+ * lives in the root layout, so client-side <Link> navigation alone doesn't unmount it, but this
+ * site also has plain-anchor and full-reload navigations (reported live: switching pages reset the
+ * chat to 0 messages). sessionStorage rather than localStorage: scoped to one tab/visit, cleared
+ * once the tab closes, which matches "same visit, different page" without following the traveller
+ * around forever.
+ */
+const STORAGE_KEY = 'kai_conversation_v1';
+
+type StoredConversation = { conversationId: string; messages: ChatMessage[] };
+
+function loadStoredConversation(): StoredConversation | null {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (typeof parsed?.conversationId !== 'string' || !Array.isArray(parsed?.messages)) return null;
+    return parsed as StoredConversation;
+  } catch {
+    // Private browsing / storage disabled / corrupt JSON - just start a fresh conversation.
+    return null;
+  }
+}
+
+function saveStoredConversation(conversationId: string, messages: ChatMessage[]) {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ conversationId, messages }));
+  } catch {
+    // Quota exceeded or storage disabled - the conversation just won't survive a reload.
+  }
+}
+
+function clearStoredConversation() {
+  try {
+    sessionStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Nothing to clean up if storage was never writable in the first place.
+  }
+}
+
+/** messageCounter resets to 0 on every page load; restored ids (from a previous load) can already
+ * be past that. Without this, the first id nextId() mints post-restore can collide with a restored
+ * message's id and break React's key uniqueness. */
+function bumpMessageCounterPast(messages: ChatMessage[]) {
+  for (const message of messages) {
+    const n = Number(message.id.slice(1));
+    if (Number.isFinite(n) && n > messageCounter) messageCounter = n;
+  }
+}
 
 /**
  * Kai sends payment links as plain text inside its reply. Render them as real links so nobody has
@@ -72,6 +143,16 @@ export default function KaiWidget() {
     if (startedRef.current) return;
     startedRef.current = true;
 
+    // Resume rather than start fresh if this tab already has a conversation from an earlier page
+    // on this same visit - the whole point is that a page navigation shouldn't reset the chat.
+    const stored = loadStoredConversation();
+    if (stored) {
+      bumpMessageCounterPast(stored.messages);
+      setConversationId(stored.conversationId);
+      setMessages(stored.messages);
+      return;
+    }
+
     setStarting(true);
     setError('');
 
@@ -106,6 +187,11 @@ export default function KaiWidget() {
   useEffect(() => {
     if (open) startConversation();
   }, [open, startConversation]);
+
+  /* Mirrors every turn into sessionStorage so the next page on this visit can resume it. */
+  useEffect(() => {
+    if (conversationId) saveStoredConversation(conversationId, messages);
+  }, [conversationId, messages]);
 
   /**
    * Lift the widget clear of the sticky ticker bar. TickerBar (components/TickerBar.tsx) slides in
@@ -193,6 +279,10 @@ export default function KaiWidget() {
           cards: turn.productCards,
           contactRequest: turn.contactRequest,
           paymentRequest: turn.paymentRequest,
+          dateOptions: turn.dateOptions,
+          timeOptions: turn.timeOptions,
+          ticketOptions: turn.ticketOptions,
+          extraOptions: turn.extraOptions,
         },
       ]);
     } catch {
@@ -205,6 +295,7 @@ export default function KaiWidget() {
 
   function resetConversation() {
     startedRef.current = false;
+    clearStoredConversation();
     setConversationId(null);
     setMessages([]);
     setDraft('');
@@ -293,6 +384,59 @@ export default function KaiWidget() {
                     />
                   ))}
                 </div>
+              )}
+
+              {message.dateOptions && message.dateOptions.length > 0 && !message.dateAnswered && (
+                <KaiDateCalendar
+                  dates={message.dateOptions}
+                  disabled={busy}
+                  onSelect={(date) => {
+                    setMessages((prev) =>
+                      prev.map((m) => (m.id === message.id ? { ...m, dateAnswered: true } : m)),
+                    );
+                    send(date);
+                  }}
+                />
+              )}
+
+              {message.timeOptions && message.timeOptions.length > 0 && !message.choiceAnswered && (
+                <KaiTimeOptions
+                  options={message.timeOptions}
+                  disabled={busy}
+                  onSelect={(label) => {
+                    setMessages((prev) =>
+                      prev.map((m) => (m.id === message.id ? { ...m, choiceAnswered: true } : m)),
+                    );
+                    send(label);
+                  }}
+                />
+              )}
+
+              {message.ticketOptions && message.ticketOptions.length > 0 && !message.choiceAnswered && (
+                <KaiPricedOptions
+                  options={message.ticketOptions}
+                  disabled={busy}
+                  onSelect={(text) => {
+                    setMessages((prev) =>
+                      prev.map((m) => (m.id === message.id ? { ...m, choiceAnswered: true } : m)),
+                    );
+                    send(text);
+                  }}
+                />
+              )}
+
+              {message.extraOptions && message.extraOptions.length > 0 && !message.choiceAnswered && (
+                <KaiPricedOptions
+                  options={message.extraOptions}
+                  disabled={busy}
+                  offerNone
+                  onSelect={(text) => {
+                    setMessages((prev) =>
+                      prev.map((m) => (m.id === message.id ? { ...m, choiceAnswered: true } : m)),
+                    );
+                    send(text);
+                  }}
+                />
               )}
 
               {message.paymentRequest && (
