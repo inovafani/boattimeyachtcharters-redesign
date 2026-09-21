@@ -56,20 +56,29 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 90px;
+    /* Sideways clipping belongs here, not on <body>. Setting overflow-x on
+       <body> makes its overflow-y compute to `auto`, which turns the body into
+       a second scroll container — so the page rendered two vertical scrollbars
+       and the scroll wheel fought between them. */
+    overflow-x: hidden;
   }
 
   body {
     font-family: var(--font-body);
     background: var(--navy);
     color: var(--cream);
-    overflow-x: hidden;
     width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   main {
-    overflow-x: hidden;
+    /* `clip`, not `hidden`. With `hidden`, overflow-y computes to `auto` and
+       <main> becomes a scroll container of its own — the decorative offset
+       frames inside the pages stick out ~30px, which was enough to render a
+       second scrollbar next to the page one. `clip` cuts the overflow without
+       creating a scroll box. */
+    overflow-x: clip;
     width: 100%;
   }
 
@@ -4630,5 +4639,23 @@
     width: 100vw;
     height: 100dvh;
     border: none;
+  }
+}
+
+/* ── Vessel pages: gallery, specs, cross-links ──────────── */
+/* Six thumbnails side by side collapse to slivers on a phone, so wrap them
+   into rows instead. The spec table and cross-link grid stack the same way as
+   the other two-column sections on these pages. */
+@media (max-width: 768px) {
+  .yacht-gallery-thumbs {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .yacht-crosslink-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 420px) {
+  .yacht-gallery-thumbs {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }

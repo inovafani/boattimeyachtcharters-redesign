@@ -195,6 +195,8 @@ type VesselInput = {
   length: string;
   /** Maximum guests aboard. */
   capacity: number;
+  /** Additional photographs of the vessel. */
+  gallery?: string[];
 };
 
 /** One of the two named vessels — the business's main entities. */
@@ -206,9 +208,9 @@ export function vesselSchema(vessel: VesselInput) {
     name: vessel.name,
     description: vessel.description,
     url: `${BASE_URL}${vessel.path}`,
-    image: vessel.image.startsWith('http')
-      ? vessel.image
-      : `${BASE_URL}${vessel.image}`,
+    image: [vessel.image, ...(vessel.gallery ?? [])].map((src) =>
+      src.startsWith('http') ? src : `${BASE_URL}${src}`,
+    ),
     category: 'Yacht charter',
     brand: { '@id': ORG_ID },
     aggregateRating: AGGREGATE_RATING,

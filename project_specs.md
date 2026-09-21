@@ -409,3 +409,138 @@ Audit prop terabaikan dijalankan ke seluruh `components/` — tidak ada komponen
 
 ### Sisa pekerjaan — tugas konten, bukan kode
 19 dari 32 artikel masih punya `meta_title` di atas 60 karakter (61–71), misalnya "Mother and Calf Whale Encounters | Gold Coast Whale Watching". Ini judul yang ditulis manual, bukan bug — diperpendek lewat admin di `/admin/news`, bukan lewat kode. Tidak dikerjakan karena menulis ulang 32 judul adalah keputusan copywriting pemilik situs.
+
+---
+
+## Koreksi — Poin 4 sebelumnya BELUM tuntas (ditemukan 21 September 2026)
+
+### Apa yang terlewat
+Laporan tim SEO berbunyi: *"Sun Goddess, Mermaid Spirit and About Boat Time are still in Google's index and now dead."* Sebelumnya saya menafsirkan ini sebagai route yang terhapus dari git, lalu memulihkan `/sun-goddess-gold-coast`, `/mermaid-spirit-gold-coast`, dan `/about-boattime`. Itu **asumsi yang salah**.
+
+URL yang sebenarnya ada di index Google berasal dari **situs WordPress lama**, dengan struktur berbeda:
+
+| Ada di index Google | Status sebelum koreksi |
+|---|---|
+| `boattimeyachtcharters.com/sun-goddess/` | 404 |
+| `boattimeyachtcharters.com/mermaid-spirit/` | 404 |
+| `boattimeyachtcharters.com/about-boat-time/` | 404 |
+
+Frasa "About Boat Time" (tiga kata terpisah) di laporan persis cocok dengan slug lama `/about-boat-time/` — petunjuk yang sebelumnya terlewat. Memulihkan route baru tidak menyentuh URL-URL ini sama sekali; ketiganya tetap mati.
+
+### Cara menemukan cakupan sebenarnya
+Daftar URL situs lama diambil dari index Wayback Machine (`web.archive.org/cdx`), disaring dari aset dan boilerplate tema, lalu tiap kandidat diuji terhadap situs live. Hasil: **78 URL situs lama yang masih 404**, jauh melampaui tiga yang disebut laporan — termasuk halaman layanan (`/private-charter/`, `/weddings/`, `/corporate-event/`, `/cruise-tickets/`, `/catering/`, `/menus/`), halaman musiman (`/valentines-day-cruise/`, `/riverfire-2024/`), index blog beserta paginasinya, dan sekitar 25 artikel lama.
+
+### Perbaikan
+Pengalihan permanen ditambahkan di `next.config.ts` sebagai daftar `OLD_SITE_REDIRECTS`, dipetakan ke halaman padanan terdekat. Setiap `source` sudah diverifikasi pernah ada di situs lama dan 404 hari ini.
+
+Hasil verifikasi lokal: **67 dari 78 URL lama kini berujung HTTP 200.**
+
+11 sisanya sengaja dibiarkan 404 karena memang tidak layak diindeks: `/auto-draft/`, `/home-btyc/`, `/homelink/`, `/sunsets-whale-draft/`, `/boattime-yc-runsheet/`, `/1813-2/`, `/2024/01/09/`, `/comments/feed/`, `/sitemap`, `/thank-you/`. Mengalihkan sampah hanya membuat Google terus merayapinya.
+
+Catatan: URL dengan garis miring di akhir melewati dua lompatan (`/sun-goddess/` → `/sun-goddess` → `/sun-goddess-gold-coast`) karena normalisasi bawaan Next.js. Google menangani rantai pendek seperti ini tanpa masalah.
+
+### Perlu keputusan — `/privacy-policy/`
+`/privacy-policy/` ada di index Google dan kini 404, tetapi situs baru **tidak punya halaman privasi sama sekali**. Tidak dialihkan karena tidak ada tujuan yang tepat. Mengingat situs mengumpulkan data enquiry dan analitik lokasi pengunjung (lihat fitur pelacakan lokasi di atas), halaman ini sebaiknya dibuat ulang — itu tugas konten, bukan kode.
+
+---
+
+## Halaman kapal dibuat informatif — 21 September 2026
+
+### Sumber kebenaran
+Pemilik situs menetapkan section homepage **"Two vessels. One horizon."** (`components/Fleet.tsx`) sebagai sumber data dan foto yang benar. Semua angka dan gambar diambil dari sana.
+
+### Konflik data yang diselesaikan
+Sebelumnya angka kapal bertabrakan antar halaman:
+
+| Data | Homepage (benar) | Halaman kapal (sebelumnya) |
+|---|---|---|
+| Sun Goddess — panjang | 34 m / 114 ft | spec bar tertulis **110 ft** |
+| Sun Goddess — tamu | 135 | schema saya tertulis **150** |
+| Mermaid Spirit — tamu harian | 150 | spec bar tertulis **100** |
+
+Semua kini mengikuti homepage. Diverifikasi: nol penyebutan "110 ft" tersisa di situs.
+
+### File baru
+- **`lib/vessels.ts`** — satu sumber data kedua kapal (nama, ukuran, kapasitas, foto + alt text, tabel spesifikasi, fitur, URL tur 360°, FAQ). Halaman, metadata, dan JSON-LD membaca dari sini, sehingga angkanya tidak bisa melenceng lagi.
+- **`components/YachtSections.tsx`** — empat section yang dipakai kedua halaman: `VesselGallery`, `VesselSpecTable`, `VesselFaq`, `VesselCrossLinks`.
+
+### Foto stok diganti foto asli
+Kedua halaman sebelumnya memakai **14 foto stok Unsplash** — kapal milik orang lain — termasuk di hero, overview, kartu charter, dan tiga dek Mermaid Spirit. Semuanya diganti foto milik sendiri dari `public/`. Diverifikasi: **nol referensi Unsplash tersisa**, dan seluruh path gambar terbukti ada.
+
+### Section baru untuk SEO
+1. **Galeri** — 6 foto Sun Goddess, 5 foto Mermaid Spirit, tiap foto punya alt text deskriptif (bobot pencarian gambar), plus tombol tur 360° Kuula yang sebelumnya hanya ada di homepage.
+2. **Tabel spesifikasi** — 10 baris `<table>` teks biasa per kapal, bisa dibaca mesin pencari dan orang yang membandingkan dua kapal.
+3. **FAQ** — 6 pertanyaan per kapal (kapasitas, ukuran, titik keberangkatan, wedding, bar, jenis charter / dek, aktivitas air, Brisbane River). Jawaban selalu ada di DOM meski accordion tertutup, supaya crawler membacanya.
+4. **Cross-link** — 4 link internal per halaman ke kapal satunya dan halaman charter/cruise terkait.
+
+### Hasil terverifikasi
+- `npm run build` lolos, tanpa error TypeScript; dev server tanpa error.
+- HTML per halaman naik dari ~63 KB ke **105–108 KB**; 11 section H2 per halaman.
+- JSON-LD per halaman: `Product` (7 foto Sun Goddess / 6 Mermaid Spirit, panjang + kapasitas benar), `FAQPage` 6 pertanyaan, `BreadcrumbList`, plus blok bisnis dan `WebSite` dari layout.
+- Aturan mobile ditambahkan di `globals.css` supaya 6 thumbnail galeri tidak menyempit di layar HP.
+- Seluruh 20 halaman tetap lolos audit: 200, canonical benar, JSON-LD ada, judul ≤ 60 karakter, tepat satu H1.
+
+---
+
+## Bug — scrollbar ganda di seluruh situs (diperbaiki 21 September 2026)
+
+### Gejala
+Setiap halaman menampilkan **dua scrollbar vertikal** bersebelahan di tepi kanan. Roda scroll berebut antara keduanya, sehingga halaman terasa macet dan sulit di-scroll. Dilaporkan saat melihat halaman Mermaid Spirit, tetapi pengukuran menunjukkan bug ini ada di **semua halaman** dan sudah lama ada — bukan akibat pekerjaan SEO.
+
+### Penyebab
+Aturan CSS di `app/globals.css`:
+
+```css
+body { overflow-x: hidden; }
+main { overflow-x: hidden; }
+```
+
+Menurut spesifikasi CSS, ketika satu sumbu `overflow` disetel ke `hidden`, sumbu lainnya yang bernilai `visible` otomatis dihitung menjadi `auto`. Jadi `overflow-x: hidden` diam-diam mengubah `overflow-y` menjadi `auto`, dan elemen itu berubah menjadi **scroll container tersendiri**.
+
+Pemicunya: bingkai dekoratif di halaman-halaman ini diposisikan dengan offset negatif (`bottom: -24`, `right: -24`), sehingga isi `<main>` meluber sekitar 30 piksel. Luberan sekecil itu sudah cukup membuat `<main>` menampilkan scrollbar sendiri di samping scrollbar halaman.
+
+Diverifikasi lewat Chrome DevTools Protocol: `main` memiliki `overflowY: auto` dengan `scrollHeight 9383` melawan `clientHeight 9353`.
+
+### Perbaikan
+- `html` kini yang memegang `overflow-x: hidden` (html memang scroller halaman, jadi tidak menimbulkan scrollbar kedua), dan aturan itu dihapus dari `body`.
+- `main` memakai `overflow-x: clip`. Berbeda dengan `hidden`, nilai `clip` **tidak** memaksa `overflow-y` menjadi `auto`, sehingga luberan tetap terpotong tanpa membuat kotak scroll baru.
+
+### Hasil terverifikasi
+- Diukur ulang di 7 halaman: satu-satunya scroll container yang tersisa adalah `html` — persis seperti seharusnya. `main` tidak lagi menjadi scroller di halaman manapun.
+- `.mobile-drawer` masih punya `overflow-y: auto`, tetapi `visibility: hidden` dan `opacity: 0` di desktop sehingga tidak pernah tergambar. Dibiarkan.
+- **Perilaku `position: sticky` diuji dan tetap utuh** — ini risiko utama dari perubahan `clip`. Panel "Horizons" di homepage tetap terkunci di 120px dan bilah filter blog tetap di 72px sepanjang scroll.
+- `npm run build` lolos; ke-20 halaman tetap lolos audit SEO; pengalihan URL lama tetap berfungsi.
+
+---
+
+## Tahun berdiri disamakan menjadi 2014 (21 September 2026)
+
+### Masalah
+Homepage menyebut dua tahun berdiri yang berbeda: Footer menulis *"since 2014"*, sedangkan StatsBar menulis *"Est. 2017"*.
+
+### Tahun mana yang benar
+**2014.** Dikuatkan oleh tiga sumber lain yang saling cocok:
+- `components/Footer.tsx` — "since 2014"
+- `components/StatsBar.jsx` (versi file ini sebelum ditulis ulang ke TypeScript) — "Est. 2014"
+- `app/about-boattime/page.tsx` — "12+ years operating"; `components/CruisePageWhale.tsx` — "over a decade of tours"
+
+"Est. 2017" tampaknya salah ketik yang masuk saat StatsBar ditulis ulang ke TypeScript.
+
+### Akibat lanjutan yang ikut diperbaiki
+Angka **"8+ seasons operating"** cocoknya dengan 2017, bukan 2014. Kalau hanya tahunnya yang diubah, homepage justru jadi kontradiktif dengan cara baru. Dari 2014 ke 2026 adalah **12 musim** — angka yang memang sudah dipakai halaman About ("12+ years") dan halaman whale ("over a decade").
+
+Angka ini muncul di dua komponen homepage, keduanya diperbaiki.
+
+### Perubahan
+| File | Sebelum | Sesudah |
+|---|---|---|
+| `components/StatsBar.tsx` | `'Est. 2017 · Family owned & operated'` | `'Est. 2014 · …'` |
+| `components/StatsBar.tsx` | `end: 8` (Seasons operating) | `end: 12` |
+| `components/AboutOwners.tsx` | `8+` seasons operating | `12+` |
+
+### Hasil terverifikasi
+- `npm run build` lolos.
+- Homepage yang sudah dirender diperiksa lewat browser: hanya ada `Est. 2014` dan `since 2014` — nol penyebutan 2017 tersisa di seluruh `components/*.tsx`.
+- Penghitung StatsBar yang beranimasi diverifikasi berhenti di **12+**, dan blok AboutOwners menampilkan **12+ seasons operating**.
+
+Catatan: file lama `components/StatsBar.jsx` dan `Footer.jsx` sudah memuat 2014 dan tidak di-import oleh apapun (Next memilih varian `.tsx`), jadi dibiarkan apa adanya.

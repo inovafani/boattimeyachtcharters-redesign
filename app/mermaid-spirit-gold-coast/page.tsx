@@ -1,15 +1,24 @@
 import type { Metadata } from 'next';
 import MermaidSpiritPage from '@/components/YachtPageMermaidSpirit';
 import JsonLd from '@/components/JsonLd';
-import { vesselSchema, breadcrumbSchema } from '@/lib/schema';
+import { vesselSchema, breadcrumbSchema, faqSchema, BASE_URL } from '@/lib/schema';
+import { MERMAID_SPIRIT as V } from '@/lib/vessels';
 
-const PATH = '/mermaid-spirit-gold-coast';
+const PATH = `/${V.slug}`;
 
 export const metadata: Metadata = {
   title: 'Mermaid Spirit — 100ft Catamaran Gold Coast',
   description:
-    'Charter the Mermaid Spirit catamaran — 3 decks, 100 guests, jet skis, scuba, DJ, fireworks. Gold Coast Broadwater and Brisbane River.',
-  alternates: { canonical: `https://www.boattimeyachtcharters.com${PATH}` },
+    "Charter Mermaid Spirit, a 100ft tri-deck catamaran for up to 150 guests. Three full decks, chef's kitchen, stinger pool, jet skis and scuba gear on the Gold Coast Broadwater and Brisbane River.",
+  alternates: { canonical: `${BASE_URL}${PATH}` },
+  openGraph: {
+    type: 'website',
+    url: `${BASE_URL}${PATH}`,
+    title: 'Mermaid Spirit — 100ft Catamaran Gold Coast',
+    description:
+      "A 100ft tri-deck catamaran for up to 150 guests. Three decks, chef's kitchen, stinger pool and jet skis.",
+    images: [{ url: V.heroImage, width: 1200, height: 630, alt: V.heroAlt }],
+  },
 };
 
 export default function Page() {
@@ -18,15 +27,16 @@ export default function Page() {
       <JsonLd
         schemas={[
           vesselSchema({
-            name: 'Mermaid Spirit',
-            description:
-              'A 100ft tri-deck catamaran chartering the Gold Coast Broadwater and Brisbane River — three decks, up to 100 guests, jet skis, scuba, DJ and fireworks.',
+            name: V.name,
+            description: V.intro[0],
             path: PATH,
-            image: '/mermaid-spirit-main.jpg',
-            length: '100 ft',
-            capacity: 100,
+            image: V.heroImage,
+            gallery: V.gallery.map((g) => g.src),
+            length: `${V.lengthFt} ft`,
+            capacity: V.dayGuests,
           }),
-          breadcrumbSchema([{ name: 'Mermaid Spirit', path: PATH }]),
+          faqSchema(V.faqs),
+          breadcrumbSchema([{ name: V.name, path: PATH }]),
         ]}
       />
       <MermaidSpiritPage />

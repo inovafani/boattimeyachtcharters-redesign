@@ -108,7 +108,7 @@ export default function AboutOwners() {
             <div className="ao-stat-divider" />
             <div className="ao-stat">
               <span className="ao-stat-num">
-                8<em>+</em>
+                12<em>+</em>
               </span>
               <span className="ao-stat-label">seasons operating</span>
             </div>

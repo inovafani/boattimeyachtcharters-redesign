@@ -8,6 +8,13 @@ import Nav from './Nav';
 import Footer from './Footer';
 import { CruiseHero, CruiseBookingCTA } from './CruiseSections';
 import { Eyebrow, ItalicEm, Button } from './Shared';
+import {
+  VesselGallery,
+  VesselSpecTable,
+  VesselFaq,
+  VesselCrossLinks,
+} from './YachtSections';
+import { MERMAID_SPIRIT as V } from '@/lib/vessels';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -28,7 +35,7 @@ const INQUIRY = '/#inquiry';
 function SpecBar() {
   const SPECS = [
     { label: 'Length',    value: '100',       suffix: 'ft' },
-    { label: 'Capacity',  value: '100',       suffix: 'guests' },
+    { label: 'Capacity',  value: '150',       suffix: 'guests' },
     { label: 'Decks',     value: '3',         suffix: 'levels' },
     { label: 'Status',    value: 'New',       suffix: 'refit' },
   ];
@@ -88,7 +95,7 @@ function VesselOverview() {
         style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}
       >
         <div className="rv" style={{ position: 'relative' }}>
-          <div style={{ aspectRatio: '4/5', backgroundImage: 'url(https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=800&q=80)', backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid rgba(201,168,76,0.15)' }} />
+          <div style={{ aspectRatio: '4/5', backgroundImage: 'url(/mermaid-spirit-interior/mermaid1.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid rgba(201,168,76,0.15)' }} />
           <div style={{ position: 'absolute', top: 24, left: -24, bottom: -24, right: 24, border: '1px solid rgba(201,168,76,0.1)', zIndex: -1, pointerEvents: 'none' }} />
         </div>
         <div>
@@ -121,21 +128,21 @@ const DECKS = [
     name: 'Main Deck',
     subtitle: 'The social heart of the vessel',
     description: 'The main deck is where it all happens — dual bars running port and starboard, the fully equipped catering galley, and a spacious lounge that converts from cocktail reception to seated dinner with ease. The aft swim platform puts you one step from the water.',
-    image: 'https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=900&q=80',
+    image: '/mermaid-spirit-interior/mermaid2.jpg',
   },
   {
     number: '02',
     name: 'Upper Deck',
     subtitle: 'Dining, entertainment & panoramic views',
     description: 'The upper deck elevates the experience — literally. An open-air dining terrace overlooking the bow, premium sound system for DJ or live band, and unobstructed 180° views across the Broadwater. This is where dinner becomes a memory.',
-    image: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=900&q=80',
+    image: '/mermaid-spirit-interior/mermaid3.jpg',
   },
   {
     number: '03',
     name: 'Sky Deck',
     subtitle: 'Open air · sun lounges · 360° views',
     description: 'The sky deck is the jewel of the vessel — fully open to the sky with wrap-around views in every direction. Sun lounges, high-top bars, and the best seat in Queensland for fireworks, sunsets, and whale watching. Completely unforgettable.',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80',
+    image: '/mermaid-spirit-interior/mermaid4.jpg',
   },
 ];
 
@@ -364,7 +371,7 @@ export default function MermaidSpiritPage() {
           eyebrow="Our Fleet · Mermaid Spirit"
           title="Mermaid Spirit"
           titleAccent="100ft Tri-deck Catamaran"
-          image="https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=2000&q=85"
+          image="/mermaid-spirit-main.jpg"
           stats={[
             { label: 'Length',   value: '100 ft' },
             { label: 'Guests',   value: 'Up to 150' },
@@ -379,6 +386,41 @@ export default function MermaidSpiritPage() {
         <Destinations />
         <AdventureActivities />
         <PremiumServices />
+        <VesselGallery
+          vesselName={V.name}
+          images={V.gallery}
+          tourUrl={V.tourUrl}
+        />
+        <VesselSpecTable
+          vesselName={V.name}
+          specs={V.specs}
+          features={V.features}
+        />
+        <VesselFaq vesselName={V.name} faqs={V.faqs} />
+        <VesselCrossLinks
+          links={[
+            {
+              label: 'Sun Goddess',
+              href: '/sun-goddess-gold-coast',
+              note: 'Our 114ft flagship superyacht — dual bars and room for 135 guests.',
+            },
+            {
+              label: 'Riverfire Cruise',
+              href: '/riverfire-2026',
+              note: 'The sky deck is one of the best fireworks vantage points on the river.',
+            },
+            {
+              label: 'Dining Cruises',
+              href: '/buffet-dinner-and-lunch-cruise',
+              note: "Buffet lunch and dinner sessions from the chef's kitchen on board.",
+            },
+            {
+              label: 'Private Charter',
+              href: '/private-yacht-charter',
+              note: 'Three decks to spread a celebration across, for up to 150 guests.',
+            },
+          ]}
+        />
         <CruiseBookingCTA bookingUrl={INQUIRY} />
       </main>
       <Footer />

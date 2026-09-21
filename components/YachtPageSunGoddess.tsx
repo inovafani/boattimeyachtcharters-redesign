@@ -8,6 +8,13 @@ import Nav from './Nav';
 import Footer from './Footer';
 import { CruiseHero, CruiseBookingCTA } from './CruiseSections';
 import { Eyebrow, ItalicEm, Button } from './Shared';
+import {
+  VesselGallery,
+  VesselSpecTable,
+  VesselFaq,
+  VesselCrossLinks,
+} from './YachtSections';
+import { SUN_GODDESS as V } from '@/lib/vessels';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -27,7 +34,7 @@ const INQUIRY = '/#inquiry';
 
 function SpecBar() {
   const SPECS = [
-    { label: 'Length', value: '110', suffix: 'ft' },
+    { label: 'Length', value: '114', suffix: 'ft' },
     { label: 'Capacity', value: '135', suffix: 'guests' },
     { label: 'Bars', value: '2', suffix: 'onboard' },
     { label: 'Location', value: 'Gold', suffix: 'Coast' },
@@ -165,7 +172,7 @@ function VesselOverview() {
             A superyacht built for <ItalicEm>extraordinary moments</ItalicEm>.
           </h2>
           {[
-            "Sun Goddess is Gold Coast's most celebrated luxury superyacht — 110 feet of sweeping teak decks, open-air entertainer's spaces, and a professional crew dedicated to making every charter unforgettable.",
+            "Sun Goddess is Gold Coast's most celebrated luxury superyacht — 114 feet of sweeping teak decks, open-air entertainer's spaces, and a professional crew dedicated to making every charter unforgettable.",
             "Whether you're hosting a wedding on the foredeck, a corporate event for 135 guests, or a private sunset cruise for two, Sun Goddess adapts entirely to your vision. The Broadwater is her home.",
           ].map((p, i) => (
             <p
@@ -194,7 +201,7 @@ function VesselOverview() {
             style={{
               aspectRatio: '4/5',
               backgroundImage:
-                'url(https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80)',
+                'url(/sungoddess-page-boat.jpeg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               border: '1px solid rgba(201,168,76,0.15)',
@@ -340,32 +347,32 @@ function OnBoard() {
 const CHARTERS = [
   {
     label: 'Sunset Cruise',
-    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80',
+    img: '/twilight-drift.jpeg',
     href: '/luxury-broadwater-cruise',
   },
   {
     label: 'Whale Watching',
-    img: 'https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=400&q=80',
+    img: '/humpbacks.jpg',
     href: '/cruise-tickets-luxury-whale-watching',
   },
   {
     label: 'Wedding Charter',
-    img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=80',
+    img: '/wedding-charter.webp',
     href: INQUIRY,
   },
   {
     label: 'Corporate Event',
-    img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80',
+    img: '/corporate-charter.webp',
     href: INQUIRY,
   },
   {
     label: 'Birthday Party',
-    img: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80',
+    img: '/sun-goddess-interior/sun3.jpeg',
     href: INQUIRY,
   },
   {
     label: 'Private Charter',
-    img: 'https://images.unsplash.com/photo-1569263979104-865ab7cd8d13?w=400&q=80',
+    img: '/private-charter.jpeg',
     href: INQUIRY,
   },
 ];
@@ -583,7 +590,7 @@ function WatersportsSection() {
             style={{
               aspectRatio: '4/5',
               backgroundImage:
-                'url(https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=80)',
+                'url(/broadwater.jpeg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               border: '1px solid rgba(201,168,76,0.15)',
@@ -752,7 +759,7 @@ export default function SunGoddessPage() {
           eyebrow="Our Fleet · Sun Goddess"
           title="Sun Goddess"
           titleAccent="114ft Superyacht"
-          image="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=2000&q=85"
+          image="/sun-goddess-main-upscale.png"
           stats={[
             { label: 'Length', value: '114 ft' },
             { label: 'Guests', value: 'Up to 135' },
@@ -767,6 +774,41 @@ export default function SunGoddessPage() {
         <CharterExperiences />
         <WatersportsSection />
         <CateringSection />
+        <VesselGallery
+          vesselName={V.name}
+          images={V.gallery}
+          tourUrl={V.tourUrl}
+        />
+        <VesselSpecTable
+          vesselName={V.name}
+          specs={V.specs}
+          features={V.features}
+        />
+        <VesselFaq vesselName={V.name} faqs={V.faqs} />
+        <VesselCrossLinks
+          links={[
+            {
+              label: 'Mermaid Spirit',
+              href: '/mermaid-spirit-gold-coast',
+              note: 'Our 100ft tri-deck catamaran — three decks, jet skis and a stinger pool.',
+            },
+            {
+              label: 'Private Charter',
+              href: '/private-yacht-charter',
+              note: 'Build the day around your occasion, from an intimate group to 135 guests.',
+            },
+            {
+              label: 'Wedding Charter',
+              href: '/wedding-yacht-charter',
+              note: 'Licensed for ceremonies, with the foredeck as your aisle.',
+            },
+            {
+              label: 'Whale Watching',
+              href: '/cruise-tickets-luxury-whale-watching',
+              note: 'Humpback season aboard Sun Goddess, May to November.',
+            },
+          ]}
+        />
         <CruiseBookingCTA bookingUrl={INQUIRY} />
       </main>
       <Footer />

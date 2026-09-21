@@ -36,7 +36,7 @@ const STATS = [
     note: 'Sun Goddess — the most spacious superyacht in the category.',
   },
   {
-    end: 8,
+    end: 12,
     suffix: '+',
     unit: false,
     decimals: 0,
@@ -145,7 +145,7 @@ export default function StatsBar() {
             {[
               "Gold Coast's most-reviewed superyacht operator",
               'Two vessels — up to 135 guests',
-              'Est. 2017 · Family owned & operated',
+              'Est. 2014 · Family owned & operated',
             ].map((item) => (
               <div
                 key={item}
