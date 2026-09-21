@@ -366,7 +366,13 @@ export default function CharterPageWedding() {
         {/* 1. Hero */}
         <CharterHero
           eyebrow="Boattime YC Luxury"
-          headline="Yacht Wedding Gold Coast"
+          headline={
+            <>
+              Yacht Wedding
+              <br />
+              Gold Coast
+            </>
+          }
           subtext="Say 'I Do' on a Boattime Luxury Yacht Charter, the idyllic venue for your wedding ceremonies and reception. Celebrate your love as you cruise through the crystal blue waters of Gold Coast."
           image="/wedding-charter-images/25-DSC2845.webp"
           ctas={[

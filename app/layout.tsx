@@ -4,6 +4,8 @@ import Script from 'next/script';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import KaiWidget from '@/components/kai/KaiWidget';
+import JsonLd from '@/components/JsonLd';
+import { organizationSchema, websiteSchema } from '@/lib/schema';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -23,7 +25,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: {
     default: 'Boattime Yacht Charters | Gold Coast Superyacht Hire',
-    template: '%s | Boattime Yacht Charters',
+    template: '%s | Boattime',
   },
   description:
     'Our fleet includes two impressive yachts, Sun Goddess and the Mermaid Spirit, which are available for yacht hire and event boat hire for any occasion. Gold Coast\'s most-reviewed superyacht charter company.',
@@ -52,9 +54,9 @@ export const metadata: Metadata = {
       'Sun Goddess & Mermaid Spirit — Gold Coast\'s most-reviewed superyacht charter company.',
     images: ['/sun-goddess-main-upscale.png'],
   },
-  alternates: {
-    canonical: 'https://www.boattimeyachtcharters.com',
-  },
+  // NOTE: no `alternates.canonical` here on purpose. Next.js inherits metadata
+  // into child pages, so a canonical set at the root would tell Google every
+  // sub-page is a duplicate of the homepage. Each page declares its own.
 };
 
 export const viewport: Viewport = {
@@ -76,6 +78,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Business + site entities — present on every page */}
+        <JsonLd schemas={[organizationSchema(), websiteSchema()]} />
       </head>
       <body>
         <ThemeProvider>

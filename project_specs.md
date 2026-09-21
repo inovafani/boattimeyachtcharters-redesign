@@ -289,3 +289,123 @@ No new top-level folders. No changes to any existing component, page, or Supabas
 - Category filter and pagination work with live data
 - Unauthenticated users hitting `/admin/*` are redirected to `/admin`
 - No console errors
+
+---
+
+## Feature — SEO Repair (laporan tim SEO, Sept 2026)
+
+### Apa ini & siapa yang terdampak
+Perbaikan empat masalah SEO yang dilaporkan tim SEO. Semuanya sudah diverifikasi langsung terhadap situs production (`https://www.boattimeyachtcharters.com`) sebelum spec ini ditulis. Yang terdampak: Google/AI search engine yang meng-crawl situs, dan calon pelanggan yang menemukan kita lewat pencarian.
+
+### Hasil verifikasi (bukan asumsi — sudah dicek live)
+
+| # | Laporan | Status | Akar masalah sebenarnya |
+|---|---------|--------|-------------------------|
+| 1 | Semua sub-page canonical ke homepage | **Benar** | `app/layout.tsx` menyetel `alternates.canonical` ke URL homepage. Di Next.js metadata ini **diwariskan** ke semua halaman anak yang tidak menyetel canonical-nya sendiri. Hanya `/cruise-tickets-luxury-whale-watching` dan artikel `/boattime-news/[slug]` yang punya canonical sendiri. |
+| 2 | 32 blog post di sitemap 404 | **Benar** | **Bukan bug kode.** Database Supabase (`atcafncwghxfynsfkjil.supabase.co`) tidak lagi resolve di DNS — project-nya ter-pause/terhapus. Semua artikel tersimpan di sana. Halaman `/boattime-news` menampilkan "No articles", tiap artikel 404. Sitemap yang masih memuat 32 URL adalah **cache lama Vercel** (`age: 519319` detik ≈ 6 hari), bukan data hidup. |
+| 3 | Tidak ada structured data (JSON-LD) | **Benar** | Nol JSON-LD di seluruh halaman marketing. Kode JSON-LD sudah ada, tapi **hanya** di `app/boattime-news/[slug]/page.tsx` — dan halaman itu sedang 404, jadi tidak pernah tampil. |
+| 4 | Halaman yacht & About 404 | **Benar** | Route-nya terhapus dari git, tapi komponennya masih ada. URL mati: `/sun-goddess-gold-coast`, `/mermaid-spirit-gold-coast`, `/about-boattime`. |
+
+### ⚠️ Blocker — butuh tindakan di luar kode (masalah #2)
+Artikel blog **tidak bisa dipulihkan lewat kode**. Kontennya ada di Supabase, dan project Supabase-nya sedang mati. Kemungkinan terbesar: Supabase free tier otomatis mem-*pause* project yang tidak diakses selama ~7 hari, dan subdomain API-nya berhenti resolve saat di-pause. Timing-nya cocok dengan cache sitemap yang berumur 6 hari.
+
+Tindakan: buka dashboard Supabase → pilih project → klik **Restore/Resume**. Begitu hidup, 32 artikel kembali 200 tanpa perubahan kode apapun. Pekerjaan kode di bawah mengasumsikan database kembali hidup.
+
+### Lingkup pekerjaan
+
+**A. Canonical per-halaman (masalah #1 — paling mendesak)**
+- Hapus `alternates.canonical` dari `app/layout.tsx` supaya tidak lagi diwariskan.
+- Tambahkan `alternates: { canonical: '<url halaman itu sendiri>' }` ke metadata setiap halaman publik (16 halaman statis + homepage).
+- Halaman whale watching dan artikel blog sudah benar — tidak disentuh.
+
+**B. Hidupkan kembali halaman yacht & About (masalah #4)**
+- Pulihkan dari git: `app/sun-goddess-gold-coast/page.tsx`, `app/mermaid-spirit-gold-coast/page.tsx`, `app/about-boattime/page.tsx`, `components/AboutPage.tsx`.
+- Komponen `YachtPageSunGoddess.tsx` dan `YachtPageMermaidSpirit.tsx` masih ada di repo dan import-nya masih valid.
+- Tambahkan ketiga URL itu ke `app/sitemap.ts`.
+- Tambahkan link ke ketiganya di `components/Footer.tsx` (saat ini "Sun Goddess"/"Mermaid Spirit" mengarah ke `#fleet`, dan link About masih di-comment).
+
+**C. Structured data / JSON-LD (masalah #3)**
+File baru `lib/schema.ts` berisi helper pembangun schema, dipakai lintas halaman. Yang ditambahkan:
+- `Organization` + `LocalBusiness` (nama, telepon `+61 477 667 644`, email, alamat Main Beach QLD 4217, jam, area layanan, profil sosial) — di layout root, jadi tampil di semua halaman.
+- `WebSite` dengan `SearchAction` — di layout root.
+- `BoatTrip`/`TouristAttraction` + `Offer` per halaman cruise (harga diambil dari copy yang sudah ada di halaman).
+- `Service` per halaman charter (private / corporate / wedding).
+- `Product`-style entity untuk kedua kapal di halaman yacht (Sun Goddess 114ft, Mermaid Spirit 100ft).
+- `AggregateRating` — **hanya** memakai angka yang sudah dipublikasikan di situs: 1.341 review, rating 4.7. Tidak ada angka karangan.
+- `FAQPage` di halaman yang sudah punya section FAQ, dibangun dari teks FAQ yang sudah ada.
+- `BreadcrumbList` di semua sub-page.
+
+**D. Kebersihan sitemap**
+- Tambahkan tiga route yang dipulihkan.
+- Jika query artikel gagal, sitemap tetap terbit dengan URL statis saja (perilaku ini sudah ada) — supaya tidak pernah lagi mengiklankan URL mati.
+
+### Yang TIDAK dikerjakan
+- Tidak menulis ulang copy atau desain halaman manapun.
+- Tidak membuat artikel blog baru — 32 artikel lama kembali sendiri begitu Supabase hidup.
+- Tidak mengarang rating, harga, atau review untuk schema. Hanya angka yang sudah tampil di situs.
+- Tidak menyentuh Kai, Supabase schema, admin, atau halaman campaign.
+
+### File yang disentuh
+| File | Baru? | Untuk apa |
+|------|-------|-----------|
+| `app/layout.tsx` | edit | Buang canonical warisan; pasang JSON-LD Organization/LocalBusiness/WebSite |
+| 16 × `app/*/page.tsx` | edit | Canonical sendiri + JSON-LD per halaman |
+| `app/page.tsx` | edit | Canonical homepage + JSON-LD |
+| `lib/schema.ts` | **baru** | Helper pembangun JSON-LD |
+| `app/sun-goddess-gold-coast/page.tsx` | **pulih** | Halaman Sun Goddess |
+| `app/mermaid-spirit-gold-coast/page.tsx` | **pulih** | Halaman Mermaid Spirit |
+| `app/about-boattime/page.tsx` | **pulih** | Halaman About |
+| `components/AboutPage.tsx` | **pulih** | Isi halaman About |
+| `app/sitemap.ts` | edit | Tambah 3 route yang pulih |
+| `components/Footer.tsx` | edit | Link ke halaman yacht & About |
+
+### Definisi "selesai"
+- `npm run build` lolos, tanpa error TypeScript.
+- Setiap halaman publik punya `<link rel="canonical">` yang menunjuk ke dirinya sendiri (dicek di HTML hasil build).
+- `/sun-goddess-gold-coast`, `/mermaid-spirit-gold-coast`, `/about-boattime` balas 200 dan tampil benar.
+- Setiap halaman publik memuat minimal satu blok `application/ld+json` yang lolos Google Rich Results Test.
+- Sitemap memuat ketiga route baru.
+- Tidak ada error console di dev server.
+- Terpisah, tergantung tindakan pemilik situs: Supabase hidup kembali → 32 artikel balas 200.
+
+### Status penyelesaian — 21 September 2026
+
+**Masalah #2 (blog 404): SELESAI oleh pemilik situs.** Supabase kena batas free plan sehingga project-nya dibatasi. Plan sudah di-upgrade. Terverifikasi: 32 artikel published kembali terbaca, `/boattime-news` kembali me-link artikel, halaman artikel balas 200. Tidak ada perubahan kode yang diperlukan.
+
+**Masalah #1, #3, #4: SELESAI lewat kode.** `npm run build` lolos (34 route), tidak ada error TypeScript, tidak ada error di dev server.
+
+Terverifikasi pada 20 halaman publik + halaman artikel:
+- Semua balas 200.
+- Semua punya `<link rel="canonical">` yang menunjuk ke dirinya sendiri.
+- Semua memuat JSON-LD yang valid dan ter-parse.
+- Sitemap kini 52 URL (20 statis + 32 artikel), memuat tiga route yang dipulihkan.
+- Halaman yang dipulihkan merender Nav, H1, isi, dan Footer dengan benar.
+
+Struktur JSON-LD yang dihasilkan:
+- Setiap halaman: `Organization`/`LocalBusiness`/`TouristAttraction` + `WebSite` (dari root layout) + `BreadcrumbList`.
+- Homepage: + `FAQPage` (dibangun dari `lib/faqs.ts`, sumber yang sama dengan FAQ yang tampil).
+- Halaman cruise: + `BoatTrip` dengan `Offer` dan `BoatTerminal` keberangkatan.
+- Halaman charter: + `Service`.
+- Halaman kapal: + `Product` (panjang kapal, kapasitas tamu).
+- `/about-boattime`: + `AboutPage`.
+- `/boattime-news`: + `Blog`; artikel: + `BlogPosting` (+ `FAQPage` bila ada).
+
+Catatan implementasi yang berbeda dari rencana:
+- `lib/faqs.ts` dibuat (tidak ada di rencana awal). Data FAQ sebelumnya berada di dalam `components/Faq.tsx` yang ber-`'use client'`; ekspor dari file client tidak terbaca sebagai array di sisi server, sehingga build gagal. Data dipindah ke modul biasa dan di-import oleh keduanya — satu sumber kebenaran, JSON-LD tidak akan melenceng dari FAQ yang tampil.
+- `components/JsonLd.tsx` dibuat untuk merender blok schema.
+- Koordinat geo di `lib/schema.ts` bersifat **perkiraan** (Sea World Drive, Main Beach). Perlu dikonfirmasi terhadap titik berlabuh sebenarnya.
+
+### Perbaikan lanjutan — disetujui & selesai
+
+**1. Judul halaman kepanjangan & brand ganda (17 halaman).** `title.template` di root layout menambahkan brand, sedangkan judul tiap halaman sudah memuatnya sendiri, sehingga judul jadi 76–133 karakter — Google hanya menampilkan sekitar 60. Diperbaiki dengan: suffix brand dibuang dari judul tiap halaman, dan template dipendekkan dari `'%s | Boattime Yacht Charters'` menjadi `'%s | Boattime'`. Hasil: **20 dari 20 halaman kini ≤ 60 karakter** (terpanjang 57). Judul homepage tidak diubah.
+
+**2. Bug H1 hero pada halaman charter.** `CharterHero` di `components/CharterSections.tsx` menulis mati teks `<h1>` ("Private Yacht Charter / Gold Coast • Brisbane") dan mengabaikan prop `headline` yang dikirim halaman. Akibatnya halaman **Corporate dan Wedding menampilkan H1 milik halaman Private** — Google membaca kedua halaman itu sebagai halaman private charter. H1 adalah sinyal on-page terkuat, jadi ini merusak relevansi dua halaman komersial.
+
+Diperbaiki: `<h1>` kini merender `{headline}`, dan tipe prop diubah dari `string` menjadi `React.ReactNode` supaya tiap halaman menentukan sendiri titik pemenggalan barisnya — pola yang sama dengan `CruiseHero` yang sudah benar. Ketiga halaman charter kini mengirim headline dua baris. Hero halaman Private tidak berubah sama sekali (teks identik dengan versi hardcoded sebelumnya).
+
+**3. Judul artikel blog memuat brand tiga kali.** `app/boattime-news/[slug]/page.tsx` menyusun judul sebagai `${meta_title} · Boattime News`, lalu template layout menambahkan brand lagi. Contoh nyata: "Luxury Whale Watching Gold Coast | Boattime Yacht Charters · Boattime News | Boattime" (87 karakter). Diperbaiki dengan helper `stripBrandSuffix()` yang membuang suffix brand yang terlanjur diketik editor ke dalam `meta_title`, dan suffix "· Boattime News" tidak lagi ditambahkan. Hasil: artikel yang lewat 60 karakter turun dari **31/32 menjadi 19/32**; contoh di atas kini 43 karakter.
+
+Audit prop terabaikan dijalankan ke seluruh `components/` — tidak ada komponen lain yang mengabaikan prop yang dikirim.
+
+### Sisa pekerjaan — tugas konten, bukan kode
+19 dari 32 artikel masih punya `meta_title` di atas 60 karakter (61–71), misalnya "Mother and Calf Whale Encounters | Gold Coast Whale Watching". Ini judul yang ditulis manual, bukan bug — diperpendek lewat admin di `/admin/news`, bukan lewat kode. Tidak dikerjakan karena menulis ulang 32 judul adalah keputusan copywriting pemilik situs.

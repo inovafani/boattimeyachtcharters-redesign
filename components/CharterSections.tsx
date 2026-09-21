@@ -46,7 +46,7 @@ export function CharterHero({
   ctas,
 }: {
   eyebrow: string;
-  headline: string;
+  headline: React.ReactNode;
   subtext: string;
   image: string;
   ctas: { label: string; href: string; variant?: 'primary' | 'ghost' }[];
@@ -132,9 +132,7 @@ export function CharterHero({
             marginBottom: 28,
           }}
         >
-          Private Yacht Charter
-          <br />
-          Gold Coast • Brisbane
+          {headline}
         </h1>
         <p
           className="hr"

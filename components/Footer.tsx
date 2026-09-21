@@ -241,8 +241,8 @@ export default function Footer() {
             <div style={{ marginTop: 28 }}>
               <ColHead>Our Yachts</ColHead>
             </div>
-            <FootLink href="#fleet">Sun Goddess</FootLink>
-            <FootLink href="#fleet">Mermaid Spirit</FootLink>
+            <FootLink href="/sun-goddess-gold-coast">Sun Goddess</FootLink>
+            <FootLink href="/mermaid-spirit-gold-coast">Mermaid Spirit</FootLink>
           </div>
 
           {/* Contact */}
@@ -252,12 +252,12 @@ export default function Footer() {
             <FootLink href="mailto:info@boattimeyachtcharters.com.au">
               info@boattimeyachtcharters.com.au
             </FootLink>
-            {/* <div style={{ marginTop: 28 }}>
+            <div style={{ marginTop: 28 }}>
               <ColHead>Company</ColHead>
             </div>
-            <FootLink>About BoatTime</FootLink>
+            <FootLink href="/about-boattime">About Boattime</FootLink>
             <FootLink href="/boattime-news">Boattime News</FootLink>
-            <FootLink href="#inquiry">Booking Enquiry</FootLink> */}
+            <FootLink href="#inquiry">Booking Enquiry</FootLink>
           </div>
         </div>
 

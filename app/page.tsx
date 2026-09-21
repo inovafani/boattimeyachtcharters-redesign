@@ -18,11 +18,20 @@ import Inquiry from '@/components/Inquiry';
 import Footer from '@/components/Footer';
 import TickerBar from '@/components/TickerBar';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
+import JsonLd from '@/components/JsonLd';
+import { FAQS } from '@/lib/faqs';
+import { faqSchema } from '@/lib/schema';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://www.boattimeyachtcharters.com' },
+};
 
 export default function HomePage() {
   return (
     <>
       <GoogleAdsTag />
+      <JsonLd schemas={[faqSchema(FAQS)]} />
       <Nav />
       <HashScroll />
       <main>

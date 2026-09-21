@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { createPublicClient } from '@/lib/supabase/public';
 import ArticlePage from '@/components/ArticlePage';
 import GoogleAdsTag from '@/components/GoogleAdsTag';
+import { breadcrumbSchema } from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,6 +23,22 @@ interface Props {
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
+const BRAND_SUFFIXES = [
+  '| Boattime Yacht Charters',
+  '· Boattime Yacht Charters',
+  '— Boattime Yacht Charters',
+  '| Boattime',
+  '· Boattime News',
+];
+
+function stripBrandSuffix(title: string): string {
+  let out = title.trim();
+  for (const suffix of BRAND_SUFFIXES) {
+    if (out.endsWith(suffix)) out = out.slice(0, -suffix.length).trim();
+  }
+  return out;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   try {
@@ -34,7 +51,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .single();
 
     if (data) {
-      const pageTitle = data.meta_title || data.title;
+      // The root layout's template already appends "| Boattime", so strip any
+      // brand the editor typed into meta_title and don't add a second suffix —
+      // otherwise the title reads "… | Boattime Yacht Charters · Boattime News
+      // | Boattime" and Google truncates it well before the useful words.
+      const pageTitle = stripBrandSuffix(data.meta_title || data.title);
       const pageDesc = data.meta_description || data.excerpt || '';
       const canonicalUrl = data.canonical_url || `${BASE_URL}/boattime-news/${slug}`;
       const ogImage = data.image_url || FALLBACK_OG;
@@ -42,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       const ogDesc = data.og_description || data.meta_description || data.excerpt || '';
 
       return {
-        title: `${pageTitle} · Boattime News`,
+        title: pageTitle,
         description: pageDesc,
         keywords: data.tags?.length ? data.tags.join(', ') : undefined,
         alternates: { canonical: canonicalUrl },
@@ -141,24 +162,11 @@ function buildSchemas(post: PostData, slug: string) {
     }
   }
 
-  if (types.includes('LocalBusiness')) {
-    schemas.push({
-      '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
-      name: 'Boattime Yacht Charters',
-      url: BASE_URL,
-      telephone: '+61477667644',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Sea World Drive',
-        addressLocality: 'Main Beach',
-        addressRegion: 'QLD',
-        postalCode: '4217',
-        addressCountry: 'AU',
-      },
-      priceRange: '$$$',
-    });
-  }
+  // No LocalBusiness block here. The root layout emits the business on every
+  // page with a stable @id; repeating it without one made 22 articles declare
+  // two separate businesses, which Google can read as two different operators.
+  // A post's `schema_types` may still list 'LocalBusiness' — it is satisfied by
+  // the layout's block, so nothing is lost.
 
   return schemas;
 }
@@ -185,7 +193,13 @@ export default async function Page({ params }: Props) {
 
     console.log('[article] loaded', post.title);
 
-    const schemas = buildSchemas(post as PostData, slug);
+    const schemas = [
+      ...buildSchemas(post as PostData, slug),
+      breadcrumbSchema([
+        { name: 'Boattime News', path: '/boattime-news' },
+        { name: post.title, path: `/boattime-news/${slug}` },
+      ]),
+    ];
 
     // Fetch up to 3 related posts from the same categories
     const categories = (post.categories as string[]) ?? [];

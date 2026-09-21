@@ -370,7 +370,13 @@ export default function CharterPageCorporate() {
         {/* 1. Hero */}
         <CharterHero
           eyebrow="Boattime YC Luxury"
-          headline="Corporate Yacht Charter Gold Coast"
+          headline={
+            <>
+              Corporate Yacht Charter
+              <br />
+              Gold Coast
+            </>
+          }
           subtext="Welcome to Boattime Yacht Charters, where luxury meets business. Whether you're planning a networking event, team-building retreat, or product launch, we provide a unique and impressive setting that will leave a lasting impact on your guests."
           image="/corporate-charter-images/06_Mermaid-Insidfe-1-1.webp"
           ctas={[

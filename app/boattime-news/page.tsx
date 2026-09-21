@@ -1,11 +1,26 @@
 import type { Metadata } from 'next';
 import { createPublicClient } from '@/lib/supabase/public';
 import NewsPage, { type Post } from '@/components/NewsPage';
+import JsonLd from '@/components/JsonLd';
+import { breadcrumbSchema, BASE_URL, ORG_ID } from '@/lib/schema';
 
 export const metadata: Metadata = {
   title: 'Boattime News · Yacht Charter Guides & Stories',
   description:
     "Guides, inspiration, and local knowledge from Gold Coast's premier yacht charter company.",
+  alternates: { canonical: `${BASE_URL}/boattime-news` },
+};
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${BASE_URL}/boattime-news/#blog`,
+  name: 'Boattime News',
+  description:
+    "Guides, inspiration, and local knowledge from Gold Coast's premier yacht charter company.",
+  url: `${BASE_URL}/boattime-news`,
+  publisher: { '@id': ORG_ID },
+  inLanguage: 'en-AU',
 };
 
 export const dynamic = 'force-dynamic';
@@ -34,5 +49,15 @@ export default async function Page() {
     console.log('[boattime-news] client error', err);
   }
 
-  return <NewsPage posts={posts} />;
+  return (
+    <>
+      <JsonLd
+        schemas={[
+          blogSchema,
+          breadcrumbSchema([{ name: 'Boattime News', path: '/boattime-news' }]),
+        ]}
+      />
+      <NewsPage posts={posts} />
+    </>
+  );
 }
