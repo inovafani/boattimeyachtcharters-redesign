@@ -29,7 +29,7 @@ const staticRoutes: Array<{
   },
   { path: '/sun-goddess-gold-coast', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/mermaid-spirit-gold-coast', changeFrequency: 'monthly', priority: 0.9 },
-  { path: '/about-boattime', changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/about', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/yacht-charter-menus', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/tickets', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/boattime-news', changeFrequency: 'daily', priority: 0.7 },

@@ -58,7 +58,12 @@ const AREA_SERVED = [
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': ['Organization', 'LocalBusiness', 'TouristAttraction'],
+    // A single type, not an array. `LocalBusiness` already IS an `Organization`
+    // in the schema.org hierarchy, so listing both was redundant, and
+    // `TouristAttraction` is a `Place` — mixing it in muddied the entity and
+    // left validators unable to name the business at all (schema.org's
+    // validator listed the WebSite and FAQPage blocks but not this one).
+    '@type': 'LocalBusiness',
     '@id': ORG_ID,
     name: 'Boattime Yacht Charters',
     alternateName: 'Boattime',

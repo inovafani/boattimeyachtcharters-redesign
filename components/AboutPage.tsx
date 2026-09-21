@@ -49,7 +49,7 @@ function AboutHero() {
         className="absolute inset-0 will-change-transform"
         style={{
           backgroundImage:
-            'url(https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=1800&q=80)',
+            'url(/sun-goddess-main-upscale.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -157,7 +157,7 @@ function AboutIntro() {
             Gold Coast&rsquo;s most <ItalicEm>trusted charter</ItalicEm>.
           </h2>
           <p className="rv" style={{ fontFamily: 'var(--font-body)', fontSize: 15, fontWeight: 300, color: 'rgba(245,240,232,0.78)', lineHeight: 1.85, marginBottom: 20 }}>
-            Boattime Yacht Charters is home to two of the Gold Coast&rsquo;s finest superyachts — the 110ft
+            Boattime Yacht Charters is home to two of the Gold Coast&rsquo;s finest superyachts — the 114ft
             Sun Goddess and the tri-deck Mermaid Spirit. Together they host everything from intimate sunset
             escapes to large-scale corporate events and milestone celebrations.
           </p>
@@ -200,7 +200,7 @@ function AboutIntro() {
             style={{
               aspectRatio: '4/5',
               backgroundImage:
-                'url(https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=900&q=80)',
+                'url(/sungoddess-page-boat.jpeg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               border: '1px solid rgba(201,168,76,0.15)',
@@ -295,11 +295,11 @@ function OurSuperyachts() {
   const VESSELS = [
     {
       name: 'Sun Goddess',
-      tagline: '110ft Luxury Superyacht',
-      img: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80',
+      tagline: '114ft Luxury Superyacht',
+      img: '/sun-goddess-main-upscale.png',
       specs: [
         { label: 'Capacity', value: '135 Guests' },
-        { label: 'Size',     value: '34m (110ft)' },
+        { label: 'Size',     value: '34m (114ft)' },
         { label: 'Decks',    value: '2 Levels' },
         { label: 'Bars',     value: '2 Onboard' },
       ],
@@ -315,9 +315,9 @@ function OurSuperyachts() {
     {
       name: 'Mermaid Spirit',
       tagline: 'Tri-deck Catamaran',
-      img: 'https://images.unsplash.com/photo-1511316695145-4992006ffddb?w=800&q=80',
+      img: '/mermaid-spirit-main.jpg',
       specs: [
-        { label: 'Capacity', value: '100 Guests' },
+        { label: 'Capacity', value: '150 Guests' },
         { label: 'Size',     value: '30m (100ft)' },
         { label: 'Decks',    value: '3 Levels' },
         { label: 'Bars',     value: '2 Onboard' },

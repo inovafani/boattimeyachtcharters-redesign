@@ -33,7 +33,13 @@ const OLD_SITE_REDIRECTS: { source: string; destination: string }[] = [
   },
   { source: '/our-yachts/mermaid-spirit', destination: '/mermaid-spirit-gold-coast' },
   { source: '/our-yachts', destination: '/#fleet' },
-  { source: '/about-boat-time', destination: '/about-boattime' },
+  // The About page lives at /about. `/about-boattime` was its address for one
+  // deploy and reached the sitemap, so it gets a redirect of its own rather
+  // than being dropped. No rule for `/about` itself — that is the real page now,
+  // and a redirect pointing at it would loop.
+  { source: '/about-boat-time', destination: '/about' },
+  { source: '/about-boattime', destination: '/about' },
+  { source: '/about-us', destination: '/about' },
 
   // ── Charter & service pages ──────────────────────────────────────────────
   { source: '/private-charter', destination: '/private-yacht-charter' },

@@ -255,7 +255,7 @@ export default function Footer() {
             <div style={{ marginTop: 28 }}>
               <ColHead>Company</ColHead>
             </div>
-            <FootLink href="/about-boattime">About Boattime</FootLink>
+            <FootLink href="/about">About Boattime</FootLink>
             <FootLink href="/boattime-news">Boattime News</FootLink>
             <FootLink href="#inquiry">Booking Enquiry</FootLink>
           </div>

@@ -3,7 +3,7 @@ import AboutPage from '@/components/AboutPage';
 import JsonLd from '@/components/JsonLd';
 import { breadcrumbSchema, BASE_URL, ORG_ID } from '@/lib/schema';
 
-const PATH = '/about-boattime';
+const PATH = '/about';
 
 export const metadata: Metadata = {
   title: 'About Boattime Yacht Charters · Gold Coast',

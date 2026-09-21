@@ -554,3 +554,76 @@ Tim SEO meminta link eksplisit dari homepage ke masing-masing halaman kapal. Foo
 Ditambahkan `pageHref` + `pageLabel` pada data kartu di `components/Fleet.tsx`, dirender sebagai link `<a>` sungguhan di samping tombol tur, dibungkus `.yacht-cta-row` (flex, wrap di layar sempit).
 
 Terverifikasi lokal: homepage kini memuat 4 link ke halaman kapal — "View Sun Goddess" dan "View Mermaid Spirit" di kartu fleet, plus dua link footer. `npm run build` lolos.
+
+---
+
+## Koreksi schema — entitas bisnis tidak terdeteksi validator (21 September 2026)
+
+### Temuan
+Saat menyiapkan bukti untuk tim SEO, screenshot dari `validator.schema.org` pada homepage hanya menampilkan **dua** schema (`WebSite` dan `FAQPage`), padahal HTML memuat **tiga** blok. Yang hilang dari daftar justru blok bisnisnya — bagian paling penting untuk operator wisata lokal.
+
+### Penyebab
+`@type` ditulis sebagai array tiga tipe sekaligus:
+
+```json
+"@type": ["Organization", "LocalBusiness", "TouristAttraction"]
+```
+
+Dua masalah:
+1. **Berlebihan** — `LocalBusiness` di hierarki schema.org sudah merupakan turunan `Organization`, jadi menyebut keduanya mubazir.
+2. **Mencampur kategori** — `TouristAttraction` adalah turunan `Place`, bukan `Organization`. Mencampur Organization dengan Place membuat entitasnya ambigu, dan validator tidak bisa memberi nama pada blok tersebut.
+
+### Perbaikan
+`@type` disederhanakan menjadi satu tipe: **`LocalBusiness`**. Ini tipe yang dipakai dokumentasi structured data Google untuk bisnis lokal, dan secara hierarki tetap mencakup `Organization` — sehingga referensi `provider`, `publisher`, dan `brand` yang menunjuk ke `@id` yang sama tetap sah.
+
+Seluruh isi blok tidak berubah: nama, telepon, email, alamat, geo, area layanan, rentang harga, rating agregat, dan profil sosial tetap lengkap.
+
+### Terverifikasi lokal
+```
+/                         -> LocalBusiness, WebSite, FAQPage
+/sun-goddess-gold-coast   -> LocalBusiness, WebSite, Product, FAQPage, BreadcrumbList
+/wedding-yacht-charter    -> LocalBusiness, WebSite, Service, BreadcrumbList
+```
+`npm run build` lolos. Tiap blok kini punya satu tipe bersih yang bisa dinamai validator.
+
+### Catatan — `/about` bukan URL lama yang terindeks
+Pemilik situs mengecek `https://www.boattimeyachtcharters.com/about` dan menemukan 404. Diperiksa terhadap index Wayback: satu-satunya URL About yang pernah ada di situs lama adalah **`/about-boat-time/`**, dan itu sudah dialihkan ke `/about-boattime` (200). `/about` tidak pernah ada sehingga tidak pernah terindeks.
+
+Meski begitu `/about` dan `/about-us` tetap ditambahkan ke daftar redirect — keduanya alamat yang wajar ditebak orang atau dipakai link eksternal, dan biayanya nol.
+
+---
+
+## Halaman About: foto asli + pindah ke `/about` (21 September 2026)
+
+### Foto stok diganti
+`components/AboutPage.tsx` memakai **4 foto stok Unsplash** — kapal milik orang lain — di hero, blok portrait, dan kedua kartu kapal. Semuanya diganti foto sendiri: `sun-goddess-main-upscale.png`, `sungoddess-page-boat.jpeg`, `mermaid-spirit-main.jpg`. Terverifikasi nol referensi Unsplash tersisa.
+
+### Angka kapal ikut diperbaiki
+Halaman ini menyimpan angka lama yang bertentangan dengan homepage:
+
+| Data | Sebelumnya | Sekarang (ikut homepage) |
+|---|---|---|
+| Sun Goddess — panjang | 110 ft (2 tempat + body copy) | **114 ft** |
+| Mermaid Spirit — kapasitas | 100 Guests | **150 Guests** |
+
+### URL dipindah `/about-boattime` → `/about`
+Pemilik situs meminta halaman About berada di `/about` supaya alamat itu tidak 404. Route dipindah dengan `git mv` agar riwayat file terjaga.
+
+Yang ikut disesuaikan:
+- `PATH` di dalam page → canonical, `AboutPage` schema `@id`/`url`, dan breadcrumb otomatis mengikuti.
+- `app/sitemap.ts` → `/about`.
+- `components/Footer.tsx` → link ke `/about`.
+- `next.config.ts` → `/about-boat-time`, `/about-boattime`, dan `/about-us` semua diarahkan ke `/about`.
+
+**Penting:** aturan `{ source: '/about', destination: '/about-boattime' }` yang sempat ditambahkan sebelumnya **dihapus**. Kalau dibiarkan, `/about` yang kini halaman sungguhan akan mengalihkan ke dirinya sendiri lewat rantai dan menimbulkan redirect loop.
+
+`/about-boattime` sempat live satu deploy dan sudah masuk sitemap, jadi ia mendapat redirect sendiri — bukan sekadar dihapus.
+
+### Terverifikasi lokal
+```
+/about              200
+/about-boat-time/   308 → 308 → 200  → /about
+/about-boattime     308 → 200        → /about
+/about-us           308 → 200        → /about
+```
+Tidak ada redirect loop. Sitemap tetap 52 URL, semuanya 200; canonical `/about` menunjuk ke dirinya sendiri; schema `LocalBusiness, WebSite, AboutPage, BreadcrumbList`. `npm run build` lolos.
