@@ -4659,3 +4659,12 @@
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
+
+/* Fleet card now carries two calls to action: the vessel's own page and the
+   360° tour. Sit them on one row, wrapping on narrow screens. */
+.yacht-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+}

@@ -22,6 +22,9 @@ interface YachtData {
   feats: string[];
   ctaLabel: string;
   ctaHref: string;
+  /** Link to this vessel's own page. */
+  pageHref: string;
+  pageLabel: string;
   tourUrl?: string;
   img: string;
   interiorImages: string[];
@@ -52,6 +55,8 @@ const YACHTS: YachtData[] = [
     ],
     ctaLabel: '360° Tour Sun Goddess',
     ctaHref: '/#inquiry',
+    pageHref: '/sun-goddess-gold-coast',
+    pageLabel: 'View Sun Goddess',
     tourUrl:
       'https://kuula.co/share/collection/7M9TC?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
     img: '/sun-goddess-main-upscale.png',
@@ -88,6 +93,8 @@ const YACHTS: YachtData[] = [
     ],
     ctaLabel: '360° Tour Mermaid Spirit',
     ctaHref: '/#inquiry',
+    pageHref: '/mermaid-spirit-gold-coast',
+    pageLabel: 'View Mermaid Spirit',
     tourUrl:
       'https://kuula.co/share/collection/7MvRw?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1',
     img: '/mermaid-spirit-main.jpg',
@@ -734,6 +741,25 @@ function YachtShowcase({
         </div>
 
         {/* CTA */}
+        <div className="yacht-cta-row">
+        <a href={y.pageHref} className="yacht-cta-link">
+          {y.pageLabel}
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 12 12"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 6h8M6 2l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
         {y.tourUrl && onTourClick ? (
           <button
             onClick={onTourClick}
@@ -782,6 +808,7 @@ function YachtShowcase({
             </svg>
           </a>
         )}
+        </div>
       </div>
     </div>
   );

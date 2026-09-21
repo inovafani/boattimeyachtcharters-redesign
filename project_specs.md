@@ -544,3 +544,13 @@ Angka ini muncul di dua komponen homepage, keduanya diperbaiki.
 - Penghitung StatsBar yang beranimasi diverifikasi berhenti di **12+**, dan blok AboutOwners menampilkan **12+ seasons operating**.
 
 Catatan: file lama `components/StatsBar.jsx` dan `Footer.jsx` sudah memuat 2014 dan tidak di-import oleh apapun (Next memilih varian `.tsx`), jadi dibiarkan apa adanya.
+
+---
+
+## Link "View Sun Goddess / View Mermaid Spirit" (21 September 2026)
+
+Tim SEO meminta link eksplisit dari homepage ke masing-masing halaman kapal. Footer sudah dikerjakan sebelumnya, tetapi section fleet ("Two vessels. One horizon.") belum: satu-satunya CTA di kartu kapal adalah tombol tur 360°, yang membuka modal dan bukan link — sehingga halaman entitas kapal tidak punya link masuk dari section yang justru membahasnya.
+
+Ditambahkan `pageHref` + `pageLabel` pada data kartu di `components/Fleet.tsx`, dirender sebagai link `<a>` sungguhan di samping tombol tur, dibungkus `.yacht-cta-row` (flex, wrap di layar sempit).
+
+Terverifikasi lokal: homepage kini memuat 4 link ke halaman kapal — "View Sun Goddess" dan "View Mermaid Spirit" di kartu fleet, plus dua link footer. `npm run build` lolos.
