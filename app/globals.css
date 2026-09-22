@@ -631,13 +631,42 @@
   color: var(--gold) !important;
 }
 
-/* ── Restore gold eyebrows ─────────────────────────────────── */
-[data-theme='light'] .section-eyebrow {
-  color: var(--gold) !important;
+/* ── Eyebrows go dark ──────────────────────────────────────
+   A 9-10px gold kicker on the cream background is too faint to
+   read, so eyebrows sitting on light flip to navy. The ones on a
+   dark photo overlay are matched at (0,3,0) further up and keep
+   their light colour. */
+[data-theme='light'] .section-eyebrow,
+[data-theme='light'] .kai-eyebrow {
+  color: #0a1628 !important;
 }
 [data-theme='light'] .section-eyebrow::before {
+  background: #0a1628 !important;
+}
+
+/* The overlay rules above are only (0,2,0) — `*` adds nothing — so the
+   eyebrow rule would otherwise tie them and win on order, printing navy
+   on a dark photo. Naming .section-eyebrow explicitly lifts these to
+   (0,3,0) so eyebrows over photos stay gold, as they were. */
+[data-theme='light'] .cruise-hero-content .section-eyebrow,
+[data-theme='light'] .cta-band-content .section-eyebrow,
+[data-theme='light'] .cruise-card-inner .section-eyebrow,
+[data-theme='light'] .photo-overlay-card .section-eyebrow,
+[data-theme='light'] .vessel-carousel-overlay .section-eyebrow,
+[data-theme='light'] .skysea-stickybar .section-eyebrow,
+[data-theme='light'] .yacht-visual .section-eyebrow {
+  color: var(--gold) !important;
+}
+[data-theme='light'] .cruise-hero-content .section-eyebrow::before,
+[data-theme='light'] .cta-band-content .section-eyebrow::before,
+[data-theme='light'] .cruise-card-inner .section-eyebrow::before,
+[data-theme='light'] .photo-overlay-card .section-eyebrow::before,
+[data-theme='light'] .vessel-carousel-overlay .section-eyebrow::before,
+[data-theme='light'] .skysea-stickybar .section-eyebrow::before,
+[data-theme='light'] .yacht-visual .section-eyebrow::before {
   background: var(--gold) !important;
 }
+
 
 /* ── Restore headings (var(--cream) = #0A1628 in light) ────── */
 [data-theme='light'] main section h1,
@@ -653,15 +682,19 @@
 }
 
 /* ── Restore inline-styled gold elements ───────────────────── */
-/* Exclude elements where gold is used as a BACKGROUND — those keep dark text */
-[data-theme='light'] [style*='var(--gold)']:not([style*='background: var(--gold)']) {
+/* Exclude elements where gold is used as a BACKGROUND — those keep dark
+   text. React serialises inline styles without a space after the colon,
+   so these read "background:var(--gold)"; the spaced spelling used to be
+   here matched nothing, which left gold buttons printing gold on gold. */
+[data-theme='light'] [style*='var(--gold)']:not([style*='background:var(--gold)']) {
   color: var(--gold) !important;
 }
-[data-theme='light'] [style*='var(--gold-light)']:not([style*='background: var(--gold-light)']) {
+[data-theme='light']
+  [style*='var(--gold-light)']:not([style*='background:var(--gold-light)']) {
   color: var(--gold) !important;
 }
 /* Elements with gold backgrounds must keep dark navy text */
-[data-theme='light'] [style*='background: var(--gold)'] {
+[data-theme='light'] [style*='background:var(--gold)'] {
   color: #0a1628 !important;
 }
 
@@ -677,6 +710,16 @@
 }
 [data-theme='light'] .vessel-carousel-overlay [style*='var(--gold)'],
 [data-theme='light'] .vessel-carousel-overlay [style*='var(--gold-light)'] {
+  color: var(--gold) !important;
+}
+
+/* ── Sky-to-Sea sticky bar — paints its own navy, text stays cream ── */
+[data-theme='light'] .skysea-stickybar,
+[data-theme='light'] .skysea-stickybar * {
+  color: #f5f0e8 !important;
+}
+[data-theme='light'] .skysea-stickybar [style*='var(--gold)'],
+[data-theme='light'] .skysea-stickybar [style*='var(--gold-light)'] {
   color: var(--gold) !important;
 }
 
@@ -714,6 +757,49 @@
 [data-theme='light'] .cruise-hero-content .btn-ghost {
   color: #f5f0e8 !important;
   border-color: rgba(245, 240, 232, 0.4) !important;
+}
+
+/* ── Inline-styled eyebrows go dark ─────────────────────────
+   Most eyebrows outside .section-eyebrow are written as inline
+   styles on the page components (uppercase + gold text). React
+   serialises those with no space after the colon, so the
+   attribute substrings below match them exactly. Sits at (0,3,0),
+   one above the generic "restore inline gold" rule earlier, so
+   this is what lands on an eyebrow. */
+[data-theme='light'] [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] [style*='text-transform:uppercase'][style*='color:var(--gold-light)'] {
+  color: #0a1628 !important;
+}
+
+/* The same eyebrows on a dark photo overlay keep their gold —
+   (0,4,0) beats the rule above. Elements whose own inline style
+   paints a gold background are left out; those are pills, and
+   their text is handled below. */
+[data-theme='light'] .hero-content [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .hero-stats-badge [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .cruise-hero-content [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .cta-band-content [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .cruise-card-inner [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .photo-overlay-card [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .vessel-carousel-overlay [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .skysea-stickybar [style*='text-transform:uppercase'][style*='color:var(--gold)'],
+[data-theme='light'] .yacht-visual [style*='text-transform:uppercase'][style*='color:var(--gold)'] {
+  color: var(--gold) !important;
+}
+
+/* Gold-background pills keep navy text. Repeated here, after the
+   overlay exceptions, so a pill inside one of those containers is not
+   dragged back to gold-on-gold. */
+[data-theme='light'] [style*='background:var(--gold)'],
+[data-theme='light'] [style*='background:var(--gold-light)'] {
+  color: #0a1628 !important;
+}
+
+/* Carousel arrows paint their own navy chip, so they keep a light glyph.
+   The broad `main section *` rule is !important and would otherwise beat
+   the inline colour and hide them. */
+[data-theme='light'] .carousel-arrow {
+  color: #f5f0e8 !important;
 }
 
 /* ============================================================
@@ -935,8 +1021,10 @@
   border-color: rgba(10, 22, 40, 0.1) !important;
 }
 
+/* --navy flips to cream in light mode, so naming the token here painted
+   these labels cream on a cream dropdown. Literal navy is what was meant. */
 [data-theme='light'] .site-header__dropdown-label {
-  color: var(--navy) !important;
+  color: #0a1628 !important;
 }
 
 [data-theme='light'] .site-header__dropdown-item:hover {

@@ -425,7 +425,7 @@ function CharterExperiences() {
             <a
               key={c.label}
               href={c.href}
-              className="ch"
+              className="ch photo-overlay-card"
               style={{
                 position: 'relative',
                 display: 'block',

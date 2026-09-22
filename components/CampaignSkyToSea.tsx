@@ -699,7 +699,7 @@ export default function CampaignSkyToSea() {
             >
               {GCH_TOURS.map((t) => (
                 <div key={t.n} style={{ background: 'var(--navy)', display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
+                  <div className="photo-overlay-card" style={{ height: 220, overflow: 'hidden', position: 'relative' }}>
                     <img
                       src={t.img}
                       alt={t.name}

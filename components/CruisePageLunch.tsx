@@ -813,7 +813,7 @@ export default function LunchPage() {
 
         {/* 6 ── SOCIAL PROOF BAR */}
         <div
-          className="cruise-section"
+          className="light-adapt-section cruise-section"
           style={{
             background: "var(--navy-mid)",
             padding: "28px 48px",

@@ -656,6 +656,7 @@ export default function WhalePage() {
 
         {/* 3b ── DEPARTURE MAP */}
         <div
+          className="light-adapt-section"
           style={{
             background: "var(--navy)",
             borderBottom: "1px solid rgba(201,168,76,0.08)",
@@ -755,6 +756,7 @@ export default function WhalePage() {
               />
               {/* Fastest vessel badge */}
               <div
+                className="photo-overlay-card"
                 style={{
                   position: "absolute",
                   bottom: 24,

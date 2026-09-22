@@ -150,6 +150,7 @@ export function VesselGallery({
             type="button"
             aria-label="Previous photo"
             onClick={() => step(-1)}
+            className="carousel-arrow"
             style={arrowStyle('left')}
           >
             ‹
@@ -158,6 +159,7 @@ export function VesselGallery({
             type="button"
             aria-label="Next photo"
             onClick={() => step(1)}
+            className="carousel-arrow"
             style={arrowStyle('right')}
           >
             ›
@@ -229,7 +231,9 @@ function arrowStyle(side: 'left' | 'right'): React.CSSProperties {
     justifyContent: 'center',
     background: 'rgba(10,22,40,0.6)',
     border: '1px solid rgba(201,168,76,0.3)',
-    color: 'var(--cream)',
+    // The chip paints its own navy, so the glyph is a literal cream —
+    // var(--cream) flips to navy in light mode and vanished against it.
+    color: '#F5F0E8',
     fontSize: 24,
     lineHeight: 1,
     cursor: 'pointer',

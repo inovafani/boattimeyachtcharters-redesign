@@ -593,7 +593,7 @@ function YachtShowcase({
       </div>
 
       {/* Info panel */}
-      <div ref={infoRef} className="yacht-info">
+      <div ref={infoRef} className="yacht-info light-adapt-section">
         <div
           style={{
             fontFamily: 'var(--font-body)',

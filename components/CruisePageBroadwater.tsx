@@ -509,7 +509,7 @@ export default function BroadwaterPage() {
 
         {/* 4 ── SOCIAL PROOF */}
         <div
-          className="cruise-section"
+          className="light-adapt-section cruise-section"
           style={{
             background: 'var(--navy-mid)',
             padding: '28px 48px',
