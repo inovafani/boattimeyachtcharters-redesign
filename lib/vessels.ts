@@ -37,7 +37,7 @@ export const SUN_GODDESS: Vessel = {
   tagline: 'She turns every head in the marina — and earns it.',
   intro: [
     'At 114 feet, Sun Goddess is our flagship. Dual bars, two entertainment decks, a dual-level galley, and Bose sound throughout. Built for up to 135 guests who expect room to breathe without giving up a single luxury.',
-    'Whether you are hosting a wedding on the foredeck, a corporate event for 135 guests, or a private sunset cruise for two, Sun Goddess adapts entirely to your vision. The Gold Coast Broadwater is her home, departing Sea World Drive, Main Beach.',
+    'Whether you are hosting a wedding on the foredeck, a corporate event for 135 guests, or a private sunset cruise for two, Sun Goddess adapts entirely to your vision. The Gold Coast Broadwater is her home, departing Marine Stadium Jetty & Pontoon, Main Beach.',
   ],
   lengthFt: 114,
   lengthM: 34,
@@ -81,7 +81,7 @@ export const SUN_GODDESS: Vessel = {
     { label: 'Galley', value: 'Dual-level catering galley' },
     { label: 'Audio', value: 'Bose sound throughout' },
     { label: 'Refit', value: '2019' },
-    { label: 'Departs', value: 'Sea World Drive, Main Beach, Gold Coast' },
+    { label: 'Departs', value: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast' },
     { label: 'Cruising area', value: 'Gold Coast Broadwater & Brisbane' },
   ],
   features: [
@@ -107,7 +107,7 @@ export const SUN_GODDESS: Vessel = {
     },
     {
       q: 'Where does Sun Goddess depart from?',
-      a: 'Sun Goddess departs from Sea World Drive, Main Beach on the Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
+      a: 'Sun Goddess departs from Marine Stadium Jetty & Pontoon, Main Beach on the Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
     },
     {
       q: 'Can you hold a wedding on Sun Goddess?',
@@ -171,7 +171,7 @@ export const MERMAID_SPIRIT: Vessel = {
     { label: 'Galley', value: "Chef's kitchen" },
     { label: 'Water features', value: 'Stinger-proof pool, jet skis, paddle boards, scuba gear' },
     { label: 'Condition', value: 'New refit' },
-    { label: 'Departs', value: 'Sea World Drive, Main Beach, Gold Coast' },
+    { label: 'Departs', value: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast' },
     { label: 'Cruising area', value: 'Gold Coast Broadwater & Brisbane River' },
   ],
   features: [

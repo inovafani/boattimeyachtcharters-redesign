@@ -25,25 +25,28 @@ const SAME_AS = [
 
 const ADDRESS = {
   '@type': 'PostalAddress',
-  streetAddress: 'Sea World Drive',
+  streetAddress: 'Marine Stadium Jetty & Pontoon',
   addressLocality: 'Main Beach',
   addressRegion: 'QLD',
   postalCode: '4217',
   addressCountry: 'AU',
 };
 
-// Approximate departure point — Sea World Drive, Main Beach.
+// Departure point — Marine Stadium Jetty & Pontoon, Main Beach.
 const GEO = {
   '@type': 'GeoCoordinates',
-  latitude: -27.9689,
-  longitude: 153.427,
+  latitude: -27.9407977,
+  longitude: 153.4237125,
 };
 
-// Published on the site (StatsBar): 1,341 verified reviews, 4.7 average.
+// Must match what visitors can see. The review blocks across the cruise pages
+// publish Google 4.7 from 1,863 reviews, so that is what is declared here.
+// (Facebook's 5.0 from 2,047 is shown too, but mixing two platforms into one
+// aggregate is not something we could defend if Google checked.)
 const AGGREGATE_RATING = {
   '@type': 'AggregateRating',
   ratingValue: '4.7',
-  reviewCount: '1341',
+  reviewCount: '1863',
   bestRating: '5',
   worstRating: '1',
 };
@@ -117,19 +120,30 @@ export function breadcrumbSchema(trail: { name: string; path: string }[]) {
 type OfferInput = {
   /** Lowest advertised price, as a plain number string, e.g. '99'. */
   price: string;
+  /** Highest advertised price. Set it to publish a range instead of one figure. */
+  highPrice?: string;
   /** What the price buys, e.g. 'Adult ticket'. */
   description?: string;
 };
 
 function buildOffer(offer: OfferInput) {
-  return {
-    '@type': 'Offer',
-    price: offer.price,
+  const base = {
     priceCurrency: 'AUD',
     availability: 'https://schema.org/InStock',
     url: `${BASE_URL}/tickets`,
     ...(offer.description ? { description: offer.description } : {}),
   };
+
+  // With a ceiling given, publish the real range so search results can show a
+  // "from" price rather than the cost of a multi-ticket bundle.
+  return offer.highPrice
+    ? {
+        '@type': 'AggregateOffer',
+        lowPrice: offer.price,
+        highPrice: offer.highPrice,
+        ...base,
+      }
+    : { '@type': 'Offer', price: offer.price, ...base };
 }
 
 type TripInput = {
@@ -155,7 +169,7 @@ export function boatTripSchema(trip: TripInput) {
     provider: { '@id': ORG_ID },
     departureBoatTerminal: {
       '@type': 'BoatTerminal',
-      name: 'Sea World Drive, Main Beach',
+      name: 'Marine Stadium Jetty & Pontoon, Main Beach',
       address: ADDRESS,
     },
     aggregateRating: AGGREGATE_RATING,

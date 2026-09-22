@@ -393,7 +393,7 @@ Struktur JSON-LD yang dihasilkan:
 Catatan implementasi yang berbeda dari rencana:
 - `lib/faqs.ts` dibuat (tidak ada di rencana awal). Data FAQ sebelumnya berada di dalam `components/Faq.tsx` yang ber-`'use client'`; ekspor dari file client tidak terbaca sebagai array di sisi server, sehingga build gagal. Data dipindah ke modul biasa dan di-import oleh keduanya — satu sumber kebenaran, JSON-LD tidak akan melenceng dari FAQ yang tampil.
 - `components/JsonLd.tsx` dibuat untuk merender blok schema.
-- Koordinat geo di `lib/schema.ts` bersifat **perkiraan** (Sea World Drive, Main Beach). Perlu dikonfirmasi terhadap titik berlabuh sebenarnya.
+- Koordinat geo di `lib/schema.ts` sudah **dikonfirmasi** ke titik depart resmi: Marine Stadium Jetty & Pontoon, Main Beach (-27.9407977, 153.4237125) — https://maps.app.goo.gl/ef21zFGntpZDjmB17
 
 ### Perbaikan lanjutan — disetujui & selesai
 
@@ -627,3 +627,88 @@ Yang ikut disesuaikan:
 /about-us           308 → 200        → /about
 ```
 Tidak ada redirect loop. Sitemap tetap 52 URL, semuanya 200; canonical `/about` menunjuk ke dirinya sendiri; schema `LocalBusiness, WebSite, AboutPage, BreadcrumbList`. `npm run build` lolos.
+
+---
+
+## Optimasi halaman sunset cruise (21 September 2026)
+
+### Kenapa halaman ini
+Data Search Console (19 Jun – 17 Sep) menunjukkan `sunset cruise gold coast` adalah **permintaan terbesar yang belum dimenangkan**: 1.689 tampilan, hanya 32 klik, posisi rata-rata 8,6 (CTR 1,9%). Bandingkan dengan whale watching yang berada di posisi 1,6–1,8.
+
+Pola pendukungnya jelas dari blog: dari 32 artikel, **17 tentang whale watching, 0 tentang sunset**. Yang ditulis banyak artikel menang; yang tidak ditulis kalah.
+
+### Aturan yang dipegang
+Pemilik situs meminta: hanya memakai fakta yang sudah ada di situs, **tidak boleh mengarang**. Karena itu penambahan landmark rute (Marina Mirage, kanal Surfers Paradise, dll) **ditunda** — rute asli kapal belum dikonfirmasi, dan menuliskannya tanpa konfirmasi berarti membuat klaim palsu di situs klien.
+
+### Yang dikerjakan
+
+**1. Judul kata kunci di atas, judul pilihan klien tetap di bawahnya**
+Hero kini memuat keduanya dalam satu `<h1>`:
+
+```
+Sunset Cruise Gold Coast                                  ← krem, baris utama
+Twilight Drift — Broadwater Sunset Tour & Scenic Cruise    ← italic emas, satu baris
+```
+
+Klien ingin "Twilight Drift / Broadwater Sunset Tour & Scenic Cruise" dipertahankan, sementara kata kunci pencarian perlu berada di depan. Dua-duanya dipenuhi tanpa kompromi.
+
+Agar itu mungkin, tipe prop `titleAccent` pada `CruiseHero` diubah dari `string` menjadi `React.ReactNode` sehingga sebuah halaman bisa mengirim pemenggalan baris sendiri. `string` tetap valid sebagai `ReactNode`, jadi **enam halaman lain yang memakai `titleAccent` tidak tersentuh** — sudah diverifikasi masing-masing masih punya tepat satu H1 dengan isi aslinya.
+
+Atas permintaan pemilik situs, nama produk dijadikan **satu baris**. Karena panjangnya 54 karakter, baris itu diberi ukuran relatif terhadap heading — sekarang `fontSize: '0.62em'` (diperbesar dari `0.5em` atas permintaan pemilik situs) (memanfaatkan `titleAccent` yang kini `ReactNode`), dan `titleFontSize` disetel ke `clamp(40px, 5.4vw, 76px)`.
+
+Diperiksa dengan tangkapan layar di 1440px, 1280px, dan 390px: satu baris utuh di kedua lebar desktop, membungkus jadi dua baris di ponsel (tak terhindarkan pada lebar 390px, tetap terbaca dan tidak meluber). Jarak logo ke menu nav pada 1280px diukur 36px — sama di homepage dan halaman lain, jadi bukan efek perubahan ini.
+
+Penempatan kata kunci lainnya:
+- **Title tag** → `Sunset Cruise Gold Coast — Twilight Drift | Boattime` (52 karakter).
+- **Eyebrow** → "Cruise Tickets · Sunset Cruise Gold Coast".
+- **H2** → tanda pisah dihapus menjadi "Luxury Sunset Cruise Gold Coast" supaya frasanya menyatu.
+
+Frasa "sunset cruise gold coast" kini muncul **6 kali** di halaman (sebelumnya nol dalam bentuk persis).
+
+**2. Section FAQ + schema `FAQPage`**
+Halaman sebelumnya punya **nol kalimat tanya**. Ditambahkan 8 pertanyaan di `lib/cruise-faqs.ts`, **setiap jawaban menyalin fakta yang sudah tercetak di halaman** — blok jadwal (4:30/5:00/7:00, Jumat–Minggu), tabel harga, daftar inclusions, deskripsi kapal, dan ketentuan pembatalan. Tidak ada klaim baru.
+
+**3. Jumlah review diperbaiki — melanggar aturan Google**
+Structured data menyebut 1.341 review, padahal halaman menampilkan Facebook 2.047 + Google 1.863. Google mensyaratkan angka di schema sama dengan yang terlihat; kalau tidak, rich result diabaikan.
+
+Ternyata 1.341 juga **mustahil secara aritmetika** — lebih kecil dari Facebook saja. Angka itu muncul di homepage (StatsBar, Hero, Reviews, AboutOwners) sementara 6 halaman lain memakai 2.047/1.863.
+
+Diperbaiki: schema memakai **4,7 / 1.863 (Google saja)** — satu sumber, bisa diverifikasi, cocok dengan yang tercetak. Tampilan di situs diperbaiki dari 1.341 menjadi **3.910+** (2.047 + 1.863, dengan "+" karena angka Tripadvisor tidak dipublikasikan). Nol sisa "1.341" di seluruh kode.
+
+**4. Harga di schema jadi rentang, bukan satu angka**
+Sebelumnya `Offer` dengan `price: 129` ("dua tiket") — terlihat mahal dibanding pesaing yang menampilkan "from $45pp". Sekarang `AggregateOffer` **$59–$229**, sesuai tabel harga di halaman (anak $59 · 1 dewasa $79 · 2 dewasa $129 · 4 dewasa $229). Helper `buildOffer` di `lib/schema.ts` menerima `highPrice` opsional.
+
+**5. Link internal diperbanyak**
+Halaman sunset ditambahkan ke cross-link halaman Sun Goddess dan Mermaid Spirit. Total link menuju halaman sunset naik dari **5 menjadi 19**.
+
+### Hasil terverifikasi
+| | Sebelum | Sesudah |
+|---|---|---|
+| Jumlah kata | 1.107 | **1.895** |
+| Kalimat tanya | 0 | **27** |
+| Schema | BoatTrip, Breadcrumb | **+ FAQPage (8 pertanyaan)**, offer jadi rentang |
+| Link internal masuk | 5 | **19** |
+
+`npm run build` lolos. Ke-20 halaman tetap lolos audit (200, self-canonical, ada JSON-LD, judul ≤ 60 karakter, tepat satu H1).
+
+### Belum dikerjakan
+- **Landmark rute** — menunggu konfirmasi rute asli dari klien.
+- **Artikel blog sunset** — 5 judul sudah diusulkan; ini yang berpotensi membawa dari posisi 8 ke 3, tapi butuh penulisan.
+
+### Koreksi FAQ setelah audit sumber (22 September 2026)
+Pemilik situs meminta pembuktian bahwa setiap jawaban FAQ bersumber dari halaman. Audit 27 klaim dijalankan terhadap `components/CruisePageBroadwater.tsx`; semuanya terverifikasi, tetapi dua hal dilaporkan dan kemudian diperbaiki:
+
+1. **Kalimat yang tidak bersumber — dihapus.** Jawaban tentang satwa laut memuat tambahan *"though sightings are never guaranteed"*. Kata "guarantee" tidak ada sama sekali di halaman; kalimat itu ditulis sebagai pengaman, bukan dikutip. Atas instruksi pemilik situs, dihapus. Jawabannya sekarang berhenti pada apa yang memang tertulis di halaman.
+
+2. **Kapasitas Sun Goddess diselaraskan 100 → 135.** Halaman sunset menuliskan "room for up to 100 guests", satu-satunya sumber di situs yang menyebut 100; homepage (Fleet), `lib/vessels.ts`, dan halaman Sun Goddess semuanya menyebut 135. Diperbaiki di deskripsi vessel halaman sunset **dan** di jawaban FAQ. Nol sisa "100 guests" untuk Sun Goddess di seluruh kode.
+
+Audit ulang dijalankan untuk kata-kata berisiko (`guarantee`, `never`, `always`, `best`): tidak ada lagi kata dalam jawaban FAQ yang tidak punya padanan di halaman. Dua kemunculan "never" yang tersisa berada di komentar kode dan di copy gift voucher milik halaman, bukan di jawaban FAQ.
+
+Catatan: titik keberangkatan diubah pemilik situs dari "Sea World Drive" menjadi "Marine Stadium Jetty & Pontoon, Main Beach" dan sudah konsisten di `lib/vessels.ts`, `lib/schema.ts`, `lib/cruise-faqs.ts`, serta halaman sunset.
+
+### Cara mengatur ukuran baris nama produk
+Nilainya ada di satu tempat: prop `titleAccent` pada `CruiseHero` di `components/CruisePageBroadwater.tsx` — `<span style={{ fontSize: '0.62em' }}>`.
+
+Satuan `em` berarti kelipatan dari ukuran heading utama (`titleFontSize`, maksimum 76px di desktop), jadi baris itu otomatis mengecil bersama heading di layar sempit. Diukur di browser: pada `0.62em` hasilnya 47px dengan lebar 891px di 1440px, dan tetap satu baris di 1600, 1440, 1280, serta 1100px.
+
+Ruang yang tersisa sebelum membungkus di 1440px adalah sekitar 1.072px, jadi batas praktisnya kira-kira **`0.74em`**. Di atas itu barisnya akan pecah jadi dua di desktop.

@@ -184,7 +184,7 @@ export default function Reviews() {
     <div ref={sectionRef} id="reviews" className="testimonials">
       <div ref={headerRef} className="testimonials-header">
         <h2 className="testimonials-title">
-          1,341 guests<br />can&rsquo;t be <em>wrong.</em>
+          3,910 guests<br />can&rsquo;t be <em>wrong.</em>
         </h2>
 
         <div className="testimonials-nav">

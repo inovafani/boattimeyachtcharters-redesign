@@ -625,7 +625,7 @@ export default function WhalePage() {
                 <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
               </svg>
               <a
-                href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
+                href="https://maps.app.goo.gl/ef21zFGntpZDjmB17"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -634,7 +634,7 @@ export default function WhalePage() {
                   borderBottom: "1px solid rgba(201,168,76,0.35)",
                 }}
               >
-                Sea World Drive, Main Beach, Gold Coast
+                Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast
               </a>
             </div>
 
@@ -686,7 +686,7 @@ export default function WhalePage() {
               }}
             >
               <iframe
-                src="https://maps.google.com/maps?q=-27.9695146,153.4236605&z=17&output=embed"
+                src="https://maps.google.com/maps?q=-27.9407977,153.4237125&z=17&output=embed"
                 width="100%"
                 height="300"
                 style={{
@@ -696,12 +696,12 @@ export default function WhalePage() {
                 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Departure point — Sea World Drive, Main Beach, Gold Coast"
+                title="Departure point — Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast"
               />
             </div>
             <div style={{ marginTop: 12, textAlign: "right" }}>
               <a
-                href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
+                href="https://maps.app.goo.gl/ef21zFGntpZDjmB17"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -1182,7 +1182,7 @@ export default function WhalePage() {
               {[
                 {
                   label: "Departure Point",
-                  value: "Sea World Drive, Main Beach, Gold Coast",
+                  value: "Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast",
                 },
                 { label: "Sessions Per Day", value: "2 — Morning & Afternoon" },
                 { label: "Days Per Week", value: "7 Days — May to November" },

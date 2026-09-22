@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const STATS = [
   {
-    end: 1341,
+    end: 3910,
     suffix: '+',
     unit: false,
     decimals: 0,

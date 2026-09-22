@@ -166,7 +166,7 @@ const ITINERARY = [
           PM
         </p>
         <p style={{ marginBottom: 12 }}>
-          Departs from Sea World Drive, Main Beach, Gold Coast.
+          Departs from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast.
         </p>
         <p style={{ color: "rgba(245,240,232,0.5)" }}>
           Operational Fridays, Saturdays and Sundays only.
@@ -371,7 +371,7 @@ export default function LunchPage() {
                   <strong style={{ color: "rgba(245,240,232,0.85)" }}>
                     Boarding:
                   </strong>{" "}
-                  Please arrive by 11:30 AM at Sea World Drive, Main Beach, Gold
+                  Please arrive by 11:30 AM at Marine Stadium Jetty & Pontoon, Main Beach, Gold
                   Coast.{" "}
                   <strong style={{ color: "rgba(245,240,232,0.85)" }}>
                     Departure:
@@ -1235,7 +1235,7 @@ export default function LunchPage() {
                     fontWeight: 500,
                   }}
                 >
-                  Sea World Drive · Main Beach, Gold Coast
+                  Marine Stadium Jetty & Pontoon · Main Beach, Gold Coast
                 </div>
               </div>
             </div>
@@ -1295,7 +1295,7 @@ export default function LunchPage() {
                 marginBottom: 32,
               }}
             >
-              Boarding 11:30 AM &middot; Sea World Drive, Main Beach, Gold Coast
+              Boarding 11:30 AM &middot; Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast
             </p>
             <div
               style={{

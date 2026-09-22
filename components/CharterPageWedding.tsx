@@ -226,7 +226,7 @@ const WEDDING_FAQ = (
       },
       {
         q: 'Where do we depart?',
-        a: 'Sea World Drive, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+        a: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
       },
       {
         q: 'Can we have a ceremony on board?',

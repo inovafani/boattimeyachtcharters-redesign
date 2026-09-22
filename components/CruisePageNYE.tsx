@@ -652,7 +652,7 @@ export default function NyePage() {
             { label: 'Date', value: 'December 31, 2025' },
             {
               label: 'Location',
-              value: 'Sea World Drive, Main Beach, Gold Coast',
+              value: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
             },
             {
               label: 'Venue',

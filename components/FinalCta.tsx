@@ -93,7 +93,7 @@ export default function FinalCta() {
               </svg>
             </div>
             <div className="contact-label">Berth</div>
-            <div className="contact-value">Sea World Drive, Main Beach</div>
+            <div className="contact-value">Marine Stadium Jetty & Pontoon, Main Beach</div>
           </div>
         </div>
       </div>

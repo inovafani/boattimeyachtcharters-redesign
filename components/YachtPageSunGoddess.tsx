@@ -807,6 +807,11 @@ export default function SunGoddessPage() {
               href: '/cruise-tickets-luxury-whale-watching',
               note: 'Humpback season aboard Sun Goddess, May to November.',
             },
+            {
+              label: 'Sunset Cruise',
+              href: '/luxury-broadwater-cruise',
+              note: 'Two hours across the Broadwater at golden hour, Friday to Sunday.',
+            },
           ]}
         />
         <CruiseBookingCTA bookingUrl={INQUIRY} />

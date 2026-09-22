@@ -31,7 +31,7 @@ export default function Page() {
           boatTripSchema({
             name: 'Gold Coast Whale Escape — Luxury Whale Watching Cruise',
             description:
-              'A 2.5-hour luxury humpback whale watching cruise aboard the Sun Goddess superyacht, departing Sea World Drive, Main Beach. Morning and afternoon sessions, May to November.',
+              'A 2.5-hour luxury humpback whale watching cruise aboard the Sun Goddess superyacht, departing Marine Stadium Jetty & Pontoon, Main Beach. Morning and afternoon sessions, May to November.',
             path: PATH,
             image: '/humpbacks.jpg',
             duration: 'PT2H30M',

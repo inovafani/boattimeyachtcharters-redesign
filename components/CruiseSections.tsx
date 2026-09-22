@@ -57,7 +57,7 @@ export function CruiseHero({
 }: {
   eyebrow: string;
   title: string;
-  titleAccent?: string;
+  titleAccent?: React.ReactNode;
   image: string;
   stats: StatPill[];
   bookingUrl: string;

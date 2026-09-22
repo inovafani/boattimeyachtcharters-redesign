@@ -233,7 +233,7 @@ export default function Hero() {
         }}
       >
         <Icon name="star" size={11} color="var(--gold)" />
-        4.7 · 1,341+ guest reviews
+        4.7 · 3,910+ guest reviews
       </div> */}
 
       {/* Main content */}
@@ -386,7 +386,7 @@ export default function Hero() {
             color: '#F5F0E8',
           }}
         >
-          1,341+
+          3,910+
         </div>
         <div
           style={{

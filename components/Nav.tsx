@@ -295,7 +295,7 @@ export default function Nav() {
             </div>
             <div className="mobile-drawer__footer-block">
               <span className="mobile-drawer__footer-label">Berth</span>
-              <span className="mobile-drawer__footer-value">Sea World Drive · Main Beach, Gold Coast</span>
+              <span className="mobile-drawer__footer-value">Marine Stadium Jetty & Pontoon · Main Beach, Gold Coast</span>
             </div>
           </div>
           <div className="mobile-drawer__footer-ctas">

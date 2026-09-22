@@ -902,7 +902,7 @@ export function CharterDestinations() {
               fontWeight: 300,
             }}
           >
-            Departing from Sea World Drive, Main Beach, Gold Coast — 10
+            Departing from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — 10
             minutes from Surfers Paradise. Free parking available.
           </p>
         </div>

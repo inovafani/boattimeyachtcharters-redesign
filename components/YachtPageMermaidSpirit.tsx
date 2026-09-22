@@ -419,6 +419,11 @@ export default function MermaidSpiritPage() {
               href: '/private-yacht-charter',
               note: 'Three decks to spread a celebration across, for up to 150 guests.',
             },
+            {
+              label: 'Sunset Cruise',
+              href: '/luxury-broadwater-cruise',
+              note: 'Golden hour on the Broadwater aboard the Sun Goddess.',
+            },
           ]}
         />
         <CruiseBookingCTA bookingUrl={INQUIRY} />

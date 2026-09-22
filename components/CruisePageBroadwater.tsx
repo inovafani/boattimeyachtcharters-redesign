@@ -4,6 +4,8 @@ import Script from 'next/script';
 import Nav from './Nav';
 import Footer from './Footer';
 import { CruiseHero, CruiseYachts, CruiseItinerary } from './CruiseSections';
+import { VesselFaq } from './YachtSections';
+import { SUNSET_FAQS } from '@/lib/cruise-faqs';
 import type { ReactNode } from 'react';
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -22,7 +24,7 @@ const VESSELS = [
     image: '/sun-goddess-main.jpeg',
     name: 'Sun Goddess',
     description:
-      "Get ready to elevate your Gold Coast adventure with Boattime Yacht Charters aboard the stunning Sun Goddess! This luxury yacht offers 360-degree views and provides an unforgettable backdrop for a magical sunset experience. With top-notch amenities and breathtaking views of the Broadwater and the iconic Gold Coast skyline, you're in for an evening to remember.\n\nWhether you're celebrating a milestone or simply seeking an extraordinary escape, our dedicated team is here to ensure your sunset cruise is nothing short of spectacular. With room for up to 100 guests, there's plenty of space for everyone to relax, unwind, and soak in the beauty of the setting sun.",
+      "Get ready to elevate your Gold Coast adventure with Boattime Yacht Charters aboard the stunning Sun Goddess! This luxury yacht offers 360-degree views and provides an unforgettable backdrop for a magical sunset experience. With top-notch amenities and breathtaking views of the Broadwater and the iconic Gold Coast skyline, you're in for an evening to remember.\n\nWhether you're celebrating a milestone or simply seeking an extraordinary escape, our dedicated team is here to ensure your sunset cruise is nothing short of spectacular. With room for up to 135 guests, there's plenty of space for everyone to relax, unwind, and soak in the beauty of the setting sun.",
     pax: '135 Guests',
     size: '34m (114ft)',
     features: [
@@ -150,7 +152,7 @@ const ITINERARY = [
           7:00 PM
         </p>
         <p style={{ marginBottom: 12 }}>
-          Return trip from Sea World Drive, Main Beach, Gold Coast set the beautiful Main
+          Return trip from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast set the beautiful Main
           Beach Spit.
         </p>
         <p style={{ marginBottom: 12 }}>
@@ -249,6 +251,7 @@ const ITINERARY = [
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 
+
 export default function BroadwaterPage() {
   return (
     <>
@@ -260,9 +263,16 @@ export default function BroadwaterPage() {
       <main>
         {/* 1 ── HERO */}
         <CruiseHero
-          eyebrow="Cruise Tickets · Sunset Cruise"
-          title="Twilight Drift"
-          titleAccent="Broadwater Sunset Tour & Scenic Cruise"
+          eyebrow="Cruise Tickets · Sunset Cruise Gold Coast"
+          title="Sunset Cruise Gold Coast"
+          titleAccent={
+            /* One line. Sized down relative to the heading so the whole
+               product name fits without wrapping on a desktop width. */
+            <span style={{ fontSize: '0.62em' }}>
+              Twilight Drift &mdash; Broadwater Sunset Tour &amp; Scenic Cruise
+            </span>
+          }
+          titleFontSize="clamp(40px, 5.4vw, 76px)"
           image="/dinner-lunch-buffet/sunset-buffet1.jpg"
           stats={[
             { label: 'Duration', value: '2 hours' },
@@ -295,7 +305,7 @@ export default function BroadwaterPage() {
                 marginBottom: 24,
               }}
             >
-              Luxury Sunset Cruise &ndash; Gold Coast
+              Luxury Sunset Cruise Gold Coast
             </h2>
             <p
               style={{
@@ -350,7 +360,7 @@ export default function BroadwaterPage() {
                   <strong style={{ color: 'rgba(245,240,232,0.85)' }}>
                     Starting Point:
                   </strong>{' '}
-                  Depart from Sea World Drive, Main Beach, Gold Coast.
+                  Depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast.
                 </p>
               </div>
               <div>
@@ -491,6 +501,8 @@ export default function BroadwaterPage() {
             </svg>
           </div>
         </section>
+
+        <VesselFaq vesselName="the Sunset Cruise" faqs={SUNSET_FAQS} />
 
         {/* 3 ── OUR YACHTS — Sun Goddess */}
         <CruiseYachts vessels={VESSELS} />

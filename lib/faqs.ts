@@ -8,11 +8,11 @@
 export const FAQS = [
   {
     q: 'Where do your boats depart from?',
-    a: 'Our boats depart from Sea World Drive, Main Beach, Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
+    a: 'Our boats depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
   },
   {
     q: 'Do you offer pre-made charter packages?',
-    a: "Three starting points: Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o'clock out of Sea World Drive, Main Beach into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.",
+    a: "Three starting points: Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o'clock out of Marine Stadium Jetty & Pontoon, Main Beach into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.",
   },
   {
     q: 'What about food and drinks?',
