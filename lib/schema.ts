@@ -172,7 +172,10 @@ export function boatTripSchema(trip: TripInput) {
       name: 'Marine Stadium Jetty & Pontoon, Main Beach',
       address: ADDRESS,
     },
-    aggregateRating: AGGREGATE_RATING,
+    // No aggregateRating: Google only accepts review snippets on certain types
+    // (Product, LocalBusiness, Event…). On a BoatTrip it is flagged as
+    // "Invalid object type for field <parent_node>". The business rating is
+    // already declared once, on the LocalBusiness block in the root layout.
     ...(trip.duration ? { duration: trip.duration } : {}),
     ...(trip.offer ? { offers: buildOffer(trip.offer) } : {}),
   };
@@ -201,7 +204,7 @@ export function serviceSchema(service: ServiceInput) {
     serviceType: service.serviceType,
     provider: { '@id': ORG_ID },
     areaServed: AREA_SERVED,
-    aggregateRating: AGGREGATE_RATING,
+    // No aggregateRating — Service is not a review-snippet type (see BoatTrip).
   };
 }
 
