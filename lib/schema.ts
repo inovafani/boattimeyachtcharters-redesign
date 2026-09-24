@@ -82,7 +82,9 @@ export function organizationSchema() {
     areaServed: AREA_SERVED,
     priceRange: '$$$',
     currenciesAccepted: 'AUD',
-    aggregateRating: AGGREGATE_RATING,
+    // No aggregateRating. Google does not show stars for a business rating
+    // itself ("self-serving"), and Googlebot's render counted this block twice,
+    // flagging every page with "Review has multiple aggregate ratings".
     sameAs: SAME_AS,
   };
 }
