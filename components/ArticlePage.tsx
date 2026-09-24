@@ -55,7 +55,7 @@ function ProductSidebar({ productIds }: { productIds: string[] }) {
   const items = PRODUCTS.filter(p => productIds.includes(p.id));
 
   return (
-    <aside className="article-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+    <aside className="article-sidebar">
       {items.length > 0 && (
         <>
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 8, letterSpacing: '0.36em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 20, paddingBottom: 12, borderBottom: '1px solid var(--border-subtle)' }}>
@@ -84,7 +84,7 @@ function RelatedSidebar({ posts }: { posts: RelatedPost[] }) {
   if (posts.length === 0) return <aside className="article-sidebar" />;
 
   return (
-    <aside className="article-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+    <aside className="article-sidebar">
       <div style={{
         fontFamily: 'var(--font-body)',
         fontSize: 8,

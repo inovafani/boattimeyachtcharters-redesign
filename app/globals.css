@@ -3919,6 +3919,8 @@
 .article-sidebar {
   position: sticky;
   top: 96px;
+  display: flex;
+  flex-direction: column;
 }
 @media (max-width: 1100px) {
   .article-grid {
@@ -3927,7 +3929,12 @@
     max-width: 760px;
     padding: 48px 24px 80px;
   }
-  .article-sidebar { display: none; }
+  .article-sidebar {
+    position: static;
+    order: 1;
+    margin-top: 56px;
+  }
+  .article-sidebar:empty { display: none; }
 }
 
 /* ── News hero — dark photo overlay, text must stay cream ───── */
