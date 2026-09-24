@@ -54,6 +54,7 @@ export function CruiseHero({
   stats,
   bookingUrl,
   titleFontSize,
+  notice,
 }: {
   eyebrow: string;
   title: string;
@@ -62,6 +63,8 @@ export function CruiseHero({
   stats: StatPill[];
   bookingUrl: string;
   titleFontSize?: string;
+  /** Optional message shown above the eyebrow, e.g. a "currently unavailable" notice. */
+  notice?: React.ReactNode;
 }) {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -128,6 +131,7 @@ export function CruiseHero({
           maxWidth: 1200,
         }}
       >
+        {notice}
         <div className="section-eyebrow hr" style={{ marginBottom: 24 }}>
           {eyebrow}
         </div>

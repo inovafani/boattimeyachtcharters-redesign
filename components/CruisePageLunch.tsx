@@ -3,6 +3,8 @@
 import Script from "next/script";
 import Nav from "./Nav";
 import Footer from "./Footer";
+import DiningUnavailableNotice from "./DiningUnavailableNotice";
+import { DINING_CRUISES_AVAILABLE } from "@/lib/products";
 import { CruiseHero, CruiseGallery, CruiseItinerary } from "./CruiseSections";
 import type { ReactNode } from "react";
 
@@ -292,6 +294,7 @@ export default function LunchPage() {
       <main>
         {/* 1 ── HERO */}
         <CruiseHero
+          notice={DINING_CRUISES_AVAILABLE ? undefined : <DiningUnavailableNotice />}
           eyebrow="Cruise Tickets · Lunch Cruise"
           title="Gold Coast: Chef's Table"
           titleAccent="Flavours of Australia"

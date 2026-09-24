@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm, Icon } from './Shared';
+import { DINING_CRUISES_AVAILABLE } from '@/lib/products';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -22,6 +23,7 @@ interface CruiseData {
   row: string;
   img: string;
   href: string;
+  dining?: boolean;
 }
 
 const CRUISES: CruiseData[] = [
@@ -65,6 +67,7 @@ const CRUISES: CruiseData[] = [
     row: 'span 2',
     img: '/relaxed-lunch/relaxed_lunch_2.webp',
     href: '/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit',
+    dining: true,
   },
   {
     cat: 'Dining',
@@ -78,6 +81,7 @@ const CRUISES: CruiseData[] = [
     row: 'span 2',
     img: '/sunset-twilight.png',
     href: '/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit',
+    dining: true,
   },
   {
     cat: 'Event',
@@ -371,7 +375,7 @@ export default function Cruises() {
           padding: '0 48px',
         }}
       >
-        {CRUISES.map((c, i) => (
+        {CRUISES.filter(c => DINING_CRUISES_AVAILABLE || !c.dining).map((c, i) => (
           <div
             key={i}
             className="cruise-card-wrap"

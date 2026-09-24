@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { DINING_CRUISES_AVAILABLE } from '@/lib/products';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -219,12 +220,16 @@ export default function Footer() {
             <FootLink href="/nye-2026">New Year&rsquo;s Eve 2026</FootLink>
             <FootLink href="/valentines-day">Valentine&rsquo;s Cruise</FootLink>
             <FootLink href="/riverfire-2026">Riverfire 2026</FootLink>
-            <FootLink href="/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit">
-              Relaxed Lunch
-            </FootLink>
-            <FootLink href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit">
-              Twilight Buffet
-            </FootLink>
+            {DINING_CRUISES_AVAILABLE && (
+              <>
+                <FootLink href="/relaxed-lunch-cruise-flavours-of-australia-aboard-the-mermaid-spirit">
+                  Relaxed Lunch
+                </FootLink>
+                <FootLink href="/sunset-twilight-buffet-flavours-of-australia-aboard-the-mermaid-spirit">
+                  Twilight Buffet
+                </FootLink>
+              </>
+            )}
           </div>
 
           {/* Charters + Yachts */}

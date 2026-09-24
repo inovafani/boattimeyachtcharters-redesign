@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Eyebrow, ItalicEm, Icon } from './Shared';
+import { DINING_CRUISES_AVAILABLE } from '@/lib/products';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -312,7 +313,7 @@ export default function YachtChartersSection() {
           padding: '0 48px',
         }}
       >
-        {CHARTERS.map((c, i) => (
+        {CHARTERS.filter(c => DINING_CRUISES_AVAILABLE || c.href !== '/buffet-dinner-and-lunch-cruise').map((c, i) => (
           <div
             key={i}
             className="charter-card-wrap"

@@ -15,6 +15,7 @@ import {
   VesselCrossLinks,
 } from './YachtSections';
 import { MERMAID_SPIRIT as V } from '@/lib/vessels';
+import { DINING_CRUISES_AVAILABLE } from '@/lib/products';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -409,11 +410,13 @@ export default function MermaidSpiritPage() {
               href: '/riverfire-2026',
               note: 'The sky deck is one of the best fireworks vantage points on the river.',
             },
-            {
-              label: 'Dining Cruises',
-              href: '/buffet-dinner-and-lunch-cruise',
-              note: "Buffet lunch and dinner sessions from the chef's kitchen on board.",
-            },
+            ...(DINING_CRUISES_AVAILABLE
+              ? [{
+                  label: 'Dining Cruises',
+                  href: '/buffet-dinner-and-lunch-cruise',
+                  note: "Buffet lunch and dinner sessions from the chef's kitchen on board.",
+                }]
+              : []),
             {
               label: 'Private Charter',
               href: '/private-yacht-charter',
