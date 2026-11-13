@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<unknown>(null);
   const touchStartX = useRef<number>(0);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -116,6 +117,7 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
   const closeLightbox = () => {
     if (lightbox !== null) {
       (bookRef.current as { turnToPage: (p: number) => void } | null)?.turnToPage(lightbox);
+      stripRef.current?.scrollTo({ left: lightbox * stripRef.current.clientWidth });
       setCurrentPage(lightbox);
     }
     setLightbox(null);
@@ -149,7 +151,12 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
         @keyframes flipbook-spin { to { transform: rotate(360deg); } }
         .fb-arrow:hover { background: rgba(10,22,40,0.16) !important; border-color: rgba(10,22,40,0.4) !important; }
         .fb-fs-btn:hover { background: rgba(10,22,40,0.12) !important; }
-        .fb-mobile-btn:hover { opacity: 0.85 !important; }
+        .fb-mobile-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 340px; padding: 16px 24px; border: none; border-radius: 10px; background: var(--bl-cta, #0A1628); color: #fff; font-family: sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; box-shadow: 0 8px 24px var(--bl-cta-glow, rgba(10,22,40,0.25)); transition: opacity 0.2s ease; }
+        .fb-mobile-btn:hover { opacity: 0.88; }
+        .fb-strip { display: flex; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; box-shadow: 0 8px 32px rgba(0,0,0,0.18); background: #fff; }
+        .fb-strip::-webkit-scrollbar { display: none; }
+        .fb-strip img { flex: 0 0 100%; width: 100%; display: block; scroll-snap-align: center; cursor: zoom-in; user-select: none; }
+        .fb-arrow:disabled { opacity: 0.3; cursor: default; }
         .fb-lb-btn { position: absolute; z-index: 2; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; border: none; background: #fff; color: #0A1628; box-shadow: 0 4px 18px rgba(0,0,0,0.45); transition: transform 0.2s ease, opacity 0.2s ease; }
         .fb-lb-btn:hover:not(:disabled) { transform: translateY(-50%) scale(1.06); }
         .fb-lb-btn:disabled { opacity: 0.25; cursor: default; }
@@ -197,7 +204,7 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
           </button>
 
-          <div style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,0.6)', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.2em' }}>
+          <div className="fb-lb-count" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,0.6)', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.2em' }}>
             {shown.map((i) => i + 1).join('–')} / {images.length}
           </div>
         </div>
@@ -226,23 +233,48 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
           </div>
         )}
 
-        {/* ── MOBILE view: page grid + fullscreen CTA ── */}
+        {/* ── MOBILE view: swipeable pages + fullscreen CTA ── */}
         {status === 'ready' && isMobile && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
-            {/* First page preview */}
-            {images[0] && (
-              <img
-                src={images[0]}
-                alt="Menu cover"
-                onClick={() => openLightbox(0)}
-                style={{ width: '100%', maxWidth: 340, boxShadow: '0 8px 32px rgba(0,0,0,0.18)', cursor: 'zoom-in' }}
-              />
-            )}
+            {/* Native scroll-snap does the swiping; we only read which page is in view */}
+            <div style={{ width: '100%', maxWidth: 340, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
+              <div
+                ref={stripRef}
+                className="fb-strip"
+                onScroll={(e) => setCurrentPage(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))}
+              >
+                {images.map((src, i) => (
+                  <img key={i} src={src} alt={`Menu page ${i + 1}`} draggable={false} onClick={() => openLightbox(i)} />
+                ))}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                <button
+                  className="fb-arrow"
+                  aria-label="Previous page"
+                  disabled={currentPage === 0}
+                  onClick={() => stripRef.current?.scrollTo({ left: (currentPage - 1) * stripRef.current.clientWidth, behavior: 'smooth' })}
+                  style={{ ...arrowBtn, width: 40, height: 40 }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="#0A1628" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </button>
+                <p style={{ fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.15em', color: '#666', margin: 0, minWidth: 48, textAlign: 'center' }}>
+                  {currentPage + 1} / {pageCount}
+                </p>
+                <button
+                  className="fb-arrow"
+                  aria-label="Next page"
+                  disabled={currentPage >= pageCount - 1}
+                  onClick={() => stripRef.current?.scrollTo({ left: (currentPage + 1) * stripRef.current.clientWidth, behavior: 'smooth' })}
+                  style={{ ...arrowBtn, width: 40, height: 40 }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="#0A1628" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </button>
+              </div>
+            </div>
             {/* Big fullscreen CTA */}
             <button
               className="fb-mobile-btn"
-              onClick={() => openLightbox(0)}
-              style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#0A1628', color: '#C9A84C', border: '1px solid #C9A84C', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 600, padding: '14px 28px', cursor: 'pointer', width: '100%', maxWidth: 340, justifyContent: 'center' }}
+              onClick={() => openLightbox(currentPage)}
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
@@ -250,8 +282,8 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
               </svg>
               Browse Full Menu · {pageCount} pages
             </button>
-            <p style={{ fontFamily: 'sans-serif', fontSize: 10, color: '#aaa', letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0 }}>
-              Tap to open full screen — pinch to zoom
+            <p style={{ fontFamily: 'sans-serif', fontSize: 10, color: '#888', letterSpacing: '0.12em', textTransform: 'uppercase', margin: 0, textAlign: 'center' }}>
+              Swipe to turn pages — tap to open full screen
             </p>
           </div>
         )}

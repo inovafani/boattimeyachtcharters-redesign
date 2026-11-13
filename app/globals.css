@@ -801,6 +801,17 @@
   color: #f5f0e8 !important;
 }
 
+/* Menu flipbook: the mobile CTA sits on a blue fill, the full-screen close
+   button and page counter sit on the dark overlay. */
+[data-theme='light'] .fb-mobile-btn,
+[data-theme='light'] .fb-mobile-btn *,
+[data-theme='light'] .fb-lb-close {
+  color: #fff !important;
+}
+[data-theme='light'] .fb-lb-count {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
 /* ============================================================
    SITE HEADER — 3-column grid navbar
    ============================================================ */
