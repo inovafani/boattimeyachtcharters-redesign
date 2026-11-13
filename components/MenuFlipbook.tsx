@@ -34,12 +34,13 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
         for (let i = 1; i <= numPages; i++) {
           if (cancelled) return;
           const page = await pdf.getPage(i);
-          const viewport = page.getViewport({ scale: 2 });
+          // 3x keeps a full-screen spread sharp on Retina; phones only ever show one page
+          const viewport = page.getViewport({ scale: window.innerWidth < 640 ? 2 : 3 });
           const canvas = document.createElement('canvas');
           canvas.width = viewport.width;
           canvas.height = viewport.height;
           await page.render({ canvas, viewport }).promise;
-          rendered.push(canvas.toDataURL('image/jpeg', 0.9));
+          rendered.push(canvas.toDataURL('image/jpeg', 0.92));
         }
 
         if (cancelled) return;
@@ -67,7 +68,18 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
             flippingTime: 700,
           });
 
-          book.loadFromImages(rendered);
+          const pages = rendered.map((src) => {
+            const pageEl = document.createElement('div');
+            pageEl.style.background = '#fff';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = '';
+            img.draggable = false;
+            img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+            pageEl.appendChild(img);
+            return pageEl;
+          });
+          book.loadFromHTML(pages);
           book.on('flip', (e: unknown) => {
             setCurrentPage((e as { data: number }).data);
           });
@@ -85,17 +97,41 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
     return () => { cancelled = true; };
   }, [pdfUrl]);
 
+  // Full screen shows the same spread as the book: cover alone, then pairs (1-2, 3-4, …)
+  const spread = !isMobile;
+  const spreadStart = (i: number) => (spread && i > 0 && i % 2 === 0 ? i - 1 : i);
+  const shown = lightbox === null ? [] : spread && lightbox > 0 ? [lightbox, lightbox + 1].filter((i) => i < images.length) : [lightbox];
+  const canPrev = lightbox !== null && lightbox > 0;
+  const canNext = shown.length > 0 && shown[shown.length - 1] < images.length - 1;
+
+  const step = (dir: 1 | -1) =>
+    setLightbox((s) => {
+      if (s === null) return s;
+      const next = !spread ? s + dir : dir > 0 ? (s === 0 ? 1 : s + 2) : s <= 1 ? 0 : s - 2;
+      return next < 0 || next >= images.length ? s : next;
+    });
+
+  const openLightbox = (i: number) => setLightbox(spreadStart(i));
+
+  const closeLightbox = () => {
+    if (lightbox !== null) {
+      (bookRef.current as { turnToPage: (p: number) => void } | null)?.turnToPage(lightbox);
+      setCurrentPage(lightbox);
+    }
+    setLightbox(null);
+  };
+
   // ESC / arrow keys for lightbox
   useEffect(() => {
     if (lightbox === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightbox(null);
-      if (e.key === 'ArrowLeft') setLightbox((i) => (i === null ? null : (i - 1 + images.length) % images.length));
-      if (e.key === 'ArrowRight') setLightbox((i) => (i === null ? null : (i + 1) % images.length));
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [lightbox, images.length]);
+  });
 
   const flipPrev = () => (bookRef.current as { flipPrev: (c: string) => void } | null)?.flipPrev('top');
   const flipNext = () => (bookRef.current as { flipNext: (c: string) => void } | null)?.flipNext('top');
@@ -114,49 +150,55 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
         .fb-arrow:hover { background: rgba(10,22,40,0.16) !important; border-color: rgba(10,22,40,0.4) !important; }
         .fb-fs-btn:hover { background: rgba(10,22,40,0.12) !important; }
         .fb-mobile-btn:hover { opacity: 0.85 !important; }
+        .fb-lb-btn { position: absolute; z-index: 2; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; border: none; background: #fff; color: #0A1628; box-shadow: 0 4px 18px rgba(0,0,0,0.45); transition: transform 0.2s ease, opacity 0.2s ease; }
+        .fb-lb-btn:hover:not(:disabled) { transform: translateY(-50%) scale(1.06); }
+        .fb-lb-btn:disabled { opacity: 0.25; cursor: default; }
+        .fb-lb-nav { top: 50%; transform: translateY(-50%); width: 56px; height: 56px; }
+        .fb-lb-close { top: 20px; right: 20px; width: 44px; height: 44px; background: rgba(255,255,255,0.14); color: #fff; box-shadow: none; }
+        @media (min-width: 640px) { .fb-lb-prev { left: 28px; } .fb-lb-next { right: 28px; } }
+        @media (max-width: 639px) { .fb-lb-prev { left: 8px; } .fb-lb-next { right: 8px; } .fb-lb-nav { width: 44px; height: 44px; } }
       `}</style>
 
       {/* ── Lightbox overlay ── */}
       {lightbox !== null && (
         <div
-          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu, full screen"
+          onClick={closeLightbox}
           onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
           onTouchEnd={(e) => {
             const diff = touchStartX.current - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 40) {
-              if (diff > 0) setLightbox((lightbox + 1) % images.length);
-              else setLightbox((lightbox - 1 + images.length) % images.length);
-            }
+            if (Math.abs(diff) > 40) step(diff > 0 ? 1 : -1);
           }}
-          style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(5,10,20,0.96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          <button
-            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox - 1 + images.length) % images.length); }}
-            aria-label="Previous"
-            style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(201,168,76,0.85)', border: 'none', borderRadius: '50%', width: 52, height: 52, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
-          >
-            <svg width="18" height="14" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M1 5L5 1M1 5L5 9" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <button className="fb-lb-btn fb-lb-nav fb-lb-prev" disabled={!canPrev} onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous page">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
 
-          <img
-            src={images[lightbox]}
-            onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: '76vw', maxHeight: '88vh', objectFit: 'contain', userSelect: 'none' }}
-            alt=""
-          />
+          <div onClick={(e) => e.stopPropagation()} style={{ display: 'flex', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}>
+            {shown.map((i) => (
+              <img
+                key={i}
+                src={images[i]}
+                alt={`Menu page ${i + 1}`}
+                draggable={false}
+                style={{ display: 'block', maxHeight: '90vh', maxWidth: shown.length > 1 ? 'calc(50vw - 80px)' : spread ? 'calc(100vw - 180px)' : '84vw', width: 'auto', height: 'auto', background: '#fff', userSelect: 'none' }}
+              />
+            ))}
+          </div>
 
-          <button
-            onClick={(e) => { e.stopPropagation(); setLightbox((lightbox + 1) % images.length); }}
-            aria-label="Next"
-            style={{ position: 'absolute', right: 12, top: '50%', transform: 'translateY(-50%)', background: 'rgba(201,168,76,0.85)', border: 'none', borderRadius: '50%', width: 52, height: 52, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
-          >
-            <svg width="18" height="14" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="#0A1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <button className="fb-lb-btn fb-lb-nav fb-lb-next" disabled={!canNext} onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next page">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
 
-          <button onClick={(e) => { e.stopPropagation(); setLightbox(null); }} aria-label="Close" style={{ position: 'absolute', top: 16, right: 16, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '50%', width: 40, height: 40, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: 18, zIndex: 2 }}>✕</button>
+          <button className="fb-lb-btn fb-lb-close" onClick={(e) => { e.stopPropagation(); closeLightbox(); }} aria-label="Close full screen">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+          </button>
 
-          <div style={{ position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,0.4)', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.2em' }}>
-            {lightbox + 1} / {images.length}
+          <div style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', color: 'rgba(255,255,255,0.6)', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.2em' }}>
+            {shown.map((i) => i + 1).join('–')} / {images.length}
           </div>
         </div>
       )}
@@ -192,14 +234,14 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
               <img
                 src={images[0]}
                 alt="Menu cover"
-                onClick={() => setLightbox(0)}
+                onClick={() => openLightbox(0)}
                 style={{ width: '100%', maxWidth: 340, boxShadow: '0 8px 32px rgba(0,0,0,0.18)', cursor: 'zoom-in' }}
               />
             )}
             {/* Big fullscreen CTA */}
             <button
               className="fb-mobile-btn"
-              onClick={() => setLightbox(0)}
+              onClick={() => openLightbox(0)}
               style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#0A1628', color: '#C9A84C', border: '1px solid #C9A84C', fontFamily: 'sans-serif', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 600, padding: '14px 28px', cursor: 'pointer', width: '100%', maxWidth: 340, justifyContent: 'center' }}
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -240,7 +282,7 @@ export default function MenuFlipbook({ pdfUrl }: { pdfUrl: string }) {
                 </p>
                 <button
                   className="fb-fs-btn"
-                  onClick={() => setLightbox(currentPage)}
+                  onClick={() => openLightbox(currentPage)}
                   style={{ display: 'inline-flex', alignItems: 'center', gap: 7, fontFamily: 'sans-serif', fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#555', background: 'rgba(10,22,40,0.06)', border: '1px solid rgba(10,22,40,0.15)', padding: '8px 16px', cursor: 'pointer', borderRadius: 1 }}
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
