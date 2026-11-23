@@ -200,3 +200,33 @@ from Rezdy (`P4APMF`). No price, no age band beyond "the ticket page lists the
 age bands" (the agency product `PUQKEN` uses 2 to 13 where the direct product
 uses 3 to 13, so the article does not commit to either), and no review count or
 rating.
+
+## State of this folder, checked 23 November 2026
+
+The 19 and 21 November drafts both return 200 live. Nothing in this folder is
+waiting on a SQL run except the draft below.
+
+## The 23 November draft, and the check it passed
+
+`getting-to-marine-stadium-jetty-a-departure-day-guide` answers the land half
+of a cruise: where the pontoon is, how to get there, parking, when to arrive,
+what to bring and access. It links to `/luxury-broadwater-cruise` and
+`/private-yacht-charter` in its second paragraph, and to both plus
+`/corporate-yacht-charter` at the end.
+
+Why: none of the 48 live articles in the sitemap (read 23 November) is about
+the departure point, while every booking ends at it. Keyword Planner (27
+October, AU) puts "main beach gold coast" at 1,600 a month at competition 9 and
+"the spit main beach" at 170, so local, low-competition place terms exist that
+no money page targets.
+
+Head terms checked, from the 11 November pull because Windsor still refuses
+Search Console on 23 November (Free plan, 7 accounts against 1): none of the
+money pages' head queries appears in the title, H1 or slug.
+
+Its facts: location, drive times, free parking and the overnight towing note,
+maxi taxis, two bars per vessel, covered decks, all-weather running, no
+wheelchair access and the motion sickness timing, all from `lib/faqs.ts`;
+boarding at 4:30pm from `lib/cruise-faqs.ts`; the 5pm departure from Rezdy
+`P4APMF`, read 23 November (every session to 20 February starts at 17:00). No
+price, no count, no rating.
