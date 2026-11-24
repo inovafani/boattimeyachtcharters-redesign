@@ -1419,3 +1419,25 @@ Permintaan pemilik situs (dari screenshot iPhone 16, 393 px):
 1. **Tombol hero di HP:** Enquiry dan Call tidak lagi selebar layar; keduanya selebar tombol terpanjang (Call). `components/site/site.css`: `.st-hero__actions` di `max-width: 720px` dari `width: min(100%, 320px)` jadi `width: max-content; max-width: 100%`.
 2. **Tombol menu hamburger:** "Reserve a Cruise" dan "Custom Enquiry" masih bersudut tajam. `app/skin-bluuu.css`: `.mobile-drawer__cta` diberi `border-radius: var(--bl-radius-pill)` (sama dengan tombol lain di skin bluuu).
 3. **Angka "05" di samping "Blogs":** sisa penomoran menu lama (5 item). Menu kini 3 item sehingga angkanya tak bermakna. `components/Nav.tsx`: atribut `data-num="05"` dihapus.
+
+---
+
+## Kembalikan titik keberangkatan ke Sea World Drive — 24 November 2026
+
+**Status: SELESAI di kode (24 Nov 2026). Nama final dari pemilik situs: "Marina Mirage Seaworld Drive, Main Beach, Gold Coast". Foto meeting point dihapus sampai ada foto baru. Artikel: `content/articles/_revert-departure-to-marina-mirage.sql` (jalankan di Supabase) — artikel "Getting to Marine Stadium Jetty" dijadikan draft.**
+
+Pemilik situs meminta titik keberangkatan "Marine Stadium Jetty & Pontoon, Main Beach" dikembalikan ke lokasi awal. Lokasi awal diambil dari commit `6c7c067 fix address` (22 Sep 2026):
+
+| | Sekarang | Dikembalikan ke |
+|---|---|---|
+| Nama | Marine Stadium Jetty & Pontoon (· Doug Jennings Park), Main Beach | Sea World Drive, Main Beach, Gold Coast |
+| Link Google Maps | https://maps.app.goo.gl/ef21zFGntpZDjmB17 | https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9 |
+| Pin peta (embed + schema geo) | -27.9407977, 153.4237125 | -27.9695146, 153.4236605 |
+
+**Yang diubah (kode):** semua teks, metadata, FAQ, JSON-LD (`lib/schema.ts`), email template (`app/api/inquiry`, `app/api/partnership`), `public/llms.txt`, footer, nav, peta & link di `components/site/DepartureLocation.tsx` dan `components/CruisePageWhale.tsx`. Sebutan "Doug Jennings Park" ikut dihapus karena itu bagian dari lokasi Marine Stadium.
+
+**Artikel blog:** isinya tinggal di Supabase, bukan di kode. Perubahan file di `content/articles/` tidak mengubah situs live; perlu SQL yang dijalankan pemilik situs.
+
+**Tidak disentuh:** `CampaignSkyToSea.tsx` (alamat 74 Seaworld Drive itu milik helikopter, bukan kapal).
+
+**Selesai bila:** nol sisa "Marine Stadium", "Doug Jennings" dan pin/link lama di kode; `npm run build` lolos; halaman cruise menampilkan pin Sea World Drive.

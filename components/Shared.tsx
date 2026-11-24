@@ -74,7 +74,8 @@ export function Button({
 type IconName =
   | 'anchor' | 'chevron' | 'chevronDown' | 'arrow' | 'pin' | 'clock'
   | 'users' | 'instagram' | 'facebook' | 'mail' | 'phone'
-  | 'plus' | 'minus' | 'waves' | 'sparkle' | 'star';
+  | 'plus' | 'minus' | 'waves' | 'sparkle' | 'star'
+  | 'calendar' | 'sun' | 'shield';
 
 interface IconProps {
   name: IconName;
@@ -157,6 +158,24 @@ export function Icon({ name, size = 16, color = 'currentColor' }: IconProps) {
     ),
     star: (
       <polygon points="12 2 15.1 8.6 22 9.3 17 14.1 18.2 21 12 17.7 5.8 21 7 14.1 2 9.3 8.9 8.6" />
+    ),
+    calendar: (
+      <>
+        <rect x="3" y="4" width="18" height="18" rx="2" />
+        <path d="M16 2v4M8 2v4M3 10h18" />
+      </>
+    ),
+    sun: (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+      </>
+    ),
+    shield: (
+      <>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="M9 12l2 2 4-4" />
+      </>
     ),
   };
 

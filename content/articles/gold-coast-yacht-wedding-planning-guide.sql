@@ -101,7 +101,7 @@ into an afternoon rather than an evening.
 
 The useful question to ask is not what is possible but what is coordinated: the
 more that runs through one team, the fewer vendors you are managing from a boat
-that has already left the pontoon.
+that has already left the marina.
 
 ## 6. Have the wet weather answer before you need it
 
@@ -113,9 +113,9 @@ change of plan and a crisis.
 
 ## 7. Getting everyone there
 
-Departure is from Marine Stadium Jetty & Pontoon at Main Beach, roughly ten
+Departure is from Marina Mirage Seaworld Drive, Main Beach, roughly ten
 minutes from Surfers Paradise and fifteen from Broadbeach, with free parking at
-the pontoon. For a guest list in the dozens, maxi taxis are the usual answer.
+the marina. For a guest list in the dozens, maxi taxis are the usual answer.
 
 The one instruction worth repeating on the invitation: a boat leaves. Put a
 be-there-by time on the invite that is well before the departure time, because
@@ -148,8 +148,8 @@ join the vessel. We can recommend partners if you do not have one.
 
 ### Where does a Gold Coast yacht wedding depart from?
 
-Marine Stadium Jetty & Pontoon, Main Beach, about ten minutes from Surfers
-Paradise and fifteen from Broadbeach. There is free parking at the pontoon.
+Marina Mirage Seaworld Drive, Main Beach, about ten minutes from Surfers
+Paradise and fifteen from Broadbeach. There is free parking at the marina.
 
 ### What happens if it rains on a yacht wedding?
 

@@ -32,7 +32,7 @@ export default function Page() {
           boatTripSchema({
             name: 'Luxury Whale Watching',
             description:
-              'A 150-minute humpback whale watching cruise aboard the Sun Goddess superyacht, departing Marine Stadium Jetty & Pontoon, Main Beach.',
+              'A 150-minute humpback whale watching cruise aboard the Sun Goddess superyacht, departing Marina Mirage Seaworld Drive, Main Beach.',
             path: PATH,
             image: '/humpbacks.jpg',
             duration: 'PT2H30M',

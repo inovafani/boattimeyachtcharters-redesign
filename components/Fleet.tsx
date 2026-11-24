@@ -880,7 +880,7 @@ export default function Fleet() {
           }}
         >
           Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks
-          of celebration. Both berthed at Marine Stadium Jetty & Pontoon, Main Beach,
+          of celebration. Both berthed at Marina Mirage Seaworld Drive, Main Beach,
           Gold Coast — ready when you are.
         </p>
       </div>

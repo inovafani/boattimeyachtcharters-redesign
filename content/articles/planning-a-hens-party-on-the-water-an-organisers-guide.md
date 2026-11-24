@@ -2,7 +2,7 @@
 slug: planning-a-hens-party-on-the-water-an-organisers-guide
 title: "Planning a Hens Party on the Water: An Organiser's Guide"
 meta_title: "Planning a Hens Party on the Water: An Organiser's Guide"
-meta_description: "Day or evening, how many to invite, food and drink rules, getting the group to the pontoon and home again. What the person in charge decides, in order."
+meta_description: "Day or evening, how many to invite, food and drink rules, getting the group to the marina and home again. What the person in charge decides, in order."
 focus_keyword: hens party on the water
 excerpt: "You have been put in charge of the hens. Here is what to settle first when the plan is a boat, and what catches organisers out."
 author: Boattime Yacht Charters
@@ -67,25 +67,25 @@ ask for the full list when you enquire.
 The rule that trips organisers up: **no outside food or drink is allowed on
 board.** That covers the cake, the bottle of champagne someone brings for the
 bride and the lolly bags. Raise anything you were planning to bring when you
-book the catering, not at the pontoon.
+book the catering, not at the marina.
 
 Decide early who is paying the bar tab, and whether the bride drinks free.
 Settling that before the night saves an awkward conversation at the bar.
 
 ## 4. Plan the trip there and home for everyone
 
-The whole group boards at Marine Stadium Jetty & Pontoon, Doug Jennings Park,
+The whole group boards at Marina Mirage Seaworld Drive,
 Main Beach, about ten minutes from Surfers Paradise and fifteen from
-Broadbeach. There is free parking at the pontoon; check the signs, and if
+Broadbeach. There is free parking at the marina; check the signs, and if
 anyone means to leave a car overnight, street parking avoids a tow.
 
 For a hens party, assume nobody drives. Maxi taxis are the usual answer for
 groups, and booking the return pick-up before the night starts beats a dozen
-people trying to order rides from the pontoon at once.
+people trying to order rides from the marina at once.
 
 ## 5. Ask about anyone who needs help boarding
 
-Boarding is a step up from the pontoon and the charters are not currently
+Boarding is a step up from the marina and the charters are not currently
 wheelchair accessible. Exceptions may be possible with at least a week's
 notice, so the crew can work out whether it can be done safely. Electric
 wheelchairs cannot come on board. If a mother, grandmother or anyone else in the
@@ -93,7 +93,7 @@ group needs a hand, say so when you enquire.
 
 ## 6. Write the invitation around the boarding time
 
-The boat leaves on schedule, and anyone ten minutes late waves from the jetty.
+The boat leaves on schedule, and anyone ten minutes late waves from the marina.
 The invitation should give:
 
 - the boarding time, set earlier than departure

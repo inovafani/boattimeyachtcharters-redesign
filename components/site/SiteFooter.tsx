@@ -14,7 +14,7 @@ export default function SiteFooter() {
           <div>
             <h4>Contact</h4>
             <address>
-              Marine Stadium Jetty &amp; Pontoon
+              Marina Mirage Seaworld Drive
               <br />
               Main Beach, Gold Coast QLD 4217
             </address>

@@ -77,11 +77,11 @@ so a day charter on her can be built around time in the water.
 
 ## Getting there, and getting on
 
-Both boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach: about ten
+Both boats depart from Marina Mirage Seaworld Drive, Main Beach: about ten
 minutes from Surfers Paradise and fifteen from Broadbeach. There is free parking; check the signs
 when you park. For groups, maxi taxis are the usual answer.
 
-Boarding is a step up from the pontoon. The charters are not wheelchair accessible and electric
+Boarding is a step up from the marina. The charters are not wheelchair accessible and electric
 wheelchairs are not permitted on board. If a guest needs help, tell the team at least a week
 before departure so the crew can work out whether it can be done safely.
 

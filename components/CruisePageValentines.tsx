@@ -121,7 +121,7 @@ function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
               fontFamily: 'var(--font-body)', fontSize: 12,
               color: 'rgba(245,240,232,0.85)', letterSpacing: '0.04em',
             }}>
-              Boarding at 5.30. From Marine Stadium Jetty & Pontoon, Main Beach
+              Boarding at 5.30. From Marina Mirage Seaworld Drive, Main Beach
             </span>
           </div>
 
@@ -138,7 +138,7 @@ function ValCTABox({ title, bookHref }: { title: string; bookHref: string }) {
               fontFamily: 'var(--font-body)', fontSize: 12,
               color: 'rgba(245,240,232,0.85)', letterSpacing: '0.04em',
             }}>
-              Marine Stadium Jetty & Pontoon, Main Beach QLD 4217
+              Marina Mirage Seaworld Drive, Main Beach QLD 4217
             </span>
           </div>
         </div>
@@ -199,11 +199,11 @@ const GALLERY = [1, 2, 3].map((n) => `/valentines-day-images/valentine${n}.webp`
 
 const ITINERARY = [
   { time: '5:30 PM', label: 'Boarding — Welcome aboard with sparkling wine or premium beer' },
-  { time: '6:00 PM', label: 'Departure from Marine Stadium Jetty & Pontoon, Main Beach' },
+  { time: '6:00 PM', label: 'Departure from Marina Mirage Seaworld Drive, Main Beach' },
   { time: '6:30 PM', label: 'Canapés served on deck as you cruise the Broadwater' },
   { time: '7:00 PM', label: 'Gourmet dinner served in the dining room or al fresco on deck' },
   { time: '8:00 PM', label: 'Return journey as you enjoy the Gold Coast city lights' },
-  { time: '8:30 PM', label: 'Arrival back at Marine Stadium Jetty & Pontoon, Main Beach' },
+  { time: '8:30 PM', label: 'Arrival back at Marina Mirage Seaworld Drive, Main Beach' },
 ];
 
 /** The evening, hour by hour. Always open: it is the only schedule on the page. */
@@ -400,7 +400,7 @@ export default function ValentinesPage() {
   
 
   const SPECS = [
-    'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
+    'Marina Mirage Seaworld Drive, Main Beach, Gold Coast',
     'Two guests',
     'Enquire for this year',
     '2.5 Hours',

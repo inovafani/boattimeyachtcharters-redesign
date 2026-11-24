@@ -25,18 +25,18 @@ const SAME_AS = [
 
 const ADDRESS = {
   '@type': 'PostalAddress',
-  streetAddress: 'Marine Stadium Jetty & Pontoon',
+  streetAddress: 'Marina Mirage Seaworld Drive',
   addressLocality: 'Main Beach',
   addressRegion: 'QLD',
   postalCode: '4217',
   addressCountry: 'AU',
 };
 
-// Departure point — Marine Stadium Jetty & Pontoon, Main Beach.
+// Departure point — Marina Mirage Seaworld Drive, Main Beach.
 const GEO = {
   '@type': 'GeoCoordinates',
-  latitude: -27.9407977,
-  longitude: 153.4237125,
+  latitude: -27.9695146,
+  longitude: 153.4236605,
 };
 
 // Must match what visitors can see. The review blocks across the cruise pages
@@ -171,12 +171,12 @@ export function boatTripSchema(trip: TripInput) {
     provider: { '@id': ORG_ID },
     departureBoatTerminal: {
       '@type': 'BoatTerminal',
-      name: 'Marine Stadium Jetty & Pontoon, Main Beach',
+      name: 'Marina Mirage Seaworld Drive, Main Beach',
       address: ADDRESS,
       // Coordinates as well as an address, because the berth is the fact most
       // often got wrong about this business: answers and third-party listings
-      // keep placing it at Mariners Cove or in Surfers Paradise. These match
-      // the Rezdy product record exactly.
+      // keep placing it at Mariners Cove or in Surfers Paradise. These are the
+      // Marina Mirage pin from the original Google Maps link.
       geo: GEO,
     },
     // No aggregateRating: Google only accepts review snippets on certain types

@@ -90,12 +90,12 @@ the open ocean. If a child is prone to motion sickness, speak to your pharmacist
 
 ### Can we bring a pram?
 
-Ask when you book. Boarding is from a pontoon, and a compact, foldable pram is easier to stow than a
+Ask when you book. Boarding is from the marina, and a compact, foldable pram is easier to stow than a
 large one.
 
 ### Where do we board?
 
-At Marine Stadium Jetty & Pontoon, Doug Jennings Park, Main Beach, which has free parking. Arrive
+At Marina Mirage Seaworld Drive, Main Beach, which has free parking. Arrive
 with time to spare: getting children out of the car always takes longer than planned.
 
 ## Book the right trip for your group

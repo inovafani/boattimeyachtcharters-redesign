@@ -74,13 +74,13 @@ thought about.
 
 ## 4. Sort out how people get there and back
 
-Both vessels depart Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main
+Both vessels depart Marina Mirage Seaworld Drive, Main
 Beach, about ten minutes from Surfers Paradise and fifteen from Broadbeach.
-There is free parking at the pontoon.
+There is free parking at the marina.
 
 For a group, maxi taxis are the usual choice and the most cost-effective one.
 If drinks are being served, arrange the return transport before the day rather
-than at the pontoon afterwards, and tell people what it is.
+than at the marina afterwards, and tell people what it is.
 
 ## 5. If anyone is speaking, say so when you enquire
 
@@ -109,7 +109,7 @@ it. Collect dietary requirements with the RSVP, not the week before.
 ## 7. Ask the accessibility question before you book
 
 If anyone in the group has limited mobility, raise it before you confirm so the
-specific requirements can be assessed against the vessel and the pontoon. It is
+specific requirements can be assessed against the vessel and the marina. It is
 a short conversation when it happens first and an awkward one when it happens on
 the day.
 
@@ -153,8 +153,8 @@ packages are arranged through the operator and built around the event.
 
 ### Where do guests board, and is there parking?
 
-At Marine Stadium Jetty & Pontoon, Doug Jennings Park, Main Beach, about ten
-minutes from Surfers Paradise. There is free parking at the pontoon, and maxi
+At Marina Mirage Seaworld Drive, Main Beach, about ten
+minutes from Surfers Paradise. There is free parking at the marina, and maxi
 taxis are the usual choice for groups.
 
 ### What should the invitation say?

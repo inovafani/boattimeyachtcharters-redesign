@@ -1,19 +1,4 @@
-import Image from "next/image";
-
-const PHOTOS = [
-  {
-    src: "/meeting-point/aerial.jpeg",
-    alt: "Aerial view of Doug Jennings Park and Marine Stadium, Main Beach, with the jetty and pontoon on the lagoon",
-    caption: "Doug Jennings Park, Main Beach — from above",
-  },
-  {
-    src: "/meeting-point/pontoon.jpeg",
-    alt: "Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach — the boarding point",
-    caption: "Marine Stadium Jetty & Pontoon — board here",
-  },
-];
-
-/** Meeting point photos + map. Shared by every cruise page so guests can find the jetty. */
+/** Meeting point address + map. Shared by every cruise page so guests can find the marina. */
 export default function DepartureLocation() {
   return (
     <div
@@ -45,51 +30,9 @@ export default function DepartureLocation() {
             margin: "0 0 18px",
           }}
         >
-          Marine Stadium Jetty &amp; Pontoon · Doug Jennings Park, Main Beach,
+          Marina Mirage Seaworld Drive, Main Beach,
           Gold Coast
         </p>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 16,
-            marginBottom: 16,
-          }}
-        >
-          {PHOTOS.map((photo) => (
-            <figure key={photo.src} style={{ margin: 0 }}>
-              <div
-                style={{
-                  position: "relative",
-                  aspectRatio: "16 / 10",
-                  borderRadius: 4,
-                  overflow: "hidden",
-                  border: "1px solid rgba(201,168,76,0.12)",
-                }}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  sizes="(max-width: 700px) 100vw, 560px"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <figcaption
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: 10,
-                  letterSpacing: "0.14em",
-                  textTransform: "uppercase",
-                  color: "rgba(245,240,232,0.45)",
-                  marginTop: 8,
-                }}
-              >
-                {photo.caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
         <div
           style={{
             position: "relative",
@@ -100,7 +43,7 @@ export default function DepartureLocation() {
           }}
         >
           <iframe
-            src="https://maps.google.com/maps?q=-27.9407977,153.4237125&z=17&output=embed"
+            src="https://maps.google.com/maps?q=-27.9695146,153.4236605&z=17&output=embed"
             width="100%"
             height="300"
             style={{
@@ -110,12 +53,12 @@ export default function DepartureLocation() {
             }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Departure point — Marine Stadium Jetty & Pontoon, Doug Jennings Park, Main Beach, Gold Coast"
+            title="Departure point — Marina Mirage Seaworld Drive, Main Beach, Gold Coast"
           />
         </div>
         <div style={{ marginTop: 12, textAlign: "right" }}>
           <a
-            href="https://maps.app.goo.gl/ef21zFGntpZDjmB17"
+            href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
             target="_blank"
             rel="noopener noreferrer"
             style={{

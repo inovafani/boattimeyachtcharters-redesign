@@ -223,8 +223,7 @@ const Cruises = () => (
           Choose your <ItalicEm>afternoon</ItalicEm>.
         </h2>
         <p style={cruiseStyles.sub}>
-          Seven scheduled cruises running year-round from Muriel Henchman Public
-          Pontoon, Main Beach 4217 — from whale season mornings to New
+          Seven scheduled cruises running year-round from Marina Mirage Seaworld Drive, Main Beach 4217 — from whale season mornings to New
           Year&rsquo;s Eve on three decks.
         </p>
       </div>

@@ -186,7 +186,7 @@ const Fleet = () => (
         </h2>
         <p style={fleetStyles.sub}>
           Sun Goddess for head-turning arrivals. Mermaid Spirit for three decks
-          of celebration. Both berthed at Muriel Henchman Public Pontoon, Main
+          of celebration. Both berthed at Marina Mirage Seaworld Drive, Main
           Beach 4217, ready for your afternoon.
         </p>
       </div>

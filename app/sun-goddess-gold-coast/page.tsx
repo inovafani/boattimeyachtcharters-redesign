@@ -9,7 +9,7 @@ const PATH = `/${V.slug}`;
 export const metadata: Metadata = {
   title: 'Sun Goddess: 114ft Gold Coast Superyacht',
   description:
-    'Charter Sun Goddess, a 114ft superyacht for up to 135 guests, departing Marine Stadium Jetty & Pontoon, Main Beach. Two licensed bars, two decks.',
+    'Charter Sun Goddess, a 114ft superyacht for up to 135 guests, departing Marina Mirage Seaworld Drive, Main Beach. Two licensed bars, two decks.',
   alternates: { canonical: `${BASE_URL}${PATH}` },
   openGraph: {
     type: 'website',

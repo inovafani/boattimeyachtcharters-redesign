@@ -158,7 +158,7 @@ const ITINERARY = [
           Boarding 4:30 PM &middot; Departs 5:00 PM &middot; Returns 7:30 PM
         </p>
         <p style={{ marginBottom: 12 }}>
-          Return trip from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast set the beautiful Main
+          Return trip from Marina Mirage Seaworld Drive, Main Beach, Gold Coast set the beautiful Main
           Beach Spit.
         </p>
         <p style={{ marginBottom: 12 }}>
@@ -366,7 +366,7 @@ export default function BroadwaterPage() {
                   <strong style={{ color: 'rgba(245,240,232,0.85)' }}>
                     Starting Point:
                   </strong>{' '}
-                  Depart from Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast.
+                  Depart from Marina Mirage Seaworld Drive, Main Beach, Gold Coast.
                 </p>
               </div>
               <div>

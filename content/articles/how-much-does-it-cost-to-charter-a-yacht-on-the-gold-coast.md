@@ -92,8 +92,8 @@ decks, two licensed bars.
 **Mermaid Spirit:** a 100 foot tri-deck catamaran, up to 150 guests by day, 11
 en suite cabins sleeping 22 overnight, chef's kitchen, stinger pool.
 
-Both depart Marine Stadium Jetty & Pontoon at Main Beach, roughly ten minutes
-from Surfers Paradise, with free parking at the pontoon.
+Both depart Marina Mirage Seaworld Drive, Main Beach, roughly ten minutes
+from Surfers Paradise, with free parking at the marina.
 
 ## Frequently asked questions
 

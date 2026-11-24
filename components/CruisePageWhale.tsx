@@ -6,6 +6,7 @@ import SiteShell from './site/SiteShell';
 import RatingStars from './site/RatingStars';
 import FaqEnquiry from './site/FaqEnquiry';
 import DepartureLocation from './site/DepartureLocation';
+import { Icon } from './Shared';
 import {
   CruiseHero,
   CruiseGallery,
@@ -609,7 +610,7 @@ export default function WhalePage() {
                 <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
               </svg>
               <a
-                href="https://maps.app.goo.gl/ef21zFGntpZDjmB17"
+                href="https://maps.app.goo.gl/YfFtWCqNqBe8wKYv9"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -618,7 +619,7 @@ export default function WhalePage() {
                   borderBottom: "1px solid rgba(201,168,76,0.35)",
                 }}
               >
-                Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast
+                Marina Mirage Seaworld Drive, Main Beach, Gold Coast
               </a>
             </div>
 
@@ -1120,20 +1121,22 @@ export default function WhalePage() {
                 border: "1px solid rgba(201,168,76,0.1)",
               }}
             >
-              {[
+              {([
                 {
+                  icon: "pin",
                   label: "Departure Point",
-                  value: "Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast",
+                  value: "Marina Mirage Seaworld Drive, Main Beach, Gold Coast",
                 },
-                { label: "Sessions Per Day", value: "2 — Morning & Afternoon" },
-                { label: "Sailing Dates", value: "See the booking calendar" },
-                { label: "Duration", value: "2.5 Hours Per Session" },
+                { icon: "sun", label: "Sessions Per Day", value: "2 — Morning & Afternoon" },
+                { icon: "calendar", label: "Sailing Dates", value: "See the booking calendar" },
+                { icon: "clock", label: "Duration", value: "2.5 Hours Per Session" },
                 {
+                  icon: "anchor",
                   label: "Primary Vessel",
                   value: "Sun Goddess · 34m Superyacht",
                 },
-                { label: "Guarantee", value: "Whale Sighting Guaranteed" },
-              ].map((item, i, arr) => (
+                { icon: "shield", label: "Guarantee", value: "Whale Sighting Guaranteed" },
+              ] as const).map((item, i, arr) => (
                 <div
                   key={i}
                   style={{
@@ -1148,6 +1151,22 @@ export default function WhalePage() {
                         : "none",
                   }}
                 >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: 36,
+                      height: 36,
+                      borderRadius: 10,
+                      marginBottom: 16,
+                      background: "rgba(201,168,76,0.08)",
+                      border: "1px solid rgba(201,168,76,0.18)",
+                    }}
+                  >
+                    <Icon name={item.icon} size={18} color="var(--gold)" />
+                  </span>
                   <div style={{ ...GL, marginBottom: 8 }}>{item.label}</div>
                   <div
                     style={{

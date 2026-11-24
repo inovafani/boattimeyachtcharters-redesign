@@ -8,11 +8,11 @@
 export const FAQS = [
   {
     q: 'Where do your boats depart from?',
-    a: 'Our boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
+    a: 'Our boats depart from Marina Mirage Seaworld Drive, Main Beach, Gold Coast — about ten minutes from Surfers Paradise and fifteen from Broadbeach.',
   },
   {
     q: 'Do you offer pre-made charter packages?',
-    a: "Three starting points: Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o'clock out of Marine Stadium Jetty & Pontoon, Main Beach into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.",
+    a: "Three starting points: Beaches and BBQs — a midday run to the islands, watersports, and buffet. Sunset cocktails and canapés — five o'clock out of Marina Mirage Seaworld Drive, Main Beach into golden hour. Or a fully custom charter — tell us the occasion and we write the afternoon.",
   },
   {
     q: 'What about food and drinks?',
@@ -28,7 +28,7 @@ export const FAQS = [
   },
   {
     q: 'Are your charters accessible for guests with limited mobility?',
-    a: 'Our charters are currently not wheelchair accessible. Boarding requires a step up from the marina pontoon, and space onboard can be limited depending on the vessel and guest needs. \nIn some cases, exceptions may be possible if we are notified at least 1 week before departure. This allows our team to review the requirements, arrange adequate crew support, and confirm whether the charter can be accommodated safely. \nFor safety reasons, electric wheelchairs are not permitted onboard.',
+    a: 'Our charters are currently not wheelchair accessible. Boarding requires a step up from the marina, and space onboard can be limited depending on the vessel and guest needs. \nIn some cases, exceptions may be possible if we are notified at least 1 week before departure. This allows our team to review the requirements, arrange adequate crew support, and confirm whether the charter can be accommodated safely. \nFor safety reasons, electric wheelchairs are not permitted onboard.',
   },
 ];
 
@@ -44,7 +44,7 @@ export const CORPORATE_FAQS = [
   },
   {
     q: 'Where do your boats depart from?',
-    a: 'Our boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast, approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+    a: 'Our boats depart from Marina Mirage Seaworld Drive, Main Beach, Gold Coast, approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
   },
   {
     q: 'Can we customise the catering and drinks?',
@@ -56,7 +56,7 @@ export const CORPORATE_FAQS = [
   },
   {
     q: 'What transport options are there for large groups?',
-    a: 'Maxi taxis are the most popular and cost-effective option. The pontoon also has ample free parking.',
+    a: 'Maxi taxis are the most popular and cost-effective option. Marina Mirage also has ample free parking.',
   },
   {
     q: 'Can we add corporate branding or custom signage?',
@@ -80,7 +80,7 @@ export const WEDDING_FAQS = [
     },
     {
       q: 'Where do we depart?',
-      a: 'Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
+      a: 'Marina Mirage Seaworld Drive, Main Beach, Gold Coast — approximately 10 minutes from Surfers Paradise and 15 minutes from Broadbeach. Free parking is available.',
     },
     {
       q: 'Can we have a ceremony on board?',
@@ -109,11 +109,11 @@ export const WEDDING_FAQS = [
 export const PRIVATE_FAQS = [
     {
       q: 'Where do your boats depart from?',
-      a: 'Our boats depart from Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach, Gold Coast — about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.',
+      a: 'Our boats depart from Marina Mirage Seaworld Drive, Main Beach, Gold Coast — about 10 minutes from Surfers Paradise and 15 minutes from Broadbeach.',
     },
     {
       q: 'Where can I park?',
-      a: 'There is plentiful free parking at Marine Stadium Jetty & Pontoon at Doug Jennings Park, Main Beach which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.',
+      a: 'There is plentiful free parking at Marina Mirage Seaworld Drive, Main Beach which you are permitted to use. Please check signage at time of parking and if parking overnight consider street parking to avoid towing.',
     },
     {
       q: 'What about other transport options?',

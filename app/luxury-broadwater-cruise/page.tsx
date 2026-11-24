@@ -22,7 +22,7 @@ export default function Page() {
           boatTripSchema({
             name: 'Luxury Scenic Sunset Cruise: Superyacht Sunset on the Broadwater',
             description:
-              'A 150-minute sunset scenic cruise through the Gold Coast Broadwater aboard the Sun Goddess superyacht, departing Marine Stadium Jetty & Pontoon, Main Beach. Saturdays and Sundays at 5:00 PM.',
+              'A 150-minute sunset scenic cruise through the Gold Coast Broadwater aboard the Sun Goddess superyacht, departing Marina Mirage Seaworld Drive, Main Beach. Saturdays and Sundays at 5:00 PM.',
             path: PATH,
             image: '/twilight-drift.jpeg',
             duration: 'PT2H30M',

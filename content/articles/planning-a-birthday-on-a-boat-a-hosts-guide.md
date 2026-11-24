@@ -69,18 +69,18 @@ turning up with one.
 
 ## 4. Work out how everyone gets there and home
 
-Every guest boards at Marine Stadium Jetty & Pontoon, Doug Jennings Park, Main
+Every guest boards at Marina Mirage Seaworld Drive, Main
 Beach, about ten minutes from Surfers Paradise and fifteen from Broadbeach.
-There is free parking at the pontoon. Check the signs, and if anyone plans to
+There is free parking at the marina. Check the signs, and if anyone plans to
 leave a car overnight, street parking avoids a tow.
 
 For a party, plan for nobody to drive. Maxi taxis are the usual answer for
 groups, and booking them for the return trip before the night starts saves the
-scramble at the pontoon.
+scramble at the marina.
 
 ## 5. Tell the crew about anyone who needs help boarding
 
-Boarding is a step up from the pontoon and the charters are not currently
+Boarding is a step up from the marina and the charters are not currently
 wheelchair accessible. Exceptions may be possible with at least a week's notice,
 so the crew can review what is needed and confirm whether it can be done
 safely. Electric wheelchairs cannot come on board. If a grandparent or anyone
@@ -122,8 +122,8 @@ waves, and the skipper plans the route around the day's conditions.
 
 ### Where do guests board?
 
-At Marine Stadium Jetty & Pontoon, Doug Jennings Park, Main Beach, with free
-parking at the pontoon.
+At Marina Mirage Seaworld Drive, Main Beach, with free
+parking at the marina.
 
 ## Start with the date
 

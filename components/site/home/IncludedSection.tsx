@@ -78,7 +78,7 @@ const ITEMS: { title: string; text: string; icon: ReactNode }[] = [
   },
   {
     title: 'Easy Departure',
-    text: 'Board at Marine Stadium Jetty & Pontoon, Main Beach, ten minutes from Surfers Paradise.',
+    text: 'Board at Marina Mirage Seaworld Drive, Main Beach, ten minutes from Surfers Paradise.',
     icon: (
       <svg {...ICON}>
         <path d="M24 43s-13-12-13-22a13 13 0 0 1 26 0c0 10-13 22-13 22z" />

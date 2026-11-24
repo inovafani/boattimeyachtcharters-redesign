@@ -39,8 +39,8 @@ hours are actually made of.
 
 ## The shape of the evening
 
-Boarding opens at 4:30 PM at Marine Stadium Jetty & Pontoon, Main Beach.
-Departure is 5:00 PM. You are back at the pontoon at 7:30 PM, so 150 minutes on
+Boarding opens at 4:30 PM at Marina Mirage Seaworld Drive, Main Beach.
+Departure is 5:00 PM. You are back at the marina at 7:30 PM, so 150 minutes on
 the water.
 
 The route runs north through the Broadwater toward the islands, turns, and comes
@@ -96,7 +96,7 @@ Adult $79. Two adults together $149. Child aged 3 to 13 $55. Infant under 3 $11.
 ### What time does the Gold Coast sunset cruise depart?
 
 Boarding opens at 4:30 PM, Sun Goddess departs at 5:00 PM and returns at 7:30
-PM, from Marine Stadium Jetty & Pontoon at Main Beach.
+PM, from Marina Mirage Seaworld Drive, Main Beach.
 
 ### How long is the sunset cruise?
 

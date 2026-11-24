@@ -511,7 +511,7 @@ export default function NyePage() {
             { label: 'Date', value: 'Enquire for this year' },
             {
               label: 'Location',
-              value: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
+              value: 'Marina Mirage Seaworld Drive, Main Beach, Gold Coast',
             },
             {
               label: 'Venue',

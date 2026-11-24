@@ -265,7 +265,7 @@ export default function Inquiry() {
               {
                 key: 'Dock',
                 icon: 'pin' as const,
-                val: 'Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast',
+                val: 'Marina Mirage Seaworld Drive, Main Beach, Gold Coast',
               },
               {
                 key: 'Hours',

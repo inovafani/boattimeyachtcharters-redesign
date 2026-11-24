@@ -28,7 +28,7 @@ not need a 150-guest vessel and should not be paying for one.
 
 The Luxury Scenic Sunset Cruise takes 100 guests a sailing and sells seat by
 seat. It runs every Saturday and Sunday through December, departing 5:00 PM from
-Marine Stadium Jetty & Pontoon at Main Beach and back at 7:30 PM. A group of 30
+Marina Mirage Seaworld Drive, Main Beach and back at 7:30 PM. A group of 30
 books 30 seats and shares the boat with other guests, which for a casual team
 drinks is usually the point rather than the compromise.
 
@@ -65,7 +65,7 @@ Private chef fine dining for 100 is not. The menu conversation should happen at
 the same time as the date conversation, not after it.
 
 **Transport is the detail people forget.** Maxi taxis are the usual answer for a
-group, and the pontoon has free parking. Marine Stadium Jetty & Pontoon is about
+group, and the marina has free parking. Marina Mirage Seaworld Drive is about
 ten minutes from Surfers Paradise and fifteen from Broadbeach.
 
 ## Frequently asked questions
@@ -91,8 +91,8 @@ December. Charter dates are separate and are confirmed on enquiry.
 
 ### Where does the boat leave from?
 
-Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast. Roughly ten minutes from
-Surfers Paradise and fifteen from Broadbeach, with free parking at the pontoon.
+Marina Mirage Seaworld Drive, Main Beach, Gold Coast. Roughly ten minutes from
+Surfers Paradise and fifteen from Broadbeach, with free parking at the marina.
 
 ### Can we bring our own food or drinks?
 

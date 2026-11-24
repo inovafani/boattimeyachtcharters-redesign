@@ -60,7 +60,7 @@ not need a 150-guest vessel and should not be paying for one.
 
 The Luxury Scenic Sunset Cruise takes 100 guests a sailing and sells seat by
 seat. It runs every Saturday and Sunday through December, departing 5:00 PM from
-Marine Stadium Jetty & Pontoon at Main Beach and back at 7:30 PM. A group of 30
+Marina Mirage Seaworld Drive, Main Beach and back at 7:30 PM. A group of 30
 books 30 seats and shares the boat with other guests, which for a casual team
 drinks is usually the point rather than the compromise.
 
@@ -97,7 +97,7 @@ Private chef fine dining for 100 is not. The menu conversation should happen at
 the same time as the date conversation, not after it.
 
 **Transport is the detail people forget.** Maxi taxis are the usual answer for a
-group, and the pontoon has free parking. Marine Stadium Jetty & Pontoon is about
+group, and the marina has free parking. Marina Mirage Seaworld Drive is about
 ten minutes from Surfers Paradise and fifteen from Broadbeach.
 
 ## Frequently asked questions
@@ -123,8 +123,8 @@ December. Charter dates are separate and are confirmed on enquiry.
 
 ### Where does the boat leave from?
 
-Marine Stadium Jetty & Pontoon, Main Beach, Gold Coast. Roughly ten minutes from
-Surfers Paradise and fifteen from Broadbeach, with free parking at the pontoon.
+Marina Mirage Seaworld Drive, Main Beach, Gold Coast. Roughly ten minutes from
+Surfers Paradise and fifteen from Broadbeach, with free parking at the marina.
 
 ### Can we bring our own food or drinks?
 
@@ -243,7 +243,7 @@ into an afternoon rather than an evening.
 
 The useful question to ask is not what is possible but what is coordinated: the
 more that runs through one team, the fewer vendors you are managing from a boat
-that has already left the pontoon.
+that has already left the marina.
 
 ## 6. Have the wet weather answer before you need it
 
@@ -255,9 +255,9 @@ change of plan and a crisis.
 
 ## 7. Getting everyone there
 
-Departure is from Marine Stadium Jetty & Pontoon at Main Beach, roughly ten
+Departure is from Marina Mirage Seaworld Drive, Main Beach, roughly ten
 minutes from Surfers Paradise and fifteen from Broadbeach, with free parking at
-the pontoon. For a guest list in the dozens, maxi taxis are the usual answer.
+the marina. For a guest list in the dozens, maxi taxis are the usual answer.
 
 The one instruction worth repeating on the invitation: a boat leaves. Put a
 be-there-by time on the invite that is well before the departure time, because
@@ -290,8 +290,8 @@ join the vessel. We can recommend partners if you do not have one.
 
 ### Where does a Gold Coast yacht wedding depart from?
 
-Marine Stadium Jetty & Pontoon, Main Beach, about ten minutes from Surfers
-Paradise and fifteen from Broadbeach. There is free parking at the pontoon.
+Marina Mirage Seaworld Drive, Main Beach, about ten minutes from Surfers
+Paradise and fifteen from Broadbeach. There is free parking at the marina.
 
 ### What happens if it rains on a yacht wedding?
 
@@ -430,8 +430,8 @@ decks, two licensed bars.
 **Mermaid Spirit:** a 100 foot tri-deck catamaran, up to 150 guests by day, 11
 en suite cabins sleeping 22 overnight, chef''s kitchen, stinger pool.
 
-Both depart Marine Stadium Jetty & Pontoon at Main Beach, roughly ten minutes
-from Surfers Paradise, with free parking at the pontoon.
+Both depart Marina Mirage Seaworld Drive, Main Beach, roughly ten minutes
+from Surfers Paradise, with free parking at the marina.
 
 ## Frequently asked questions
 
@@ -512,8 +512,8 @@ hours are actually made of.
 
 ## The shape of the evening
 
-Boarding opens at 4:30 PM at Marine Stadium Jetty & Pontoon, Main Beach.
-Departure is 5:00 PM. You are back at the pontoon at 7:30 PM, so 150 minutes on
+Boarding opens at 4:30 PM at Marina Mirage Seaworld Drive, Main Beach.
+Departure is 5:00 PM. You are back at the marina at 7:30 PM, so 150 minutes on
 the water.
 
 The route runs north through the Broadwater toward the islands, turns, and comes
@@ -569,7 +569,7 @@ Adult $79. Two adults together $149. Child aged 3 to 13 $55. Infant under 3 $11.
 ### What time does the Gold Coast sunset cruise depart?
 
 Boarding opens at 4:30 PM, Sun Goddess departs at 5:00 PM and returns at 7:30
-PM, from Marine Stadium Jetty & Pontoon at Main Beach.
+PM, from Marina Mirage Seaworld Drive, Main Beach.
 
 ### How long is the sunset cruise?
 
