@@ -230,3 +230,45 @@ wheelchair access and the motion sickness timing, all from `lib/faqs.ts`;
 boarding at 4:30pm from `lib/cruise-faqs.ts`; the 5pm departure from Rezdy
 `P4APMF`, read 23 November (every session to 20 February starts at 17:00). No
 price, no count, no rating.
+
+## State of this folder, checked 25 November 2026
+
+The departure point went back to Marina Mirage on 24 November
+(`_revert-departure-to-marina-mirage.sql`), and that script has been run: the
+live `/luxury-broadwater-cruise` names Marina Mirage Seaworld Drive and
+`getting-to-marine-stadium-jetty-a-departure-day-guide` returns 404, so the
+old guide is hidden as intended. Its `.md` and `.sql` stay here as the record
+and are **superseded: do not republish that row.**
+
+## The 25 November draft, and the check it passed
+
+`getting-to-marina-mirage-a-departure-day-guide` is the rewrite the 24 November
+script asked for: the same land-side guide, for Marina Mirage. It has a new
+slug because the old one carries the old place name. It links to
+`/luxury-broadwater-cruise` and `/private-yacht-charter` in its second
+paragraph, and to both plus `/corporate-yacht-charter` at the end. It does not
+use the words the revert script searches for (the old place names and the two
+old words for the boarding point), so that script's closing `select` still
+returns only the hidden row after this one is loaded.
+
+Head terms checked from the 11 November pull, because Search Console could not
+be read on 25 November (Windsor has paused every read on its Free plan): none
+of the money pages' head queries appears in the title, H1 or slug.
+
+Its facts: the departure point from Rezdy `P4APMF` (`locationAddress` reads
+Marina Mirage Seaworld Drive, Main Beach 4217) and `lib/faqs.ts`; the street
+number, 74 Seaworld Drive, from marinamirage.com.au; drive times, free parking
+and the overnight towing note, maxi taxis, two bars per vessel, covered decks,
+all-weather running, no wheelchair access and the motion sickness timing from
+`lib/faqs.ts`; boarding at 4:30pm from `lib/cruise-faqs.ts`; the 5pm Saturday
+and Sunday departure from Rezdy, read 25 November (every session to 27
+February starts at 17:00, on a Saturday or a Sunday). No price, no count, no
+rating.
+
+**One thing for the owner to confirm before this is published.** Marina
+Mirage's own site reports the centre is under redevelopment, with demolition
+of the old shopping centre reported in March 2026, while its marina page still
+lists complimentary undercover parking. The article says parking is free, as
+this site's FAQs do, and tells guests to follow the signs on the day. If
+parking or the walk to the boat has changed during the works, that paragraph
+and the FAQs in `lib/faqs.ts` both need the current instructions.
