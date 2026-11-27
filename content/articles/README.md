@@ -272,3 +272,35 @@ lists complimentary undercover parking. The article says parking is free, as
 this site's FAQs do, and tells guests to follow the signs on the day. If
 parking or the walk to the boat has changed during the works, that paragraph
 and the FAQs in `lib/faqs.ts` both need the current instructions.
+
+## Added 27 November 2026: a proposal planning guide
+
+`planning-a-proposal-on-the-water-what-to-settle-first` is for the person
+planning to propose on a boat: a private charter or two seats at sunset, how to
+time the question, who to tell beforehand, the no outside food or drink rule,
+weather and arrival. It links to `/private-yacht-charter` and
+`/luxury-broadwater-cruise` in its second paragraph and again at the end.
+
+Why this topic. In the 11 November Search Console pull, "romantic yacht",
+"romantic boat hire" and "romantic boat" reached this site 74 times between
+them and landed on the homepage or the wedding page at positions 59 to 84, with
+no clicks. No article and no money page answers them. Valentine's Day was
+considered and dropped, because `/valentines-day` already holds those queries.
+
+Head terms checked from the same 11 November pull, because Search Console
+still could not be read on 27 November (Windsor has paused every read on its
+Free plan): none of the money pages' head queries appears in the title, H1 or
+slug.
+
+Its facts: the sunset cruise's 150 minutes, 17:00 Saturday and Sunday
+departures, licensed bar and "nibbles share plate for two" from Rezdy
+`P4APMF`, read 27 November (36 sessions to 28 March 2027, all 17:00); the
+departure point from the same product's `locationAddress` and `lib/faqs.ts`;
+guest capacities from `lib/vessels.ts`; bars, catering partners, the no
+external food or drink rule, covered decks and drive times from `lib/faqs.ts`.
+No price, no count, no rating, no sunset time.
+
+**Two things the article deliberately does not promise**, because no source
+says them: that the crew will stage anything for a proposal, and that a
+photographer may come aboard a ticketed cruise. It tells the reader to ask.
+If the owner has a standing answer to either, add it before publishing.
